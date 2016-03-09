@@ -1,0 +1,2 @@
+defmodule CogApi do
+end
