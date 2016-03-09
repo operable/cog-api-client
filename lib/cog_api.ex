@@ -1,5 +1,4 @@
 defmodule CogApi do
-
   defstruct [proto: "http", host: nil, port: nil, version: 1, token: nil, username: nil,
              password: nil]
 
@@ -16,79 +15,6 @@ defmodule CogApi do
   end
   def authenticate(%__MODULE__{}=api) do
     {:ok, api}
-  end
-
-  def get(%__MODULE__{}=api, resource, params \\ %{}) do
-    rescue_econnrefused(fn ->
-      response = HTTPotion.get(make_url(api, resource, params), headers: make_headers(api))
-      {response_type(response), Poison.decode!(response.body)}
-    end)
-  end
-
-  def post(%__MODULE__{}=api, resource, params) do
-    rescue_econnrefused(fn ->
-      body = Poison.encode!(params)
-      response = HTTPotion.post(make_url(api, resource), body: body, headers: make_headers(api, ["Content-Type": "application/json"]))
-      {response_type(response), Poison.decode!(response.body)}
-    end)
-  end
-
-  def patch(%__MODULE__{}=api, resource, params) do
-    rescue_econnrefused(fn ->
-      body = Poison.encode!(params)
-      response = HTTPotion.patch(make_url(api, resource), body: body, headers: make_headers(api, ["Content-Type": "application/json"]))
-      {response_type(response), Poison.decode!(response.body)}
-    end)
-  end
-
-  def delete(%__MODULE__{}=api, resource) do
-    rescue_econnrefused(fn ->
-      response = HTTPotion.delete(make_url(api, resource), headers: make_headers(api))
-      case response_type(response) do
-        :ok ->
-          :ok
-        :error ->
-          {:error, Poison.decode!(response.body)}
-      end
-    end)
-  end
-
-  # TODO: Replace the following with single parameterized get call once it
-  # exists in the Cog API
-  def get_by(%__MODULE__{}=api, resource, filter) do
-    with {:ok, id} <- find_id_by(api, resource, filter) do
-      get(api, resource <> "/" <> URI.encode(id))
-    end
-  end
-
-  def patch_by(%__MODULE__{}=api, resource, filter, params) do
-    with {:ok, id} <- find_id_by(api, resource, filter) do
-      patch(api, resource <> "/" <> URI.encode(id), params)
-    end
-  end
-
-  def delete_by(%__MODULE__{}=api, resource, filter) do
-    with {:ok, id} <- find_id_by(api, resource, filter) do
-      delete(api, resource <> "/" <> URI.encode(id))
-    end
-  end
-
-  def find_id_by(api, resource, find_fun)
-      when is_function(find_fun) do
-    with {:ok, %{^resource => items}} <- get(api, resource) do
-      case Enum.find(items, find_fun) do
-        %{"id" => id} ->
-          {:ok, id}
-        nil ->
-          {:error, %{"error" => "Resource not found"}}
-      end
-    end
-  end
-
-  def find_id_by(api, resource, [{param_key, param_value}]) do
-    find_id_by(api, resource, fn item ->
-      item[to_string(param_key)] == param_value
-    end)
   end
 
   def bootstrap_show(%__MODULE__{}=api) do
@@ -322,6 +248,79 @@ defmodule CogApi do
     end)
   end
 
+  defp get(%__MODULE__{}=api, resource, params \\ %{}) do
+    rescue_econnrefused(fn ->
+      response = HTTPotion.get(make_url(api, resource, params), headers: make_headers(api))
+      {response_type(response), Poison.decode!(response.body)}
+    end)
+  end
+
+  defp post(%__MODULE__{}=api, resource, params) do
+    rescue_econnrefused(fn ->
+      body = Poison.encode!(params)
+      response = HTTPotion.post(make_url(api, resource), body: body, headers: make_headers(api, ["Content-Type": "application/json"]))
+      {response_type(response), Poison.decode!(response.body)}
+    end)
+  end
+
+  defp patch(%__MODULE__{}=api, resource, params) do
+    rescue_econnrefused(fn ->
+      body = Poison.encode!(params)
+      response = HTTPotion.patch(make_url(api, resource), body: body, headers: make_headers(api, ["Content-Type": "application/json"]))
+      {response_type(response), Poison.decode!(response.body)}
+    end)
+  end
+
+  defp delete(%__MODULE__{}=api, resource) do
+    rescue_econnrefused(fn ->
+      response = HTTPotion.delete(make_url(api, resource), headers: make_headers(api))
+      case response_type(response) do
+        :ok ->
+          :ok
+        :error ->
+          {:error, Poison.decode!(response.body)}
+      end
+    end)
+  end
+
+  # TODO: Replace the following with single parameterized get call once it
+  # exists in the Cog API
+  defp get_by(%__MODULE__{}=api, resource, filter) do
+    with {:ok, id} <- find_id_by(api, resource, filter) do
+      get(api, resource <> "/" <> URI.encode(id))
+    end
+  end
+
+  defp patch_by(%__MODULE__{}=api, resource, filter, params) do
+    with {:ok, id} <- find_id_by(api, resource, filter) do
+      patch(api, resource <> "/" <> URI.encode(id), params)
+    end
+  end
+
+  defp delete_by(%__MODULE__{}=api, resource, filter) do
+    with {:ok, id} <- find_id_by(api, resource, filter) do
+      delete(api, resource <> "/" <> URI.encode(id))
+    end
+  end
+
+  defp find_id_by(%__MODULE__{}=api, resource, find_fun)
+      when is_function(find_fun) do
+    with {:ok, %{^resource => items}} <- get(api, resource) do
+      case Enum.find(items, find_fun) do
+        %{"id" => id} ->
+          {:ok, id}
+        nil ->
+          {:error, %{"error" => "Resource not found"}}
+      end
+    end
+  end
+
+  defp find_id_by(%__MODULE__{}=api, resource, [{param_key, param_value}]) do
+    find_id_by(api, resource, fn item ->
+      item[to_string(param_key)] == param_value
+    end)
+  end
+
   defp rescue_econnrefused(fun) do
     try do
       fun.()
@@ -353,7 +352,6 @@ defmodule CogApi do
   end
 
   defp make_headers(api, others \\ ["Accept": "application/json"])
-
   defp make_headers(%__MODULE__{token: nil}, others) do
     others
   end
@@ -368,5 +366,4 @@ defmodule CogApi do
       :error
     end
   end
-
 end
