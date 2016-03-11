@@ -6,7 +6,7 @@ defmodule CogApi.Fake.RolesTest do
   describe "role_create" do
     it "returns the created role" do
       name = "foobar"
-      params = %{"name" => name}
+      params = %{name: name}
       {:ok, role} = CogApi.Fake.Roles.role_create(%Endpoint{}, params)
 
       assert present role.id
@@ -17,7 +17,7 @@ defmodule CogApi.Fake.RolesTest do
   describe "role_index" do
     it "returns a list of roles" do
       name = "foobar"
-      params = %{"name" => name}
+      params = %{name: name}
       CogApi.Fake.Roles.role_create(%Endpoint{}, params)
 
       {:ok, roles} = CogApi.Fake.Roles.role_index(%Endpoint{})

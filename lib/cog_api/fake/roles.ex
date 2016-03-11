@@ -5,7 +5,7 @@ defmodule CogApi.Fake.Roles do
   alias CogApi.Fake.Server
   alias CogApi.Resources.Role
 
-  def role_create(%Endpoint{}, %{"name" => name}) do
+  def role_create(%Endpoint{}, %{name: name}) do
     new_role = %Role{id: random_string(8), name: name}
     {:ok, Server.role_create(new_role)}
   end
