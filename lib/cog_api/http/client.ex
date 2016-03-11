@@ -12,6 +12,10 @@ defmodule CogApi.HTTP.Client do
     Roles.role_index(endpoint)
   end
 
+  def role_create(endpoint, params) do
+    Roles.role_create(endpoint, params)
+  end
+
   def bootstrap_show(%Endpoint{}=endpoint) do
     get(endpoint, "bootstrap")
   end

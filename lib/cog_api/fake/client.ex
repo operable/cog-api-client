@@ -9,4 +9,8 @@ defmodule CogApi.Fake.Client do
   def role_index(endpoint) do
     Roles.role_index(endpoint)
   end
+
+  def role_create(endpoint, params) do
+    Roles.role_create(endpoint, params)
+  end
 end
