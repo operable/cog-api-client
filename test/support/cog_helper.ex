@@ -7,7 +7,7 @@ defmodule CogHelper do
       password: "password",
       host: "localhost",
       port: "4000",
-    } |> CogApi.HTTPClient.authenticate
+    } |> CogApi.HTTP.Client.authenticate
 
     endpoint
   end

@@ -12,16 +12,6 @@ defmodule CogApi.HTTP.RolesTest do
         assert present first_role.name
       end
     end
-
-    it "returns an error if Cog is not running" do
-      cassette "roles_index_no_cog" do
-        endpoint = %Endpoint{}
-
-        roles = CogApi.HTTP.Roles.role_index(endpoint)
-
-        assert roles == {:error, %{"error" => "An instance of cog must be running"}}
-      end
-    end
   end
 
   describe "role_create" do
@@ -32,16 +22,6 @@ defmodule CogApi.HTTP.RolesTest do
 
         assert present role.id
         assert role.name == "new role"
-      end
-    end
-
-    it "returns an error if Cog is not running" do
-      cassette "roles_index_no_cog" do
-        endpoint = %Endpoint{}
-
-        roles = CogApi.HTTP.Roles.role_index(endpoint)
-
-        assert roles == {:error, %{"error" => "An instance of cog must be running"}}
       end
     end
   end

@@ -1,5 +1,6 @@
 defmodule CogApi.HTTP.Base do
   alias CogApi.Endpoint
+  alias HTTPotion.Response
 
   def get(%Endpoint{}=endpoint, resource, params \\ %{}) do
     rescue_econnrefused(fn ->
@@ -80,25 +81,36 @@ defmodule CogApi.HTTP.Base do
       fun.()
     rescue
       HTTPotion.HTTPError ->
-        {:error, %{"error" => "An instance of cog must be running"}}
+        {:no_connection_error, "An instance of cog must be running"}
     end
   end
 
 
-  def format_response(response) do
+  def format_response(response = {:no_connection_error, _}), do: response
+  def format_response(response = %Response{status_code: 403}) do
+    format_error(response)
+  end
+  def format_response(response = %Response{}) do
     {
       response_type(response),
       Poison.decode!(response.body)
     }
   end
   def format_response(response = {:error, _}, _, _), do: response
-  def format_response(response, resource, struct) do
+  def format_response(response = %Response{}, resource, struct) do
     {
       response_type(response),
       Poison.decode!(
         response.body,
         as: %{resource => struct}
       )[resource]
+    }
+  end
+
+  defp format_error(response) do
+    {
+      :error,
+      Poison.decode!(response.body)["error"]
     }
   end
 

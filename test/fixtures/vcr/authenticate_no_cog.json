@@ -1,0 +1,26 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:9999/v1/token"
+    },
+    "response": {
+      "body": [
+        "conn_failed",
+        [
+          "error",
+          "econnrefused"
+        ]
+      ],
+      "headers": [],
+      "status_code": null,
+      "type": "error"
+    }
+  }
+]

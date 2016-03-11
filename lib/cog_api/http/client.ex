@@ -1,26 +1,15 @@
-defmodule CogApi.HTTPClient do
+defmodule CogApi.HTTP.Client do
   import CogApi.HTTP.Base
 
   alias CogApi.Endpoint
   alias CogApi.HTTP.Roles
 
-  def role_index(endpoint) do
-    Roles.role_index(endpoint)
+  def authenticate(%Endpoint{token: nil}=endpoint) do
+    CogApi.HTTP.Authentication.get_and_merge_token(endpoint)
   end
 
-  def authenticate(%Endpoint{token: nil}=endpoint) do
-    rescue_econnrefused(fn ->
-      params = %{username: endpoint.username, password: endpoint.password}
-      case post(endpoint, "token", params) |> format_response do
-        {:ok, %{"token" => %{"value" => token}}} ->
-          {:ok, %{endpoint | token: token}}
-        error ->
-          error
-      end
-    end)
-  end
-  def authenticate(%Endpoint{}=endpoint) do
-    {:ok, endpoint}
+  def role_index(endpoint) do
+    Roles.role_index(endpoint)
   end
 
   def bootstrap_show(%Endpoint{}=endpoint) do
