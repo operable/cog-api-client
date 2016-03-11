@@ -7,6 +7,12 @@ defmodule CogApi.Fake.Server do
     Agent.start_link(fn -> %__MODULE__{} end, name: __MODULE__)
   end
 
+  def reset do
+    Agent.update(__MODULE__, fn server ->
+      %__MODULE__{}
+    end)
+  end
+
   def role_create(role) do
     Agent.get_and_update(__MODULE__, fn server ->
       server = %{ server | roles: server.roles ++ [role] }
