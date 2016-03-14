@@ -25,3 +25,6 @@
 
 * `CogApi.Client` was introduced as an behavior for `CogApi.HTTP.Client` and
   `CogApi.Fake.Client` to conform to.
+
+* Moved old functionality to `CogApi.HTTP.Old`. Code will stay there until it is
+  tested and has a Fake implementation.
