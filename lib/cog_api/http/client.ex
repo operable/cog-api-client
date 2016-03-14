@@ -1,4 +1,6 @@
 defmodule CogApi.HTTP.Client do
+  @behaviour CogApi.Client
+
   import CogApi.HTTP.Base
 
   alias CogApi.Endpoint

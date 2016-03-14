@@ -1,4 +1,6 @@
 defmodule CogApi.Fake.Client do
+  @behaviour CogApi.Client
+
   alias CogApi.Endpoint
   alias CogApi.Fake.Roles
 
