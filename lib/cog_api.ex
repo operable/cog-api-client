@@ -325,8 +325,13 @@ defmodule CogApi do
     try do
       fun.()
     rescue
-      HTTPotion.HTTPError ->
-        {:error, %{"error" => "An instance of cog must be running"}}
+      e in HTTPotion.HTTPError ->
+        case e do
+          %{message: "econnrefused"} ->
+            {:error, %{"error" => "An instance of cog must be running"}}
+          _ ->
+            {:error, %{"error" => "HTTP request resulted in an exception: #{inspect(e)}"}}
+        end
     end
   end
 
