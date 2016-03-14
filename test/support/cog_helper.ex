@@ -12,6 +12,11 @@ defmodule CogHelper do
     endpoint
   end
 
+  def fake_endpoint do
+    {:ok, endpoint} = %Endpoint{} |> CogApi.Fake.Client.authenticate
+    endpoint
+  end
+
   def present(string) do
     String.length(string) > 1
   end
