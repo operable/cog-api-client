@@ -62,4 +62,14 @@ defmodule CogApi.HTTP.RolesTest do
       end
     end
   end
+
+  describe "role_delete" do
+    it "returns :ok" do
+      cassette "role_delete" do
+        endpoint = valid_endpoint
+        {:ok, role} = Roles.role_create(endpoint, %{name: "role to delete"})
+        assert :ok == Roles.role_delete(endpoint, role.id)
+      end
+    end
+  end
 end

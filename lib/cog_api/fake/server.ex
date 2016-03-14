@@ -42,9 +42,22 @@ defmodule CogApi.Fake.Server do
     end)
   end
 
+  def delete(resource_name, id) do
+    Agent.update(__MODULE__, fn server ->
+      Map.update!(server, resource_name, fn list ->
+        delete_by_id(list, id)
+      end)
+    end)
+  end
+
   defp update_by_id(list, id, new_resource) do
     index = Enum.find_index(list, fn resource -> resource.id == id end)
     List.replace_at(list, index, new_resource)
+  end
+
+  defp delete_by_id(list, id) do
+    index = Enum.find_index(list, fn resource -> resource.id == id end)
+    List.delete_at(list, index)
   end
 
   defp find_by_id(server, resource_name, id) do

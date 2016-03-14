@@ -26,6 +26,12 @@ defmodule CogApi.Fake.Roles do
     {:ok, Server.update(:roles, id, params)}
   end
 
+  def role_delete(%Endpoint{token: nil}, _, _), do: invalid_endpoint
+  def role_delete(%Endpoint{token: _}, id) do
+    Server.delete(:roles, id)
+    :ok
+  end
+
   def invalid_endpoint do
     {:error, "You must provide an authenticated endpoint"}
   end

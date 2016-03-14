@@ -69,4 +69,21 @@ defmodule CogApi.Fake.RolesTest do
       assert updated_role.name == "updated role"
     end
   end
+
+  describe "role_delete" do
+    it "deletes the role from the server" do
+      {:ok, role} = Roles.role_create(fake_endpoint, %{name: "new role"})
+
+      Roles.role_delete(fake_endpoint, role.id)
+
+      {:ok, roles} = Roles.role_index(fake_endpoint)
+
+      refute Enum.member?(roles, role)
+    end
+
+    it "returns :ok" do
+      {:ok, role} = Roles.role_create(fake_endpoint, %{name: "new role"})
+      assert :ok == Roles.role_delete(fake_endpoint, role.id)
+    end
+  end
 end

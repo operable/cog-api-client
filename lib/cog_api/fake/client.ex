@@ -23,4 +23,8 @@ defmodule CogApi.Fake.Client do
   def role_update(endpoint, role_id, params) do
     Roles.role_update(endpoint, role_id, params)
   end
+
+  def role_delete(%Endpoint{}=endpoint, role_id) do
+    Roles.role_delete(endpoint, role_id)
+  end
 end

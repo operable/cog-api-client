@@ -21,4 +21,8 @@ defmodule CogApi.HTTP.Roles do
     patch(endpoint, "roles/#{role_id}", %{"role" => params})
     |> format_response("role", %Role{})
   end
+
+  def role_delete(%Endpoint{}=endpoint, role_id) do
+    delete(endpoint, "roles/#{role_id}") |> format_response("role", %Role{})
+  end
 end

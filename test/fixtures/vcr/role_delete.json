@@ -1,0 +1,79 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"hvEZhzrluJ3b9/9PM1VwhWHZyS6c1Lst9PvwPa2Nrwk=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 14 Mar 2016 20:11:12 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "lut5avs8eupmvk3rq7lvs1qa3h3dbmio"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"role\":{\"name\":\"role to delete\"}}",
+      "headers": {
+        "authorization": "token hvEZhzrluJ3b9/9PM1VwhWHZyS6c1Lst9PvwPa2Nrwk=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/roles"
+    },
+    "response": {
+      "body": "{\"role\":{\"name\":\"role to delete\",\"id\":\"99c612dd-bbdc-4128-9bf6-ae1a17e532f8\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 14 Mar 2016 20:11:12 GMT",
+        "content-length": "78",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "hll8ogvhh9j0ia94og19i2r7l63v8gh6",
+        "location": "/v1/roles/99c612dd-bbdc-4128-9bf6-ae1a17e532f8"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token hvEZhzrluJ3b9/9PM1VwhWHZyS6c1Lst9PvwPa2Nrwk=",
+        "Accept": "application/json"
+      },
+      "method": "delete",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/roles/99c612dd-bbdc-4128-9bf6-ae1a17e532f8"
+    },
+    "response": {
+      "body": "",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 14 Mar 2016 20:11:12 GMT",
+        "content-length": "0",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "n3dq628tfer5vf5l5l6o9t5kk0oj0tmk"
+      },
+      "status_code": 204,
+      "type": "ok"
+    }
+  }
+]

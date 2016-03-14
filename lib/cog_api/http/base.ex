@@ -27,13 +27,7 @@ defmodule CogApi.HTTP.Base do
 
   def delete(%Endpoint{}=endpoint, resource) do
     rescue_econnrefused(fn ->
-      response = HTTPotion.delete(make_url(endpoint, resource), headers: make_headers(endpoint))
-      case response_type(response) do
-        :ok ->
-          :ok
-        :error ->
-          {:error, Poison.decode!(response.body)}
-      end
+      HTTPotion.delete(make_url(endpoint, resource), headers: make_headers(endpoint))
     end)
   end
 
@@ -95,6 +89,7 @@ defmodule CogApi.HTTP.Base do
     }
   end
   def format_response(response = {:error, _}, _, _), do: response
+  def format_response(%Response{status_code: 204}, _, _), do: :ok
   def format_response(response = %Response{}, resource, struct) do
     {
       response_type(response),
