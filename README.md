@@ -18,3 +18,19 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
           [applications: [:cog_api]]
         end
 
+## Test
+
+Tests and static analysis can be run with:
+
+```
+bin/test_suite
+```
+
+If tests fail, the script will not perform static analysis.
+
+Run only tests with: `mix test`
+
+## Static Analysis
+
+Run `mix dialyzer` to run analysis. If your dependencies or your elixir version
+change, run `bin/rebuild_plt`.

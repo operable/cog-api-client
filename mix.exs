@@ -10,6 +10,15 @@ defmodule CogApi.Mixfile do
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
       deps: deps,
+      dialyzer: dialyzer_settings,
+    ]
+  end
+
+  defp dialyzer_settings do
+    [
+      plt_add_deps: true,
+      plt_file: ".dialyzer.plt",
+      flags: ["-Wunderspecs", "-Wno_undefined_callbacks"]
     ]
   end
 
@@ -29,6 +38,7 @@ defmodule CogApi.Mixfile do
       {:httpotion, "~> 2.1.0"},
       {:ibrowse, "~> 4.2.2"},
       {:poison, "~> 2.0"},
+      {:dialyxir, "~> 0.3"},
     ]
   end
 end
