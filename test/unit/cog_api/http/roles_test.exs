@@ -44,5 +44,4 @@ defmodule CogApi.HTTP.RolesTest do
       end
     end
   end
-
 end

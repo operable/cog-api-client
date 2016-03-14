@@ -130,16 +130,9 @@ defmodule CogApi.HTTP.Base do
     format_params(url, params)
   end
 
-  defp format_params(url, params) when is_map params and map_size(params) == 0 do
-    url
-  end
-
-  defp format_params(url, params) when is_map params do
+  def format_params(url, params) when map_size(params) == 0,  do: url
+  def format_params(url, params) do
     URI.encode(url <> "?" <> URI.encode_query(params))
-  end
-
-  defp format_params(url, params) do
-    "#{url}/#{params}"
   end
 
   defp make_headers(endpoint, others \\ ["Accept": "application/json"])

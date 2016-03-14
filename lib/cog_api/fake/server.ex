@@ -13,26 +13,28 @@ defmodule CogApi.Fake.Server do
     end)
   end
 
-  def role_index do
+  def index(resource) do
     Agent.get(__MODULE__, fn server ->
-      server.roles
+      Map.fetch!(server, resource)
     end)
   end
 
-  def role_show(id) do
+  def show(resource, id) do
     Agent.get(__MODULE__, fn server ->
-      find_by_id(server.roles, id)
+      find_by_id(server, resource, id)
     end)
   end
 
-  def role_create(role) do
+  def create(resource, new_resource) do
     Agent.get_and_update(__MODULE__, fn server ->
-      server = %{ server | roles: server.roles ++ [role] }
-      {role, server}
+      Map.get_and_update(server, resource, fn list ->
+        {new_resource, list ++ [new_resource]}
+      end)
     end)
   end
 
-  defp find_by_id(list, id) do
-    Enum.find(list, fn resource -> resource.id == id end)
+  defp find_by_id(server, resource, id) do
+    Map.fetch!(server, resource)
+    |> Enum.find(fn resource -> resource.id == id end)
   end
 end

@@ -9,7 +9,7 @@ defmodule CogApi.HTTP.Roles do
   end
 
   def role_show(%Endpoint{}=endpoint, id) do
-    get(endpoint, "roles", id) |> format_response("role", %Role{})
+    get(endpoint, "roles/#{id}") |> format_response("role", %Role{})
   end
 
   def role_create(%Endpoint{}=endpoint, params) do

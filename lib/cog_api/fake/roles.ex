@@ -7,17 +7,18 @@ defmodule CogApi.Fake.Roles do
 
   def role_index(%Endpoint{token: nil}),  do: invalid_endpoint
   def role_index(%Endpoint{}) do
-    {:ok, Server.role_index}
+    {:ok, Server.index(:roles)}
   end
 
   def role_show(%Endpoint{token: nil}, _),  do: invalid_endpoint
   def role_show(%Endpoint{}, id) do
-    {:ok, Server.role_show(id)}
+    {:ok, Server.show(:roles, id)}
   end
+
   def role_create(%Endpoint{token: nil}, %{name: _}), do: invalid_endpoint
   def role_create(%Endpoint{token: _}, %{name: name}) do
     new_role = %Role{id: random_string(8), name: name}
-    {:ok, Server.role_create(new_role)}
+    {:ok, Server.create(:roles, new_role)}
   end
 
   def invalid_endpoint do
