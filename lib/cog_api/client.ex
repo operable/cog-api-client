@@ -5,5 +5,6 @@ defmodule CogApi.Client do
   @callback authenticate(%Endpoint{}) :: {atom, %Endpoint{}}
 
   @callback role_index(%Endpoint{}) :: {atom, [%Role{}]}
+  @callback role_show(%Endpoint{}, String.t) :: {atom, %Role{}}
   @callback role_create(%Endpoint{}, %{}) :: {atom, %Role{}}
 end

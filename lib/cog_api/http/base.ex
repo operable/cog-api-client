@@ -85,7 +85,6 @@ defmodule CogApi.HTTP.Base do
     end
   end
 
-
   def format_response(response = {:no_connection_error, _}), do: response
   def format_response(response = %Response{status_code: 403}) do
     format_error(response)
@@ -128,11 +127,19 @@ defmodule CogApi.HTTP.Base do
       "#{url}/#{route}"
     end
 
-    if map_size(params) == 0 do
-      url
-    else
-      URI.encode(url <> "?" <> URI.encode_query(params))
-    end
+    format_params(url, params)
+  end
+
+  defp format_params(url, params) when is_map params and map_size(params) == 0 do
+    url
+  end
+
+  defp format_params(url, params) when is_map params do
+    URI.encode(url <> "?" <> URI.encode_query(params))
+  end
+
+  defp format_params(url, params) do
+    "#{url}/#{params}"
   end
 
   defp make_headers(endpoint, others \\ ["Accept": "application/json"])

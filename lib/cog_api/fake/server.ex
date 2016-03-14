@@ -8,8 +8,20 @@ defmodule CogApi.Fake.Server do
   end
 
   def reset do
-    Agent.update(__MODULE__, fn server ->
+    Agent.update(__MODULE__, fn _ ->
       %__MODULE__{}
+    end)
+  end
+
+  def role_index do
+    Agent.get(__MODULE__, fn server ->
+      server.roles
+    end)
+  end
+
+  def role_show(id) do
+    Agent.get(__MODULE__, fn server ->
+      find_by_id(server.roles, id)
     end)
   end
 
@@ -20,9 +32,7 @@ defmodule CogApi.Fake.Server do
     end)
   end
 
-  def role_index do
-    Agent.get(__MODULE__, fn server ->
-      server.roles
-    end)
+  defp find_by_id(list, id) do
+    Enum.find(list, fn resource -> resource.id == id end)
   end
 end

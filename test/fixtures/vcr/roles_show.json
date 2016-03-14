@@ -1,0 +1,80 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"2J2jFe9EhbGfKr161kZjVZiabD9VzZn/InF59x1HuV8=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 14 Mar 2016 18:10:17 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "pl06hlg3f6r4jgl4a2i0o7msv7rstlg8"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"role\":{\"name\":\"QA Analyst\"}}",
+      "headers": {
+        "authorization": "token 2J2jFe9EhbGfKr161kZjVZiabD9VzZn/InF59x1HuV8=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/roles"
+    },
+    "response": {
+      "body": "{\"role\":{\"name\":\"QA Analyst\",\"id\":\"1549db07-e45d-49e6-8563-7408744adfe6\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 14 Mar 2016 18:10:18 GMT",
+        "content-length": "74",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "un66mdftv4e7qq5cjp7l2pko5g9i9h3m",
+        "location": "/v1/roles/1549db07-e45d-49e6-8563-7408744adfe6"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token 2J2jFe9EhbGfKr161kZjVZiabD9VzZn/InF59x1HuV8=",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/roles/1549db07-e45d-49e6-8563-7408744adfe6"
+    },
+    "response": {
+      "body": "{\"role\":{\"name\":\"QA Analyst\",\"id\":\"1549db07-e45d-49e6-8563-7408744adfe6\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 14 Mar 2016 18:10:18 GMT",
+        "content-length": "74",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "v3eqhg89lj6ragiot8p0tgd32hlri8b7"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
