@@ -1,0 +1,80 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"RkavDyTONN55IH2+vfr6LW5P9cEx4l+JAtUUjJHM+7E=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 14 Mar 2016 18:14:05 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "hitmuq6uggmjnf3mfbnl9gdnn5eldn17"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"role\":{\"name\":\"new role\"}}",
+      "headers": {
+        "authorization": "token RkavDyTONN55IH2+vfr6LW5P9cEx4l+JAtUUjJHM+7E=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/roles"
+    },
+    "response": {
+      "body": "{\"role\":{\"name\":\"new role\",\"id\":\"263df3b4-20a9-413a-8371-7087cd67d568\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 14 Mar 2016 18:14:05 GMT",
+        "content-length": "72",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "7km304r7q4ogfcab7n2tafam36agc0tv",
+        "location": "/v1/roles/263df3b4-20a9-413a-8371-7087cd67d568"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"role\":{\"name\":\"updated role\"}}",
+      "headers": {
+        "authorization": "token RkavDyTONN55IH2+vfr6LW5P9cEx4l+JAtUUjJHM+7E=",
+        "Content-Type": "application/json"
+      },
+      "method": "patch",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/roles/263df3b4-20a9-413a-8371-7087cd67d568"
+    },
+    "response": {
+      "body": "{\"role\":{\"name\":\"updated role\",\"id\":\"263df3b4-20a9-413a-8371-7087cd67d568\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 14 Mar 2016 18:14:05 GMT",
+        "content-length": "76",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "lva5vb8m18jn3j3dtul9uod45qo27kfv"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

@@ -13,28 +13,42 @@ defmodule CogApi.Fake.Server do
     end)
   end
 
-  def index(resource) do
+  def index(resource_name) do
     Agent.get(__MODULE__, fn server ->
-      Map.fetch!(server, resource)
+      Map.fetch!(server, resource_name)
     end)
   end
 
-  def show(resource, id) do
+  def show(resource_name, id) do
     Agent.get(__MODULE__, fn server ->
-      find_by_id(server, resource, id)
+      find_by_id(server, resource_name, id)
     end)
   end
 
-  def create(resource, new_resource) do
+  def create(resource_name, new_resource) do
     Agent.get_and_update(__MODULE__, fn server ->
-      Map.get_and_update(server, resource, fn list ->
+      Map.get_and_update(server, resource_name, fn list ->
         {new_resource, list ++ [new_resource]}
       end)
     end)
   end
 
-  defp find_by_id(server, resource, id) do
-    Map.fetch!(server, resource)
+  def update(resource_name, id, new_resource) do
+    Agent.get_and_update(__MODULE__, fn server ->
+      Map.get_and_update(server, resource_name, fn list ->
+        new_list = update_by_id(list, id, new_resource)
+        {new_resource, new_list}
+      end)
+    end)
+  end
+
+  defp update_by_id(list, id, new_resource) do
+    index = Enum.find_index(list, fn resource -> resource.id == id end)
+    List.replace_at(list, index, new_resource)
+  end
+
+  defp find_by_id(server, resource_name, id) do
+    Map.fetch!(server, resource_name)
     |> Enum.find(fn resource -> resource.id == id end)
   end
 end

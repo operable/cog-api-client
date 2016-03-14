@@ -21,8 +21,7 @@ defmodule CogApi.HTTP.Base do
   def patch(%Endpoint{}=endpoint, resource, params) do
     rescue_econnrefused(fn ->
       body = Poison.encode!(params)
-      response = HTTPotion.patch(make_url(endpoint, resource), body: body, headers: make_headers(endpoint, ["Content-Type": "application/json"]))
-      {response_type(response), Poison.decode!(response.body)}
+      HTTPotion.patch(make_url(endpoint, resource), body: body, headers: make_headers(endpoint, ["Content-Type": "application/json"]))
     end)
   end
 

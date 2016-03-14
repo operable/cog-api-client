@@ -28,3 +28,7 @@
 
 * Moved old functionality to `CogApi.HTTP.Old`. Code will stay there until it is
   tested and has a Fake implementation.
+
+* `role_update` now returns `{:ok, %CogApi.Resources.Role{}}` on success.
+* `role_update` now takes an `id` as the second argument. Use
+  `CogApi.HTTP.Old.role_update` to update roles by name.

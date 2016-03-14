@@ -56,4 +56,17 @@ defmodule CogApi.Fake.RolesTest do
       assert first_role.name == name
     end
   end
+
+  describe "role_update" do
+    it "returns the updated role" do
+      {:ok, new_role} = Roles.role_create(fake_endpoint, %{name: "new role"})
+      {:ok, updated_role} = Roles.role_update(
+        fake_endpoint,
+        new_role.id,
+        %{name: "updated role"}
+      )
+
+      assert updated_role.name == "updated role"
+    end
+  end
 end

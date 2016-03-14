@@ -16,4 +16,9 @@ defmodule CogApi.HTTP.Roles do
     post(endpoint, "roles", %{"role" => params})
     |> format_response("role", %Role{})
   end
+
+  def role_update(%Endpoint{}=endpoint, role_id, params) do
+    patch(endpoint, "roles/#{role_id}", %{"role" => params})
+    |> format_response("role", %Role{})
+  end
 end

@@ -5,6 +5,8 @@ defmodule CogApi.HTTP.RolesTest do
 
   doctest CogApi.HTTP.Roles
 
+  alias CogApi.HTTP.Roles
+
   describe "role_index" do
     it "returns a list of roles" do
       cassette "roles_index" do
@@ -41,6 +43,22 @@ defmodule CogApi.HTTP.RolesTest do
 
         assert present role.id
         assert role.name == "new role"
+      end
+    end
+  end
+
+  describe "role_update" do
+    it "returns the updated role" do
+      cassette "role_update" do
+        endpoint = valid_endpoint
+        {:ok, new_role} = Roles.role_create(endpoint, %{name: "new role"})
+        {:ok, updated_role} = Roles.role_update(
+          endpoint,
+          new_role.id,
+          %{name: "updated role"}
+        )
+
+        assert updated_role.name == "updated role"
       end
     end
   end
