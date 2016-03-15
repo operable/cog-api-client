@@ -34,3 +34,5 @@ Run only tests with: `mix test`
 
 Run `mix dialyzer` to run analysis. If your dependencies or your elixir version
 change, run `bin/rebuild_plt`.
+
+Note: `dialyzer` requires Elixir v1.2.3 to work properly.

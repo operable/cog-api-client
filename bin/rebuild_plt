@@ -3,5 +3,9 @@
 # Exit if any subcommand fails
 set -e
 
-rm .dialyzer.plt
+if [ -s ".dialyzer.plt" ]
+then
+  rm .dialyzer.plt
+fi
+
 mix dialyzer.plt
