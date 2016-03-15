@@ -1,6 +1,7 @@
 defmodule CogApi.Fake.Server do
   defstruct [
-    roles: []
+    roles: [],
+    permissions: []
   ]
 
   def start_link do

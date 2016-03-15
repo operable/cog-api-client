@@ -1,7 +1,11 @@
 # Changlelog
 
-* `role_update` now takes an `id` as the second argument. Use
-  `CogApi.HTTP.Old.role_update` to update roles by name.
+* The `permission_create` now takes a single parameter of `name`. This will be
+  used as the name of the command and a default `site` namespace. The fake
+  server will accept a `:` separating the namespace and the command name.
+
+* The `permission_index` now returns a `%Permission` struct instead of a bare
+  map.
 
 * `role_update` now returns `{:ok, %CogApi.Resources.Role{}}` on success.
 

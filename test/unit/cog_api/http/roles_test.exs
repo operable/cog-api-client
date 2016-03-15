@@ -5,8 +5,6 @@ defmodule CogApi.HTTP.RolesTest do
 
   doctest CogApi.HTTP.Roles
 
-  alias CogApi.HTTP.Roles
-
   describe "role_index" do
     it "returns a list of roles" do
       cassette "roles_index" do

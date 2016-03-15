@@ -3,6 +3,7 @@ defmodule CogApi.HTTP.Client do
 
   alias CogApi.Endpoint
   alias CogApi.HTTP.Roles
+  alias CogApi.HTTP.Permissions
 
   def authenticate(%Endpoint{token: nil}=endpoint) do
     CogApi.HTTP.Authentication.get_and_merge_token(endpoint)
@@ -26,5 +27,9 @@ defmodule CogApi.HTTP.Client do
 
   def role_delete(%Endpoint{}=endpoint, role_id) do
     Roles.role_delete(endpoint, role_id)
+  end
+
+  def permission_index(%Endpoint{}=endpoint) do
+    Permissions.permission_index(endpoint)
   end
 end

@@ -8,4 +8,8 @@ defmodule CogApi.Endpoint do
     username: nil,
     password: nil
   ]
+
+  def invalid_endpoint do
+    {:error, "You must provide an authenticated endpoint"}
+  end
 end

@@ -225,14 +225,6 @@ defmodule CogApi.HTTP.Old do
     end
   end
 
-  def permission_index(%Endpoint{}=endpoint, params) do
-    get(endpoint, "permissions", params)
-  end
-
-  def permission_create(%Endpoint{}=endpoint, params) do
-    post(endpoint, "permissions", params)
-  end
-
   def permission_delete(%Endpoint{}=endpoint, name) do
     delete_by(endpoint, "permissions", fn item ->
       item["name"] == name &&

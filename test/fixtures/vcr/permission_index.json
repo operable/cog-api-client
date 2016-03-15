@@ -1,0 +1,53 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"mTzKBl7VLizC5hjUtmEtSCrqdUqovOWP7vuiTlwKtN8=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 15 Mar 2016 15:13:05 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "napcvj5l90p821jv5e1n7dtmpdrl2ac5"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token mTzKBl7VLizC5hjUtmEtSCrqdUqovOWP7vuiTlwKtN8=",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/permissions"
+    },
+    "response": {
+      "body": "{\"permissions\":[{\"namespace\":{\"name\":\"operable\",\"id\":\"fd682d03-0d91-442f-8957-f744b5038455\"},\"name\":\"manage_commands\",\"id\":\"534c4500-c3b7-4102-9ad0-1827ccc49f3c\"},{\"namespace\":{\"name\":\"operable\",\"id\":\"fd682d03-0d91-442f-8957-f744b5038455\"},\"name\":\"manage_groups\",\"id\":\"82ca5343-e805-4c1f-9123-7ddc9c4a685d\"},{\"namespace\":{\"name\":\"operable\",\"id\":\"fd682d03-0d91-442f-8957-f744b5038455\"},\"name\":\"manage_permissions\",\"id\":\"347ae461-5a18-4c79-8fa4-040fae34a8f2\"},{\"namespace\":{\"name\":\"operable\",\"id\":\"fd682d03-0d91-442f-8957-f744b5038455\"},\"name\":\"manage_roles\",\"id\":\"593957b8-308c-4cfe-8e67-b55ef0e9befd\"},{\"namespace\":{\"name\":\"operable\",\"id\":\"fd682d03-0d91-442f-8957-f744b5038455\"},\"name\":\"manage_users\",\"id\":\"cb832e23-3c90-4ddc-bc9f-c73eb572eada\"},{\"namespace\":{\"name\":\"site\",\"id\":\"4c544b59-0122-4f41-95ff-30ed0c94e1c5\"},\"name\":\"foobar\",\"id\":\"6b44eaaf-ae24-496f-9ab4-dec37e82d5c1\"}]}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 15 Mar 2016 15:13:05 GMT",
+        "content-length": "881",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "ppqsgej3hj1chbfe5q51inkuqkgojnh3"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

@@ -4,7 +4,7 @@ defmodule CogApi.HTTP.Base do
 
   def get(%Endpoint{}=endpoint, resource, params \\ %{}) do
     rescue_econnrefused(fn ->
-      response = HTTPotion.get(
+      HTTPotion.get(
         make_url(endpoint, resource, params),
         headers: make_headers(endpoint)
       )
