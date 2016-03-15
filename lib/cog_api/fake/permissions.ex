@@ -6,13 +6,13 @@ defmodule CogApi.Fake.Permissions do
   alias CogApi.Resources.Permission
   alias CogApi.Resources.Namespace
 
-  def permission_index(%Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
-  def permission_index(%Endpoint{}) do
+  def index(%Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
+  def index(%Endpoint{}) do
     {:ok, Server.index(:permissions)}
   end
 
-  def permission_create(%Endpoint{token: nil}, %{name: _}), do: Endpoint.invalid_endpoint
-  def permission_create(%Endpoint{token: _}, name) do
+  def create(%Endpoint{token: nil}, %{name: _}), do: Endpoint.invalid_endpoint
+  def create(%Endpoint{token: _}, name) do
     [namespace, name] = build_namespaced_name(name)
 
     new_permission = %Permission{

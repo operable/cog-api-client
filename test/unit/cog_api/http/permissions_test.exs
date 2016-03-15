@@ -8,7 +8,7 @@ defmodule CogApi.HTTP.PermissionsTest do
   describe "permission_index" do
     it "returns a list of permissions" do
       cassette "permission_index" do
-        {:ok, permissions} = Permissions.permission_index(valid_endpoint)
+        {:ok, permissions} = Permissions.index(valid_endpoint)
 
         first_permission = List.first permissions
 
@@ -25,7 +25,7 @@ defmodule CogApi.HTTP.PermissionsTest do
     it "returns the created permission, in the site namespace" do
       cassette "permission_create" do
         name = "foobar"
-        {:ok, permission} = Permissions.permission_create(valid_endpoint, name)
+        {:ok, permission} = Permissions.create(valid_endpoint, name)
 
         assert present permission.id
         assert permission.name == "foobar"

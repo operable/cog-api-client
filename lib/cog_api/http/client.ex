@@ -10,26 +10,30 @@ defmodule CogApi.HTTP.Client do
   end
 
   def role_index(endpoint) do
-    Roles.role_index(endpoint)
+    Roles.index(endpoint)
   end
 
   def role_show(endpoint, id) do
-    Roles.role_show(endpoint, id)
+    Roles.index(endpoint, id)
   end
 
   def role_create(endpoint, params) do
-    Roles.role_create(endpoint, params)
+    Roles.create(endpoint, params)
   end
 
   def role_update(%Endpoint{}=endpoint, role_id, params) do
-    Roles.role_update(endpoint, role_id, params)
+    Roles.update(endpoint, role_id, params)
   end
 
   def role_delete(%Endpoint{}=endpoint, role_id) do
-    Roles.role_delete(endpoint, role_id)
+    Roles.delete(endpoint, role_id)
   end
 
   def permission_index(%Endpoint{}=endpoint) do
-    Permissions.permission_index(endpoint)
+    Permissions.index(endpoint)
+  end
+
+  def permission_create(%Endpoint{}=endpoint, name) do
+    Permissions.create(endpoint, name)
   end
 end
