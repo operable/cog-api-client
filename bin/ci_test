@@ -1,4 +1,4 @@
 #!/bin/bash
 
 source ~/.asdf/asdf.sh
-mix test
+mix test --warnings-as-errors
