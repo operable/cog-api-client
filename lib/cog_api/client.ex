@@ -1,9 +1,13 @@
 defmodule CogApi.Client do
   alias CogApi.Endpoint
+  alias CogApi.Resources.Group
   alias CogApi.Resources.Permission
   alias CogApi.Resources.Role
 
   @callback authenticate(%Endpoint{}) :: {atom, %Endpoint{}}
+
+  @callback group_index(%Endpoint{}) :: {atom, [%Group{}]}
+  @callback group_create(%Endpoint{}, %{}) :: {atom, %Group{}}
 
   @callback permission_index(%Endpoint{}) :: {atom, [%Permission{}]}
   @callback permission_create(%Endpoint{}, String.t) :: {atom, %Permission{}}

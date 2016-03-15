@@ -2,6 +2,7 @@ defmodule CogApi.HTTP.Client do
   @behaviour CogApi.Client
 
   alias CogApi.Endpoint
+  alias CogApi.HTTP.Groups
   alias CogApi.HTTP.Roles
   alias CogApi.HTTP.Permissions
 
@@ -35,5 +36,13 @@ defmodule CogApi.HTTP.Client do
 
   def permission_create(%Endpoint{}=endpoint, name) do
     Permissions.create(endpoint, name)
+  end
+
+  def group_index(%Endpoint{}=endpoint) do
+    Groups.index(endpoint)
+  end
+
+  def group_create(%Endpoint{}=endpoint, name) do
+    Groups.create(endpoint, name)
   end
 end

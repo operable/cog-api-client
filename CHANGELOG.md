@@ -1,5 +1,7 @@
 # Changlelog
 
+* The `groups_index` now returns a list of `%Group{}` structs instead of a map.
+
 * The `permission_create` now takes a single parameter of `name`. This will be
   used as the name of the command and a default `site` namespace. The fake
   server will accept a `:` separating the namespace and the command name.

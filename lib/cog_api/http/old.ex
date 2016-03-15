@@ -128,19 +128,11 @@ defmodule CogApi.HTTP.Old do
     delete_by(endpoint, "users", username: user_username)
   end
 
-  def group_index(%Endpoint{}=endpoint) do
-    get(endpoint, "groups")
-  end
-
   def group_show(%Endpoint{}=endpoint, group_name) do
     with {:ok, group_id} <- find_id_by(endpoint, "groups", name: group_name),
       {:ok, group} <- get(endpoint, "groups/#{URI.encode(group_id)}"),
       {:ok, members} <- get(endpoint, "groups/#{URI.encode(group_id)}/memberships"),
       do: {:ok, Map.update!(group, "group", &Map.merge(&1, members))}
-  end
-
-  def group_create(%Endpoint{}=endpoint, params) do
-    post(endpoint, "groups", params)
   end
 
   def group_update(%Endpoint{}=endpoint, group_name, params) do

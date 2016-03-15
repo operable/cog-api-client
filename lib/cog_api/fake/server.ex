@@ -1,5 +1,6 @@
 defmodule CogApi.Fake.Server do
   defstruct [
+    groups: [],
     roles: [],
     permissions: []
   ]

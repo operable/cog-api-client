@@ -2,6 +2,7 @@ defmodule CogApi.Fake.Client do
   @behaviour CogApi.Client
 
   alias CogApi.Endpoint
+  alias CogApi.Fake.Groups
   alias CogApi.Fake.Roles
   alias CogApi.Fake.Permissions
 
@@ -35,5 +36,13 @@ defmodule CogApi.Fake.Client do
 
   def permission_create(%Endpoint{}=endpoint, name) do
     Permissions.create(endpoint, name)
+  end
+
+  def group_index(%Endpoint{}=endpoint) do
+    Groups.index(endpoint)
+  end
+
+  def group_create(%Endpoint{}=endpoint, params) do
+    Groups.create(endpoint, params)
   end
 end
