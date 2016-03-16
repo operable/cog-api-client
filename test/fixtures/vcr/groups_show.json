@@ -1,0 +1,80 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"b4nB52dLHzqBF8W+qAYfPJMJdDEoSpnBRdgndxXyNZM=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 16 Mar 2016 18:12:13 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "tuho1qkpk26668ch40m2afs360gta9bk"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"group\":{\"name\":\"Developers\"}}",
+      "headers": {
+        "authorization": "token b4nB52dLHzqBF8W+qAYfPJMJdDEoSpnBRdgndxXyNZM=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/groups"
+    },
+    "response": {
+      "body": "{\"group\":{\"name\":\"Developers\",\"id\":\"4e0a5efe-1572-4169-933b-64f36a508dbe\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 16 Mar 2016 18:12:13 GMT",
+        "content-length": "75",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "nppcrokiugpeieoq40bkttsgtrcfqi97",
+        "location": "/v1/groups/4e0a5efe-1572-4169-933b-64f36a508dbe"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token b4nB52dLHzqBF8W+qAYfPJMJdDEoSpnBRdgndxXyNZM=",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/groups/4e0a5efe-1572-4169-933b-64f36a508dbe"
+    },
+    "response": {
+      "body": "{\"group\":{\"name\":\"Developers\",\"id\":\"4e0a5efe-1572-4169-933b-64f36a508dbe\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 16 Mar 2016 18:12:13 GMT",
+        "content-length": "75",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "3smlh9a2h52onq8hgkl7hos3g8karfql"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

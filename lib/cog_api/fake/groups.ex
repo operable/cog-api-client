@@ -10,6 +10,11 @@ defmodule CogApi.Fake.Groups do
     {:ok, Server.index(:groups)}
   end
 
+  def show(%Endpoint{token: nil}, _), do: Endpoint.invalid_endpoint
+  def show(%Endpoint{token: _}, id) do
+    {:ok, Server.show(:groups, id)}
+  end
+
   def create(%Endpoint{token: nil}, _), do: Endpoint.invalid_endpoint
   def create(%Endpoint{token: _}, %{name: name}) do
     new_group = %Group{id: random_string(8), name: name}

@@ -18,6 +18,19 @@ defmodule CogApi.Fake.GroupsTest do
     end
   end
 
+  describe "group_show" do
+    context "when the group exists" do
+      it "returns the group" do
+        params = %{name: "Developers"}
+        {:ok, created_group} = Groups.create(fake_endpoint, params)
+
+        {:ok, found_group} = Groups.show(fake_endpoint, created_group.id)
+
+        assert found_group.id == created_group.id
+      end
+    end
+  end
+
   describe "create" do
     it "returns the created group" do
       name = "foobar"

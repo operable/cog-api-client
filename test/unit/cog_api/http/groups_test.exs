@@ -17,6 +17,22 @@ defmodule CogApi.HTTP.GroupsTest do
     end
   end
 
+  describe "group_show" do
+    context "when the group exists" do
+      it "returns the group" do
+        cassette "groups_show" do
+          endpoint = valid_endpoint
+          params = %{name: "Developers"}
+          {:ok, created_group} = Groups.create(endpoint, params)
+
+          {:ok, found_group} = Groups.show(endpoint, created_group.id)
+
+          assert found_group.id == created_group.id
+        end
+      end
+    end
+  end
+
   describe "group_create" do
     it "returns the created group" do
       cassette "groups_create" do

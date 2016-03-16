@@ -42,6 +42,10 @@ defmodule CogApi.Fake.Client do
     Groups.index(endpoint)
   end
 
+  def group_show(%Endpoint{}=endpoint, group_id) do
+    Groups.show(endpoint, group_id)
+  end
+
   def group_create(%Endpoint{}=endpoint, params) do
     Groups.create(endpoint, params)
   end
