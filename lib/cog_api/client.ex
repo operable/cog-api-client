@@ -3,8 +3,11 @@ defmodule CogApi.Client do
   alias CogApi.Resources.Group
   alias CogApi.Resources.Permission
   alias CogApi.Resources.Role
+  alias CogApi.Resources.Bundle
 
   @callback authenticate(%Endpoint{}) :: {atom, %Endpoint{}}
+
+  @callback bundle_index(%Endpoint{}) ::{atom, [%Bundle{}]}
 
   @callback group_index(%Endpoint{}) :: {atom, [%Group{}]}
   @callback group_show(%Endpoint{}, String.t) :: {atom, %Group{}}

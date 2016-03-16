@@ -5,9 +5,14 @@ defmodule CogApi.Fake.Client do
   alias CogApi.Fake.Groups
   alias CogApi.Fake.Roles
   alias CogApi.Fake.Permissions
+  alias CogApi.Fake.Bundles
 
   def authenticate(%Endpoint{token: nil}=endpoint) do
     CogApi.Fake.Authentication.get_and_merge_token(endpoint)
+  end
+
+  def bundle_index(%Endpoint{}=endpoint) do
+    Bundles.index(endpoint)
   end
 
   def group_index(%Endpoint{}=endpoint) do

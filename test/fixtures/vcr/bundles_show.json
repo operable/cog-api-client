@@ -1,0 +1,27 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"pwYxmzzw8pgz8Ps1dXbXp77SlqU112krLYtv2bTJgwo=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 16 Mar 2016 15:59:52 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "c7hkeg2pfp40081o7bqd16145cp0s32r"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  }
+]

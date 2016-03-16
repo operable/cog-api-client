@@ -1,8 +1,9 @@
 defmodule CogApi.Fake.Server do
   defstruct [
+    bundles: [],
     groups: [],
+    permissions: [],
     roles: [],
-    permissions: []
   ]
 
   def start_link do

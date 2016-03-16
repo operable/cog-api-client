@@ -1,0 +1,53 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"lLMKhdIsBbKSJ58QUJ2bYsfQLiwK6FgKKwxWNjp5X/g=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 16 Mar 2016 15:46:38 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "1l2pafr0efv2f8vfgq92bc6e3ofvg20c"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token lLMKhdIsBbKSJ58QUJ2bYsfQLiwK6FgKKwxWNjp5X/g=",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/bundles"
+    },
+    "response": {
+      "body": "{\"bundles\":[{\"namespace\":{\"name\":\"operable\",\"id\":\"473c9d8c-5493-478f-8f5d-884ad46a7abd\"},\"name\":\"operable\",\"inserted_at\":\"2016-03-09T21:34:42Z\",\"id\":\"f964dc52-c86b-4143-94b4-67099f29a603\",\"enabled\":true}]}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 16 Mar 2016 15:46:38 GMT",
+        "content-length": "205",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "dsflei2k0m74t9b5cbi8b5lajucrs18i"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

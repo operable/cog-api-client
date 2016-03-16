@@ -47,7 +47,7 @@ defmodule CogApi.Fake.RolesTest do
     it "returns a list of roles" do
       name = "foobar"
       params = %{name: name}
-      {:ok, _ } = Roles.create(fake_endpoint, params)
+      {:ok, _} = Roles.create(fake_endpoint, params)
 
       {:ok, roles} = Roles.index(fake_endpoint)
 

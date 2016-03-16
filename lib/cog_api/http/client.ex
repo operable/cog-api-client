@@ -5,9 +5,14 @@ defmodule CogApi.HTTP.Client do
   alias CogApi.HTTP.Groups
   alias CogApi.HTTP.Roles
   alias CogApi.HTTP.Permissions
+  alias CogApi.HTTP.Bundles
 
   def authenticate(%Endpoint{token: nil}=endpoint) do
     CogApi.HTTP.Authentication.get_and_merge_token(endpoint)
+  end
+
+  def bundle_index(%Endpoint{}=endpoint) do
+    Bundles.index(endpoint)
   end
 
   def group_index(%Endpoint{}=endpoint) do
