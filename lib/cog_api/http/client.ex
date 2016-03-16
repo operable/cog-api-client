@@ -10,6 +10,26 @@ defmodule CogApi.HTTP.Client do
     CogApi.HTTP.Authentication.get_and_merge_token(endpoint)
   end
 
+  def group_index(%Endpoint{}=endpoint) do
+    Groups.index(endpoint)
+  end
+
+  def group_show(%Endpoint{}=endpoint, group_id) do
+    Groups.show(endpoint, group_id)
+  end
+
+  def group_create(%Endpoint{}=endpoint, name) do
+    Groups.create(endpoint, name)
+  end
+
+  def permission_index(%Endpoint{}=endpoint) do
+    Permissions.index(endpoint)
+  end
+
+  def permission_create(%Endpoint{}=endpoint, name) do
+    Permissions.create(endpoint, name)
+  end
+
   def role_index(endpoint) do
     Roles.index(endpoint)
   end
@@ -28,25 +48,5 @@ defmodule CogApi.HTTP.Client do
 
   def role_delete(%Endpoint{}=endpoint, role_id) do
     Roles.delete(endpoint, role_id)
-  end
-
-  def permission_index(%Endpoint{}=endpoint) do
-    Permissions.index(endpoint)
-  end
-
-  def permission_create(%Endpoint{}=endpoint, name) do
-    Permissions.create(endpoint, name)
-  end
-
-  def group_index(%Endpoint{}=endpoint) do
-    Groups.index(endpoint)
-  end
-
-  def group_show(%Endpoint{}=endpoint, group_id) do
-    Groups.show(endpoint, group_id)
-  end
-
-  def group_create(%Endpoint{}=endpoint, name) do
-    Groups.create(endpoint, name)
   end
 end
