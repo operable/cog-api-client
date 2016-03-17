@@ -23,6 +23,7 @@ defmodule CogApi.Client do
   @callback role_create(%Endpoint{}, %{}) :: {atom, %Role{}}
   @callback role_update(%Endpoint{}, String.t, %{}) :: {atom, %Role{}}
   @callback role_delete(%Endpoint{}, String.t) :: atom
+  @callback role_grant(%Endpoint{}, %Role{}, %Group{}) :: {atom, %Group{}}
 
   @callback user_index(%Endpoint{}) :: {atom, [%User{}]}
   @callback user_show(%Endpoint{}, String.t) :: {atom, %User{}}

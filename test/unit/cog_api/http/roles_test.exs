@@ -70,4 +70,19 @@ defmodule CogApi.HTTP.RolesTest do
       end
     end
   end
+
+  describe "role_grant" do
+    it "returns the roles that are associated with that group" do
+      cassette "role_grant" do
+        endpoint = valid_endpoint
+        role = Client.role_create(endpoint, %{name: "role"}) |> get_value
+        group = Client.group_create(endpoint, %{name: "group"}) |> get_value
+
+        updated_group = Client.role_grant(endpoint, role, group) |> get_value
+
+        first_role = List.first updated_group.roles
+        assert first_role.id == role.id
+      end
+    end
+  end
 end

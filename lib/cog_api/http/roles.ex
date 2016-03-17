@@ -24,4 +24,18 @@ defmodule CogApi.HTTP.Roles do
   def delete(%Endpoint{}=endpoint, role_id) do
     Base.delete(endpoint, "roles/#{role_id}") |> Base.format_response("role", %Role{})
   end
+
+  def grant(%Endpoint{}=endpoint, role, group) do
+    path = "groups/#{group.id}/roles"
+    Base.post(endpoint, path, %{roles: %{grant: [role.name]}})
+    |> format_response(group)
+  end
+
+  defp format_response(response, group) do
+    body = Poison.decode!(response.body, as: %{"roles" => [%Role{}]})
+    {
+      Base.response_type(response),
+      %{group | roles: body["roles"] }
+    }
+  end
 end

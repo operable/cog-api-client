@@ -31,4 +31,10 @@ defmodule CogApi.Fake.Roles do
     Server.delete(:roles, id)
     :ok
   end
+
+  def grant(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
+  def grant(%Endpoint{}, role, group) do
+    group = %{group | roles: group.roles ++ [role]}
+    {:ok, Server.update(:groups, group.id, group)}
+  end
 end

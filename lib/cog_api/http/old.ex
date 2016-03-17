@@ -144,12 +144,10 @@ defmodule CogApi.HTTP.Old do
   end
 
   def role_grant(%Endpoint{}=endpoint, role_name, type, item_to_grant)
-      when type in ["users", "groups"] do
+      when type in ["users"] do
     result = case type do
       "users" ->
         find_id_by(endpoint, type, username: item_to_grant)
-      "groups" ->
-        find_id_by(endpoint, type, name: item_to_grant)
     end
 
     with {:ok, id} <- result do

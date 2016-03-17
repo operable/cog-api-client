@@ -112,7 +112,7 @@ defmodule CogApi.HTTP.Base do
     route = if is_function(route) do
       route.()
     else
-      route
+      URI.encode(route)
     end
     url = "#{proto}://#{host}:#{port}/v#{version}"
     url = if String.starts_with?(route, "/") do

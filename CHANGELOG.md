@@ -1,5 +1,9 @@
 # Changelog
 
+* The `role_grant` function now takes a `%Role{}`, and a `%Group{}` instead of
+  names. It returns a `%Group{}` with the associated roles as an attribute. The
+  original `role_grant` can still be used for users.
+
 * The `bundle_status`, `bundle_enable` and `bundle_disable` functions were
   removed. All calls should now go through `bundle_update` and pass the
   `enabled:` as `true` or `false`. This command returns `{:ok, %Bundle}`.

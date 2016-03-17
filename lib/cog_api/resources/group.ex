@@ -4,5 +4,6 @@ defmodule CogApi.Resources.Group do
   defstruct [
     :id,
     :name,
+    roles: [],
   ]
 end

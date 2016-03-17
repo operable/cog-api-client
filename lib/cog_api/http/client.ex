@@ -60,6 +60,10 @@ defmodule CogApi.HTTP.Client do
     Roles.delete(endpoint, role_id)
   end
 
+  def role_grant(%Endpoint{}=endpoint, role, group) do
+    Roles.grant(endpoint, role, group)
+  end
+
   def user_index(%Endpoint{}=endpoint) do
     Users.index(endpoint)
   end

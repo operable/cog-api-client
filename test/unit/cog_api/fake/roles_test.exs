@@ -86,4 +86,16 @@ defmodule CogApi.Fake.RolesTest do
       assert :ok == Client.role_delete(fake_endpoint, role.id)
     end
   end
+
+  describe "role_grant" do
+    it "returns the roles that are associated with that group" do
+      role = Client.role_create(fake_endpoint, %{name: "role"}) |> get_value
+      group = Client.group_create(fake_endpoint, %{name: "group"}) |> get_value
+
+      updated_group = Client.role_grant(fake_endpoint, role, group) |> get_value
+
+      first_role = List.first updated_group.roles
+      assert first_role.id == role.id
+    end
+  end
 end
