@@ -1,4 +1,4 @@
-defmodule CogHelper do
+defmodule CogApi.Test.HTTPHelpers do
   alias CogApi.Endpoint
 
   def valid_endpoint do
@@ -10,14 +10,5 @@ defmodule CogHelper do
     } |> CogApi.HTTP.Client.authenticate
 
     endpoint
-  end
-
-  def fake_endpoint do
-    {:ok, endpoint} = %Endpoint{} |> CogApi.Fake.Client.authenticate
-    endpoint
-  end
-
-  def present(string) do
-    String.length(string) > 1
   end
 end

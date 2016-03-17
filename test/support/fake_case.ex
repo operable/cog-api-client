@@ -7,7 +7,8 @@ defmodule CogApi.FakeCase do
 
       alias CogApi.Endpoint
 
-      import CogHelper
+      import CogApi.TestHelpers
+      import CogApi.Test.FakeHelpers
 
       setup do
         CogApi.Fake.Server.start_link

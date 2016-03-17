@@ -1,4 +1,7 @@
-# Changlelog
+# Changelog
+
+* The `users_index` now returns `{:ok, [%User{}]}` on success
+* The `users_create` now returns `{:ok, %User{}}` on success
 
 * The `groups_index` now returns a list of `%Group{}` structs instead of a map.
 

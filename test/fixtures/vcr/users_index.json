@@ -1,0 +1,80 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"gZDKN1r6VhZnznRUqd+TzNor/XvPzi6h2kv+WtUFY0s=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 17 Mar 2016 14:15:25 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "m6s5msa95amfj2dpi5e8v9c7fgcs6d72"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"user\":{\"username\":\"chief_of_staff\",\"password\":\"supersecret\",\"last_name\":\"McGary\",\"first_name\":\"Leo\",\"email_address\":\"cos@example.com\"}}",
+      "headers": {
+        "authorization": "token gZDKN1r6VhZnznRUqd+TzNor/XvPzi6h2kv+WtUFY0s=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/users"
+    },
+    "response": {
+      "body": "{\"user\":{\"username\":\"chief_of_staff\",\"last_name\":\"McGary\",\"id\":\"38e28b40-f45b-4e76-b86a-723fe47081f1\",\"first_name\":\"Leo\",\"email_address\":\"cos@example.com\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 17 Mar 2016 14:15:27 GMT",
+        "content-length": "156",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "qbv5p804uufajre2lq48t0g4em98m7k0",
+        "location": "/v1/users/38e28b40-f45b-4e76-b86a-723fe47081f1"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token gZDKN1r6VhZnznRUqd+TzNor/XvPzi6h2kv+WtUFY0s=",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/users"
+    },
+    "response": {
+      "body": "{\"users\":[{\"username\":\"admin\",\"last_name\":\"Administrator\",\"id\":\"e8a31058-94f8-4275-8fbb-262b4bb36797\",\"first_name\":\"Cog\",\"email_address\":\"cog@localhost\"},{\"username\":\"chief_of_staff\",\"last_name\":\"McGary\",\"id\":\"38e28b40-f45b-4e76-b86a-723fe47081f1\",\"first_name\":\"Leo\",\"email_address\":\"cos@example.com\"}]}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 17 Mar 2016 14:15:27 GMT",
+        "content-length": "303",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "jh64gj1psuv15h5sad3ctblrrd6r49hu"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

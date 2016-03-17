@@ -4,6 +4,7 @@ defmodule CogApi.Client do
   alias CogApi.Resources.Permission
   alias CogApi.Resources.Role
   alias CogApi.Resources.Bundle
+  alias CogApi.Resources.User
 
   @callback authenticate(%Endpoint{}) :: {atom, %Endpoint{}}
 
@@ -21,4 +22,7 @@ defmodule CogApi.Client do
   @callback role_create(%Endpoint{}, %{}) :: {atom, %Role{}}
   @callback role_update(%Endpoint{}, String.t, %{}) :: {atom, %Role{}}
   @callback role_delete(%Endpoint{}, String.t) :: atom
+
+  @callback user_index(%Endpoint{}) ::{atom, [%User{}]}
+  @callback user_create(%Endpoint{}, %{}) ::{atom, %User{}}
 end

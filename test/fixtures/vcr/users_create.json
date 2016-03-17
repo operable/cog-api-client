@@ -1,0 +1,54 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"i5zrL6SU0zABonMiyB2kRd31r1nQCVX/KUsJ1rHR908=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 16 Mar 2016 21:13:12 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "9tkfullanfbbmdt9jn8si9qhuqirn5n5"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"user\":{\"username\":\"potus\",\"password\":\"mrpresident\",\"last_name\":\"Bartlett\",\"first_name\":\"Josiah\",\"email_address\":\"president@example.com\"}}",
+      "headers": {
+        "authorization": "token i5zrL6SU0zABonMiyB2kRd31r1nQCVX/KUsJ1rHR908=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/users"
+    },
+    "response": {
+      "body": "{\"user\":{\"username\":\"potus\",\"last_name\":\"Bartlett\",\"id\":\"9a6a3d40-18b6-4e59-ad16-c8ee3f19b10e\",\"first_name\":\"Josiah\",\"email_address\":\"president@example.com\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 16 Mar 2016 21:13:14 GMT",
+        "content-length": "158",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "n176gj0ds9cjoul2snp591boulcvu7l7",
+        "location": "/v1/users/9a6a3d40-18b6-4e59-ad16-c8ee3f19b10e"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  }
+]

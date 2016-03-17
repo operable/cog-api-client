@@ -108,16 +108,8 @@ defmodule CogApi.HTTP.Old do
     bundle_status(endpoint, bundle_name, "disabled")
   end
 
-  def user_index(%Endpoint{}=endpoint) do
-    get(endpoint, "users")
-  end
-
   def user_show(%Endpoint{}=endpoint, user_username) do
     get_by(endpoint, "users", username: user_username)
-  end
-
-  def user_create(%Endpoint{}=endpoint, params) do
-    post(endpoint, "users", params)
   end
 
   def user_update(%Endpoint{}=endpoint, user_username, params) do

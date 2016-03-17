@@ -54,4 +54,12 @@ defmodule CogApi.Fake.Client do
   def role_delete(%Endpoint{}=endpoint, role_id) do
     Roles.delete(endpoint, role_id)
   end
+
+  def user_index(endpoint) do
+    Roles.index(endpoint)
+  end
+
+  def user_create(endpoint, params) do
+    Roles.create(endpoint, params)
+  end
 end

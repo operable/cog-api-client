@@ -8,7 +8,8 @@ defmodule CogApi.HTTPCase do
 
       alias CogApi.Endpoint
 
-      import CogHelper
+      import CogApi.TestHelpers
+      import CogApi.Test.HTTPHelpers
 
       defmacro cassette(fixture, test) do
         quote do
