@@ -1,14 +1,14 @@
 defmodule CogApi.HTTP.PermissionsTest do
   use CogApi.HTTPCase
 
-  alias CogApi.HTTP.Permissions
+  alias CogApi.HTTP.Client
 
   doctest CogApi.HTTP.Permissions
 
   describe "permission_index" do
     it "returns a list of permissions" do
       cassette "permission_index" do
-        {:ok, permissions} = Permissions.index(valid_endpoint)
+        {:ok, permissions} = Client.permission_index(valid_endpoint)
 
         first_permission = List.first permissions
 
@@ -25,7 +25,7 @@ defmodule CogApi.HTTP.PermissionsTest do
     it "returns the created permission, in the site namespace" do
       cassette "permission_create" do
         name = "foobar"
-        {:ok, permission} = Permissions.create(valid_endpoint, name)
+        {:ok, permission} = Client.permission_create(valid_endpoint, name)
 
         assert present permission.id
         assert permission.name == "foobar"

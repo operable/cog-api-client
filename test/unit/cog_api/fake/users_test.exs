@@ -1,7 +1,7 @@
 defmodule CogApi.Fake.UsersTest do
   use CogApi.FakeCase
 
-  alias CogApi.Fake.Users
+  alias CogApi.Fake.Client
 
   doctest CogApi.Fake.Users
 
@@ -14,9 +14,9 @@ defmodule CogApi.Fake.UsersTest do
         username: "chief_of_staff",
         password: "supersecret",
       }
-      {:ok, _} = Users.create(fake_endpoint, params)
+      {:ok, _} = Client.user_create(fake_endpoint, params)
 
-      {:ok, users} = Users.index(fake_endpoint)
+      {:ok, users} = Client.user_index(fake_endpoint)
 
       last_user = List.last users
       assert present last_user.id
@@ -36,7 +36,7 @@ defmodule CogApi.Fake.UsersTest do
         username: "chief_of_staff",
         password: "supersecret",
       }
-      {:ok, user} = Users.create(fake_endpoint, params)
+      {:ok, user} = Client.user_create(fake_endpoint, params)
 
       assert present user.id
       assert user.first_name == params.first_name

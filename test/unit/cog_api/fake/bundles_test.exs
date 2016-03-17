@@ -3,13 +3,13 @@ defmodule CogApi.Fake.BundlesTest do
 
   alias CogApi.Resources.Bundle
   alias CogApi.Fake.Server
-  alias CogApi.Fake.Bundles
+  alias CogApi.Fake.Client
 
   doctest CogApi.Fake.Roles
 
   describe "bundle_index" do
     it "requires an authenticated endpoint" do
-      {response, error_message} = Bundles.index(%Endpoint{})
+      {response, error_message} = Client.bundle_index(%Endpoint{})
 
       assert response == :error
       assert error_message == "You must provide an authenticated endpoint"
@@ -19,7 +19,7 @@ defmodule CogApi.Fake.BundlesTest do
       bundle = %Bundle{id: "id123", name: "a bundle"}
       Server.create(:bundles, bundle)
 
-      {:ok, bundles} = Bundles.index(fake_endpoint)
+      {:ok, bundles} = Client.bundle_index(fake_endpoint)
 
       first_bundle = List.first bundles
       assert first_bundle.id == bundle.id

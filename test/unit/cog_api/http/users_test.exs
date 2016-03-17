@@ -1,7 +1,7 @@
 defmodule CogApi.HTTP.UsersTest do
   use CogApi.HTTPCase
 
-  alias CogApi.HTTP.Users
+  alias CogApi.HTTP.Client
 
   doctest CogApi.HTTP.Users
 
@@ -16,9 +16,9 @@ defmodule CogApi.HTTP.UsersTest do
           password: "supersecret",
         }
         endpoint = valid_endpoint
-        {:ok, _} = Users.create(endpoint, params)
+        {:ok, _} = Client.user_create(endpoint, params)
 
-        {:ok, users} = Users.index(endpoint)
+        {:ok, users} = Client.user_index(endpoint)
 
         last_user = List.last users
         assert present last_user.id
@@ -40,7 +40,7 @@ defmodule CogApi.HTTP.UsersTest do
           username: "potus",
           password: "mrpresident",
         }
-        {:ok, user} = Users.create(valid_endpoint, params)
+        {:ok, user} = Client.user_create(valid_endpoint, params)
 
         assert present user.id
         assert user.first_name == params.first_name

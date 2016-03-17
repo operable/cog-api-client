@@ -6,6 +6,7 @@ defmodule CogApi.Fake.Client do
   alias CogApi.Fake.Roles
   alias CogApi.Fake.Permissions
   alias CogApi.Fake.Bundles
+  alias CogApi.Fake.Users
 
   def authenticate(%Endpoint{token: nil}=endpoint) do
     CogApi.Fake.Authentication.get_and_merge_token(endpoint)
@@ -56,10 +57,10 @@ defmodule CogApi.Fake.Client do
   end
 
   def user_index(endpoint) do
-    Roles.index(endpoint)
+    Users.index(endpoint)
   end
 
   def user_create(endpoint, params) do
-    Roles.create(endpoint, params)
+    Users.create(endpoint, params)
   end
 end

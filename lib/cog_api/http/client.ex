@@ -6,6 +6,7 @@ defmodule CogApi.HTTP.Client do
   alias CogApi.HTTP.Roles
   alias CogApi.HTTP.Permissions
   alias CogApi.HTTP.Bundles
+  alias CogApi.HTTP.Users
 
   def authenticate(%Endpoint{token: nil}=endpoint) do
     CogApi.HTTP.Authentication.get_and_merge_token(endpoint)
@@ -56,10 +57,10 @@ defmodule CogApi.HTTP.Client do
   end
 
   def user_index(endpoint) do
-    Roles.index(endpoint)
+    Users.index(endpoint)
   end
 
   def user_create(endpoint, params) do
-    Roles.create(endpoint, params)
+    Users.create(endpoint, params)
   end
 end

@@ -1,14 +1,14 @@
 defmodule CogApi.HTTP.RolesTest do
   use CogApi.HTTPCase
 
-  alias CogApi.HTTP.Roles
+  alias CogApi.HTTP.Client
 
   doctest CogApi.HTTP.Roles
 
   describe "role_index" do
     it "returns a list of roles" do
       cassette "roles_index" do
-        {:ok, roles} = Roles.index(valid_endpoint)
+        {:ok, roles} = Client.role_index(valid_endpoint)
 
         first_role = List.first roles
         assert present first_role.id
@@ -23,9 +23,9 @@ defmodule CogApi.HTTP.RolesTest do
         cassette "roles_show" do
           endpoint = valid_endpoint
           params = %{name: "QA Analyst"}
-          {:ok, created_role} = Roles.create(endpoint, params)
+          {:ok, created_role} = Client.role_create(endpoint, params)
 
-          {:ok, found_role} = Roles.show(endpoint, created_role.id)
+          {:ok, found_role} = Client.role_show(endpoint, created_role.id)
 
           assert found_role.id == created_role.id
         end
@@ -37,7 +37,7 @@ defmodule CogApi.HTTP.RolesTest do
     it "returns the created role" do
       cassette "roles_create" do
         params = %{"name" => "new role"}
-        {:ok, role} = Roles.create(valid_endpoint, params)
+        {:ok, role} = Client.role_create(valid_endpoint, params)
 
         assert present role.id
         assert role.name == "new role"
@@ -49,8 +49,8 @@ defmodule CogApi.HTTP.RolesTest do
     it "returns the updated role" do
       cassette "role_update" do
         endpoint = valid_endpoint
-        {:ok, new_role} = Roles.create(endpoint, %{name: "new role"})
-        {:ok, updated_role} = Roles.update(
+        {:ok, new_role} = Client.role_create(endpoint, %{name: "new role"})
+        {:ok, updated_role} = Client.role_update(
           endpoint,
           new_role.id,
           %{name: "updated role"}
@@ -65,8 +65,8 @@ defmodule CogApi.HTTP.RolesTest do
     it "returns :ok" do
       cassette "role_delete" do
         endpoint = valid_endpoint
-        {:ok, role} = Roles.create(endpoint, %{name: "role to delete"})
-        assert :ok == Roles.delete(endpoint, role.id)
+        {:ok, role} = Client.role_create(endpoint, %{name: "role to delete"})
+        assert :ok == Client.role_delete(endpoint, role.id)
       end
     end
   end
