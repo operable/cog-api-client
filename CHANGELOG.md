@@ -3,6 +3,8 @@
 * The `users_index` now returns `{:ok, [%User{}]}` on success
 * The `users_create` now returns `{:ok, %User{}}` on success
 
+* The `bundle_index` now returns `{:ok, [%Bundle{}]}` on success
+
 * The `groups_index` now returns a list of `%Group{}` structs instead of a map.
 
 * The `permission_create` now takes a single parameter of `name`. This will be

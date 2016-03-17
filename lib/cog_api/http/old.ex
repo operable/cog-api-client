@@ -82,10 +82,6 @@ defmodule CogApi.HTTP.Old do
     post(endpoint, "bootstrap", [])
   end
 
-  def bundle_index(%Endpoint{}=endpoint) do
-    get(endpoint, "bundles")
-  end
-
   def bundle_show(%Endpoint{}=endpoint, bundle_name) do
     get_by(endpoint, "bundles", name: bundle_name)
   end
