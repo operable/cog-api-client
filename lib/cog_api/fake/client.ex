@@ -64,6 +64,10 @@ defmodule CogApi.Fake.Client do
     Roles.grant(endpoint, role, group)
   end
 
+  def role_revoke(%Endpoint{}=endpoint, role, group) do
+    Roles.revoke(endpoint, role, group)
+  end
+
   def user_index(%Endpoint{}=endpoint) do
     Users.index(endpoint)
   end

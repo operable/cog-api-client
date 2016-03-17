@@ -37,4 +37,10 @@ defmodule CogApi.Fake.Roles do
     group = %{group | roles: group.roles ++ [role]}
     {:ok, Server.update(:groups, group.id, group)}
   end
+
+  def revoke(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
+  def revoke(%Endpoint{}, role, group) do
+    group = %{group | roles: List.delete(group.roles, role)}
+    {:ok, Server.update(:groups, group.id, group)}
+  end
 end

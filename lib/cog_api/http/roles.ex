@@ -26,8 +26,16 @@ defmodule CogApi.HTTP.Roles do
   end
 
   def grant(%Endpoint{}=endpoint, role, group) do
+    update_roles_for_group(endpoint, role, group, :grant)
+  end
+
+  def revoke(%Endpoint{}=endpoint, role, group) do
+    update_roles_for_group(endpoint, role, group, :revoke)
+  end
+
+  def update_roles_for_group(endpoint, role, group, action) do
     path = "groups/#{group.id}/roles"
-    Base.post(endpoint, path, %{roles: %{grant: [role.name]}})
+    Base.post(endpoint, path, %{roles: %{action => [role.name]}})
     |> format_response(group)
   end
 

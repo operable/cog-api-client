@@ -1,5 +1,9 @@
 # Changelog
 
+* The `role_revoke` function now takes a `%Role{}`, and a `%Group{}` instead of
+  names. It returns a `%Group{}` with the associated roles as an attribute. The
+  original `role_revoke` can still be used for users.
+
 * The `role_grant` function now takes a `%Role{}`, and a `%Group{}` instead of
   names. It returns a `%Group{}` with the associated roles as an attribute. The
   original `role_grant` can still be used for users.

@@ -4,4 +4,5 @@ defmodule CogApi.TestHelpers do
   end
 
   def get_value({:ok, value}), do: value
+  def get_value(nil), do: raise "Expected :ok but got `nil`"
 end

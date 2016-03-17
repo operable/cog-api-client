@@ -143,28 +143,14 @@ defmodule CogApi.HTTP.Old do
     delete_by(endpoint, "roles", name: role_name)
   end
 
-  def role_grant(%Endpoint{}=endpoint, role_name, type, item_to_grant)
-      when type in ["users"] do
-    result = case type do
-      "users" ->
-        find_id_by(endpoint, type, username: item_to_grant)
-    end
-
-    with {:ok, id} <- result do
+  def role_grant(%Endpoint{}=endpoint, role_name, type, item_to_grant) when type in ["users"] do
+    with {:ok, id} <- find_id_by(endpoint, type, username: item_to_grant) do
       post(endpoint, "#{type}/#{URI.encode(id)}/roles", %{roles: %{grant: [role_name]}})
     end
   end
 
-  def role_revoke(%Endpoint{}=endpoint, role_name, type, item_to_revoke)
-      when type in ["users", "groups"] do
-    result = case type do
-      "users" ->
-        find_id_by(endpoint, type, username: item_to_revoke)
-      "groups" ->
-        find_id_by(endpoint, type, name: item_to_revoke)
-    end
-
-    with {:ok, id} <- result do
+  def role_revoke(%Endpoint{}=endpoint, role_name, type, item_to_revoke) when type in ["users"] do
+    with {:ok, id} <- find_id_by(endpoint, type, username: item_to_revoke) do
       post(endpoint, "#{type}/#{URI.encode(id)}/roles", %{roles: %{revoke: [role_name]}})
     end
   end
