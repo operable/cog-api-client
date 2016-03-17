@@ -1,5 +1,9 @@
 # Changelog
 
+* The `bundle_status`, `bundle_enable` and `bundle_disable` functions were
+  removed. All calls should now go through `bundle_update` and pass the
+  `enabled:` as `true` or `false`. This command returns `{:ok, %Bundle}`.
+
 * The `users_index` now returns `{:ok, [%User{}]}` on success
 * The `users_create` now returns `{:ok, %User{}}` on success
 

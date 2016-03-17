@@ -16,6 +16,10 @@ defmodule CogApi.Fake.Client do
     Bundles.index(endpoint)
   end
 
+  def bundle_update(%Endpoint{}=endpoint, bundle_id, params) do
+    Bundles.update(endpoint, bundle_id, params)
+  end
+
   def group_index(%Endpoint{}=endpoint) do
     Groups.index(endpoint)
   end

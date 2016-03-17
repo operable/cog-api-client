@@ -137,7 +137,7 @@ defmodule CogApi.HTTP.Base do
     ["authorization": "token " <> token] ++ others
   end
 
-  defp response_type(response) do
+  def response_type(response) do
     if HTTPotion.Response.success?(response) do
       :ok
     else

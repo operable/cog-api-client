@@ -90,20 +90,6 @@ defmodule CogApi.HTTP.Old do
     delete_by(endpoint, "bundles", name: bundle_name)
   end
 
-  def bundle_status(%Endpoint{}=endpoint, bundle_name, status) do
-    with {:ok, bundle_id} <- find_id_by(endpoint, "bundles", name: bundle_name) do
-      post(endpoint, "bundles/#{bundle_id}/status", %{status: status})
-    end
-  end
-
-  def bundle_enable(%Endpoint{}=endpoint, bundle_name) do
-    bundle_status(endpoint, bundle_name, "enabled")
-  end
-
-  def bundle_disable(%Endpoint{}=endpoint, bundle_name) do
-    bundle_status(endpoint, bundle_name, "disabled")
-  end
-
   def user_show(%Endpoint{}=endpoint, user_username) do
     get_by(endpoint, "users", username: user_username)
   end
