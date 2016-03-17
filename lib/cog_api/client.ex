@@ -24,7 +24,9 @@ defmodule CogApi.Client do
   @callback role_update(%Endpoint{}, String.t, %{}) :: {atom, %Role{}}
   @callback role_delete(%Endpoint{}, String.t) :: atom
 
-  @callback user_index(%Endpoint{}) ::{atom, [%User{}]}
-  @callback user_show(%Endpoint{}, String.t) ::{atom, %User{}}
-  @callback user_create(%Endpoint{}, %{}) ::{atom, %User{}}
+  @callback user_index(%Endpoint{}) :: {atom, [%User{}]}
+  @callback user_show(%Endpoint{}, String.t) :: {atom, %User{}}
+  @callback user_create(%Endpoint{}, %{}) :: {atom, %User{}}
+  @callback user_update(%Endpoint{}, String.t, %{}) :: {atom, %User{}}
+  @callback user_delete(%Endpoint{}, String.t) :: atom
 end

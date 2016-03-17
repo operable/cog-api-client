@@ -18,6 +18,11 @@ defmodule CogApi.HTTP.Users do
     |> Base.format_response("user", %User{})
   end
 
+  def update(%Endpoint{}=endpoint, id, params) do
+    Base.patch(endpoint, "users/#{id}", %{"user" => params})
+    |> Base.format_response("user", %User{})
+  end
+
   def delete(%Endpoint{}=endpoint, id) do
     Base.delete(endpoint, "users/#{id}")
     |> Base.format_response("user", %User{})

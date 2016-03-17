@@ -60,19 +60,23 @@ defmodule CogApi.HTTP.Client do
     Roles.delete(endpoint, role_id)
   end
 
-  def user_index(endpoint) do
+  def user_index(%Endpoint{}=endpoint) do
     Users.index(endpoint)
   end
 
-  def user_show(endpoint, user_id) do
+  def user_show(%Endpoint{}=endpoint, user_id) do
     Users.show(endpoint, user_id)
   end
 
-  def user_create(endpoint, params) do
+  def user_create(%Endpoint{}=endpoint, params) do
     Users.create(endpoint, params)
   end
 
-  def user_delete(endpoint, user_id) do
+  def user_update(%Endpoint{}=endpoint, user_id, params) do
+    Users.update(endpoint, user_id, params)
+  end
+
+  def user_delete(%Endpoint{}=endpoint, user_id) do
     Users.delete(endpoint, user_id)
   end
 end

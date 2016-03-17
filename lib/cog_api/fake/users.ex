@@ -22,6 +22,11 @@ defmodule CogApi.Fake.Users do
     {:ok, Server.create(:users, new_user)}
   end
 
+  def update(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
+  def update(%Endpoint{token: _}, id, params) do
+    {:ok, Server.update(:users, id, params)}
+  end
+
   def delete(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def delete(%Endpoint{token: _}, id) do
     Server.delete(:users, id)

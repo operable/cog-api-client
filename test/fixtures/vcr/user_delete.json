@@ -11,14 +11,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"3j3l1FQG4e1tXY9vod1kTcbzdZOVaR3rdq3g3PRp5hw=\"}}",
+      "body": "{\"token\":{\"value\":\"A97lPSmn8cOmamKEsIgXbfhTLIlFtWRKjIhK96Ag9ew=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 17 Mar 2016 15:54:47 GMT",
+        "date": "Thu, 17 Mar 2016 17:47:53 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "3h204vkn5vpsc0j66ad63m3smffe42j5"
+        "x-request-id": "qlq46sunbers9pn0gh430241v6q9hbpu"
       },
       "status_code": 201,
       "type": "ok"
@@ -28,7 +28,7 @@
     "request": {
       "body": "{\"user\":{\"username\":\"deputy_cos\",\"password\":\"password\",\"last_name\":\"Lyman\",\"first_name\":\"Josh\",\"email_address\":\"josh@example.com\"}}",
       "headers": {
-        "authorization": "token 3j3l1FQG4e1tXY9vod1kTcbzdZOVaR3rdq3g3PRp5hw=",
+        "authorization": "token A97lPSmn8cOmamKEsIgXbfhTLIlFtWRKjIhK96Ag9ew=",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,15 +37,15 @@
       "url": "http://localhost:4000/v1/users"
     },
     "response": {
-      "body": "{\"user\":{\"username\":\"deputy_cos\",\"last_name\":\"Lyman\",\"id\":\"c5ec268f-19ff-4a73-8881-cc58d015bb86\",\"first_name\":\"Josh\",\"email_address\":\"josh@example.com\"}}",
+      "body": "{\"user\":{\"username\":\"deputy_cos\",\"last_name\":\"Lyman\",\"id\":\"bb5200aa-9aec-4774-9957-3572c48c5164\",\"first_name\":\"Josh\",\"email_address\":\"josh@example.com\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 17 Mar 2016 15:54:49 GMT",
+        "date": "Thu, 17 Mar 2016 17:47:55 GMT",
         "content-length": "153",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "kvi37b5uv2qlc623035uukl5baapprcb",
-        "location": "/v1/users/c5ec268f-19ff-4a73-8881-cc58d015bb86"
+        "x-request-id": "9df6vv4p8753ebkf1sqjt1aksq8336gv",
+        "location": "/v1/users/bb5200aa-9aec-4774-9957-3572c48c5164"
       },
       "status_code": 201,
       "type": "ok"
@@ -55,24 +55,50 @@
     "request": {
       "body": "",
       "headers": {
-        "authorization": "token 3j3l1FQG4e1tXY9vod1kTcbzdZOVaR3rdq3g3PRp5hw=",
+        "authorization": "token A97lPSmn8cOmamKEsIgXbfhTLIlFtWRKjIhK96Ag9ew=",
         "Accept": "application/json"
       },
       "method": "delete",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/users/c5ec268f-19ff-4a73-8881-cc58d015bb86"
+      "url": "http://localhost:4000/v1/users/bb5200aa-9aec-4774-9957-3572c48c5164"
     },
     "response": {
       "body": "",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 17 Mar 2016 15:54:49 GMT",
+        "date": "Thu, 17 Mar 2016 17:47:55 GMT",
         "content-length": "0",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "vqcmpmqnoq0n16inmg429c5ug1hsk9mq"
+        "x-request-id": "408i5ideqmd5pbt162snqh2effijd2rt"
       },
       "status_code": 204,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token A97lPSmn8cOmamKEsIgXbfhTLIlFtWRKjIhK96Ag9ew=",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/users"
+    },
+    "response": {
+      "body": "{\"users\":[{\"username\":\"admin\",\"last_name\":\"Administrator\",\"id\":\"e8a31058-94f8-4275-8fbb-262b4bb36797\",\"first_name\":\"Cog\",\"email_address\":\"cog@localhost\"}]}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 17 Mar 2016 17:47:55 GMT",
+        "content-length": "155",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "hcoir132jamg8jjluvb1oe796s2qt8p2"
+      },
+      "status_code": 200,
       "type": "ok"
     }
   }

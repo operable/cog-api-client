@@ -16,7 +16,7 @@ defmodule CogApi.Fake.UsersTest do
       }
       {:ok, _} = Client.user_create(fake_endpoint, params)
 
-      {:ok, users} = Client.user_index(fake_endpoint)
+      users = Client.user_index(fake_endpoint) |> get_value
 
       last_user = List.last users
       assert present last_user.id
@@ -36,14 +36,11 @@ defmodule CogApi.Fake.UsersTest do
         username: "aide_to_potus",
         password: "thesecretest",
       }
-      {:ok, created_user} = Client.user_create(fake_endpoint, params)
+      created_user = Client.user_create(fake_endpoint, params) |> get_value
 
-      {:ok, found_user} = Client.user_show(fake_endpoint, created_user.id)
+      found_user = Client.user_show(fake_endpoint, created_user.id) |> get_value
 
-      assert found_user.first_name == params.first_name
-      assert found_user.last_name == params.last_name
-      assert found_user.email_address == params.email_address
-      assert found_user.username == params.username
+      assert found_user.id == created_user.id
     end
   end
 
@@ -56,13 +53,31 @@ defmodule CogApi.Fake.UsersTest do
         username: "chief_of_staff",
         password: "supersecret",
       }
-      {:ok, user} = Client.user_create(fake_endpoint, params)
+      user = Client.user_create(fake_endpoint, params) |> get_value
 
       assert present user.id
       assert user.first_name == params.first_name
       assert user.last_name == params.last_name
       assert user.email_address == params.email_address
       assert user.username == params.username
+    end
+  end
+
+  describe "update" do
+    it "returns the updated user" do
+      params = %{
+        first_name: "Arnold",
+        last_name: "Vinick",
+        email_address: "arnold@example.com",
+        username: "arnie",
+        password: "12345",
+      }
+      new_user = Client.user_create(fake_endpoint, params) |> get_value
+
+      params = %{first_name: "Arnie"}
+      updated_user = Client.user_update(fake_endpoint, new_user.id, params) |> get_value
+
+      assert updated_user.first_name == params.first_name
     end
   end
 
@@ -75,11 +90,11 @@ defmodule CogApi.Fake.UsersTest do
         username: "chief_of_staff",
         password: "supersecret",
       }
-      {:ok, user} = Client.user_create(fake_endpoint, params)
+      user = Client.user_create(fake_endpoint, params) |> get_value
 
       response = Client.user_delete(fake_endpoint, user.id)
 
-      {:ok, users} = Client.user_index(fake_endpoint)
+      users = Client.user_index(fake_endpoint) |> get_value
 
       assert response == :ok
       refute Enum.member?(users, user)

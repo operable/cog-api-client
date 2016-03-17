@@ -18,7 +18,7 @@ defmodule CogApi.HTTP.UsersTest do
         endpoint = valid_endpoint
         {:ok, _} = Client.user_create(endpoint, params)
 
-        {:ok, users} = Client.user_index(endpoint)
+        users = Client.user_index(endpoint) |> get_value
 
         last_user = List.last users
         assert present last_user.id
@@ -42,9 +42,9 @@ defmodule CogApi.HTTP.UsersTest do
             username: "press_secretary",
             password: "sosecret",
           }
-          {:ok, created_user} = Client.user_create(endpoint, params)
+          created_user = Client.user_create(endpoint, params) |> get_value
 
-          {:ok, found_user} = Client.user_show(endpoint, created_user.id)
+          found_user = Client.user_show(endpoint, created_user.id) |> get_value
 
           assert found_user.id == created_user.id
         end
@@ -62,13 +62,34 @@ defmodule CogApi.HTTP.UsersTest do
           username: "potus",
           password: "mrpresident",
         }
-        {:ok, user} = Client.user_create(valid_endpoint, params)
+        user = Client.user_create(valid_endpoint, params) |> get_value
 
         assert present user.id
         assert user.first_name == params.first_name
         assert user.last_name == params.last_name
         assert user.email_address == params.email_address
         assert user.username == params.username
+      end
+    end
+  end
+
+  describe "update" do
+    it "returns the updated user" do
+      cassette "users_update" do
+        params = %{
+          first_name: "Arnold",
+          last_name: "Vinick",
+          email_address: "arnold@example.com",
+          username: "arnie",
+          password: "12345",
+        }
+        endpoint = valid_endpoint
+        user = Client.user_create(endpoint, params) |> get_value
+
+        params = %{first_name: "Arnie"}
+        updated_user = Client.user_update(endpoint, user.id, params) |> get_value
+
+        assert updated_user.first_name == params.first_name
       end
     end
   end
@@ -84,8 +105,12 @@ defmodule CogApi.HTTP.UsersTest do
           username: "deputy_cos",
           password: "password",
         }
-        {:ok, user} = Client.user_create(endpoint, params)
+        user = Client.user_create(endpoint, params) |> get_value
+
         assert :ok == Client.user_delete(endpoint, user.id)
+
+        users = Client.user_index(endpoint) |> get_value
+        refute Enum.member?(users, user)
       end
     end
   end
