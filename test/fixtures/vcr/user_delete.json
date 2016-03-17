@@ -1,0 +1,79 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"3j3l1FQG4e1tXY9vod1kTcbzdZOVaR3rdq3g3PRp5hw=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 17 Mar 2016 15:54:47 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "3h204vkn5vpsc0j66ad63m3smffe42j5"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"user\":{\"username\":\"deputy_cos\",\"password\":\"password\",\"last_name\":\"Lyman\",\"first_name\":\"Josh\",\"email_address\":\"josh@example.com\"}}",
+      "headers": {
+        "authorization": "token 3j3l1FQG4e1tXY9vod1kTcbzdZOVaR3rdq3g3PRp5hw=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/users"
+    },
+    "response": {
+      "body": "{\"user\":{\"username\":\"deputy_cos\",\"last_name\":\"Lyman\",\"id\":\"c5ec268f-19ff-4a73-8881-cc58d015bb86\",\"first_name\":\"Josh\",\"email_address\":\"josh@example.com\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 17 Mar 2016 15:54:49 GMT",
+        "content-length": "153",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "kvi37b5uv2qlc623035uukl5baapprcb",
+        "location": "/v1/users/c5ec268f-19ff-4a73-8881-cc58d015bb86"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token 3j3l1FQG4e1tXY9vod1kTcbzdZOVaR3rdq3g3PRp5hw=",
+        "Accept": "application/json"
+      },
+      "method": "delete",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/users/c5ec268f-19ff-4a73-8881-cc58d015bb86"
+    },
+    "response": {
+      "body": "",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 17 Mar 2016 15:54:49 GMT",
+        "content-length": "0",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "vqcmpmqnoq0n16inmg429c5ug1hsk9mq"
+      },
+      "status_code": 204,
+      "type": "ok"
+    }
+  }
+]

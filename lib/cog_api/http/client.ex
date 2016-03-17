@@ -71,4 +71,8 @@ defmodule CogApi.HTTP.Client do
   def user_create(endpoint, params) do
     Users.create(endpoint, params)
   end
+
+  def user_delete(endpoint, user_id) do
+    Users.delete(endpoint, user_id)
+  end
 end

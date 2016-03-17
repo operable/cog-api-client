@@ -21,4 +21,10 @@ defmodule CogApi.Fake.Users do
     new_user = Map.merge(new_user, params)
     {:ok, Server.create(:users, new_user)}
   end
+
+  def delete(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
+  def delete(%Endpoint{token: _}, id) do
+    Server.delete(:users, id)
+    :ok
+  end
 end

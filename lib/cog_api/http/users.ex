@@ -17,4 +17,9 @@ defmodule CogApi.HTTP.Users do
     Base.post(endpoint, "users", %{user: params})
     |> Base.format_response("user", %User{})
   end
+
+  def delete(%Endpoint{}=endpoint, id) do
+    Base.delete(endpoint, "users/#{id}")
+    |> Base.format_response("user", %User{})
+  end
 end

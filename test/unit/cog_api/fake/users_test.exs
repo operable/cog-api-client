@@ -65,4 +65,24 @@ defmodule CogApi.Fake.UsersTest do
       assert user.username == params.username
     end
   end
+
+  describe "delete" do
+    it "deletes the user from the server" do
+      params = %{
+        first_name: "Leo",
+        last_name: "McGary",
+        email_address: "cos@example.com",
+        username: "chief_of_staff",
+        password: "supersecret",
+      }
+      {:ok, user} = Client.user_create(fake_endpoint, params)
+
+      response = Client.user_delete(fake_endpoint, user.id)
+
+      {:ok, users} = Client.user_index(fake_endpoint)
+
+      assert response == :ok
+      refute Enum.member?(users, user)
+    end
+  end
 end

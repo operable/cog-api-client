@@ -30,7 +30,7 @@ defmodule CogApi.HTTP.UsersTest do
     end
   end
 
-  describe "user_show" do
+  describe "show" do
     context "when the user exists" do
       it "returns the user" do
         cassette "users_show" do
@@ -69,6 +69,23 @@ defmodule CogApi.HTTP.UsersTest do
         assert user.last_name == params.last_name
         assert user.email_address == params.email_address
         assert user.username == params.username
+      end
+    end
+  end
+
+  describe "delete" do
+    it "returns :ok" do
+      cassette "user_delete" do
+        endpoint = valid_endpoint
+        params = %{
+          first_name: "Josh",
+          last_name: "Lyman",
+          email_address: "josh@example.com",
+          username: "deputy_cos",
+          password: "password",
+        }
+        {:ok, user} = Client.user_create(endpoint, params)
+        assert :ok == Client.user_delete(endpoint, user.id)
       end
     end
   end
