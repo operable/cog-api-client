@@ -1,0 +1,80 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"ijZHghkTLF/4TgcWbs/atBvp7l9tYYQAFfyNHBupWCA=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 17 Mar 2016 15:09:30 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "9ti742ubv6hrovmjokstk0kkp581bcn9"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"user\":{\"username\":\"press_secretary\",\"password\":\"sosecret\",\"last_name\":\"Craig\",\"first_name\":\"CJ\",\"email_address\":\"ps@example.com\"}}",
+      "headers": {
+        "authorization": "token ijZHghkTLF/4TgcWbs/atBvp7l9tYYQAFfyNHBupWCA=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/users"
+    },
+    "response": {
+      "body": "{\"user\":{\"username\":\"press_secretary\",\"last_name\":\"Craig\",\"id\":\"9354b5a8-0929-4261-bb7f-6e7684913b91\",\"first_name\":\"CJ\",\"email_address\":\"ps@example.com\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 17 Mar 2016 15:09:32 GMT",
+        "content-length": "154",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "5lnbk135rh5dbg07mpsfsc17f4lha5i2",
+        "location": "/v1/users/9354b5a8-0929-4261-bb7f-6e7684913b91"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token ijZHghkTLF/4TgcWbs/atBvp7l9tYYQAFfyNHBupWCA=",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/users/9354b5a8-0929-4261-bb7f-6e7684913b91"
+    },
+    "response": {
+      "body": "{\"user\":{\"username\":\"press_secretary\",\"last_name\":\"Craig\",\"id\":\"9354b5a8-0929-4261-bb7f-6e7684913b91\",\"first_name\":\"CJ\",\"email_address\":\"ps@example.com\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 17 Mar 2016 15:09:32 GMT",
+        "content-length": "154",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "lb01kcl50egleqq4hfa494i1tanr77lp"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

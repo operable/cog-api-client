@@ -64,6 +64,10 @@ defmodule CogApi.HTTP.Client do
     Users.index(endpoint)
   end
 
+  def user_show(endpoint, user_id) do
+    Users.show(endpoint, user_id)
+  end
+
   def user_create(endpoint, params) do
     Users.create(endpoint, params)
   end

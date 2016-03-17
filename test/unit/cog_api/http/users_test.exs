@@ -30,6 +30,28 @@ defmodule CogApi.HTTP.UsersTest do
     end
   end
 
+  describe "user_show" do
+    context "when the user exists" do
+      it "returns the user" do
+        cassette "users_show" do
+          endpoint = valid_endpoint
+          params = %{
+            first_name: "CJ",
+            last_name: "Craig",
+            email_address: "ps@example.com",
+            username: "press_secretary",
+            password: "sosecret",
+          }
+          {:ok, created_user} = Client.user_create(endpoint, params)
+
+          {:ok, found_user} = Client.user_show(endpoint, created_user.id)
+
+          assert found_user.id == created_user.id
+        end
+      end
+    end
+  end
+
   describe "create" do
     it "returns the created user" do
       cassette "users_create" do

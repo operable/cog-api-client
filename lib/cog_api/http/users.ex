@@ -8,6 +8,11 @@ defmodule CogApi.HTTP.Users do
     Base.get(endpoint, "users") |> Base.format_response("users", [%User{}])
   end
 
+  def show(%Endpoint{}=endpoint, id) do
+    Base.get(endpoint, "users/#{id}")
+    |> Base.format_response("user", %User{})
+  end
+
   def create(%Endpoint{}=endpoint, params) do
     Base.post(endpoint, "users", %{user: params})
     |> Base.format_response("user", %User{})

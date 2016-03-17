@@ -27,6 +27,26 @@ defmodule CogApi.Fake.UsersTest do
     end
   end
 
+  describe "show" do
+    it "returns the user" do
+      params = %{
+        first_name: "Charlie",
+        last_name: "Young",
+        email_address: "charlie@example.com",
+        username: "aide_to_potus",
+        password: "thesecretest",
+      }
+      {:ok, created_user} = Client.user_create(fake_endpoint, params)
+
+      {:ok, found_user} = Client.user_show(fake_endpoint, created_user.id)
+
+      assert found_user.first_name == params.first_name
+      assert found_user.last_name == params.last_name
+      assert found_user.email_address == params.email_address
+      assert found_user.username == params.username
+    end
+  end
+
   describe "create" do
     it "returns the created user" do
       params = %{

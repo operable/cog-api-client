@@ -10,6 +10,11 @@ defmodule CogApi.Fake.Users do
     {:ok, Server.index(:users)}
   end
 
+  def show(%Endpoint{token: nil}, _),  do: Endpoint.invalid_endpoint
+  def show(%Endpoint{}, id) do
+    {:ok, Server.show(:users, id)}
+  end
+
   def create(%Endpoint{token: nil}, _), do: Endpoint.invalid_endpoint
   def create(%Endpoint{token: _}, params) do
     new_user = %User{id: random_string(8)}
