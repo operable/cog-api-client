@@ -63,7 +63,7 @@ defmodule CogApi.HTTP.Old do
         %{"id" => id} ->
           {:ok, id}
         nil ->
-          {:error, %{"error" => "Resource not found"}}
+          {:error, %{"errors" => "Resource not found"}}
       end
     end
   end
@@ -243,7 +243,7 @@ defmodule CogApi.HTTP.Old do
       fun.()
     rescue
       HTTPotion.HTTPError ->
-        {:error, %{"error" => "An instance of cog must be running"}}
+        {:error, %{"errors" => "An instance of cog must be running"}}
     end
   end
 

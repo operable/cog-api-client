@@ -58,7 +58,7 @@ defmodule CogApi.HTTP.Base do
         %{"id" => id} ->
           {:ok, id}
         nil ->
-          {:error, %{"error" => "Resource not found"}}
+          {:error, %{"errors" => "Resource not found"}}
       end
     end
   end
@@ -88,8 +88,12 @@ defmodule CogApi.HTTP.Base do
       Poison.decode!(response.body)
     }
   end
+
   def format_response(response = {:error, _}, _, _), do: response
   def format_response(%Response{status_code: 204}, _, _), do: :ok
+  def format_response(%Response{status_code: code}=response, _, _) when code in [403, 422] do
+    format_error(response)
+  end
   def format_response(response = %Response{}, resource, struct) do
     {
       response_type(response),
@@ -103,7 +107,7 @@ defmodule CogApi.HTTP.Base do
   defp format_error(response) do
     {
       :error,
-      Poison.decode!(response.body)["error"]
+      Poison.decode!(response.body)["errors"]
     }
   end
 
