@@ -44,12 +44,14 @@ defmodule CogApi.Fake.GroupsTest do
   describe "group_add_user" do
     it "adds the user to the group" do
       group = Client.group_create(fake_endpoint, %{name: "user_group"}) |> get_value
-      user = Client.user_create(fake_endpoint, %{username: "bob"}) |> get_value
+      first_user = Client.user_create(fake_endpoint, %{username: "bob"}) |> get_value
+      second_user = Client.user_create(fake_endpoint, %{username: "sam"}) |> get_value
       assert group.users == []
 
-      group = Client.group_add_user(fake_endpoint, group, user) |> get_value
+      Client.group_add_user(fake_endpoint, group, first_user) |> get_value
+      group = Client.group_add_user(fake_endpoint, group, second_user) |> get_value
 
-      assert group.users == [user]
+      assert group.users == [first_user, second_user]
     end
   end
 end
