@@ -5,5 +5,6 @@ defmodule CogApi.Resources.Group do
     :id,
     :name,
     roles: [],
+    users: [],
   ]
 end

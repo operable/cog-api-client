@@ -40,4 +40,16 @@ defmodule CogApi.Fake.GroupsTest do
       assert group.name == name
     end
   end
+
+  describe "group_add_user" do
+    it "adds the user to the group" do
+      group = Client.group_create(fake_endpoint, %{name: "user_group"}) |> get_value
+      user = Client.user_create(fake_endpoint, %{username: "bob"}) |> get_value
+      assert group.users == []
+
+      group = Client.group_add_user(fake_endpoint, group, user) |> get_value
+
+      assert group.users == [user]
+    end
+  end
 end

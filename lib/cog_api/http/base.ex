@@ -137,8 +137,16 @@ defmodule CogApi.HTTP.Base do
     ["authorization": "token " <> token] ++ others
   end
 
-  def response_type(response) do
+  def response_type(%HTTPotion.Response{} = response) do
     if HTTPotion.Response.success?(response) do
+      :ok
+    else
+      :error
+    end
+  end
+
+  def response_type(responses) do
+    if Enum.all?(responses, fn(response) -> response == :ok end) do
       :ok
     else
       :error

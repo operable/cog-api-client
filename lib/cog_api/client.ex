@@ -14,6 +14,7 @@ defmodule CogApi.Client do
   @callback group_index(%Endpoint{}) :: {atom, [%Group{}]}
   @callback group_show(%Endpoint{}, String.t) :: {atom, %Group{}}
   @callback group_create(%Endpoint{}, %{}) :: {atom, %Group{}}
+  @callback group_add_user(%Endpoint{}, %Group{}, %User{}) :: {atom, %Group{}}
 
   @callback permission_index(%Endpoint{}) :: {atom, [%Permission{}]}
   @callback permission_create(%Endpoint{}, String.t) :: {atom, %Permission{}}

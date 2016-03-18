@@ -20,4 +20,10 @@ defmodule CogApi.Fake.Groups do
     new_group = %Group{id: random_string(8), name: name}
     {:ok, Server.create(:groups, new_group)}
   end
+
+  def add_user(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
+  def add_user(%Endpoint{token: _}, group, user) do
+    group = %{group | users: group.users ++ [user]}
+    {:ok, Server.update(:groups, group.id, group)}
+  end
 end
