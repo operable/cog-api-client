@@ -126,8 +126,7 @@ defmodule CogApi.HTTP.Old do
       do: {:ok, Map.update!(group, "group", &Map.merge(&1, members))}
   end
 
-  def group_remove(%Endpoint{}=endpoint, group_name, type, item_to_remove)
-      when type in [:users, :groups] do
+  def group_remove(%Endpoint{}=endpoint, group_name, type, item_to_remove) when type in [:users, :groups] do
     with {:ok, group_id} <- find_id_by(endpoint, "groups", name: group_name),
       {:ok, group} <- get(endpoint, "groups/#{URI.encode(group_id)}"),
       {:ok, _} <- post(endpoint, "groups/#{URI.encode(group_id)}/membership", %{members: Map.put(%{}, type, %{remove: [item_to_remove]})}),

@@ -45,12 +45,20 @@ defmodule CogApi.HTTP.Groups do
   end
 
   def add_user(%Endpoint{}=endpoint, group, user) do
-    path = "groups/#{group.id}/membership"
-    Base.post(endpoint, path, %{members: %{users: %{add: [user.username]}}})
-    |> format_add_user_response(group)
+    update_membership(endpoint, group, user, :add)
   end
 
-  defp format_add_user_response(response, group) do
+  def remove_user(%Endpoint{}=endpoint, group, user) do
+    update_membership(endpoint, group, user, :remove)
+  end
+
+  defp update_membership(endpoint, group, user, action) do
+    path = "groups/#{group.id}/membership"
+    Base.post(endpoint, path, %{members: %{users: %{action =>  [user.username]}}})
+    |> format_membership_response(group)
+  end
+
+  defp format_membership_response(response, group) do
     json_map = %{"members" => %{"users" => [%User{}]}}
     body = Poison.decode!(response.body, as: json_map)
     {

@@ -55,4 +55,22 @@ defmodule CogApi.Fake.GroupsTest do
       assert group.users == [first_user, second_user]
     end
   end
+
+  describe "group_remove_user" do
+    it "removes the user from the group" do
+      {group, user} = create_group_with_user(fake_endpoint)
+
+      group = Client.group_remove_user(fake_endpoint, group, user) |> get_value
+
+      assert group.users == []
+    end
+  end
+
+  def create_group_with_user(endpoint) do
+    group = Client.group_create(endpoint, %{name: "Group"}) |> get_value
+    user = Client.user_create(endpoint, %{username: "User"}) |> get_value
+    group = Client.group_add_user(endpoint, group, user) |> get_value
+
+    {group, user}
+  end
 end

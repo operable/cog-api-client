@@ -71,6 +71,19 @@ defmodule CogApi.HTTP.GroupsTest do
     end
   end
 
+  describe "group_remove_user" do
+    it "removes the user from the group" do
+      cassette "groups_remove" do
+        endpoint = valid_endpoint
+        {group, user} = create_group_with_user(endpoint, "group_add_user")
+
+        group = Client.group_remove_user(endpoint, group, user) |> get_value
+
+        assert group.users == []
+      end
+    end
+  end
+
   defp user_params(test_name) do
     %{
       first_name: "Leo",

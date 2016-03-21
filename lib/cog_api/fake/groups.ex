@@ -30,4 +30,14 @@ defmodule CogApi.Fake.Groups do
 
     {:ok, Server.update(:groups, group.id, group)}
   end
+
+  def remove_user(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
+  def remove_user(%Endpoint{token: _}, group, user) do
+    user = Server.show_by_key(:users, :username, user.username)
+    group = Server.show(:groups, group.id)
+    users = group.users -- [user]
+    group = %{group | users: users}
+
+    {:ok, Server.update(:groups, group.id, group)}
+  end
 end

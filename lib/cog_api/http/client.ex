@@ -36,6 +36,10 @@ defmodule CogApi.HTTP.Client do
     Groups.add_user(endpoint, group, user)
   end
 
+  def group_remove_user(%Endpoint{}=endpoint, group, user) do
+    Groups.remove_user(endpoint, group, user)
+  end
+
   def permission_index(%Endpoint{}=endpoint) do
     Permissions.index(endpoint)
   end
