@@ -29,6 +29,12 @@ defmodule CogApi.Fake.Server do
     end)
   end
 
+  def show_by_key(resource_name, key, value) do
+    Agent.get(__MODULE__, fn server ->
+      find_by_key(server, resource_name, key, value)
+    end)
+  end
+
   def create(resource_name, new_resource) do
     Agent.get_and_update(__MODULE__, fn server ->
       Map.get_and_update(server, resource_name, fn list ->
@@ -65,7 +71,11 @@ defmodule CogApi.Fake.Server do
   end
 
   defp find_by_id(server, resource_name, id) do
+    find_by_key(server, resource_name, :id, id)
+  end
+
+  defp find_by_key(server, resource_name, key, value) do
     Map.fetch!(server, resource_name)
-    |> Enum.find(fn resource -> resource.id == id end)
+    |> Enum.find(fn resource -> Map.get(resource, key) == value end)
   end
 end

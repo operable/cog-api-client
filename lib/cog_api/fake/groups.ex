@@ -23,6 +23,7 @@ defmodule CogApi.Fake.Groups do
 
   def add_user(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def add_user(%Endpoint{token: _}, group, user) do
+    user = Server.show_by_key(:users, :username, user.username)
     group = Server.show(:groups, group.id)
     users = group.users ++ [user]
     group = %{group | users: users}

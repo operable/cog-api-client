@@ -2,6 +2,7 @@ defmodule CogApi.Fake.GroupsTest do
   use CogApi.FakeCase
 
   alias CogApi.Fake.Client
+  alias CogApi.Resources.User
 
   doctest CogApi.Fake.Groups
 
@@ -48,7 +49,7 @@ defmodule CogApi.Fake.GroupsTest do
       second_user = Client.user_create(fake_endpoint, %{username: "sam"}) |> get_value
       assert group.users == []
 
-      Client.group_add_user(fake_endpoint, group, first_user) |> get_value
+      Client.group_add_user(fake_endpoint, group, %User{username: first_user.username}) |> get_value
       group = Client.group_add_user(fake_endpoint, group, second_user) |> get_value
 
       assert group.users == [first_user, second_user]
