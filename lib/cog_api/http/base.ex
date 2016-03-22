@@ -52,7 +52,8 @@ defmodule CogApi.HTTP.Base do
 
   def find_id_by(%Endpoint{}=endpoint, resource, find_fun)
       when is_function(find_fun) do
-    with {:ok, %{^resource => items}} <- get(endpoint, resource) do
+    with {:ok, items} <- get(endpoint, resource)
+        |> CogApi.HTTP.ApiResponse.format(%{resource => %{}}) do
       case Enum.find(items, find_fun) do
         %{"id" => id} ->
           {:ok, id}
@@ -61,7 +62,6 @@ defmodule CogApi.HTTP.Base do
       end
     end
   end
-
   def find_id_by(%Endpoint{}=endpoint, resource, [{param_key, param_value}]) do
     find_id_by(endpoint, resource, fn item ->
       item[to_string(param_key)] == param_value

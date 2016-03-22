@@ -4,6 +4,6 @@ defmodule CogApi.Resources.Permission do
   defstruct [
     :id,
     :name,
-    namespace: %CogApi.Resources.Namespace{},
+    :namespace,
   ]
 end

@@ -14,9 +14,7 @@ defmodule CogApi.HTTP.PermissionsTest do
 
         assert present first_permission.id
         assert present first_permission.name
-        namespace = first_permission.namespace
-        assert present namespace.id
-        assert present namespace.name
+        assert present first_permission.namespace
       end
     end
   end
@@ -29,7 +27,7 @@ defmodule CogApi.HTTP.PermissionsTest do
 
         assert present permission.id
         assert permission.name == "foobar"
-        assert permission.namespace.name == "site"
+        assert permission.namespace == "site"
       end
     end
   end

@@ -37,6 +37,22 @@ defmodule CogApi.HTTP.RolesTest do
     end
   end
 
+  describe "role_show by name" do
+    context "when the role exists" do
+      it "returns the role" do
+        cassette "roles_show" do
+          endpoint = valid_endpoint
+          params = %{name: "role_show"}
+          {:ok, created_role} = Client.role_create(endpoint, params)
+
+          {:ok, found_role} = Client.role_show(endpoint, %{name: created_role.name})
+
+          assert found_role.id == created_role.id
+        end
+      end
+    end
+  end
+
   describe "role_create" do
     it "returns the created role" do
       cassette "roles_create" do

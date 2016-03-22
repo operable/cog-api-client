@@ -67,7 +67,6 @@ defmodule CogApi.HTTP.Internal do
       end
     end
   end
-
   def find_id_by(endpoint, resource, [{param_key, param_value}]) do
     find_id_by(endpoint, resource, fn item ->
       item[to_string(param_key)] == param_value
@@ -168,8 +167,7 @@ defmodule CogApi.HTTP.Internal do
 
   def permission_delete(%Endpoint{}=endpoint, name) do
     delete_by(endpoint, "permissions", fn item ->
-      item["name"] == name &&
-        item["namespace"]["name"] == "site"
+      item["name"] == name && item["namespace"] == "site"
     end)
   end
 
