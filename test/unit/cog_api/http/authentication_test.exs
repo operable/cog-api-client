@@ -31,9 +31,9 @@ defmodule CogApi.HTTP.AuthenticationTest do
             host: "localhost",
             port: invalid_port,
           }
-          {:no_connection_error, error_message} = Authentication.get_and_merge_token(endpoint)
+          {:error, errors} = Authentication.get_and_merge_token(endpoint)
 
-          assert error_message == "An instance of cog must be running"
+          assert errors == ["Could not connect to a Cog instance"]
         end
       end
     end
@@ -47,9 +47,9 @@ defmodule CogApi.HTTP.AuthenticationTest do
             host: "localhost",
             port: "4000",
           }
-          {:error, error_message} = Authentication.get_and_merge_token(endpoint)
+          {:error, errors} = Authentication.get_and_merge_token(endpoint)
 
-          assert error_message == "Invalid username/password"
+          assert errors == ["Invalid username/password"]
         end
       end
     end

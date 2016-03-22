@@ -71,6 +71,22 @@ defmodule CogApi.HTTP.UsersTest do
         assert user.username == params.username
       end
     end
+
+    it "returns errors when invalid" do
+      cassette "users_create_errors" do
+        params = %{
+          email_address: "president@example.com",
+          username: "potus",
+          password: "mrpresident",
+        }
+        {:error, errors} = Client.user_create(valid_endpoint, params)
+
+        assert errors == [
+          "First name can't be blank",
+          "Last name can't be blank",
+        ]
+      end
+    end
   end
 
   describe "update" do

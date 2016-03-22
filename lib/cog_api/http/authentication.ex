@@ -7,7 +7,7 @@ defmodule CogApi.HTTP.Authentication do
     params = %{username: endpoint.username, password: endpoint.password}
 
     post(endpoint, "token", params)
-    |> format_response
+    |> format_generic_response
     |> merge_token(endpoint)
   end
 

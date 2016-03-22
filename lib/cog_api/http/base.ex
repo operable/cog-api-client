@@ -58,7 +58,7 @@ defmodule CogApi.HTTP.Base do
         %{"id" => id} ->
           {:ok, id}
         nil ->
-          {:error, %{"errors" => "Resource not found"}}
+          {:error, "Resource not found"}
       end
     end
   end
@@ -74,24 +74,28 @@ defmodule CogApi.HTTP.Base do
       fun.()
     rescue
       HTTPotion.HTTPError ->
-        {:no_connection_error, "An instance of cog must be running"}
+        {:error, "Could not connect to a Cog instance"}
     end
   end
 
-  def format_response(response = {:no_connection_error, _}), do: response
-  def format_response(response = %Response{status_code: 403}) do
+  def format_generic_response({:error, error_message}) do
+    format_error(error_message)
+  end
+  def format_generic_response(response = %Response{status_code: code}) when code in [403] do
     format_error(response)
   end
-  def format_response(response = %Response{}) do
+  def format_generic_response(response = %Response{}) do
     {
       response_type(response),
       Poison.decode!(response.body)
     }
   end
 
-  def format_response(response = {:error, _}, _, _), do: response
+  def format_response({:error, error_message}, _, _) do
+    format_error(error_message)
+  end
   def format_response(%Response{status_code: 204}, _, _), do: :ok
-  def format_response(%Response{status_code: code}=response, _, _) when code in [403, 422] do
+  def format_response(response = %Response{status_code: code}, _, _) when code in [403, 422] do
     format_error(response)
   end
   def format_response(response = %Response{}, resource, struct) do
@@ -104,11 +108,27 @@ defmodule CogApi.HTTP.Base do
     }
   end
 
-  defp format_error(response) do
+  defp format_error(response=%Response{}) do
     {
       :error,
-      Poison.decode!(response.body)["errors"]
+      parse_errors(Poison.decode!(response.body)["errors"])
     }
+  end
+  defp format_error(error_message) do
+    {
+      :error,
+      parse_errors(error_message)
+    }
+  end
+
+  defp parse_errors(errors = %{}) do
+    Enum.map errors, fn {key, value} ->
+      key = String.replace(key, "_", " ") |> String.capitalize
+      "#{key} #{value}"
+    end
+  end
+  defp parse_errors(errors) when is_binary(errors) do
+    [errors]
   end
 
   defp make_url(%Endpoint{proto: proto, host: host, port: port,

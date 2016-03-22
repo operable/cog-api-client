@@ -1,0 +1,53 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"z9dq0qkckmoA5pem5FIswvycHG0UU649p8AiQ4LctZ8=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 22 Mar 2016 15:55:19 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "4beb2sg2tiamnciulvsjbtsjbrk02epf"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"user\":{\"username\":\"potus\",\"password\":\"mrpresident\",\"email_address\":\"president@example.com\"}}",
+      "headers": {
+        "authorization": "token z9dq0qkckmoA5pem5FIswvycHG0UU649p8AiQ4LctZ8=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/users"
+    },
+    "response": {
+      "body": "{\"errors\":{\"last_name\":[\"can't be blank\"],\"first_name\":[\"can't be blank\"]}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 22 Mar 2016 15:55:21 GMT",
+        "content-length": "75",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "iog8a3j793cv2ujemsthauqih208br5g"
+      },
+      "status_code": 422,
+      "type": "ok"
+    }
+  }
+]
