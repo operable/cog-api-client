@@ -122,9 +122,12 @@ defmodule CogApi.HTTP.Base do
   end
 
   defp parse_errors(errors = %{}) do
-    Enum.map errors, fn {key, value} ->
+    Enum.flat_map errors, fn {key, values} ->
       key = String.replace(key, "_", " ") |> String.capitalize
-      "#{key} #{value}"
+
+      Enum.map values, fn value ->
+        "#{key} #{value}"
+      end
     end
   end
   defp parse_errors(errors) when is_binary(errors) do

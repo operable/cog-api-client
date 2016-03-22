@@ -61,6 +61,15 @@ defmodule CogApi.Fake.UsersTest do
       assert user.email_address == params.email_address
       assert user.username == params.username
     end
+
+    it "returns errors when invalid" do
+      params = %{
+        username: "ERROR",
+      }
+      {:error, errors} = Client.user_create(fake_endpoint, params)
+
+      assert errors == ["Username is invalid"]
+    end
   end
 
   describe "update" do
