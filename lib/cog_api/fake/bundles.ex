@@ -16,8 +16,9 @@ defmodule CogApi.Fake.Bundles do
   end
 
   def create(%Endpoint{token: nil}, %{name: _}), do: Endpoint.invalid_endpoint
-  def create(%Endpoint{token: _}, %Bundle{}=bundle) do
-    new_bundle = %{bundle | id: random_string(8)}
+  def create(%Endpoint{token: _}, params) do
+    new_bundle = %Bundle{id: random_string(8)}
+    new_bundle = Map.merge(new_bundle, params)
     {:ok, Server.create(:bundles, new_bundle)}
   end
 

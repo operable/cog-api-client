@@ -40,7 +40,7 @@ defmodule CogApi.Fake.BundlesTest do
 
   describe "bundle_create" do
     it "allows adding a new bundle" do
-      bundle = %Bundle{name: "a bundle"}
+      bundle = %{name: "a bundle"}
 
       bundle = Client.bundle_create(fake_endpoint, bundle) |> get_value
 
