@@ -1,4 +1,4 @@
-defmodule CogApi.HTTP.Old do
+defmodule CogApi.HTTP.Internal do
   alias CogApi.Endpoint
 
   def get(%Endpoint{}=endpoint, resource, params \\ %{}) do
