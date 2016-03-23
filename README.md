@@ -1,22 +1,20 @@
 # CogApi
 
-**TODO: Add description**
-
 ## Installation
+1. Add cog_api to your list of dependencies in `mix.exs`:
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+```elixir
+  {:cog_api, github: "operable/cog-api-client"},
+```
 
-  1. Add cog_api to your list of dependencies in `mix.exs`:
+2. Ensure cog_api is started before your application:
 
-        def deps do
-          [{:cog_api, "~> 0.0.1"}]
-        end
+```elixir
+  def application do
+    [applications: [:cog_api]]
+  end
+```
 
-  2. Ensure cog_api is started before your application:
-
-        def application do
-          [applications: [:cog_api]]
-        end
 ## Stucture
 
 There are two main areas of CogApi.
