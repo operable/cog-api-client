@@ -7,5 +7,6 @@ defmodule CogApi.Resources.User do
     :last_name,
     :email_address,
     :username,
+    groups: [],
   ]
 end
