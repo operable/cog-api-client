@@ -5,6 +5,8 @@ defmodule CogApi.Resources.Bundle do
     :id,
     :enabled,
     :name,
+    namespace: %CogApi.Resources.Namespace{},
+    commands: [%CogApi.Resources.Command{}],
   ]
 
   def decode_status("enabled"), do: true

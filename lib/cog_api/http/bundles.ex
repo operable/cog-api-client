@@ -9,6 +9,11 @@ defmodule CogApi.HTTP.Bundles do
     |> Base.format_response("bundles", [%Bundle{}])
   end
 
+  def show(%Endpoint{}=endpoint, id) do
+    Base.get(endpoint, "bundles/#{id}")
+    |> Base.format_response("bundle", %Bundle{})
+  end
+
   def update(%Endpoint{}=endpoint, bundle_id, %{enabled: enabled}) do
     status = Bundle.encode_status(enabled)
 

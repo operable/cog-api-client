@@ -16,6 +16,10 @@ defmodule CogApi.HTTP.Client do
     Bundles.index(endpoint)
   end
 
+  def bundle_show(%Endpoint{}=endpoint, bundle_id) do
+    Bundles.show(endpoint, bundle_id)
+  end
+
   def bundle_update(%Endpoint{}=endpoint, bundle_id, params) do
     Bundles.update(endpoint, bundle_id, params)
   end

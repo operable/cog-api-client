@@ -20,6 +20,10 @@ defmodule CogApi.Fake.Client do
     Bundles.create(endpoint, bundle)
   end
 
+  def bundle_show(%Endpoint{}=endpoint, bundle_id) do
+    Bundles.show(endpoint, bundle_id)
+  end
+
   def bundle_update(%Endpoint{}=endpoint, bundle_id, params) do
     Bundles.update(endpoint, bundle_id, params)
   end
