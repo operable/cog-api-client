@@ -1,10 +1,19 @@
 defmodule CogApi.Fake.Bundles do
+  import CogApi.Fake.Random
+
   alias CogApi.Endpoint
   alias CogApi.Fake.Server
+  alias CogApi.Resources.Bundle
 
   def index(%Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
   def index(%Endpoint{}) do
     {:ok, Server.index(:bundles)}
+  end
+
+  def create(%Endpoint{token: nil}, %{name: _}), do: Endpoint.invalid_endpoint
+  def create(%Endpoint{token: _}, %Bundle{}=bundle) do
+    new_bundle = %{bundle | id: random_string(8)}
+    {:ok, Server.create(:bundles, new_bundle)}
   end
 
   def update(%Endpoint{token: _}, id, %{enabled: enabled}) do
