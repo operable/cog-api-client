@@ -46,8 +46,7 @@ defmodule CogApi.Fake.Server do
   def update(resource_name, id, new_resource) do
     Agent.get_and_update(__MODULE__, fn server ->
       Map.get_and_update(server, resource_name, fn list ->
-        new_list = update_by_id(list, id, new_resource)
-        {new_resource, new_list}
+        update_by_id(list, id, new_resource)
       end)
     end)
   end
@@ -60,9 +59,12 @@ defmodule CogApi.Fake.Server do
     end)
   end
 
-  defp update_by_id(list, id, new_resource) do
+  defp update_by_id(list, id, params) do
     index = Enum.find_index(list, fn resource -> resource.id == id end)
-    List.replace_at(list, index, new_resource)
+    old_resource = Enum.at(list, index)
+    new_resource = Map.merge(old_resource, params)
+    new_list = List.replace_at(list, index, new_resource)
+    {new_resource, new_list}
   end
 
   defp delete_by_id(list, id) do

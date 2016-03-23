@@ -74,19 +74,20 @@ defmodule CogApi.Fake.UsersTest do
 
   describe "update" do
     it "returns the updated user" do
-      params = %{
+      original_params = %{
         first_name: "Arnold",
         last_name: "Vinick",
         email_address: "arnold@example.com",
         username: "arnie",
         password: "12345",
       }
-      new_user = Client.user_create(fake_endpoint, params) |> get_value
+      new_user = Client.user_create(fake_endpoint, original_params) |> get_value
 
-      params = %{first_name: "Arnie"}
-      updated_user = Client.user_update(fake_endpoint, new_user.id, params) |> get_value
+      update_params = %{first_name: "Arnie"}
+      updated_user = Client.user_update(fake_endpoint, new_user.id, update_params) |> get_value
 
-      assert updated_user.first_name == params.first_name
+      assert updated_user.first_name == update_params.first_name
+      assert updated_user.last_name == original_params.last_name
     end
   end
 
