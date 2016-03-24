@@ -75,5 +75,18 @@ defmodule CogApi.Fake.BundlesTest do
 
       assert error == "You can only enable or disable a bundle"
     end
+
+    it "allows a way to test errors" do
+      bundle = %Bundle{id: "id123", name: "a bundle", enabled: true}
+      bundle = Client.bundle_create(fake_endpoint, bundle) |> get_value
+
+      {:error, [error]} = Client.bundle_update(
+        fake_endpoint,
+        bundle.id,
+        %{enabled: "ERROR"}
+      )
+
+      assert error == "Enabled is invalid"
+    end
   end
 end

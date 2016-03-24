@@ -1,4 +1,5 @@
 defmodule CogApi.Fake.Bundles do
+  import CogApi.Fake.Helpers
   import CogApi.Fake.Random
 
   alias CogApi.Endpoint
@@ -22,11 +23,13 @@ defmodule CogApi.Fake.Bundles do
     {:ok, Server.create(:bundles, new_bundle)}
   end
 
-  def update(%Endpoint{token: _}, id, %{enabled: enabled}) do
-    current_bundle = Server.show(:bundles, id)
-    updated_bundle = %{current_bundle | enabled: enabled}
+  def update(%Endpoint{token: _}, id, %{enabled: enabled} = params) do
+    catch_errors params, fn ->
+      current_bundle = Server.show(:bundles, id)
+      updated_bundle = %{current_bundle | enabled: enabled}
 
-    {:ok, Server.update(:bundles, id, updated_bundle)}
+      {:ok, Server.update(:bundles, id, updated_bundle)}
+    end
   end
 
   def update(%Endpoint{token: _}, _, %{}) do
