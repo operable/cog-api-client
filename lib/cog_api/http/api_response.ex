@@ -32,6 +32,18 @@ defmodule CogApi.HTTP.ApiResponse do
     }
   end
 
+  def format_delete(%Response{status_code: @no_content}, _) do
+    :ok
+  end
+
+  def format_delete(%Response{}, error_message) do
+    {:error, [error_message]}
+  end
+
+  def parse_struct(response, struct= %{__struct__: _}) do
+    Poison.decode!(response.body, as: struct)
+  end
+
   def parse_struct(response, struct_map) do
     resource = struct_map |> Map.keys |> List.first
     Poison.decode!(response.body, as: struct_map)[resource]

@@ -1,0 +1,53 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"A2fEYVOilxzf7Ojck153sw4CrLYZUHSgNHwM1wc8hWw=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 28 Mar 2016 18:49:35 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "al45nisorsfrcc417dt6sogm02cgcqfg"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"rule\":\"when command invalid text operable:help\"}",
+      "headers": {
+        "authorization": "token A2fEYVOilxzf7Ojck153sw4CrLYZUHSgNHwM1wc8hWw=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/rules"
+    },
+    "response": {
+      "body": "{\"errors\":{\"invalid_rule_syntax\":[\"(Line: 1, Col: 13) syntax error before: \\\"invalid\\\".\"]}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 28 Mar 2016 18:49:35 GMT",
+        "content-length": "91",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "va01h54mn1hd02lrqdgbcmh1k0s9ms9r"
+      },
+      "status_code": 422,
+      "type": "ok"
+    }
+  }
+]

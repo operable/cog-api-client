@@ -1,9 +1,11 @@
 defmodule CogApi.Client do
   alias CogApi.Endpoint
+
+  alias CogApi.Resources.Bundle
   alias CogApi.Resources.Group
   alias CogApi.Resources.Permission
   alias CogApi.Resources.Role
-  alias CogApi.Resources.Bundle
+  alias CogApi.Resources.Rule
   alias CogApi.Resources.User
 
   @callback authenticate(%Endpoint{}) :: {atom, %Endpoint{}}
@@ -30,6 +32,11 @@ defmodule CogApi.Client do
   @callback role_delete(%Endpoint{}, String.t) :: atom
   @callback role_grant(%Endpoint{}, %Role{}, %Group{}) :: {atom, %Group{}}
   @callback role_revoke(%Endpoint{}, %Role{}, %Group{}) :: {atom, %Group{}}
+
+  @callback rule_index(String.t, %Endpoint{}) :: {atom, [%Rule{}]}
+  @callback rule_create(String.t, %Endpoint{}) :: {atom, %Rule{}}
+  @callback rule_delete(String.t, %Endpoint{}) :: atom
+  @callback rule_delete(String.t, %Endpoint{}) :: {atom, [String.t]}
 
   @callback user_index(%Endpoint{}) :: {atom, [%User{}]}
   @callback user_show(%Endpoint{}, String.t) :: {atom, %User{}}

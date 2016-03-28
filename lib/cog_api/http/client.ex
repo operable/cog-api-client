@@ -2,10 +2,12 @@ defmodule CogApi.HTTP.Client do
   @behaviour CogApi.Client
 
   alias CogApi.Endpoint
-  alias CogApi.HTTP.Groups
-  alias CogApi.HTTP.Roles
-  alias CogApi.HTTP.Permissions
+
   alias CogApi.HTTP.Bundles
+  alias CogApi.HTTP.Groups
+  alias CogApi.HTTP.Permissions
+  alias CogApi.HTTP.Roles
+  alias CogApi.HTTP.Rules
   alias CogApi.HTTP.Users
 
   def authenticate(%Endpoint{token: nil}=endpoint) do
@@ -82,6 +84,18 @@ defmodule CogApi.HTTP.Client do
 
   def role_revoke(%Endpoint{}=endpoint, role, group) do
     Roles.revoke(endpoint, role, group)
+  end
+
+  def rule_index(command, %Endpoint{}=endpoint) do
+    Rules.index(command, endpoint)
+  end
+
+  def rule_create(rule_text, %Endpoint{}=endpoint) do
+    Rules.create(rule_text, endpoint)
+  end
+
+  def rule_delete(rule_id, %Endpoint{}=endpoint) do
+    Rules.delete(rule_id, endpoint)
   end
 
   def user_index(%Endpoint{}=endpoint) do

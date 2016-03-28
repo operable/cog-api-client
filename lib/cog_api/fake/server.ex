@@ -4,6 +4,7 @@ defmodule CogApi.Fake.Server do
     groups: [],
     permissions: [],
     roles: [],
+    rules: [],
     users: [],
   ]
 

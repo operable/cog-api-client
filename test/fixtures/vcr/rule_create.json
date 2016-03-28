@@ -1,0 +1,53 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"hdlZiIW4Wc0iB4AIFk7SWlZQ9fkMXnqpDb7fe0Msl5o=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 28 Mar 2016 18:43:23 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "pn2c52dor5dvfsrbucr0h0aphg6ncl7r"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"rule\":\"when command is operable:help must have operable:manage_commands\"}",
+      "headers": {
+        "authorization": "token hdlZiIW4Wc0iB4AIFk7SWlZQ9fkMXnqpDb7fe0Msl5o=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/rules"
+    },
+    "response": {
+      "body": "{\"rule\":\"when command is operable:help must have operable:manage_commands\",\"id\":\"c5cd2f03-531c-4f64-94ee-17ced6e38fb4\"}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 28 Mar 2016 18:43:23 GMT",
+        "content-length": "119",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "4t2n5mqnrpp175tkeg8q0no5bu16h70p"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  }
+]

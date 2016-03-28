@@ -1,0 +1,53 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"XVJtrssynuDgfnoL5tpcyBeTN3R7RqnsbNiPzd4QzUo=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 28 Mar 2016 18:15:02 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "bfialmkk92pv7khm4l93hdnbomedde7v"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token XVJtrssynuDgfnoL5tpcyBeTN3R7RqnsbNiPzd4QzUo=",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/rules?for-command=operable:bundle"
+    },
+    "response": {
+      "body": "{\"rules\":[{\"rule\":\"when command is operable:bundle must have operable:manage_commands\",\"id\":\"fe54b544-debd-4a6f-969c-7acf1c593936\",\"command\":\"operable:bundle\"}]}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 28 Mar 2016 18:15:02 GMT",
+        "content-length": "161",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "8p6e60g85auhoqh7252kf69pnfc7tc1r"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
