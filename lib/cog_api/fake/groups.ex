@@ -21,6 +21,16 @@ defmodule CogApi.Fake.Groups do
     {:ok, Server.create(:groups, new_group)}
   end
 
+  def delete(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
+  def delete(%Endpoint{token: _}, id) do
+    if Server.show(:groups, id) do
+      Server.delete(:groups, id)
+      :ok
+    else
+      {:error, ["The group could not be deleted"]}
+    end
+  end
+
   def add_user(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def add_user(%Endpoint{token: _}, group, user) do
     user = Server.show_by_key(:users, :username, user.username)

@@ -56,6 +56,26 @@ defmodule CogApi.HTTP.GroupsTest do
     end
   end
 
+  describe "group_delete" do
+    it "returns :ok" do
+      cassette "groups_delete" do
+        endpoint = valid_endpoint
+        {:ok, group} = Client.group_create(endpoint, %{name: "group to delete"})
+        assert :ok == Client.group_delete(endpoint, group.id)
+      end
+    end
+
+    context "when the group cannot be deleted" do
+      it "returns an error" do
+        cassette "groups_delete_failure" do
+          {:error, [error]} = Client.group_delete(valid_endpoint, "not real")
+
+          assert error == "The group could not be deleted"
+        end
+      end
+    end
+  end
+
   describe "group_add_user" do
     it "adds the user to the group" do
       cassette "groups_add" do

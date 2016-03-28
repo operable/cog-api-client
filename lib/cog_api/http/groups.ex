@@ -1,5 +1,6 @@
 defmodule CogApi.HTTP.Groups do
   alias CogApi.HTTP.Base
+  alias HTTPotion.Response
 
   alias CogApi.Endpoint
   alias CogApi.Resources.Group
@@ -44,6 +45,11 @@ defmodule CogApi.HTTP.Groups do
     |> Base.format_response("group", %Group{})
   end
 
+  def delete(%Endpoint{}=endpoint, group_id) do
+    Base.delete(endpoint, "groups/#{group_id}")
+    |> format_delete_response
+  end
+
   def add_user(%Endpoint{}=endpoint, group, user) do
     update_membership(endpoint, group, user, :add)
   end
@@ -65,5 +71,12 @@ defmodule CogApi.HTTP.Groups do
       Base.response_type(response),
       %{group | users: body["members"]["users"] }
     }
+  end
+
+  defp format_delete_response(%Response{status_code: code}) when code == 204 do
+    :ok
+  end
+  defp format_delete_response(%Response{}) do
+    {:error, ["The group could not be deleted"]}
   end
 end

@@ -1,0 +1,79 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"CQqlr4/4DlNL2V8VWwkoUzuNhElt1bDQut1QYA7aOAA=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 28 Mar 2016 20:03:14 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "99t74eq7u9e20hdq6vq7p5tqdkbbcjnv"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"group\":{\"name\":\"group to delete\"}}",
+      "headers": {
+        "authorization": "token CQqlr4/4DlNL2V8VWwkoUzuNhElt1bDQut1QYA7aOAA=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/groups"
+    },
+    "response": {
+      "body": "{\"group\":{\"name\":\"group to delete\",\"id\":\"1a5e56ad-6797-482c-8017-bb0b508ce855\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 28 Mar 2016 20:03:15 GMT",
+        "content-length": "80",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "0cpn2svkui90rn915l69ps3qckm8c3pl",
+        "location": "/v1/groups/1a5e56ad-6797-482c-8017-bb0b508ce855"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token CQqlr4/4DlNL2V8VWwkoUzuNhElt1bDQut1QYA7aOAA=",
+        "Accept": "application/json"
+      },
+      "method": "delete",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/groups/1a5e56ad-6797-482c-8017-bb0b508ce855"
+    },
+    "response": {
+      "body": "",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 28 Mar 2016 20:03:15 GMT",
+        "content-length": "0",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "eiv2jtq6to2t3knur6mk18qjhud1eel0"
+      },
+      "status_code": 204,
+      "type": "ok"
+    }
+  }
+]

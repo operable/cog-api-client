@@ -42,6 +42,26 @@ defmodule CogApi.Fake.GroupsTest do
     end
   end
 
+  describe "delete" do
+    it "deletes the group from the server" do
+      {:ok, group} = Client.group_create(fake_endpoint, %{name: "new group"})
+
+      assert :ok == Client.group_delete(fake_endpoint, group.id)
+
+      {:ok, groups} = Client.group_index(fake_endpoint)
+
+      refute Enum.member?(groups, group)
+    end
+
+    context "when the group cannot be deleted" do
+      it "returns an error" do
+        {:error, [error]} = Client.group_delete(fake_endpoint, "not real")
+
+        assert error == "The group could not be deleted"
+      end
+    end
+  end
+
   describe "group_add_user" do
     it "adds the user to the group" do
       group = Client.group_create(fake_endpoint, %{name: "user_group"}) |> get_value

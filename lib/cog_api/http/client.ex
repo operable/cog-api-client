@@ -36,6 +36,10 @@ defmodule CogApi.HTTP.Client do
     Groups.create(endpoint, name)
   end
 
+  def group_delete(%Endpoint{}=endpoint, group_id) do
+    Groups.delete(endpoint, group_id)
+  end
+
   def group_add_user(%Endpoint{}=endpoint, group, user) do
     Groups.add_user(endpoint, group, user)
   end
