@@ -109,10 +109,12 @@ defmodule CogApi.HTTP.Base do
   end
 
   defp format_error(response=%Response{}) do
-    {
-      :error,
-      parse_errors(Poison.decode!(response.body)["errors"])
-    }
+    errors = response.body
+    |> Poison.decode!
+    |> extract_errors
+    |> parse_errors
+
+    {:error, errors}
   end
   defp format_error(error_message) do
     {
@@ -120,6 +122,9 @@ defmodule CogApi.HTTP.Base do
       parse_errors(error_message)
     }
   end
+
+  defp extract_errors(%{"errors" => errors}), do: errors
+  defp extract_errors(%{"error" => error}), do: [error]
 
   defp parse_errors(errors = %{}) do
     Enum.flat_map errors, fn {key, values} ->
@@ -130,6 +135,7 @@ defmodule CogApi.HTTP.Base do
       end
     end
   end
+  defp parse_errors(errors) when is_list(errors), do: errors
   defp parse_errors(errors) when is_binary(errors) do
     [errors]
   end

@@ -11,4 +11,15 @@ defmodule CogApi.Test.HTTPHelpers do
 
     endpoint
   end
+
+  def get_valid_endpoint(user, password) do
+    {:ok, endpoint} = %Endpoint{
+      username: user.username,
+      password: password,
+      host: "localhost",
+      port: "4000",
+    } |> CogApi.HTTP.Client.authenticate
+
+    endpoint
+  end
 end
