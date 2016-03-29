@@ -104,9 +104,7 @@ defmodule CogApi.HTTP.Internal do
 
   def group_show(%Endpoint{}=endpoint, group_name) do
     with {:ok, group_id} <- find_id_by(endpoint, "groups", name: group_name),
-      {:ok, group} <- get(endpoint, "groups/#{URI.encode(group_id)}"),
-      {:ok, members} <- get(endpoint, "groups/#{URI.encode(group_id)}/memberships"),
-      do: {:ok, Map.update!(group, "group", &Map.merge(&1, members))}
+      do: get(endpoint, "groups/#{URI.encode(group_id)}")
   end
 
   def group_update(%Endpoint{}=endpoint, group_name, params) do
@@ -120,18 +118,12 @@ defmodule CogApi.HTTP.Internal do
   def group_add(%Endpoint{}=endpoint, group_name, type, item_to_add)
       when type in [:users, :groups] do
     with {:ok, group_id} <- find_id_by(endpoint, "groups", name: group_name),
-      {:ok, group} <- get(endpoint, "groups/#{URI.encode(group_id)}"),
-      {:ok, _} <- post(endpoint, "groups/#{URI.encode(group_id)}/membership", %{members: Map.put(%{}, type, %{add: [item_to_add]})}),
-      {:ok, members} <- get(endpoint, "groups/#{URI.encode(group_id)}/memberships"),
-      do: {:ok, Map.update!(group, "group", &Map.merge(&1, members))}
+      do: post(endpoint, "groups/#{URI.encode(group_id)}/membership", %{members: Map.put(%{}, type, %{add: [item_to_add]})})
   end
 
   def group_remove(%Endpoint{}=endpoint, group_name, type, item_to_remove) when type in [:users, :groups] do
     with {:ok, group_id} <- find_id_by(endpoint, "groups", name: group_name),
-      {:ok, group} <- get(endpoint, "groups/#{URI.encode(group_id)}"),
-      {:ok, _} <- post(endpoint, "groups/#{URI.encode(group_id)}/membership", %{members: Map.put(%{}, type, %{remove: [item_to_remove]})}),
-      {:ok, members} <- get(endpoint, "groups/#{URI.encode(group_id)}/memberships"),
-      do: {:ok, Map.update!(group, "group", &Map.merge(&1, members))}
+      do: post(endpoint, "groups/#{URI.encode(group_id)}/membership", %{members: Map.put(%{}, type, %{remove: [item_to_remove]})})
   end
 
   def role_update(%Endpoint{}=endpoint, role_name, params) do
