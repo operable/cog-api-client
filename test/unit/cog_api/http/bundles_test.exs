@@ -29,11 +29,17 @@ defmodule CogApi.HTTP.BundlesTest do
         assert bundle.id == operable_bundle.id
         assert bundle.name == operable_bundle.name
         assert bundle.enabled == true
-        first_command = List.first(bundle.commands)
-        assert present first_command.id
-        assert present first_command.name
-        assert present first_command.documentation
         assert bundle.namespace.name == "operable"
+
+        bundle_command = bundle.commands
+        |> Enum.find(fn command -> command.name == "bundle" end)
+
+        assert present bundle_command.id
+        assert present bundle_command.name
+        assert present bundle_command.documentation
+
+        [rule] = bundle_command.rules
+        assert rule.rule =~ "when command is operable:bundle"
       end
     end
   end

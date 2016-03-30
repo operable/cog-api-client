@@ -1,6 +1,7 @@
 defmodule CogApi.HTTP.Bundles do
   alias CogApi.HTTP.ApiResponse
   alias CogApi.HTTP.Base
+  alias CogApi.HTTP.Rules
 
   alias CogApi.Endpoint
   alias CogApi.Resources.Bundle
@@ -11,8 +12,28 @@ defmodule CogApi.HTTP.Bundles do
   end
 
   def show(%Endpoint{}=endpoint, id) do
+    case find_bundle(endpoint, id) do
+      {:ok, bundle} -> add_rules(endpoint, bundle)
+      other_response -> other_response
+    end
+  end
+
+  defp find_bundle(endpoint, id) do
     Base.get(endpoint, "bundles/#{id}")
     |> ApiResponse.format(%{"bundle" => %Bundle{}})
+  end
+
+  defp add_rules(endpoint, bundle) do
+    commands = bundle.commands
+    |> Enum.map(fn command -> %{command | rules: find_rules(endpoint, bundle, command)} end)
+
+    {:ok, %{bundle | commands: commands}}
+  end
+
+  defp find_rules(endpoint, bundle, command) do
+    full_command_name = "#{bundle.name}:#{command.name}"
+    {:ok, rules} = Rules.index(full_command_name, endpoint)
+    rules
   end
 
   def update(%Endpoint{}=endpoint, bundle_id, %{enabled: enabled}) do

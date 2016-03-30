@@ -5,5 +5,6 @@ defmodule CogApi.Resources.Command do
     :id,
     :name,
     :documentation,
+    rules: [],
   ]
 end
