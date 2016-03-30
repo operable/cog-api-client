@@ -1,0 +1,53 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"Z6RpTT4+dySLGpkjUYuMZ3LxoKk2Dm1sfS2EpH0d2d4=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 30 Mar 2016 18:30:34 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "fl5if7m2i78t9hs7qau1uk43tt2c6vml"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token Z6RpTT4+dySLGpkjUYuMZ3LxoKk2Dm1sfS2EpH0d2d4=",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/rules?for-command=operable:raw"
+    },
+    "response": {
+      "body": "{\"errors\":\"No rules for command found\"}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 30 Mar 2016 18:30:34 GMT",
+        "content-length": "39",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "qgoncaj49ht29v0401ud7l6va95es0s5"
+      },
+      "status_code": 422,
+      "type": "ok"
+    }
+  }
+]

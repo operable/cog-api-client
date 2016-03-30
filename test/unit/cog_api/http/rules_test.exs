@@ -17,6 +17,17 @@ defmodule CogApi.HTTP.RulesTest do
         assert first_rule.command == command_name
       end
     end
+
+    context "when the command does not have a rule" do
+      it "returns an empty list" do
+        cassette "rule_index_without_rule_for_command" do
+          command_name = "operable:raw"
+          rules = command_name |> Client.rule_index(valid_endpoint) |> get_value
+
+          assert length(rules) == 0
+        end
+      end
+    end
   end
 
   describe "rule_create" do

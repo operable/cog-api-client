@@ -1,4 +1,6 @@
 defmodule CogApi.HTTP.Rules do
+  alias HTTPotion.Response
+
   alias CogApi.HTTP.ApiResponse
   alias CogApi.HTTP.Base
 
@@ -7,7 +9,7 @@ defmodule CogApi.HTTP.Rules do
 
   def index(command, %Endpoint{}=endpoint) do
     Base.get(endpoint, "rules?for-command=#{command}")
-    |> ApiResponse.format(%{"rules" => [%Rule{}]})
+    |> format_index_response
   end
 
   def create(rule_text, %Endpoint{}=endpoint) do
@@ -18,5 +20,13 @@ defmodule CogApi.HTTP.Rules do
   def delete(rule_id, %Endpoint{}=endpoint) do
     Base.delete(endpoint, "rules/#{rule_id}")
     |> ApiResponse.format_delete("The rule could not be deleted")
+  end
+
+  def format_index_response(%Response{status_code: 422}) do
+    {:ok, []}
+  end
+
+  def format_index_response(response) do
+    ApiResponse.format(response, %{"rules" => [%Rule{}]})
   end
 end
