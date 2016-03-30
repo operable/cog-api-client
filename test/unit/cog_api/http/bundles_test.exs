@@ -58,5 +58,28 @@ defmodule CogApi.HTTP.BundlesTest do
         assert updated_bundle.enabled == false
       end
     end
+
+    context "when the bundle cannot be update" do
+      it "returns errors" do
+        cassette "bundles_update_invalid" do
+          endpoint = valid_endpoint
+          operable_bundle =
+            Client.bundle_index(endpoint)
+            |> get_value
+            |> Enum.find(fn(bundle) -> bundle.name == "operable" end)
+
+          assert operable_bundle.enabled
+
+          {response, [error]} = Client.bundle_update(
+            endpoint,
+            operable_bundle.id,
+            %{enabled: false}
+          )
+
+          assert response == :error
+          assert error =~ "Cannot modify"
+        end
+      end
+    end
   end
 end

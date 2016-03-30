@@ -23,10 +23,14 @@ defmodule CogApi.HTTP.Bundles do
   end
 
   defp format_update_response(response, bundle_id) do
-    {
-      ApiResponse.type(response),
-      build_bundle_struct(Poison.decode!(response.body), bundle_id)
-    }
+    if response.status_code == 400 do
+      ApiResponse.format_error(response)
+    else
+      {
+        ApiResponse.type(response),
+        build_bundle_struct(Poison.decode!(response.body), bundle_id)
+      }
+    end
   end
 
   defp build_bundle_struct(params, bundle_id) do

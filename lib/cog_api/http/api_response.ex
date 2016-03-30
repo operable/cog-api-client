@@ -37,7 +37,7 @@ defmodule CogApi.HTTP.ApiResponse do
     Poison.decode!(response.body, as: struct_map)[resource]
   end
 
-  defp format_error(response=%Response{}) do
+  def format_error(response=%Response{}) do
     errors = response.body
     |> Poison.decode!
     |> extract_errors
@@ -45,7 +45,7 @@ defmodule CogApi.HTTP.ApiResponse do
 
     {:error, errors}
   end
-  defp format_error(error_message) do
+  def format_error(error_message) do
     {
       :error,
       parse_errors(error_message)

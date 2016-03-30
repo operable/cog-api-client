@@ -1,0 +1,78 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"CgE8EAUf2JHUNdkjlEYslcuWrGgvKeasbmvZk1r9j3I=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 28 Mar 2016 20:35:02 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "9imb0s6j731p6qt43tgqikvanr0mqq5a"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token CgE8EAUf2JHUNdkjlEYslcuWrGgvKeasbmvZk1r9j3I=",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/bundles"
+    },
+    "response": {
+      "body": "{\"bundles\":[{\"namespace\":{\"name\":\"operable\",\"id\":\"fd682d03-0d91-442f-8957-f744b5038455\"},\"name\":\"operable\",\"inserted_at\":\"2016-03-14T17:38:44Z\",\"id\":\"46375ee7-5ce3-4336-a5e2-6896579b6fc9\",\"enabled\":true},{\"namespace\":{\"name\":\"mist\",\"id\":\"ba89a112-d3c0-4588-ae94-abfb108a3cc1\"},\"name\":\"mist\",\"inserted_at\":\"2016-03-17T14:47:46Z\",\"id\":\"524c687f-d65d-4d7f-b288-a93b15cc9b9e\",\"enabled\":true}]}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 28 Mar 2016 20:35:02 GMT",
+        "content-length": "389",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "j6ulhcj6tg0e7hh6b15o0buteelftp2e"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"status\":\"disabled\"}",
+      "headers": {
+        "authorization": "token CgE8EAUf2JHUNdkjlEYslcuWrGgvKeasbmvZk1r9j3I=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/bundles/46375ee7-5ce3-4336-a5e2-6896579b6fc9/status"
+    },
+    "response": {
+      "body": "{\"error\":\"Cannot modify the status of the embedded bundle!\"}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 28 Mar 2016 20:35:02 GMT",
+        "content-length": "60",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "r873tli792p421hl4v88fk60kv7nhpb9"
+      },
+      "status_code": 400,
+      "type": "ok"
+    }
+  }
+]
