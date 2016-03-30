@@ -29,12 +29,27 @@ defmodule CogApi.Fake.BundlesTest do
 
   describe "bundle_show" do
     it "returns the bundle" do
-      bundle = %Bundle{name: "a bundle"}
+      bundle = %Bundle{name: "postgres"}
       bundle = Client.bundle_create(fake_endpoint, bundle) |> get_value
 
       bundle = Client.bundle_show(fake_endpoint, bundle.id) |> get_value
+      assert bundle.name == "postgres"
+    end
 
-      assert bundle.name == "a bundle"
+    it "includes the rules for each command" do
+      command = %CogApi.Resources.Command{name: "help"}
+      bundle = %Bundle{name: "postgres", commands: [command]}
+      bundle = Client.bundle_create(fake_endpoint, bundle) |> get_value
+      rule_text = "when command is postgres:help must have operable:manage_commands"
+      rule_text |> Client.rule_create(fake_endpoint) |> get_value
+
+      [rule] = Client.bundle_show(fake_endpoint, bundle.id)
+      |> get_value
+      |> Map.get(:commands)
+      |> List.first
+      |> Map.get(:rules)
+
+      assert rule.rule == rule_text
     end
   end
 

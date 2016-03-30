@@ -4,6 +4,7 @@ defmodule CogApi.Fake.Bundles do
 
   alias CogApi.Endpoint
   alias CogApi.Fake.Server
+  alias CogApi.Fake.Rules
   alias CogApi.Resources.Bundle
 
   def index(%Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
@@ -12,8 +13,21 @@ defmodule CogApi.Fake.Bundles do
   end
 
   def show(%Endpoint{token: nil}, _),  do: Endpoint.invalid_endpoint
-  def show(%Endpoint{}, id) do
-    {:ok, Server.show(:bundles, id)}
+  def show(%Endpoint{}=endpoint, id) do
+    bundle = Server.show(:bundles, id)
+    bundle = %{bundle | commands: add_rules(endpoint, bundle)}
+    {:ok, bundle}
+  end
+
+  defp add_rules(endpoint, bundle) do
+    bundle.commands
+    |> Enum.map(fn command -> %{command | rules: find_rules(endpoint, bundle, command)} end)
+  end
+
+  defp find_rules(endpoint, bundle, command) do
+    full_command_name = "#{bundle.name}:#{command.name}"
+    {:ok, rules} = Rules.index(full_command_name, endpoint)
+    rules
   end
 
   def create(%Endpoint{token: nil}, %{name: _}), do: Endpoint.invalid_endpoint
