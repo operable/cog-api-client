@@ -12,6 +12,7 @@ defmodule CogApi.Resources.Bundle do
   def decode_status("enabled"), do: true
   def decode_status("disabled"), do: false
 
+  def encode_status("true"), do: "enabled"
   def encode_status(true), do: "enabled"
-  def encode_status(false), do: "disabled"
+  def encode_status(_), do: "disabled"
 end

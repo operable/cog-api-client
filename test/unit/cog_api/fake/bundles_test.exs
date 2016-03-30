@@ -63,6 +63,18 @@ defmodule CogApi.Fake.BundlesTest do
       assert updated_bundle.enabled == false
     end
 
+    it "will allow a string for enabled" do
+      bundle = %Bundle{name: "a bundle", enabled: true}
+      bundle = Client.bundle_create(fake_endpoint, bundle) |> get_value
+
+      {:ok, updated_bundle} = Client.bundle_update(
+        fake_endpoint,
+        bundle.id,
+        %{enabled: "false"}
+      )
+      assert updated_bundle.enabled == false
+    end
+
     it "only updates the enabled attribute" do
       bundle = %Bundle{id: "id123", name: "a bundle", enabled: true}
       Server.create(:bundles, bundle)

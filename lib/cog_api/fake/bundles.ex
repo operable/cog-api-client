@@ -26,7 +26,7 @@ defmodule CogApi.Fake.Bundles do
   def update(%Endpoint{token: _}, id, %{enabled: enabled} = params) do
     catch_errors params, fn ->
       current_bundle = Server.show(:bundles, id)
-      updated_bundle = %{current_bundle | enabled: enabled}
+      updated_bundle = %{current_bundle | enabled: ensure_bundle_encode_status(enabled)}
 
       {:ok, Server.update(:bundles, id, updated_bundle)}
     end
@@ -34,5 +34,10 @@ defmodule CogApi.Fake.Bundles do
 
   def update(%Endpoint{token: _}, _, %{}) do
     {:error, "You can only enable or disable a bundle"}
+  end
+
+  defp ensure_bundle_encode_status(status) do
+    Bundle.encode_status(status)
+    status == "true"
   end
 end
