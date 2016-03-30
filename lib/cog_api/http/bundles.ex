@@ -1,4 +1,5 @@
 defmodule CogApi.HTTP.Bundles do
+  alias CogApi.HTTP.ApiResponse
   alias CogApi.HTTP.Base
 
   alias CogApi.Endpoint
@@ -6,12 +7,12 @@ defmodule CogApi.HTTP.Bundles do
 
   def index(%Endpoint{}=endpoint) do
     Base.get(endpoint, "bundles")
-    |> Base.format_response("bundles", [%Bundle{}])
+    |> ApiResponse.format(%{"bundles" => [%Bundle{}]})
   end
 
   def show(%Endpoint{}=endpoint, id) do
     Base.get(endpoint, "bundles/#{id}")
-    |> Base.format_response("bundle", %Bundle{})
+    |> ApiResponse.format(%{"bundle" => %Bundle{}})
   end
 
   def update(%Endpoint{}=endpoint, bundle_id, %{enabled: enabled}) do
@@ -23,7 +24,7 @@ defmodule CogApi.HTTP.Bundles do
 
   defp format_update_response(response, bundle_id) do
     {
-      Base.response_type(response),
+      ApiResponse.type(response),
       build_bundle_struct(Poison.decode!(response.body), bundle_id)
     }
   end

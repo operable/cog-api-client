@@ -1,4 +1,5 @@
 defmodule CogApi.HTTP.Groups do
+  alias CogApi.HTTP.ApiResponse
   alias CogApi.HTTP.Base
   alias HTTPotion.Response
 
@@ -7,7 +8,8 @@ defmodule CogApi.HTTP.Groups do
   alias CogApi.Resources.User
 
   def index(%Endpoint{}=endpoint) do
-    Base.get(endpoint, "groups") |> Base.format_response("groups", [%Group{}])
+    Base.get(endpoint, "groups")
+    |> ApiResponse.format(%{"groups" => [%Group{}]})
   end
 
   def show(%Endpoint{}=endpoint, id) do
@@ -20,7 +22,7 @@ defmodule CogApi.HTTP.Groups do
     {users_status, users} = group_json |> List.last |> Task.await
 
     {
-      Base.response_type([group_status, users_status]),
+      ApiResponse.type([group_status, users_status]),
       %{group | users: users}
     }
   end
@@ -30,19 +32,19 @@ defmodule CogApi.HTTP.Groups do
     json_map = %{"members" => %{"users" => [%User{}]}}
     users = Poison.decode!(response.body, as: json_map)["members"]["users"]
     {
-      Base.response_type(response),
+      ApiResponse.type(response),
       users
     }
   end
 
   defp get_group(endpoint, id) do
     Base.get(endpoint, "groups/#{id}")
-    |> Base.format_response("group", %Group{})
+    |> ApiResponse.format(%{"group" => %Group{}})
   end
 
   def create(%Endpoint{}=endpoint, params) do
     Base.post(endpoint, "groups", %{group: params})
-    |> Base.format_response("group", %Group{})
+    |> ApiResponse.format(%{"group" => %Group{}})
   end
 
   def delete(%Endpoint{}=endpoint, group_id) do
@@ -68,7 +70,7 @@ defmodule CogApi.HTTP.Groups do
     json_map = %{"members" => %{"users" => [%User{}]}}
     body = Poison.decode!(response.body, as: json_map)
     {
-      Base.response_type(response),
+      ApiResponse.type(response),
       %{group | users: body["members"]["users"] }
     }
   end

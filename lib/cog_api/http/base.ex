@@ -1,6 +1,5 @@
 defmodule CogApi.HTTP.Base do
   alias CogApi.Endpoint
-  alias HTTPotion.Response
 
   def get(%Endpoint{}=endpoint, resource, params \\ %{}) do
     rescue_econnrefused(fn ->
@@ -76,68 +75,6 @@ defmodule CogApi.HTTP.Base do
       HTTPotion.HTTPError ->
         {:error, "Could not connect to a Cog instance"}
     end
-  end
-
-  def format_generic_response({:error, error_message}) do
-    format_error(error_message)
-  end
-  def format_generic_response(response = %Response{status_code: code}) when code in [403] do
-    format_error(response)
-  end
-  def format_generic_response(response = %Response{}) do
-    {
-      response_type(response),
-      Poison.decode!(response.body)
-    }
-  end
-
-  def format_response({:error, error_message}, _, _) do
-    format_error(error_message)
-  end
-  def format_response(%Response{status_code: 204}, _, _), do: :ok
-  def format_response(response = %Response{status_code: code}, _, _) when code in [403, 422] do
-    format_error(response)
-  end
-  def format_response(response = %Response{}, resource, struct) do
-    {
-      response_type(response),
-      Poison.decode!(
-        response.body,
-        as: %{resource => struct}
-      )[resource]
-    }
-  end
-
-  defp format_error(response=%Response{}) do
-    errors = response.body
-    |> Poison.decode!
-    |> extract_errors
-    |> parse_errors
-
-    {:error, errors}
-  end
-  defp format_error(error_message) do
-    {
-      :error,
-      parse_errors(error_message)
-    }
-  end
-
-  defp extract_errors(%{"errors" => errors}), do: errors
-  defp extract_errors(%{"error" => error}), do: [error]
-
-  defp parse_errors(errors = %{}) do
-    Enum.flat_map errors, fn {key, values} ->
-      key = String.replace(key, "_", " ") |> String.capitalize
-
-      Enum.map values, fn value ->
-        "#{key} #{value}"
-      end
-    end
-  end
-  defp parse_errors(errors) when is_list(errors), do: errors
-  defp parse_errors(errors) when is_binary(errors) do
-    [errors]
   end
 
   defp make_url(%Endpoint{proto: proto, host: host, port: port,

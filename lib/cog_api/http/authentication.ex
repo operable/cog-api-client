@@ -2,12 +2,13 @@ defmodule CogApi.HTTP.Authentication do
   import CogApi.HTTP.Base
 
   alias CogApi.Endpoint
+  alias CogApi.HTTP.ApiResponse
 
   def get_and_merge_token(%Endpoint{token: nil}=endpoint) do
     params = %{username: endpoint.username, password: endpoint.password}
 
     post(endpoint, "token", params)
-    |> format_generic_response
+    |> ApiResponse.format
     |> merge_token(endpoint)
   end
 
