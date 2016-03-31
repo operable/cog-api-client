@@ -8,11 +8,14 @@ defmodule CogApi.HTTP.GroupsTest do
   describe "group_index" do
     it "returns a list of groups" do
       cassette "groups_index" do
-        {:ok, groups} = Client.group_index(valid_endpoint)
+        endpoint = valid_endpoint
+        {group, user} = create_group_with_user(endpoint, "index")
 
-        first_group = List.first groups
-        assert present first_group.id
-        assert present first_group.name
+        {:ok, [found_group]} = Client.group_index(endpoint)
+
+        assert found_group.id == group.id
+        assert found_group.name == group.name
+        assert found_group.users == [user]
       end
     end
   end
@@ -22,23 +25,13 @@ defmodule CogApi.HTTP.GroupsTest do
       it "returns the group" do
         cassette "group_show" do
           endpoint = valid_endpoint
-          params = %{name: "Developers Group"}
-          {:ok, created_group} = Client.group_create(endpoint, params)
+          {group, user} = create_group_with_user(endpoint, "show_with_user")
 
-          {:ok, found_group} = Client.group_show(endpoint, created_group.id)
+          found_group = Client.group_show(endpoint, group.id) |> get_value
 
-          assert found_group.id == created_group.id
-        end
-      end
-
-      it "includes the users for the group" do
-        cassette "group_show_with_user" do
-          endpoint = valid_endpoint
-          {group, user} = create_group_with_user(endpoint, "group_show_with_user")
-
-          group = Client.group_show(endpoint, group.id) |> get_value
-
-          assert group.users == [user]
+          assert found_group.id == group.id
+          assert found_group.name == group.name
+          assert found_group.users == [user]
         end
       end
     end
