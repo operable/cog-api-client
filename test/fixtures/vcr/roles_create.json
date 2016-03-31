@@ -11,14 +11,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"KR5YUw6o/60DvNPLVdjK49uP9XE2+juuK0kUD07HzQA=\"}}",
+      "body": "{\"token\":{\"value\":\"JdC/NXeZrSpRwj5BA5iRPeq+JE3LEEwdEc3VfSsXVPE=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 10 Mar 2016 19:51:06 GMT",
+        "date": "Thu, 31 Mar 2016 19:52:13 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "c2htipii6jo9htjd2ohqfq4o2gqcfauq"
+        "x-request-id": "nq4n06l5agffcep9j2p159nk09h9t4jr"
       },
       "status_code": 201,
       "type": "ok"
@@ -26,9 +26,9 @@
   },
   {
     "request": {
-      "body": "{\"role\":{\"name\":\"new role\"}}",
+      "body": "{\"role\":{\"name\":\"role_create\"}}",
       "headers": {
-        "authorization": "token KR5YUw6o/60DvNPLVdjK49uP9XE2+juuK0kUD07HzQA=",
+        "authorization": "token JdC/NXeZrSpRwj5BA5iRPeq+JE3LEEwdEc3VfSsXVPE=",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,15 +37,15 @@
       "url": "http://localhost:4000/v1/roles"
     },
     "response": {
-      "body": "{\"role\":{\"name\":\"new role\",\"id\":\"a82eb73e-dcf9-40d6-9ca5-e2d8c88457cd\"}}",
+      "body": "{\"role\":{\"permissions\":[],\"name\":\"role_create\",\"id\":\"7bdd9659-7427-42ee-815f-6fc9455bb821\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 10 Mar 2016 19:51:06 GMT",
-        "content-length": "72",
+        "date": "Thu, 31 Mar 2016 19:52:13 GMT",
+        "content-length": "92",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "c0d3me63m71aspfc6f77c8umvu1ajd6c",
-        "location": "/v1/roles/a82eb73e-dcf9-40d6-9ca5-e2d8c88457cd"
+        "x-request-id": "klnu5pfdr4bgp6hf77tooldgamreh2ss",
+        "location": "/v1/roles/7bdd9659-7427-42ee-815f-6fc9455bb821"
       },
       "status_code": 201,
       "type": "ok"

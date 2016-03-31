@@ -11,14 +11,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"IJ5BXX7u35n46YT89oxIdjUi5bT6TSwgWkjhsokTTxs=\"}}",
+      "body": "{\"token\":{\"value\":\"iBi/8MlO2F9UQcMiJHJyvXcnUWK0xJhs+sj7amlKv6M=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 17 Mar 2016 20:13:47 GMT",
+        "date": "Thu, 31 Mar 2016 19:52:16 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "etnibk6fkb2nllee7303la4mdefi8mj0"
+        "x-request-id": "59lg3o60576m1si8bfbvmvlb60fda0vb"
       },
       "status_code": 201,
       "type": "ok"
@@ -26,9 +26,9 @@
   },
   {
     "request": {
-      "body": "{\"role\":{\"name\":\"role123\"}}",
+      "body": "{\"role\":{\"name\":\"role_revoke\"}}",
       "headers": {
-        "authorization": "token IJ5BXX7u35n46YT89oxIdjUi5bT6TSwgWkjhsokTTxs=",
+        "authorization": "token iBi/8MlO2F9UQcMiJHJyvXcnUWK0xJhs+sj7amlKv6M=",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,15 +37,15 @@
       "url": "http://localhost:4000/v1/roles"
     },
     "response": {
-      "body": "{\"role\":{\"name\":\"role123\",\"id\":\"bf15f788-06d0-42ac-b82f-a9da780a5488\"}}",
+      "body": "{\"role\":{\"permissions\":[],\"name\":\"role_revoke\",\"id\":\"c956ec12-4ee8-4faa-add4-5e11020cbf9b\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 17 Mar 2016 20:13:47 GMT",
-        "content-length": "71",
+        "date": "Thu, 31 Mar 2016 19:52:16 GMT",
+        "content-length": "92",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "lark7t961pl56mqmhlsoar44f3hnkt8j",
-        "location": "/v1/roles/bf15f788-06d0-42ac-b82f-a9da780a5488"
+        "x-request-id": "gkfmr3mr57du5rrel7q1lt18k6hc9f6f",
+        "location": "/v1/roles/c956ec12-4ee8-4faa-add4-5e11020cbf9b"
       },
       "status_code": 201,
       "type": "ok"
@@ -53,9 +53,9 @@
   },
   {
     "request": {
-      "body": "{\"group\":{\"name\":\"group123\"}}",
+      "body": "{\"group\":{\"name\":\"group_role_revoke\"}}",
       "headers": {
-        "authorization": "token IJ5BXX7u35n46YT89oxIdjUi5bT6TSwgWkjhsokTTxs=",
+        "authorization": "token iBi/8MlO2F9UQcMiJHJyvXcnUWK0xJhs+sj7amlKv6M=",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -64,15 +64,15 @@
       "url": "http://localhost:4000/v1/groups"
     },
     "response": {
-      "body": "{\"group\":{\"name\":\"group123\",\"id\":\"5896df77-5704-4908-9295-b3e63a4034cb\"}}",
+      "body": "{\"group\":{\"name\":\"group_role_revoke\",\"members\":{\"users\":[],\"roles\":[],\"groups\":[]},\"id\":\"3bcb4280-7aa0-4224-a17a-bd60980be77d\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 17 Mar 2016 20:13:47 GMT",
-        "content-length": "73",
+        "date": "Thu, 31 Mar 2016 19:52:16 GMT",
+        "content-length": "128",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "euvj04oanr7lk1lrsul758d8jrfrt8f3",
-        "location": "/v1/groups/5896df77-5704-4908-9295-b3e63a4034cb"
+        "x-request-id": "97nmgrl4kt9e0e9fh3kcslt83r2oag76",
+        "location": "/v1/groups/3bcb4280-7aa0-4224-a17a-bd60980be77d"
       },
       "status_code": 201,
       "type": "ok"
@@ -80,25 +80,25 @@
   },
   {
     "request": {
-      "body": "{\"roles\":{\"grant\":[\"role123\"]}}",
+      "body": "{\"roles\":{\"grant\":[\"role_revoke\"]}}",
       "headers": {
-        "authorization": "token IJ5BXX7u35n46YT89oxIdjUi5bT6TSwgWkjhsokTTxs=",
+        "authorization": "token iBi/8MlO2F9UQcMiJHJyvXcnUWK0xJhs+sj7amlKv6M=",
         "Content-Type": "application/json"
       },
       "method": "post",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/groups/5896df77-5704-4908-9295-b3e63a4034cb/roles"
+      "url": "http://localhost:4000/v1/groups/3bcb4280-7aa0-4224-a17a-bd60980be77d/roles"
     },
     "response": {
-      "body": "{\"roles\":[{\"name\":\"role123\",\"id\":\"bf15f788-06d0-42ac-b82f-a9da780a5488\"}]}",
+      "body": "{\"roles\":[{\"permissions\":[],\"name\":\"role_revoke\",\"id\":\"c956ec12-4ee8-4faa-add4-5e11020cbf9b\"}]}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 17 Mar 2016 20:13:47 GMT",
-        "content-length": "74",
+        "date": "Thu, 31 Mar 2016 19:52:17 GMT",
+        "content-length": "95",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "4sd9kj74s9kgtnv3m1eav6jmhl0e2a74"
+        "x-request-id": "53n715m9652iaeikf7b21kge839l47jq"
       },
       "status_code": 200,
       "type": "ok"
@@ -106,25 +106,25 @@
   },
   {
     "request": {
-      "body": "{\"roles\":{\"revoke\":[\"role123\"]}}",
+      "body": "{\"roles\":{\"revoke\":[\"role_revoke\"]}}",
       "headers": {
-        "authorization": "token IJ5BXX7u35n46YT89oxIdjUi5bT6TSwgWkjhsokTTxs=",
+        "authorization": "token iBi/8MlO2F9UQcMiJHJyvXcnUWK0xJhs+sj7amlKv6M=",
         "Content-Type": "application/json"
       },
       "method": "post",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/groups/5896df77-5704-4908-9295-b3e63a4034cb/roles"
+      "url": "http://localhost:4000/v1/groups/3bcb4280-7aa0-4224-a17a-bd60980be77d/roles"
     },
     "response": {
       "body": "{\"roles\":[]}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 17 Mar 2016 20:13:47 GMT",
+        "date": "Thu, 31 Mar 2016 19:52:17 GMT",
         "content-length": "12",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "lpe4mas677p1va2su2q9sfka69hfud1g"
+        "x-request-id": "0h45tj4eknggsouslbo8b2tujtgjm7ja"
       },
       "status_code": 200,
       "type": "ok"
