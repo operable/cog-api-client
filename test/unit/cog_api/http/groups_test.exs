@@ -11,11 +11,12 @@ defmodule CogApi.HTTP.GroupsTest do
         endpoint = valid_endpoint
         {group, user} = create_group_with_user(endpoint, "index")
 
-        {:ok, [found_group]} = Client.group_index(endpoint)
+        {:ok, groups} = Client.group_index(endpoint)
 
-        assert found_group.id == group.id
-        assert found_group.name == group.name
-        assert found_group.users == [user]
+        last_group = List.last groups
+        assert last_group.id == group.id
+        assert last_group.name == group.name
+        assert last_group.users == [user]
       end
     end
   end
@@ -88,7 +89,7 @@ defmodule CogApi.HTTP.GroupsTest do
     it "removes the user from the group" do
       cassette "groups_remove" do
         endpoint = valid_endpoint
-        {group, user} = create_group_with_user(endpoint, "group_add_user")
+        {group, user} = create_group_with_user(endpoint, "group_remove_user")
 
         group = Client.group_remove_user(endpoint, group, user) |> get_value
 

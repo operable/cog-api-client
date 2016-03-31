@@ -11,14 +11,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"wiiG09WI7xLFzicF9kfeIgQyhVnCLalV371nP2Hz5EM=\"}}",
+      "body": "{\"token\":{\"value\":\"tH3ZcpkiZmno/a6IJYYv6R5krKu4f1GFP4no4F8T6Nw=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 31 Mar 2016 17:35:01 GMT",
+        "date": "Thu, 31 Mar 2016 19:20:05 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "8autgv43scin3muqi5reu4dgm8487lv4"
+        "x-request-id": "r0c9j60uhagoeqlv9seqqk08uuapb975"
       },
       "status_code": 201,
       "type": "ok"
@@ -28,7 +28,7 @@
     "request": {
       "body": "{\"group\":{\"name\":\"groupshow_with_user\"}}",
       "headers": {
-        "authorization": "token wiiG09WI7xLFzicF9kfeIgQyhVnCLalV371nP2Hz5EM=",
+        "authorization": "token tH3ZcpkiZmno/a6IJYYv6R5krKu4f1GFP4no4F8T6Nw=",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,15 +37,15 @@
       "url": "http://localhost:4000/v1/groups"
     },
     "response": {
-      "body": "{\"group\":{\"name\":\"groupshow_with_user\",\"members\":{\"users\":[],\"roles\":[],\"groups\":[]},\"id\":\"82a3f9e0-4338-4c6b-932b-a98f2d83369c\"}}",
+      "body": "{\"group\":{\"name\":\"groupshow_with_user\",\"members\":{\"users\":[],\"roles\":[],\"groups\":[]},\"id\":\"be8276b4-10c3-4555-a221-6d9f41522abc\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 31 Mar 2016 17:35:01 GMT",
+        "date": "Thu, 31 Mar 2016 19:20:05 GMT",
         "content-length": "130",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "bciq4n224234vd9jsc4qfspr3fn2if9b",
-        "location": "/v1/groups/82a3f9e0-4338-4c6b-932b-a98f2d83369c"
+        "x-request-id": "eqleib3l6f5v2vssec9ttccrpfbj1dg3",
+        "location": "/v1/groups/be8276b4-10c3-4555-a221-6d9f41522abc"
       },
       "status_code": 201,
       "type": "ok"
@@ -55,7 +55,7 @@
     "request": {
       "body": "{\"user\":{\"username\":\"chief_of_staffshow_with_user\",\"password\":\"supersecret\",\"last_name\":\"McGary\",\"first_name\":\"Leo\",\"email_address\":\"cosshow_with_user@example.com\"}}",
       "headers": {
-        "authorization": "token wiiG09WI7xLFzicF9kfeIgQyhVnCLalV371nP2Hz5EM=",
+        "authorization": "token tH3ZcpkiZmno/a6IJYYv6R5krKu4f1GFP4no4F8T6Nw=",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -64,15 +64,15 @@
       "url": "http://localhost:4000/v1/users"
     },
     "response": {
-      "body": "{\"user\":{\"username\":\"chief_of_staffshow_with_user\",\"last_name\":\"McGary\",\"id\":\"0c2e7652-d8e5-4f23-b227-c9bc4d8121e2\",\"groups\":[],\"first_name\":\"Leo\",\"email_address\":\"cosshow_with_user@example.com\"}}",
+      "body": "{\"user\":{\"username\":\"chief_of_staffshow_with_user\",\"last_name\":\"McGary\",\"id\":\"5c654c07-0d1f-485e-86e5-d424f56df0b5\",\"groups\":[],\"first_name\":\"Leo\",\"email_address\":\"cosshow_with_user@example.com\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 31 Mar 2016 17:35:03 GMT",
+        "date": "Thu, 31 Mar 2016 19:20:08 GMT",
         "content-length": "196",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "ng4f3k44bdofibjlsj0g48veelnrbo3m",
-        "location": "/v1/users/0c2e7652-d8e5-4f23-b227-c9bc4d8121e2"
+        "x-request-id": "g6ivns8595u7anemkne2mgq8osomhva8",
+        "location": "/v1/users/5c654c07-0d1f-485e-86e5-d424f56df0b5"
       },
       "status_code": 201,
       "type": "ok"
@@ -82,23 +82,23 @@
     "request": {
       "body": "{\"members\":{\"users\":{\"add\":[\"chief_of_staffshow_with_user\"]}}}",
       "headers": {
-        "authorization": "token wiiG09WI7xLFzicF9kfeIgQyhVnCLalV371nP2Hz5EM=",
+        "authorization": "token tH3ZcpkiZmno/a6IJYYv6R5krKu4f1GFP4no4F8T6Nw=",
         "Content-Type": "application/json"
       },
       "method": "post",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/groups/82a3f9e0-4338-4c6b-932b-a98f2d83369c/membership"
+      "url": "http://localhost:4000/v1/groups/be8276b4-10c3-4555-a221-6d9f41522abc/membership"
     },
     "response": {
-      "body": "{\"group\":{\"name\":\"groupshow_with_user\",\"members\":{\"users\":[{\"username\":\"chief_of_staffshow_with_user\",\"last_name\":\"McGary\",\"id\":\"0c2e7652-d8e5-4f23-b227-c9bc4d8121e2\",\"first_name\":\"Leo\",\"email_address\":\"cosshow_with_user@example.com\"}],\"roles\":[],\"groups\":[]},\"id\":\"82a3f9e0-4338-4c6b-932b-a98f2d83369c\"}}",
+      "body": "{\"group\":{\"name\":\"groupshow_with_user\",\"members\":{\"users\":[{\"username\":\"chief_of_staffshow_with_user\",\"last_name\":\"McGary\",\"id\":\"5c654c07-0d1f-485e-86e5-d424f56df0b5\",\"first_name\":\"Leo\",\"email_address\":\"cosshow_with_user@example.com\"}],\"roles\":[],\"groups\":[]},\"id\":\"be8276b4-10c3-4555-a221-6d9f41522abc\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 31 Mar 2016 17:35:03 GMT",
+        "date": "Thu, 31 Mar 2016 19:20:08 GMT",
         "content-length": "305",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "0onn731q4vpoktvbgvg26phga81tcr3d"
+        "x-request-id": "osjujef8ra6iuthnpelfl4ebdi4flo2e"
       },
       "status_code": 200,
       "type": "ok"
@@ -108,23 +108,23 @@
     "request": {
       "body": "",
       "headers": {
-        "authorization": "token wiiG09WI7xLFzicF9kfeIgQyhVnCLalV371nP2Hz5EM=",
+        "authorization": "token tH3ZcpkiZmno/a6IJYYv6R5krKu4f1GFP4no4F8T6Nw=",
         "Accept": "application/json"
       },
       "method": "get",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/groups/82a3f9e0-4338-4c6b-932b-a98f2d83369c"
+      "url": "http://localhost:4000/v1/groups/be8276b4-10c3-4555-a221-6d9f41522abc"
     },
     "response": {
-      "body": "{\"group\":{\"name\":\"groupshow_with_user\",\"members\":{\"users\":[{\"username\":\"chief_of_staffshow_with_user\",\"last_name\":\"McGary\",\"id\":\"0c2e7652-d8e5-4f23-b227-c9bc4d8121e2\",\"first_name\":\"Leo\",\"email_address\":\"cosshow_with_user@example.com\"}],\"roles\":[],\"groups\":[]},\"id\":\"82a3f9e0-4338-4c6b-932b-a98f2d83369c\"}}",
+      "body": "{\"group\":{\"name\":\"groupshow_with_user\",\"members\":{\"users\":[{\"username\":\"chief_of_staffshow_with_user\",\"last_name\":\"McGary\",\"id\":\"5c654c07-0d1f-485e-86e5-d424f56df0b5\",\"first_name\":\"Leo\",\"email_address\":\"cosshow_with_user@example.com\"}],\"roles\":[],\"groups\":[]},\"id\":\"be8276b4-10c3-4555-a221-6d9f41522abc\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 31 Mar 2016 17:35:03 GMT",
+        "date": "Thu, 31 Mar 2016 19:20:08 GMT",
         "content-length": "305",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "pi34f25lkm1jpjm1qtf6d4ik8639tfng"
+        "x-request-id": "f7a3ss5k64i22aq16s6dgqk60nqi5tst"
       },
       "status_code": 200,
       "type": "ok"

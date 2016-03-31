@@ -11,14 +11,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"CORuoVGBm1tQHrlOC0Ku3TXMxFkemmuxzn5L5aAH1qg=\"}}",
+      "body": "{\"token\":{\"value\":\"ZrkDjPYNQ3qHPrSiL+OJbTqcYbhA3CQ/h250v9iVxWw=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 31 Mar 2016 19:20:09 GMT",
+        "date": "Thu, 31 Mar 2016 20:23:03 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "lhat802ju2ah7dfuhnh6bqpfcetjbtth"
+        "x-request-id": "ft0rgvdo4t2khovfg8ei3du42ssaeb91"
       },
       "status_code": 201,
       "type": "ok"
@@ -26,9 +26,9 @@
   },
   {
     "request": {
-      "body": "{\"group\":{\"name\":\"group to delete\"}}",
+      "body": "{\"group\":{\"name\":\"index_no_users\"}}",
       "headers": {
-        "authorization": "token CORuoVGBm1tQHrlOC0Ku3TXMxFkemmuxzn5L5aAH1qg=",
+        "authorization": "token ZrkDjPYNQ3qHPrSiL+OJbTqcYbhA3CQ/h250v9iVxWw=",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,15 +37,15 @@
       "url": "http://localhost:4000/v1/groups"
     },
     "response": {
-      "body": "{\"group\":{\"name\":\"group to delete\",\"members\":{\"users\":[],\"roles\":[],\"groups\":[]},\"id\":\"4f2d4cc3-12d9-4d0e-a04d-5961bb6bdbb1\"}}",
+      "body": "{\"group\":{\"name\":\"index_no_users\",\"members\":{\"users\":[],\"roles\":[],\"groups\":[]},\"id\":\"b60ce1e9-f446-4787-afcc-1ac6702c31e0\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 31 Mar 2016 19:20:09 GMT",
-        "content-length": "126",
+        "date": "Thu, 31 Mar 2016 20:23:03 GMT",
+        "content-length": "125",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "lt0bdqt4lj5umm75kig36rqveeo57m6j",
-        "location": "/v1/groups/4f2d4cc3-12d9-4d0e-a04d-5961bb6bdbb1"
+        "x-request-id": "1l2thla5h5l6f7rg3reguqnb30sccvqf",
+        "location": "/v1/groups/b60ce1e9-f446-4787-afcc-1ac6702c31e0"
       },
       "status_code": 201,
       "type": "ok"
@@ -55,24 +55,25 @@
     "request": {
       "body": "",
       "headers": {
-        "authorization": "token CORuoVGBm1tQHrlOC0Ku3TXMxFkemmuxzn5L5aAH1qg=",
+        "authorization": "token ZrkDjPYNQ3qHPrSiL+OJbTqcYbhA3CQ/h250v9iVxWw=",
         "Accept": "application/json"
       },
-      "method": "delete",
+      "method": "get",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/groups/4f2d4cc3-12d9-4d0e-a04d-5961bb6bdbb1"
+      "url": "http://localhost:4000/v1/groups"
     },
     "response": {
-      "body": "",
+      "body": "{\"groups\":[{\"name\":\"index_no_users\",\"members\":{\"users\":[],\"roles\":[],\"groups\":[]},\"id\":\"b60ce1e9-f446-4787-afcc-1ac6702c31e0\"}]}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 31 Mar 2016 19:20:10 GMT",
-        "content-length": "0",
+        "date": "Thu, 31 Mar 2016 20:23:04 GMT",
+        "content-length": "128",
+        "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "jbt6oj1ipltn6203om9c5c1ev7ke6pp3"
+        "x-request-id": "qnhfu4crlsknlg6s23ku4298crpnqitm"
       },
-      "status_code": 204,
+      "status_code": 200,
       "type": "ok"
     }
   }

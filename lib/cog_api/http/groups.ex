@@ -4,7 +4,6 @@ defmodule CogApi.HTTP.Groups do
 
   alias CogApi.Endpoint
   alias CogApi.Resources.Group
-  alias CogApi.Resources.User
   alias CogApi.Decoders.Group, as: GroupDecoder
 
   def index(%Endpoint{}=endpoint) do
@@ -38,7 +37,7 @@ defmodule CogApi.HTTP.Groups do
   defp update_membership(endpoint, group, user, action) do
     path = "groups/#{group.id}/membership"
     Base.post(endpoint, path, %{members: %{users: %{action =>  [user.username]}}})
-    |> format_membership_response(group)
+    |> format_group_response
   end
 
   defp format_group_response(response) do
@@ -60,15 +59,6 @@ defmodule CogApi.HTTP.Groups do
     {
       ApiResponse.type(response),
       groups
-    }
-  end
-
-  defp format_membership_response(response, group) do
-    json_map = %{"members" => %{"users" => [%User{}]}}
-    body = Poison.decode!(response.body, as: json_map)
-    {
-      ApiResponse.type(response),
-      %{group | users: body["members"]["users"] }
     }
   end
 end
