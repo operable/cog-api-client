@@ -4,5 +4,6 @@ defmodule CogApi.Resources.Role do
   defstruct [
     :id,
     :name,
+    permissions: [%CogApi.Resources.Permission{}],
   ]
 end

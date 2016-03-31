@@ -9,6 +9,10 @@ defmodule CogApi.HTTP.Roles do
     |> ApiResponse.format(%{"roles" => [%Role{}]})
   end
 
+  def show(%Endpoint{}=endpoint, %{name: role_name}) do
+    Base.get_by(endpoint, "roles", name: role_name)
+    |> ApiResponse.format(%{"role" => %Role{}})
+  end
   def show(%Endpoint{}=endpoint, id) do
     Base.get(endpoint, "roles/#{id}")
     |> ApiResponse.format(%{"role" => %Role{}})

@@ -36,6 +36,19 @@ defmodule CogApi.Fake.RolesTest do
     end
   end
 
+  describe "role_show by name" do
+    context "when the role exists" do
+      it "returns the role" do
+        params = %{name: "QA Analyst"}
+        {:ok, created_role} = Client.role_create(fake_endpoint, params)
+
+        {:ok, found_role} = Client.role_show(fake_endpoint, %{name: created_role.name})
+
+        assert found_role.id == created_role.id
+      end
+    end
+  end
+
   describe "role_index" do
     it "requires an authenticated endpoint" do
       {response, error_message} = Client.role_index(%Endpoint{})

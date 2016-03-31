@@ -62,8 +62,8 @@ defmodule CogApi.HTTP.Client do
     Roles.index(endpoint)
   end
 
-  def role_show(endpoint, id) do
-    Roles.show(endpoint, id)
+  def role_show(endpoint, field) do
+    Roles.show(endpoint, field)
   end
 
   def role_create(endpoint, params) do

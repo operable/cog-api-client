@@ -11,6 +11,9 @@ defmodule CogApi.Fake.Roles do
   end
 
   def show(%Endpoint{token: nil}, _),  do: Endpoint.invalid_endpoint
+  def show(%Endpoint{}, %{name: name}) do
+    {:ok, Server.show_by_key(:roles, :name, name)}
+  end
   def show(%Endpoint{}, id) do
     {:ok, Server.show(:roles, id)}
   end

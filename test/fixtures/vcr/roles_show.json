@@ -11,14 +11,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"r1ccLylqGWwsCjD26piIItxmPnr/flub2aOohpfAqgc=\"}}",
+      "body": "{\"token\":{\"value\":\"0vNKvuuF2WJl6ecmrK/rXDywEXwxrFckYi/GyiRXRmg=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 31 Mar 2016 19:52:18 GMT",
+        "date": "Thu, 31 Mar 2016 19:15:23 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "k6uepiou49lc1a2pgqv1ujmebcma8u0c"
+        "x-request-id": "j0o7mu4c6li5jpdgf08uvma56th6g7q5"
       },
       "status_code": 201,
       "type": "ok"
@@ -28,7 +28,7 @@
     "request": {
       "body": "{\"role\":{\"name\":\"role_show\"}}",
       "headers": {
-        "authorization": "token r1ccLylqGWwsCjD26piIItxmPnr/flub2aOohpfAqgc=",
+        "authorization": "token 0vNKvuuF2WJl6ecmrK/rXDywEXwxrFckYi/GyiRXRmg=",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,15 +37,15 @@
       "url": "http://localhost:4000/v1/roles"
     },
     "response": {
-      "body": "{\"role\":{\"permissions\":[],\"name\":\"role_show\",\"id\":\"1440377e-372c-4754-a28f-e6ff64c8a706\"}}",
+      "body": "{\"role\":{\"permissions\":[],\"name\":\"role_show\",\"id\":\"ef1d78d7-b9ea-4586-8b7f-19225f896783\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 31 Mar 2016 19:52:18 GMT",
-        "content-length": "90",
+        "date": "Thu, 31 Mar 2016 19:15:23 GMT",
+        "content-length": "91",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "trcan5846dg4vru2j3cbh7uc8rk1v95o",
-        "location": "/v1/roles/1440377e-372c-4754-a28f-e6ff64c8a706"
+        "x-request-id": "hqo2itmna0ep1kbim66d6lqqlipphkar",
+        "location": "/v1/roles/ef1d78d7-b9ea-4586-8b7f-19225f896783"
       },
       "status_code": 201,
       "type": "ok"
@@ -55,23 +55,49 @@
     "request": {
       "body": "",
       "headers": {
-        "authorization": "token r1ccLylqGWwsCjD26piIItxmPnr/flub2aOohpfAqgc=",
+        "authorization": "token 0vNKvuuF2WJl6ecmrK/rXDywEXwxrFckYi/GyiRXRmg=",
         "Accept": "application/json"
       },
       "method": "get",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/roles/1440377e-372c-4754-a28f-e6ff64c8a706"
+      "url": "http://localhost:4000/v1/roles"
     },
     "response": {
-      "body": "{\"role\":{\"permissions\":[],\"name\":\"role_show\",\"id\":\"1440377e-372c-4754-a28f-e6ff64c8a706\"}}",
+      "body": "{\"roles\":[{\"permissions\":[],\"name\":\"role_show\",\"id\":\"ef1d78d7-b9ea-4586-8b7f-19225f896783\"}]}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 31 Mar 2016 19:52:18 GMT",
-        "content-length": "90",
+        "date": "Thu, 31 Mar 2016 19:15:23 GMT",
+        "content-length": "94",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "o7o8b1t54pf4rsv3gm1a4q0pq4nusd3l"
+        "x-request-id": "ndekhofjvseie2nsnsang1ojf20jk04t"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token 0vNKvuuF2WJl6ecmrK/rXDywEXwxrFckYi/GyiRXRmg=",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/roles/ef1d78d7-b9ea-4586-8b7f-19225f896783"
+    },
+    "response": {
+      "body": "{\"role\":{\"permissions\":[],\"name\":\"role_show\",\"id\":\"ef1d78d7-b9ea-4586-8b7f-19225f896783\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 31 Mar 2016 19:15:23 GMT",
+        "content-length": "91",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "tkb23f4i8okl0gvq2rme3hsvaqlgu3e2"
       },
       "status_code": 200,
       "type": "ok"
