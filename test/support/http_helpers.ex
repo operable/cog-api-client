@@ -22,4 +22,14 @@ defmodule CogApi.Test.HTTPHelpers do
 
     endpoint
   end
+
+  def user_params(test_name) do
+    %{
+      first_name: "Leo",
+      last_name: "McGary",
+      email_address: "cos#{test_name}@example.com",
+      username: "chief_of_staff#{test_name}",
+      password: "supersecret",
+    }
+  end
 end

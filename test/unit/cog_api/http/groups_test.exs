@@ -98,16 +98,6 @@ defmodule CogApi.HTTP.GroupsTest do
     end
   end
 
-  defp user_params(test_name) do
-    %{
-      first_name: "Leo",
-      last_name: "McGary",
-      email_address: "cos#{test_name}@example.com",
-      username: "chief_of_staff#{test_name}",
-      password: "supersecret",
-    }
-  end
-
   defp create_group_with_user(endpoint, test_name) do
     group = Client.group_create(endpoint, %{name: "group#{test_name}"}) |> get_value
     user = Client.user_create(endpoint, user_params(test_name)) |> get_value

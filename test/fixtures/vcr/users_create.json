@@ -11,14 +11,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"i5zrL6SU0zABonMiyB2kRd31r1nQCVX/KUsJ1rHR908=\"}}",
+      "body": "{\"token\":{\"value\":\"Fm0t6PAiTdA2hps3+x50XkdL5DJuvCi13o6ff2zBA8I=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Wed, 16 Mar 2016 21:13:12 GMT",
+        "date": "Thu, 31 Mar 2016 20:07:59 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "9tkfullanfbbmdt9jn8si9qhuqirn5n5"
+        "x-request-id": "s9ti0emrf13cfa2lqeher20i66e8e0tt"
       },
       "status_code": 201,
       "type": "ok"
@@ -26,9 +26,9 @@
   },
   {
     "request": {
-      "body": "{\"user\":{\"username\":\"potus\",\"password\":\"mrpresident\",\"last_name\":\"Bartlett\",\"first_name\":\"Josiah\",\"email_address\":\"president@example.com\"}}",
+      "body": "{\"user\":{\"username\":\"chief_of_staffuser_create\",\"password\":\"supersecret\",\"last_name\":\"McGary\",\"first_name\":\"Leo\",\"email_address\":\"cosuser_create@example.com\"}}",
       "headers": {
-        "authorization": "token i5zrL6SU0zABonMiyB2kRd31r1nQCVX/KUsJ1rHR908=",
+        "authorization": "token Fm0t6PAiTdA2hps3+x50XkdL5DJuvCi13o6ff2zBA8I=",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,15 +37,15 @@
       "url": "http://localhost:4000/v1/users"
     },
     "response": {
-      "body": "{\"user\":{\"username\":\"potus\",\"last_name\":\"Bartlett\",\"id\":\"9a6a3d40-18b6-4e59-ad16-c8ee3f19b10e\",\"first_name\":\"Josiah\",\"email_address\":\"president@example.com\"}}",
+      "body": "{\"user\":{\"username\":\"chief_of_staffuser_create\",\"last_name\":\"McGary\",\"id\":\"d827630a-d0f0-4f88-8d98-0be57e394976\",\"groups\":[],\"first_name\":\"Leo\",\"email_address\":\"cosuser_create@example.com\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Wed, 16 Mar 2016 21:13:14 GMT",
-        "content-length": "158",
+        "date": "Thu, 31 Mar 2016 20:08:01 GMT",
+        "content-length": "190",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "n176gj0ds9cjoul2snp591boulcvu7l7",
-        "location": "/v1/users/9a6a3d40-18b6-4e59-ad16-c8ee3f19b10e"
+        "x-request-id": "0d0hka2ue4lvrttq3hh06l1numroce9m",
+        "location": "/v1/users/d827630a-d0f0-4f88-8d98-0be57e394976"
       },
       "status_code": 201,
       "type": "ok"

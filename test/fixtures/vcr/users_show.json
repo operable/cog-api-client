@@ -11,14 +11,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"ijZHghkTLF/4TgcWbs/atBvp7l9tYYQAFfyNHBupWCA=\"}}",
+      "body": "{\"token\":{\"value\":\"XGLo5y9YTw5elFK++DVetM3Z7Xdq21GaNLgIVkGJjKQ=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 17 Mar 2016 15:09:30 GMT",
+        "date": "Thu, 31 Mar 2016 20:08:02 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "9ti742ubv6hrovmjokstk0kkp581bcn9"
+        "x-request-id": "10i1q2jv9q7k9sfmp6aslanv9g8rmbtj"
       },
       "status_code": 201,
       "type": "ok"
@@ -26,9 +26,9 @@
   },
   {
     "request": {
-      "body": "{\"user\":{\"username\":\"press_secretary\",\"password\":\"sosecret\",\"last_name\":\"Craig\",\"first_name\":\"CJ\",\"email_address\":\"ps@example.com\"}}",
+      "body": "{\"user\":{\"username\":\"chief_of_staffuser_show\",\"password\":\"supersecret\",\"last_name\":\"McGary\",\"first_name\":\"Leo\",\"email_address\":\"cosuser_show@example.com\"}}",
       "headers": {
-        "authorization": "token ijZHghkTLF/4TgcWbs/atBvp7l9tYYQAFfyNHBupWCA=",
+        "authorization": "token XGLo5y9YTw5elFK++DVetM3Z7Xdq21GaNLgIVkGJjKQ=",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,15 +37,15 @@
       "url": "http://localhost:4000/v1/users"
     },
     "response": {
-      "body": "{\"user\":{\"username\":\"press_secretary\",\"last_name\":\"Craig\",\"id\":\"9354b5a8-0929-4261-bb7f-6e7684913b91\",\"first_name\":\"CJ\",\"email_address\":\"ps@example.com\"}}",
+      "body": "{\"user\":{\"username\":\"chief_of_staffuser_show\",\"last_name\":\"McGary\",\"id\":\"2d6b745c-843b-4831-b58b-968fb0ff8138\",\"groups\":[],\"first_name\":\"Leo\",\"email_address\":\"cosuser_show@example.com\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 17 Mar 2016 15:09:32 GMT",
-        "content-length": "154",
+        "date": "Thu, 31 Mar 2016 20:08:04 GMT",
+        "content-length": "186",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "5lnbk135rh5dbg07mpsfsc17f4lha5i2",
-        "location": "/v1/users/9354b5a8-0929-4261-bb7f-6e7684913b91"
+        "x-request-id": "mfdkeg10fe1lnmn64l54bj6a6o66b1us",
+        "location": "/v1/users/2d6b745c-843b-4831-b58b-968fb0ff8138"
       },
       "status_code": 201,
       "type": "ok"
@@ -55,23 +55,23 @@
     "request": {
       "body": "",
       "headers": {
-        "authorization": "token ijZHghkTLF/4TgcWbs/atBvp7l9tYYQAFfyNHBupWCA=",
+        "authorization": "token XGLo5y9YTw5elFK++DVetM3Z7Xdq21GaNLgIVkGJjKQ=",
         "Accept": "application/json"
       },
       "method": "get",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/users/9354b5a8-0929-4261-bb7f-6e7684913b91"
+      "url": "http://localhost:4000/v1/users/2d6b745c-843b-4831-b58b-968fb0ff8138"
     },
     "response": {
-      "body": "{\"user\":{\"username\":\"press_secretary\",\"last_name\":\"Craig\",\"id\":\"9354b5a8-0929-4261-bb7f-6e7684913b91\",\"first_name\":\"CJ\",\"email_address\":\"ps@example.com\"}}",
+      "body": "{\"user\":{\"username\":\"chief_of_staffuser_show\",\"last_name\":\"McGary\",\"id\":\"2d6b745c-843b-4831-b58b-968fb0ff8138\",\"groups\":[],\"first_name\":\"Leo\",\"email_address\":\"cosuser_show@example.com\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 17 Mar 2016 15:09:32 GMT",
-        "content-length": "154",
+        "date": "Thu, 31 Mar 2016 20:08:04 GMT",
+        "content-length": "186",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "lb01kcl50egleqq4hfa494i1tanr77lp"
+        "x-request-id": "2im2tqrek3o6dslnj5ttnlsqjripbii2"
       },
       "status_code": 200,
       "type": "ok"

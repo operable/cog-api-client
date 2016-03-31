@@ -8,24 +8,18 @@ defmodule CogApi.HTTP.UsersTest do
   describe "index" do
     it "returns a list of users" do
       cassette "users_index" do
-        params = %{
-          first_name: "Leo",
-          last_name: "McGary",
-          email_address: "cos@example.com",
-          username: "chief_of_staff",
-          password: "supersecret",
-        }
+        params = user_params("user_index")
         endpoint = valid_endpoint
-        {:ok, _} = Client.user_create(endpoint, params)
+        {:ok, user} = Client.user_create(endpoint, params)
 
         users = Client.user_index(endpoint) |> get_value
 
         last_user = List.last users
-        assert present last_user.id
-        assert last_user.first_name == params.first_name
-        assert last_user.last_name == params.last_name
-        assert last_user.email_address == params.email_address
-        assert last_user.username == params.username
+        assert last_user.id == user.id
+        assert last_user.first_name == user.first_name
+        assert last_user.last_name == user.last_name
+        assert last_user.email_address == user.email_address
+        assert last_user.username == user.username
       end
     end
   end
@@ -35,13 +29,7 @@ defmodule CogApi.HTTP.UsersTest do
       it "returns the user" do
         cassette "users_show" do
           endpoint = valid_endpoint
-          params = %{
-            first_name: "CJ",
-            last_name: "Craig",
-            email_address: "ps@example.com",
-            username: "press_secretary",
-            password: "sosecret",
-          }
+          params = user_params("user_show")
           created_user = Client.user_create(endpoint, params) |> get_value
 
           found_user = Client.user_show(endpoint, created_user.id) |> get_value
@@ -55,13 +43,7 @@ defmodule CogApi.HTTP.UsersTest do
   describe "create" do
     it "returns the created user" do
       cassette "users_create" do
-        params = %{
-          first_name: "Josiah",
-          last_name: "Bartlett",
-          email_address: "president@example.com",
-          username: "potus",
-          password: "mrpresident",
-        }
+        params = user_params("user_create")
         user = Client.user_create(valid_endpoint, params) |> get_value
 
         assert present user.id
@@ -74,16 +56,15 @@ defmodule CogApi.HTTP.UsersTest do
 
     it "returns errors when invalid" do
       cassette "users_create_errors" do
-        params = %{
-          email_address: "president@example.com",
-          username: "potus",
-          password: "mrpresident",
-        }
-        {:error, errors} = Client.user_create(valid_endpoint, params)
+        endpoint = valid_endpoint
+        params = user_params("user_create_errors")
+        Client.user_create(endpoint, params)
+        params_with_same_username = %{params | first_name: "slightly different"}
+        {:error, errors} = Client.user_create(endpoint,
+        params_with_same_username)
 
         assert errors == [
-          "First name can't be blank",
-          "Last name can't be blank",
+          "Username has already been taken",
         ]
       end
     end
@@ -92,13 +73,7 @@ defmodule CogApi.HTTP.UsersTest do
   describe "update" do
     it "returns the updated user" do
       cassette "users_update" do
-        params = %{
-          first_name: "Arnold",
-          last_name: "Vinick",
-          email_address: "arnold@example.com",
-          username: "arnie",
-          password: "12345",
-        }
+        params = user_params("user_update")
         endpoint = valid_endpoint
         user = Client.user_create(endpoint, params) |> get_value
 
@@ -114,13 +89,7 @@ defmodule CogApi.HTTP.UsersTest do
     it "returns :ok" do
       cassette "user_delete" do
         endpoint = valid_endpoint
-        params = %{
-          first_name: "Josh",
-          last_name: "Lyman",
-          email_address: "josh@example.com",
-          username: "deputy_cos",
-          password: "password",
-        }
+        params = user_params("user_delete")
         user = Client.user_create(endpoint, params) |> get_value
 
         assert :ok == Client.user_delete(endpoint, user.id)

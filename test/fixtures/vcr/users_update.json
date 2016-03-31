@@ -11,14 +11,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"S6MHKvHNeerF/fXoM0hlsAU7jM8UYjbztgNPmzHWp8A=\"}}",
+      "body": "{\"token\":{\"value\":\"xhcYJfyCYnqS9mwAz9seqvl73mYmb4EgcjOgEGBJfd0=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 17 Mar 2016 17:20:37 GMT",
+        "date": "Thu, 31 Mar 2016 20:08:05 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "tqmvkj2vtqihug4qq6oh23g2rr7pt5eh"
+        "x-request-id": "j6crdiii1hmu8vukvh9e8orei82qh0b7"
       },
       "status_code": 201,
       "type": "ok"
@@ -26,9 +26,9 @@
   },
   {
     "request": {
-      "body": "{\"user\":{\"username\":\"arnie\",\"password\":\"12345\",\"last_name\":\"Vinick\",\"first_name\":\"Arnold\",\"email_address\":\"arnold@example.com\"}}",
+      "body": "{\"user\":{\"username\":\"chief_of_staffuser_update\",\"password\":\"supersecret\",\"last_name\":\"McGary\",\"first_name\":\"Leo\",\"email_address\":\"cosuser_update@example.com\"}}",
       "headers": {
-        "authorization": "token S6MHKvHNeerF/fXoM0hlsAU7jM8UYjbztgNPmzHWp8A=",
+        "authorization": "token xhcYJfyCYnqS9mwAz9seqvl73mYmb4EgcjOgEGBJfd0=",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,15 +37,15 @@
       "url": "http://localhost:4000/v1/users"
     },
     "response": {
-      "body": "{\"user\":{\"username\":\"arnie\",\"last_name\":\"Vinick\",\"id\":\"a8262839-e4c0-47bb-9047-f27a366d37ec\",\"first_name\":\"Arnold\",\"email_address\":\"arnold@example.com\"}}",
+      "body": "{\"user\":{\"username\":\"chief_of_staffuser_update\",\"last_name\":\"McGary\",\"id\":\"5d32aef3-819c-46c5-a2eb-af4deb479aca\",\"groups\":[],\"first_name\":\"Leo\",\"email_address\":\"cosuser_update@example.com\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 17 Mar 2016 17:20:38 GMT",
-        "content-length": "153",
+        "date": "Thu, 31 Mar 2016 20:08:07 GMT",
+        "content-length": "190",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "7le6deo0cc9tgp9otb9mfkj9s1v0jm0s",
-        "location": "/v1/users/a8262839-e4c0-47bb-9047-f27a366d37ec"
+        "x-request-id": "ovp90bnbd1kl33eo8klt1k2hvbjah3o0",
+        "location": "/v1/users/5d32aef3-819c-46c5-a2eb-af4deb479aca"
       },
       "status_code": 201,
       "type": "ok"
@@ -55,23 +55,23 @@
     "request": {
       "body": "{\"user\":{\"first_name\":\"Arnie\"}}",
       "headers": {
-        "authorization": "token S6MHKvHNeerF/fXoM0hlsAU7jM8UYjbztgNPmzHWp8A=",
+        "authorization": "token xhcYJfyCYnqS9mwAz9seqvl73mYmb4EgcjOgEGBJfd0=",
         "Content-Type": "application/json"
       },
       "method": "patch",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/users/a8262839-e4c0-47bb-9047-f27a366d37ec"
+      "url": "http://localhost:4000/v1/users/5d32aef3-819c-46c5-a2eb-af4deb479aca"
     },
     "response": {
-      "body": "{\"user\":{\"username\":\"arnie\",\"last_name\":\"Vinick\",\"id\":\"a8262839-e4c0-47bb-9047-f27a366d37ec\",\"first_name\":\"Arnie\",\"email_address\":\"arnold@example.com\"}}",
+      "body": "{\"user\":{\"username\":\"chief_of_staffuser_update\",\"last_name\":\"McGary\",\"id\":\"5d32aef3-819c-46c5-a2eb-af4deb479aca\",\"groups\":[],\"first_name\":\"Arnie\",\"email_address\":\"cosuser_update@example.com\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 17 Mar 2016 17:20:38 GMT",
-        "content-length": "152",
+        "date": "Thu, 31 Mar 2016 20:08:07 GMT",
+        "content-length": "192",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "2gg14a9u4ce0a1r7gqnhe523gf8vgf5r"
+        "x-request-id": "mo7oefquo3q2h4nspl8sfjct605ncav2"
       },
       "status_code": 200,
       "type": "ok"
