@@ -61,6 +61,11 @@ If tests fail, the script will not perform static analysis.
 
 Run only tests with: `mix test`
 
+ExVcr tests are executed against a local installation of Cog using user "admin"
+with the password set to "password". When making a change to the API, you can
+record new cassettes by deleting the files you wish to regenerate and run the tests.
+Be sure to bootstrap a clean instance of Cog when doing so.
+
 ## Static Analysis
 
 Run `mix dialyzer` to run analysis. If your dependencies or your elixir version

@@ -29,7 +29,8 @@ defmodule CogApi.HTTP.BundlesTest do
         assert bundle.id == operable_bundle.id
         assert bundle.name == operable_bundle.name
         assert bundle.enabled == true
-        assert bundle.namespace.name == "operable"
+        assert bundle.inserted_at != nil
+        assert bundle.updated_at != nil
 
         bundle_command = bundle.commands
         |> Enum.find(fn command -> command.name == "bundle" end)
