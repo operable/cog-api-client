@@ -152,17 +152,18 @@ defmodule CogApi.HTTP.Internal do
       get(endpoint, "users/#{user_id}/permissions")
     end
   end
-
   def permission_index(%Endpoint{}=endpoint, %{group: group_name}) do
     with {:ok, group_id} <- find_id_by(endpoint, "groups", name: group_name) do
       get(endpoint, "groups/#{group_id}/permissions")
     end
   end
-
   def permission_index(%Endpoint{}=endpoint, %{role: role_name}) do
     with {:ok, role_id} <- find_id_by(endpoint, "roles", name: role_name) do
       get(endpoint, "roles/#{role_id}/permissions")
     end
+  end
+  def permission_index(%Endpoint{}=endpoint, params) do
+    get(endpoint, "permissions", params)
   end
 
   def permission_delete(%Endpoint{}=endpoint, name) do

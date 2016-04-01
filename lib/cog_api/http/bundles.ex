@@ -36,6 +36,11 @@ defmodule CogApi.HTTP.Bundles do
     rules
   end
 
+  def update(%Endpoint{}=endpoint, %{name: bundle_name}, status) do
+    with {:ok, bundle_id} = Base.find_id_by(endpoint, "bundles", name: bundle_name) do
+      update(endpoint, bundle_id, status)
+    end
+  end
   def update(%Endpoint{}=endpoint, bundle_id, %{enabled: enabled}) do
     status = Bundle.encode_status(enabled)
 

@@ -5,7 +5,8 @@ defmodule CogApi.Resources.Bundle do
     :id,
     :enabled,
     :name,
-    namespace: %CogApi.Resources.Namespace{},
+    :inserted_at,
+    :updated_at,
     commands: [%CogApi.Resources.Command{}],
   ]
 
