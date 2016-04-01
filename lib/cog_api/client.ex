@@ -4,6 +4,7 @@ defmodule CogApi.Client do
   alias CogApi.Resources.Bundle
   alias CogApi.Resources.Group
   alias CogApi.Resources.Permission
+  alias CogApi.Resources.Relay
   alias CogApi.Resources.RelayGroup
   alias CogApi.Resources.Role
   alias CogApi.Resources.Rule
@@ -25,6 +26,13 @@ defmodule CogApi.Client do
 
   @callback permission_index(%Endpoint{}) :: {atom, [%Permission{}]}
   @callback permission_create(%Endpoint{}, String.t) :: {atom, %Permission{}}
+
+  @callback relay_index(%Endpoint{}) :: {atom, [%Relay{}]}
+  @callback relay_show(String.t, %Endpoint{}) :: {atom, %Relay{}}
+  @callback relay_create(%{}, %Endpoint{}) :: {atom, %Relay{}}
+  @callback relay_update(String.t, %{}, %Endpoint{}) :: {atom, %Relay{}}
+  @callback relay_delete(String.t, %Endpoint{}) :: atom
+  @callback relay_delete(String.t, %Endpoint{}) :: {atom, [String.t]}
 
   @callback relay_group_index(%Endpoint{}) :: {atom, [%RelayGroup{}]}
   @callback relay_group_show(String.t, %Endpoint{}) :: {atom, %RelayGroup{}}

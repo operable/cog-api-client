@@ -3,6 +3,7 @@ defmodule CogApi.Fake.Server do
     bundles: [],
     groups: [],
     permissions: [],
+    relays: [],
     relay_groups: [],
     roles: [],
     rules: [],
