@@ -15,8 +15,8 @@ defmodule CogApi.Fake.RelayGroupsTest do
       last_group = List.last groups
       assert present last_group.id
       assert last_group.name == name
-      assert last_group.bundles == []
-      assert last_group.relays == []
+      assert present last_group.bundles
+      assert present last_group.relays
     end
   end
 
@@ -39,8 +39,8 @@ defmodule CogApi.Fake.RelayGroupsTest do
 
       assert present relay_group.id
       assert relay_group.name == name
-      assert relay_group.bundles == []
-      assert relay_group.relays == []
+      assert present relay_group.bundles
+      assert present relay_group.relays
     end
   end
 
@@ -69,6 +69,32 @@ defmodule CogApi.Fake.RelayGroupsTest do
 
         assert error == "The relay group could not be deleted"
       end
+    end
+  end
+
+  describe "relay_group_add_relay" do
+    it "adds the relay to the group" do
+      relay = Client.relay_create(%{name: "relayyy", token: "1234"}, fake_endpoint) |> get_value
+      group = Client.relay_group_create(%{name: "groupyy"}, fake_endpoint) |> get_value
+
+      group = Client.relay_group_add_relay(group.id, relay.id, fake_endpoint) |> get_value
+
+      [grouped_relay] = group.relays
+
+      assert grouped_relay.id == relay.id
+    end
+  end
+
+  describe "relay_group_remove_relay" do
+    it "removes the relay from the group" do
+      relay = Client.relay_create(%{name: "relayyy", token: "1234"}, fake_endpoint) |> get_value
+      group = Client.relay_group_create(%{name: "groupyy"}, fake_endpoint) |> get_value
+      group = Client.relay_group_add_relay(group.id, relay.id, fake_endpoint) |> get_value
+      assert group.relays != []
+
+      group = Client.relay_group_remove_relay(group.id, relay.id, fake_endpoint) |> get_value
+
+      assert group.relays == []
     end
   end
 end

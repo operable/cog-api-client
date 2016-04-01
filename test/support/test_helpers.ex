@@ -1,4 +1,8 @@
 defmodule CogApi.TestHelpers do
+  def present(list) when is_list(list) do
+    true
+  end
+
   def present(string) do
     String.length(string) > 1
   end

@@ -40,6 +40,8 @@ defmodule CogApi.Client do
   @callback relay_group_update(String.t, %{}, %Endpoint{}) :: {atom, %RelayGroup{}}
   @callback relay_group_delete(String.t, %Endpoint{}) :: atom
   @callback relay_group_delete(String.t, %Endpoint{}) :: {atom, [String.t]}
+  @callback relay_group_add_relay(String.t, String.t, %Endpoint{}) :: {atom, %RelayGroup{}}
+  @callback relay_group_remove_relay(String.t, String.t, %Endpoint{}) :: {atom, %RelayGroup{}}
 
   @callback role_index(%Endpoint{}) :: {atom, [%Role{}]}
   @callback role_show(%Endpoint{}, String.t) :: {atom, %Role{}}
