@@ -6,6 +6,7 @@ defmodule CogApi.Fake.Client do
   alias CogApi.Fake.Bundles
   alias CogApi.Fake.Groups
   alias CogApi.Fake.Permissions
+  alias CogApi.Fake.RelayGroups
   alias CogApi.Fake.Roles
   alias CogApi.Fake.Rules
   alias CogApi.Fake.Users
@@ -60,6 +61,26 @@ defmodule CogApi.Fake.Client do
 
   def permission_create(%Endpoint{}=endpoint, name) do
     Permissions.create(endpoint, name)
+  end
+
+  def relay_group_index(%Endpoint{}=endpoint) do
+    RelayGroups.index(endpoint)
+  end
+
+  def relay_group_show(relay_group_id, %Endpoint{}=endpoint) do
+    RelayGroups.show(relay_group_id, endpoint)
+  end
+
+  def relay_group_create(params, %Endpoint{}=endpoint) do
+    RelayGroups.create(params, endpoint)
+  end
+
+  def relay_group_update(relay_group_id, params, %Endpoint{}=endpoint) do
+    RelayGroups.update(relay_group_id, params, endpoint)
+  end
+
+  def relay_group_delete(relay_group_id, %Endpoint{}=endpoint) do
+    RelayGroups.delete(relay_group_id, endpoint)
   end
 
   def role_index(endpoint) do

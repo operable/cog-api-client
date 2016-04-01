@@ -1,0 +1,80 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"oMui0vAH5iy1Nz8EDrhtGPqd/o/QecKJDcsLxzupeHs=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Fri, 01 Apr 2016 17:03:01 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "ig3d6o9uc5bpt6gd6gl7ksbmt5kq92qg"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"relay_group\":{\"name\":\"relay_group_update\"}}",
+      "headers": {
+        "authorization": "token oMui0vAH5iy1Nz8EDrhtGPqd/o/QecKJDcsLxzupeHs=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/relay_groups"
+    },
+    "response": {
+      "body": "{\"relay_group\":{\"updated_at\":\"2016-04-01T17:03:01Z\",\"relays\":[],\"name\":\"relay_group_update\",\"inserted_at\":\"2016-04-01T17:03:01Z\",\"id\":\"c86feb4f-a11d-4113-a24b-5beff16efece\",\"bundles\":[]}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Fri, 01 Apr 2016 17:03:01 GMT",
+        "content-length": "187",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "p6r4u2i7nrd7c6thc0hpor3encdj8tqd",
+        "location": "/v1/groups/c86feb4f-a11d-4113-a24b-5beff16efece"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"relay_group\":{\"name\":\"updated\"}}",
+      "headers": {
+        "authorization": "token oMui0vAH5iy1Nz8EDrhtGPqd/o/QecKJDcsLxzupeHs=",
+        "Content-Type": "application/json"
+      },
+      "method": "patch",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/relay_groups/c86feb4f-a11d-4113-a24b-5beff16efece"
+    },
+    "response": {
+      "body": "{\"relay_group\":{\"updated_at\":\"2016-04-01T17:03:01Z\",\"relays\":[],\"name\":\"updated\",\"inserted_at\":\"2016-04-01T17:03:01Z\",\"id\":\"c86feb4f-a11d-4113-a24b-5beff16efece\",\"bundles\":[]}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Fri, 01 Apr 2016 17:03:01 GMT",
+        "content-length": "176",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "i08oa2uc8t2nqqp58kfr8fjsj229qps6"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

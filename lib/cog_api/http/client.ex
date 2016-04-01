@@ -6,6 +6,7 @@ defmodule CogApi.HTTP.Client do
   alias CogApi.HTTP.Bundles
   alias CogApi.HTTP.Groups
   alias CogApi.HTTP.Permissions
+  alias CogApi.HTTP.RelayGroups
   alias CogApi.HTTP.Roles
   alias CogApi.HTTP.Rules
   alias CogApi.HTTP.Users
@@ -56,6 +57,26 @@ defmodule CogApi.HTTP.Client do
 
   def permission_create(%Endpoint{}=endpoint, name) do
     Permissions.create(endpoint, name)
+  end
+
+  def relay_group_index(%Endpoint{}=endpoint) do
+    RelayGroups.index(endpoint)
+  end
+
+  def relay_group_show(relay_group_id, %Endpoint{}=endpoint) do
+    RelayGroups.show(relay_group_id, endpoint)
+  end
+
+  def relay_group_create(params, %Endpoint{}=endpoint) do
+    RelayGroups.create(params, endpoint)
+  end
+
+  def relay_group_update(relay_group_id, params, %Endpoint{}=endpoint) do
+    RelayGroups.update(relay_group_id, params, endpoint)
+  end
+
+  def relay_group_delete(relay_group_id, %Endpoint{}=endpoint) do
+    RelayGroups.delete(relay_group_id, endpoint)
   end
 
   def role_index(endpoint) do

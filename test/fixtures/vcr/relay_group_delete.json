@@ -1,0 +1,79 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"fLS6UaEmvpfOraaJqkiwrCnjzRpg475FvnHOAv5gkHY=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Fri, 01 Apr 2016 15:25:06 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "gb0fj9l3shvjus59gca5h1r5asu9o2ct"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"relay_group\":{\"name\":\"delete me\"}}",
+      "headers": {
+        "authorization": "token fLS6UaEmvpfOraaJqkiwrCnjzRpg475FvnHOAv5gkHY=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/relay_groups"
+    },
+    "response": {
+      "body": "{\"relay_group\":{\"updated_at\":\"2016-04-01T15:25:07Z\",\"relays\":[],\"name\":\"delete me\",\"inserted_at\":\"2016-04-01T15:25:07Z\",\"id\":\"0df7ba1e-4b6d-4a4f-adc4-70d3cac8e022\",\"bundles\":[]}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Fri, 01 Apr 2016 15:25:06 GMT",
+        "content-length": "178",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "namjvd6jpmka09f9lrnei677b5hu6t15",
+        "location": "/v1/groups/0df7ba1e-4b6d-4a4f-adc4-70d3cac8e022"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token fLS6UaEmvpfOraaJqkiwrCnjzRpg475FvnHOAv5gkHY=",
+        "Accept": "application/json"
+      },
+      "method": "delete",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/relay_groups/0df7ba1e-4b6d-4a4f-adc4-70d3cac8e022"
+    },
+    "response": {
+      "body": "",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Fri, 01 Apr 2016 15:25:06 GMT",
+        "content-length": "0",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "1s2g0id80mi1c82gv19kh3fvbrvlc94v"
+      },
+      "status_code": 204,
+      "type": "ok"
+    }
+  }
+]
