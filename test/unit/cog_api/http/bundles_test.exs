@@ -29,8 +29,8 @@ defmodule CogApi.HTTP.BundlesTest do
         assert bundle.id == operable_bundle.id
         assert bundle.name == operable_bundle.name
         assert bundle.enabled == true
-        assert bundle.inserted_at != nil
-        assert bundle.updated_at != nil
+        assert present bundle.inserted_at
+        assert present bundle.updated_at
 
         bundle_command = bundle.commands
         |> Enum.find(fn command -> command.name == "bundle" end)
@@ -63,6 +63,28 @@ defmodule CogApi.HTTP.BundlesTest do
         ) |> get_value
 
         assert updated_bundle.enabled == false
+      end
+    end
+
+    context "when given a bundle name to be updated" do
+      it "returns the updated bundle" do
+        cassette "bundles_update" do
+          endpoint = valid_endpoint
+
+          mist_bundle = Client.bundle_index(endpoint)
+            |> get_value
+            |> Enum.find(fn(bundle) -> bundle.name == "mist" end)
+
+          assert mist_bundle.enabled
+
+          updated_bundle = Client.bundle_update(
+              endpoint,
+              %{name: mist_bundle.name},
+              %{enabled: false}
+            ) |> get_value
+
+          assert updated_bundle.enabled == false
+        end
       end
     end
 

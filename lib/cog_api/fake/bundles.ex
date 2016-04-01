@@ -37,6 +37,13 @@ defmodule CogApi.Fake.Bundles do
     {:ok, Server.create(:bundles, new_bundle)}
   end
 
+  def update(%Endpoint{token: _}, %{name: name}, %{enabled: enabled} = params) do
+    catch_errors params, fn ->
+      current_bundle = Server.show_by_key(:bundles, :name, name)
+      updated_bundle = %{current_bundle | enabled: ensure_bundle_encode_status(enabled)}
+      {:ok, Server.update(:bundles, current_bundle.id, updated_bundle)}
+    end
+  end
   def update(%Endpoint{token: _}, id, %{enabled: enabled} = params) do
     catch_errors params, fn ->
       current_bundle = Server.show(:bundles, id)
