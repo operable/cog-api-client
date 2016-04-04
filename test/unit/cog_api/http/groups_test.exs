@@ -9,7 +9,7 @@ defmodule CogApi.HTTP.GroupsTest do
     it "returns a list of groups" do
       cassette "groups_index" do
         endpoint = valid_endpoint
-        {group, user} = create_group_with_user(endpoint, "index")
+        {group, user, role} = create_group_with_user_and_role(endpoint, "index")
 
         {:ok, groups} = Client.group_index(endpoint)
 
@@ -17,6 +17,7 @@ defmodule CogApi.HTTP.GroupsTest do
         assert last_group.id == group.id
         assert last_group.name == group.name
         assert last_group.users == [user]
+        assert last_group.roles == [role]
       end
     end
   end
@@ -26,13 +27,14 @@ defmodule CogApi.HTTP.GroupsTest do
       it "returns the group" do
         cassette "group_show" do
           endpoint = valid_endpoint
-          {group, user} = create_group_with_user(endpoint, "show_with_user")
+          {group, user, role} = create_group_with_user_and_role(endpoint, "show_with_user")
 
           found_group = Client.group_show(endpoint, group.id) |> get_value
 
           assert found_group.id == group.id
           assert found_group.name == group.name
           assert found_group.users == [user]
+          assert found_group.roles == [role]
         end
       end
     end
@@ -104,5 +106,13 @@ defmodule CogApi.HTTP.GroupsTest do
     group = Client.group_add_user(endpoint, group, user) |> get_value
 
     {group, user}
+  end
+
+  defp create_group_with_user_and_role(endpoint, test_name) do
+    {group, user} = create_group_with_user(endpoint, test_name)
+    role = Client.role_create(endpoint, %{name: "group#{test_name}"}) |> get_value
+    group = Client.role_grant(endpoint, role, group) |> get_value
+
+    {group, user, role}
   end
 end
