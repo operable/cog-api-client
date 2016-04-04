@@ -82,6 +82,13 @@ defmodule CogApi.Fake.RelayGroupsTest do
       [grouped_relay] = group.relays
 
       assert grouped_relay.id == relay.id
+
+      first_group = Client.relay_show(relay.id, fake_endpoint)
+        |> get_value
+        |> Map.get(:groups)
+        |> List.first
+
+      assert first_group.id == group.id
     end
   end
 
@@ -95,6 +102,11 @@ defmodule CogApi.Fake.RelayGroupsTest do
       group = Client.relay_group_remove_relay(group.id, relay.id, fake_endpoint) |> get_value
 
       assert group.relays == []
+
+      relay_groups = Client.relay_show(relay.id, fake_endpoint)
+        |> get_value
+        |> Map.get(:groups)
+      assert relay_groups == []
     end
   end
 end

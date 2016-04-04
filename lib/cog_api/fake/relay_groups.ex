@@ -40,7 +40,10 @@ defmodule CogApi.Fake.RelayGroups do
   def add_relay(id, relay_id, %Endpoint{token: _}) do
     relay = Server.show(:relays, relay_id)
     relay_group = Server.show(:relay_groups, id)
-    relays = relay_group.relays ++ [relay]
+    relay_with_group = %{relay | groups: relay.groups ++ [relay_group]}
+    Server.update(:relays, relay.id, relay_with_group)
+
+    relays = relay_group.relays ++ [relay_with_group]
     relay_group = %{relay_group | relays: relays}
 
     {:ok, Server.update(:relay_groups, id, relay_group)}
@@ -52,6 +55,9 @@ defmodule CogApi.Fake.RelayGroups do
     relay_group = Server.show(:relay_groups, id)
     relays = relay_group.relays -- [relay]
     relay_group = %{relay_group | relays: relays}
+
+    relay_without_group = %{relay | groups: relay.groups -- [relay_group]}
+    Server.update(:relays, relay.id, relay_without_group)
 
     {:ok, Server.update(:relay_groups, id, relay_group)}
   end

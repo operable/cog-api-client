@@ -7,22 +7,22 @@ defmodule CogApi.HTTP.Relays do
 
   def index(%Endpoint{}=endpoint) do
     Base.get(endpoint, "relays")
-    |> ApiResponse.format(%{"relays" => [%Relay{}]})
+    |> ApiResponse.format(%{"relays" => [Relay.format]})
   end
 
   def show(id, %Endpoint{}=endpoint) do
     Base.get(endpoint, resource_path(id))
-    |> ApiResponse.format(%{"relay" => %Relay{}})
+    |> ApiResponse.format(%{"relay" => Relay.format})
   end
 
   def create(params, %Endpoint{}=endpoint) do
     Base.post(endpoint, "relays", %{relay: params})
-    |> ApiResponse.format(%{"relay" => %Relay{}})
+    |> ApiResponse.format(%{"relay" => Relay.format})
   end
 
   def update(id, params, %Endpoint{}=endpoint) do
     Base.patch(endpoint, resource_path(id), %{relay: params})
-    |> ApiResponse.format(%{"relay" => %Relay{}})
+    |> ApiResponse.format(%{"relay" => Relay.format})
   end
 
   def delete(id, %Endpoint{}=endpoint) do

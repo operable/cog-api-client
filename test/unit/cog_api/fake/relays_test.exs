@@ -17,6 +17,18 @@ defmodule CogApi.Fak.RelaysTest do
       assert present last_relay.id
       assert last_relay.name == name
     end
+
+    it "includes the group for the relay" do
+      relay = Client.relay_create(%{name: "relay", token: "1234"}, fake_endpoint) |> get_value
+      group = Client.relay_group_create(%{name: "group"}, fake_endpoint) |> get_value
+      group = Client.relay_group_add_relay(group.id, relay.id, fake_endpoint) |> get_value
+
+      last_relay = Client.relay_index(fake_endpoint) |> get_value |> List.last
+
+      [relay_group] = last_relay.groups
+
+      assert relay_group.id == group.id
+    end
   end
 
   describe "relay_show" do

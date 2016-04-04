@@ -6,5 +6,12 @@ defmodule CogApi.Resources.Relay do
     :name,
     :updated_at,
     :inserted_at,
+    groups: [],
   ]
+
+  def format do
+    %__MODULE__{
+      groups: [%CogApi.Resources.RelayGroup{}],
+    }
+  end
 end

@@ -22,6 +22,22 @@ defmodule CogApi.HTTP.RelaysTest do
         assert last_relay.name == name
       end
     end
+
+    it "includes the group for the relay" do
+      cassette "relay_index_with_group" do
+        endpoint = valid_endpoint
+        name = "IndexGroup"
+        relay = Client.relay_create(%{name: name, token: "1234"}, endpoint) |> get_value
+        group = Client.relay_group_create(%{name: name}, endpoint) |> get_value
+        group = Client.relay_group_add_relay(group.id, relay.id, endpoint) |> get_value
+
+        last_relay = Client.relay_index(endpoint) |> get_value |> List.last
+
+        [relay_group] = last_relay.groups
+
+        assert relay_group.id == group.id
+      end
+    end
   end
 
   describe "relay_show" do
