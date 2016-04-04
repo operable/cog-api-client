@@ -57,6 +57,16 @@ defmodule CogApi.Fake.Bundles do
     {:error, "You can only enable or disable a bundle"}
   end
 
+  def delete(%Endpoint{token: nil}, _), do: Endpoint.invalid_endpoint
+  def delete(%Endpoint{token: _}, id) do
+    if Server.show(:bundles, id) do
+      Server.delete(:bundles, id)
+      :ok
+    else
+      {:error, ["The bundle could not be deleted"]}
+    end
+  end
+
   defp ensure_bundle_encode_status(status) do
     Bundle.encode_status(status)
     status == "true"

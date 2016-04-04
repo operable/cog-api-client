@@ -129,4 +129,24 @@ defmodule CogApi.Fake.BundlesTest do
     end
 
   end
+
+  describe "bundle_delete" do
+    it "returns :ok" do
+      bundle = %Bundle{name: "a bundle"}
+      bundle = Client.bundle_create(fake_endpoint, bundle) |> get_value
+
+      assert :ok == Client.bundle_delete(
+        fake_endpoint,
+        bundle.id
+      )
+    end
+
+    context "when the bundle cannot be deleted" do
+      it "returns an error" do
+        {:error, [error]} = Client.bundle_delete(fake_endpoint, "not real")
+
+        assert error == "The bundle could not be deleted"
+      end
+    end
+  end
 end

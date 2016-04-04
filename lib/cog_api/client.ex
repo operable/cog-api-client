@@ -12,9 +12,10 @@ defmodule CogApi.Client do
 
   @callback authenticate(%Endpoint{}) :: {atom, %Endpoint{}}
 
-  @callback bundle_index(%Endpoint{}) ::{atom, [%Bundle{}]}
-  @callback bundle_show(%Endpoint{}, String.t) ::{atom, %Bundle{}}
-  @callback bundle_update(%Endpoint{}, String.t, %{}) ::{atom, %Bundle{}}
+  @callback bundle_index(%Endpoint{}) :: {atom, [%Bundle{}]}
+  @callback bundle_show(%Endpoint{}, String.t) :: {atom, %Bundle{}}
+  @callback bundle_update(%Endpoint{}, String.t, %{}) :: {atom, %Bundle{}}
+  @callback bundle_delete(%Endpoint{}, String.t) :: atom
 
   @callback group_index(%Endpoint{}) :: {atom, [%Group{}]}
   @callback group_show(%Endpoint{}, String.t) :: {atom, %Group{}}

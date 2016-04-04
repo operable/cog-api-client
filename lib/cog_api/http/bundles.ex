@@ -18,6 +18,11 @@ defmodule CogApi.HTTP.Bundles do
     end
   end
 
+  def delete(%Endpoint{}=endpoint, id) do
+    Base.delete(endpoint, "bundles/#{id}")
+    |> ApiResponse.format_delete("The bundle could not be deleted")
+  end
+
   defp find_bundle(endpoint, id) do
     Base.get(endpoint, "bundles/#{id}")
     |> ApiResponse.format(%{"bundle" => %Bundle{}})

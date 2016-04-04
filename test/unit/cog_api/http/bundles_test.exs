@@ -49,10 +49,7 @@ defmodule CogApi.HTTP.BundlesTest do
     it "returns the updated bundle" do
       cassette "bundles_update" do
         endpoint = valid_endpoint
-        mist_bundle =
-          Client.bundle_index(endpoint)
-          |> get_value
-          |> Enum.find(fn(bundle) -> bundle.name == "mist" end)
+        mist_bundle = get_bundle(endpoint, "mist")
 
         assert mist_bundle.enabled
 
@@ -71,9 +68,7 @@ defmodule CogApi.HTTP.BundlesTest do
         cassette "bundles_update" do
           endpoint = valid_endpoint
 
-          mist_bundle = Client.bundle_index(endpoint)
-            |> get_value
-            |> Enum.find(fn(bundle) -> bundle.name == "mist" end)
+          mist_bundle = get_bundle(endpoint, "mist")
 
           assert mist_bundle.enabled
 
@@ -92,10 +87,7 @@ defmodule CogApi.HTTP.BundlesTest do
       it "returns errors" do
         cassette "bundles_update_invalid" do
           endpoint = valid_endpoint
-          operable_bundle =
-            Client.bundle_index(endpoint)
-            |> get_value
-            |> Enum.find(fn(bundle) -> bundle.name == "operable" end)
+          operable_bundle = get_bundle(endpoint, "operable")
 
           assert operable_bundle.enabled
 
@@ -110,5 +102,32 @@ defmodule CogApi.HTTP.BundlesTest do
         end
       end
     end
+  end
+
+  describe "bundle_delete" do
+    it "returns :ok" do
+      cassette "bundles_delete" do
+        endpoint = valid_endpoint
+        mist_bundle = get_bundle(endpoint, "mist")
+        assert :ok == Client.bundle_delete(endpoint, mist_bundle.id)
+      end
+    end
+
+    context "when the bundle cannot be deleted" do
+      it "returns an error" do
+        cassette "bundles_delete_failure" do
+          {:error, [error]} = Client.bundle_delete(valid_endpoint, "not real")
+
+          assert error == "The bundle could not be deleted"
+        end
+      end
+    end
+  end
+
+  def get_bundle(endpoint, bundle_name) do
+    endpoint
+    |> Client.bundle_index
+    |> get_value
+    |> Enum.find(fn(bundle) -> bundle.name == bundle_name end)
   end
 end
