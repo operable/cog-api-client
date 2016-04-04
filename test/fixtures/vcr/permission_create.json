@@ -11,14 +11,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"itD3gRhHACto9YzIOwP8R8uhbn4Yw9GcBRk1BshhQPI=\"}}",
+      "body": "{\"token\":{\"value\":\"vMicUL4DgNEv5ZUZsIRUYrrgb3Ibmo94Puir27S43HA=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 31 Mar 2016 19:14:39 GMT",
+        "date": "Mon, 04 Apr 2016 14:51:40 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "91g4si9abb27j3m6qspvnejfr13jmipg"
+        "x-request-id": "5iqabvoke8sohcdsopbunrmoa82usq5u"
       },
       "status_code": 201,
       "type": "ok"
@@ -26,9 +26,9 @@
   },
   {
     "request": {
-      "body": "{\"permission\":{\"name\":\"foobar\"}}",
+      "body": "{\"permission\":{\"name\":\"permission_create\"}}",
       "headers": {
-        "authorization": "token itD3gRhHACto9YzIOwP8R8uhbn4Yw9GcBRk1BshhQPI=",
+        "authorization": "token vMicUL4DgNEv5ZUZsIRUYrrgb3Ibmo94Puir27S43HA=",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,15 +37,15 @@
       "url": "http://localhost:4000/v1/permissions"
     },
     "response": {
-      "body": "{\"permission\":{\"namespace\":\"site\",\"name\":\"foobar\",\"id\":\"3304911e-3e01-406c-a1c9-98e0c199d8e1\"}}",
+      "body": "{\"permission\":{\"namespace\":\"site\",\"name\":\"permission_create\",\"id\":\"17107127-dab7-495d-93a0-e963a418ff9c\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 31 Mar 2016 19:14:39 GMT",
-        "content-length": "95",
+        "date": "Mon, 04 Apr 2016 14:51:40 GMT",
+        "content-length": "106",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "qv9i2tjlvfsk00fdelahe6imr47dtb7k",
-        "location": "/v1/permissions/3304911e-3e01-406c-a1c9-98e0c199d8e1"
+        "x-request-id": "6bh8qk2bgpeic4r572uvdtlll5kgptaa",
+        "location": "/v1/permissions/17107127-dab7-495d-93a0-e963a418ff9c"
       },
       "status_code": 201,
       "type": "ok"
