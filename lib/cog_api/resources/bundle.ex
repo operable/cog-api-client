@@ -7,7 +7,7 @@ defmodule CogApi.Resources.Bundle do
     :name,
     :inserted_at,
     :updated_at,
-    commands: [%CogApi.Resources.Command{}],
+    commands: [],
   ]
 
   def decode_status("enabled"), do: true
@@ -16,4 +16,10 @@ defmodule CogApi.Resources.Bundle do
   def encode_status("true"), do: "enabled"
   def encode_status(true), do: "enabled"
   def encode_status(_), do: "disabled"
+
+  def format do
+    %__MODULE__{
+      commands: [%CogApi.Resources.Command{}],
+    }
+  end
 end

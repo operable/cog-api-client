@@ -8,7 +8,7 @@ defmodule CogApi.HTTP.Bundles do
 
   def index(%Endpoint{}=endpoint) do
     Base.get(endpoint, "bundles")
-    |> ApiResponse.format(%{"bundles" => [%Bundle{}]})
+    |> ApiResponse.format(%{"bundles" => [Bundle.format]})
   end
 
   def show(%Endpoint{}=endpoint, id) do
@@ -25,7 +25,7 @@ defmodule CogApi.HTTP.Bundles do
 
   defp find_bundle(endpoint, id) do
     Base.get(endpoint, "bundles/#{id}")
-    |> ApiResponse.format(%{"bundle" => %Bundle{}})
+    |> ApiResponse.format(%{"bundle" => Bundle.format})
   end
 
   defp add_rules(endpoint, bundle) do

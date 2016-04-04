@@ -4,6 +4,12 @@ defmodule CogApi.Resources.Role do
   defstruct [
     :id,
     :name,
-    permissions: [%CogApi.Resources.Permission{}],
+    permissions: [],
   ]
+
+  def format do
+    %__MODULE__{
+      permissions: [%CogApi.Resources.Permission{}],
+    }
+  end
 end

@@ -7,6 +7,13 @@ defmodule CogApi.Resources.RelayGroup do
     :updated_at,
     :inserted_at,
     bundles: [],
-    relays: [%CogApi.Resources.Relay{}],
+    relays: [],
   ]
+
+  def format do
+    %__MODULE__{
+      bundles: [%CogApi.Resources.Bundle{}],
+      relays: [%CogApi.Resources.Relay{}],
+    }
+  end
 end

@@ -9,4 +9,10 @@ defmodule CogApi.Resources.User do
     :username,
     groups: [],
   ]
+
+  def format do
+    %__MODULE__{
+      groups: [%CogApi.Resources.Group{}],
+    }
+  end
 end

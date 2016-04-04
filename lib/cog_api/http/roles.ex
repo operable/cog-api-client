@@ -6,31 +6,31 @@ defmodule CogApi.HTTP.Roles do
 
   def index(%Endpoint{}=endpoint) do
     Base.get(endpoint, "roles")
-    |> ApiResponse.format(%{"roles" => [%Role{}]})
+    |> ApiResponse.format(%{"roles" => [Role.format]})
   end
 
   def show(%Endpoint{}=endpoint, %{name: role_name}) do
     Base.get_by(endpoint, "roles", name: role_name)
-    |> ApiResponse.format(%{"role" => %Role{}})
+    |> ApiResponse.format(%{"role" => Role.format})
   end
   def show(%Endpoint{}=endpoint, id) do
     Base.get(endpoint, "roles/#{id}")
-    |> ApiResponse.format(%{"role" => %Role{}})
+    |> ApiResponse.format(%{"role" => Role.format})
   end
 
   def create(%Endpoint{}=endpoint, params) do
     Base.post(endpoint, "roles", %{"role" => params})
-    |> ApiResponse.format(%{"role" => %Role{}})
+    |> ApiResponse.format(%{"role" => Role.format})
   end
 
   def update(%Endpoint{}=endpoint, role_id, params) do
     Base.patch(endpoint, "roles/#{role_id}", %{"role" => params})
-    |> ApiResponse.format(%{"role" => %Role{}})
+    |> ApiResponse.format(%{"role" => Role.format})
   end
 
   def delete(%Endpoint{}=endpoint, role_id) do
     Base.delete(endpoint, "roles/#{role_id}")
-    |> ApiResponse.format(%{"role" => %Role{}})
+    |> ApiResponse.format(%{"role" => Role.format})
   end
 
   def grant(%Endpoint{}=endpoint, role, group) do
@@ -48,7 +48,7 @@ defmodule CogApi.HTTP.Roles do
   end
 
   defp format_response(response, group) do
-    roles = ApiResponse.parse_struct(response,  %{"roles" => [%Role{}]})
+    roles = ApiResponse.parse_struct(response,  %{"roles" => [Role.format]})
     {
       ApiResponse.type(response),
       %{group | roles: roles }
