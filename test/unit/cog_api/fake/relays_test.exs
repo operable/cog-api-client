@@ -51,6 +51,15 @@ defmodule CogApi.Fak.RelaysTest do
       assert present relay.id
       assert relay.name == name
     end
+
+    context "when given invalid params" do
+      it "returns a list of errors" do
+        name = "invalid relay"
+        {:error, [error]} = Client.relay_create(%{name: name, token: "ERROR"}, fake_endpoint)
+
+        assert error == "Token is invalid"
+      end
+    end
   end
 
   describe "relay_updated" do
@@ -65,6 +74,20 @@ defmodule CogApi.Fak.RelaysTest do
       ) |> get_value
 
       assert updated.name == "updated"
+    end
+
+    context "when given invalid params" do
+      it "returns a list of errors" do
+        name = "invalid update relay"
+        relay = Client.relay_create(%{name: name, token: "1234"}, fake_endpoint) |> get_value
+        {:error, [error]} = Client.relay_update(
+          relay.id,
+          %{name: "ERROR"},
+          fake_endpoint
+        )
+
+        assert error == "Name is invalid"
+      end
     end
   end
 

@@ -1,0 +1,53 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"6B4qqOdj+yQXgzlmbeHjhgAA6hTo9MEz4SX2j0NA/DY=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 05 Apr 2016 17:13:26 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "bllm8ln255surk0nddobnm1a0i2rakkp"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"relay\":{\"name\":\"invalid relay\"}}",
+      "headers": {
+        "authorization": "token 6B4qqOdj+yQXgzlmbeHjhgAA6hTo9MEz4SX2j0NA/DY=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/relays"
+    },
+    "response": {
+      "body": "{\"errors\":{\"token\":[\"can't be blank\"]}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 05 Apr 2016 17:13:26 GMT",
+        "content-length": "39",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "jhstgiu0v7tuddculgoggf8mhh171m63"
+      },
+      "status_code": 422,
+      "type": "ok"
+    }
+  }
+]

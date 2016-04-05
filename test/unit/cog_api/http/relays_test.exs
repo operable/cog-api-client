@@ -67,6 +67,17 @@ defmodule CogApi.HTTP.RelaysTest do
         assert relay.name == name
       end
     end
+
+    context "when given invalid params" do
+      it "returns a list of errors" do
+        cassette "relay_create_invalid" do
+          name = "invalid relay"
+          {:error, [error]} = Client.relay_create(%{name: name}, valid_endpoint)
+
+          assert error == "Token can't be blank"
+        end
+      end
+    end
   end
 
   describe "relay_updated" do
@@ -83,6 +94,23 @@ defmodule CogApi.HTTP.RelaysTest do
         ) |> get_value
 
         assert updated.name == "updated"
+      end
+    end
+
+    context "when given invalid params" do
+      it "returns a list of errors" do
+        cassette "relay_update_invalid" do
+          name = "invalid update relay"
+          endpoint = valid_endpoint
+          relay = Client.relay_create(%{name: name, token: "1234"}, endpoint) |> get_value
+          {:error, [error]} = Client.relay_update(
+            relay.id,
+            %{name: ""},
+            endpoint
+          )
+
+          assert error == "Name can't be blank"
+        end
       end
     end
   end
