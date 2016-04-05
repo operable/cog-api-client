@@ -55,6 +55,15 @@ defmodule CogApi.HTTP.GroupsTest do
         end
       end
     end
+
+    context "when the group does not exist" do
+      it "returns an error tuple" do
+        cassette "group_find_error" do
+          response = Client.group_find(valid_endpoint, name: "lolwut")
+          assert {:error, _} = response
+        end
+      end
+    end
   end
 
   describe "group_create" do

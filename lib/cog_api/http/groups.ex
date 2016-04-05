@@ -50,6 +50,10 @@ defmodule CogApi.HTTP.Groups do
     |> format_group_response
   end
 
+  defp format_group_response({:error, _}=response) do
+    response
+  end
+
   defp format_group_response(response) do
     json_structure = %{"group" => GroupDecoder.format}
     groups = Poison.decode!(response.body, as: json_structure)["group"]
