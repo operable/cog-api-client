@@ -40,6 +40,23 @@ defmodule CogApi.HTTP.GroupsTest do
     end
   end
 
+  describe "group_find" do
+    context "when the group exists" do
+      it "finds and returns a group by name" do
+        cassette "group_find" do
+          endpoint = valid_endpoint
+          group_names = ~w(group_1 group_2 group_3)
+
+          Enum.each(group_names, fn(name) -> Client.group_create(endpoint, %{name: name}) end)
+          {:ok, group} = Client.group_find(endpoint, name: Enum.at(group_names, 1))
+
+          assert present group.id
+          assert group.name == Enum.at(group_names, 1)
+        end
+      end
+    end
+  end
+
   describe "group_create" do
     it "returns the created group" do
       cassette "groups_create" do
@@ -48,6 +65,22 @@ defmodule CogApi.HTTP.GroupsTest do
 
         assert present group.id
         assert group.name == name
+      end
+    end
+  end
+
+  describe "group_update" do
+    it "updates fields in a group and returns the updated group" do
+      cassette "groups_update" do
+        endpoint = valid_endpoint
+        original_name = "original_group"
+        updated_name = "updated_group"
+
+        {:ok, original_group} = Client.group_create(endpoint, %{name: original_name})
+        {:ok, group} = Client.group_update(endpoint, original_group.id, %{name: updated_name})
+
+        assert group.id == original_group.id
+        assert group.name == updated_name
       end
     end
   end

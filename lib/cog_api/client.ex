@@ -19,7 +19,9 @@ defmodule CogApi.Client do
 
   @callback group_index(%Endpoint{}) :: {atom, [%Group{}]}
   @callback group_show(%Endpoint{}, String.t) :: {atom, %Group{}}
+  @callback group_find(%Endpoint{}, %{}) :: {atom, %Group{}}
   @callback group_create(%Endpoint{}, %{}) :: {atom, %Group{}}
+  @callback group_update(%Endpoint{}, String.t, %{}) :: {atom, %Group{}}
   @callback group_delete(%Endpoint{}, String.t) :: atom
   @callback group_delete(%Endpoint{}, String.t) :: {atom, [String.t]}
   @callback group_add_user(%Endpoint{}, %Group{}, %User{}) :: {atom, %Group{}}
