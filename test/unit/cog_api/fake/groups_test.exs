@@ -2,7 +2,6 @@ defmodule CogApi.Fake.GroupsTest do
   use CogApi.FakeCase
 
   alias CogApi.Fake.Client
-  alias CogApi.Resources.User
 
   doctest CogApi.Fake.Groups
 
@@ -32,9 +31,31 @@ defmodule CogApi.Fake.GroupsTest do
     end
   end
 
+  describe "group_find" do
+    it "finds and returns a group by name" do
+      group_names = ~w(group_1 group_2 group_3)
+      Enum.each(group_names, fn(name) -> Client.group_create(fake_endpoint, %{name: name}) end)
+      {:ok, group} = Client.group_find(fake_endpoint, name: Enum.at(group_names, 1))
+
+      assert present group.id
+      assert group.name == Enum.at(group_names, 1)
+    end
+  end
+
   describe "create" do
     it "returns the created group" do
       name = "foobar"
+      {:ok, group} = Client.group_create(fake_endpoint, %{name: name})
+
+      assert present group.id
+      assert group.name == name
+    end
+  end
+
+  describe "create" do
+    it "updates the group on the server and returns the updated group" do
+      name = "foobar"
+
       {:ok, group} = Client.group_create(fake_endpoint, %{name: name})
 
       assert present group.id
@@ -65,11 +86,11 @@ defmodule CogApi.Fake.GroupsTest do
   describe "group_add_user" do
     it "adds the user to the group" do
       group = Client.group_create(fake_endpoint, %{name: "user_group"}) |> get_value
-      first_user = Client.user_create(fake_endpoint, %{username: "bob"}) |> get_value
-      second_user = Client.user_create(fake_endpoint, %{username: "sam"}) |> get_value
+      first_user = Client.user_create(fake_endpoint, %{email_address: "bob@example.com"}) |> get_value
+      second_user = Client.user_create(fake_endpoint, %{email_address: "sam@example.com"}) |> get_value
       assert group.users == []
 
-      Client.group_add_user(fake_endpoint, group, %User{username: first_user.username}) |> get_value
+      Client.group_add_user(fake_endpoint, group, first_user)
       group = Client.group_add_user(fake_endpoint, group, second_user) |> get_value
 
       assert group.users == [first_user, second_user]

@@ -16,9 +16,19 @@ defmodule CogApi.HTTP.Groups do
     |> format_group_response
   end
 
+  def find(%Endpoint{}=endpoint, filter) do
+    Base.get_by(endpoint, "groups", filter)
+    |> format_group_response
+  end
+
   def create(%Endpoint{}=endpoint, params) do
     Base.post(endpoint, "groups", %{group: params})
     |> ApiResponse.format(%{"group" => %Group{}})
+  end
+
+  def update(%Endpoint{}=endpoint, group_id, params) do
+    Base.patch(endpoint, "groups/#{group_id}", %{"group" => params})
+    |> ApiResponse.format(%{"group" => Group.format})
   end
 
   def delete(%Endpoint{}=endpoint, group_id) do
@@ -35,8 +45,8 @@ defmodule CogApi.HTTP.Groups do
   end
 
   defp update_membership(endpoint, group, user, action) do
-    path = "groups/#{group.id}/membership"
-    Base.post(endpoint, path, %{members: %{users: %{action =>  [user.username]}}})
+    path = "groups/#{group.id}/users"
+    Base.post(endpoint, path, %{users: %{action => [user.email_address]}})
     |> format_group_response
   end
 

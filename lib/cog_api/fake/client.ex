@@ -44,12 +44,20 @@ defmodule CogApi.Fake.Client do
     Groups.show(endpoint, group_id)
   end
 
+  def group_find(%Endpoint{}=endpoint, params) do
+    Groups.find(endpoint, params)
+  end
+
   def group_create(%Endpoint{}=endpoint, params) do
     Groups.create(endpoint, params)
   end
 
-  def group_delete(%Endpoint{}=endpoint, role_id) do
-    Groups.delete(endpoint, role_id)
+  def group_update(%Endpoint{}=endpoint, group_id, params) do
+    Groups.update(endpoint, group_id, params)
+  end
+
+  def group_delete(%Endpoint{}=endpoint, group_id) do
+    Groups.delete(endpoint, group_id)
   end
 
   def group_add_user(%Endpoint{}=endpoint, group, user) do
