@@ -20,6 +20,7 @@ defmodule CogApi.HTTP.RelaysTest do
         assert present last_relay.inserted_at
         assert present last_relay.updated_at
         assert last_relay.name == name
+        assert last_relay.enabled == false
       end
     end
 
@@ -45,12 +46,13 @@ defmodule CogApi.HTTP.RelaysTest do
       cassette "relay_show" do
         endpoint = valid_endpoint
         name = "Show"
-        created_relay = Client.relay_create(%{name: name, token: "1234"}, endpoint) |> get_value
+        created_relay = Client.relay_create(%{name: name, token: "1234", enabled: true}, endpoint) |> get_value
 
         found_relay = Client.relay_show(created_relay.id, endpoint) |> get_value
 
         assert created_relay.id == found_relay.id
         assert created_relay.name == found_relay.name
+        assert created_relay.enabled == true
       end
     end
   end

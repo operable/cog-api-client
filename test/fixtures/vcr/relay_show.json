@@ -11,14 +11,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"b9vaA38TB/Apz3LYyaMdC7T3K0AE2TTMmwtK/7DCCno=\"}}",
+      "body": "{\"token\":{\"value\":\"goZk8+Bdz/yBzvOjx72ABWSxgiwPpcIWZvhJDeOe7Yk=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Fri, 01 Apr 2016 18:53:04 GMT",
+        "date": "Tue, 05 Apr 2016 18:57:22 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "m1rfnsrbboc6ddbrahc34b2gottogpp0"
+        "x-request-id": "k3mnni7i8fc21c62b7cb3bk0gcpb72nh"
       },
       "status_code": 201,
       "type": "ok"
@@ -26,9 +26,9 @@
   },
   {
     "request": {
-      "body": "{\"relay\":{\"token\":\"1234\",\"name\":\"Show\"}}",
+      "body": "{\"relay\":{\"token\":\"1234\",\"name\":\"Show\",\"enabled\":true}}",
       "headers": {
-        "authorization": "token b9vaA38TB/Apz3LYyaMdC7T3K0AE2TTMmwtK/7DCCno=",
+        "authorization": "token goZk8+Bdz/yBzvOjx72ABWSxgiwPpcIWZvhJDeOe7Yk=",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,15 +37,15 @@
       "url": "http://localhost:4000/v1/relays"
     },
     "response": {
-      "body": "{\"relay\":{\"updated_at\":\"2016-04-01T18:53:05Z\",\"name\":\"Show\",\"inserted_at\":\"2016-04-01T18:53:05Z\",\"id\":\"4e82bf0b-a6f7-48af-ae98-1a026098f8d8\",\"groups\":[],\"enabled\":false}}",
+      "body": "{\"relay\":{\"updated_at\":\"2016-04-05T18:57:24Z\",\"name\":\"Show\",\"inserted_at\":\"2016-04-05T18:57:24Z\",\"id\":\"d5091c57-acbd-4a4c-b8fa-0dbabd9575b7\",\"groups\":[],\"enabled\":true}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Fri, 01 Apr 2016 18:53:05 GMT",
-        "content-length": "170",
+        "date": "Tue, 05 Apr 2016 18:57:23 GMT",
+        "content-length": "169",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "n27fmlnjq3dtro5dt6kf1rf6dciht1d4",
-        "location": "/v1/relays/4e82bf0b-a6f7-48af-ae98-1a026098f8d8"
+        "x-request-id": "9t54u5gooq2r8rop46ud8ni5scs9q3po",
+        "location": "/v1/relays/d5091c57-acbd-4a4c-b8fa-0dbabd9575b7"
       },
       "status_code": 201,
       "type": "ok"
@@ -55,23 +55,23 @@
     "request": {
       "body": "",
       "headers": {
-        "authorization": "token b9vaA38TB/Apz3LYyaMdC7T3K0AE2TTMmwtK/7DCCno=",
+        "authorization": "token goZk8+Bdz/yBzvOjx72ABWSxgiwPpcIWZvhJDeOe7Yk=",
         "Accept": "application/json"
       },
       "method": "get",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/relays/4e82bf0b-a6f7-48af-ae98-1a026098f8d8"
+      "url": "http://localhost:4000/v1/relays/d5091c57-acbd-4a4c-b8fa-0dbabd9575b7"
     },
     "response": {
-      "body": "{\"relay\":{\"updated_at\":\"2016-04-01T18:53:05Z\",\"name\":\"Show\",\"inserted_at\":\"2016-04-01T18:53:05Z\",\"id\":\"4e82bf0b-a6f7-48af-ae98-1a026098f8d8\",\"groups\":[],\"enabled\":false}}",
+      "body": "{\"relay\":{\"updated_at\":\"2016-04-05T18:57:24Z\",\"name\":\"Show\",\"inserted_at\":\"2016-04-05T18:57:24Z\",\"id\":\"d5091c57-acbd-4a4c-b8fa-0dbabd9575b7\",\"groups\":[],\"enabled\":true}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Fri, 01 Apr 2016 18:53:05 GMT",
-        "content-length": "170",
+        "date": "Tue, 05 Apr 2016 18:57:23 GMT",
+        "content-length": "169",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "5s2n2vp117m19adthi5ebgoj857tba20"
+        "x-request-id": "76l3hvonucfk2vprfal202d6o33abkqo"
       },
       "status_code": 200,
       "type": "ok"

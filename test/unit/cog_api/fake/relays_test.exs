@@ -33,13 +33,14 @@ defmodule CogApi.Fak.RelaysTest do
 
   describe "relay_show" do
     it "returns a list of relays" do
-      name = "Show"
-      created_relay = Client.relay_create(%{name: name, token: "1234"}, fake_endpoint) |> get_value
+      params = %{name: "Show", token: "1234", enabled: true}
+      created_relay = Client.relay_create(params, fake_endpoint) |> get_value
 
       found_relay = Client.relay_show(created_relay.id, fake_endpoint) |> get_value
 
       assert created_relay.id == found_relay.id
       assert created_relay.name == found_relay.name
+      assert created_relay.enabled == true
     end
   end
 
