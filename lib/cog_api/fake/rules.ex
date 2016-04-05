@@ -8,7 +8,7 @@ defmodule CogApi.Fake.Rules do
   def index(_, %Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
   def index(command, %Endpoint{}) do
     rules =
-    Server.index(:rules)
+    Server.index(Rule.fake_server_information)
     |> Enum.filter(fn rule -> rule.command == command end)
     {:ok, rules}
   end
@@ -23,14 +23,14 @@ defmodule CogApi.Fake.Rules do
         id: random_string(8),
         rule: rule,
       }
-      {:ok, Server.create(:rules, new_rule)}
+      {:ok, Server.create(Rule.fake_server_information, new_rule)}
     end
   end
 
   def delete(_, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
   def delete(id, %Endpoint{token: _}) do
-    if Server.show(:rules, id) do
-      Server.delete(:rules, id)
+    if Server.show(Rule.fake_server_information, id) do
+      Server.delete(Rule.fake_server_information, id)
     else
       {:error, ["The rule could not be deleted"]}
     end

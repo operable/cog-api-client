@@ -12,4 +12,12 @@ defmodule CogApi.Resources.Role do
       permissions: [%CogApi.Resources.Permission{}],
     }
   end
+
+  def fake_server_information do
+    %{
+      key: :roles,
+      associations: [
+      ]
+    }
+  end
 end

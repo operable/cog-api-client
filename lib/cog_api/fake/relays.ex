@@ -8,12 +8,12 @@ defmodule CogApi.Fake.Relays do
 
   def index(%Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
   def index(%Endpoint{}) do
-    {:ok, Server.index(:relays)}
+    {:ok, Server.index(Relay.fake_server_information)}
   end
 
   def show(_, %Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
   def show(id, %Endpoint{}) do
-    {:ok, Server.show(:relays, id)}
+    {:ok, Server.show(Relay.fake_server_information, id)}
   end
 
   def create(_, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
@@ -21,21 +21,21 @@ defmodule CogApi.Fake.Relays do
     catch_errors params, fn ->
       new_relay = %Relay{id: random_string(8)}
       new_relay = Map.merge(new_relay, params)
-      {:ok, Server.create(:relays, new_relay)}
+      {:ok, Server.create(Relay.fake_server_information, new_relay)}
     end
   end
 
   def update(_, _, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
   def update(id, params, %Endpoint{token: _}) do
     catch_errors params, fn ->
-      {:ok, Server.update(:relays, id, params)}
+      {:ok, Server.update(Relay.fake_server_information, id, params)}
     end
   end
 
   def delete(_, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
   def delete(id, %Endpoint{token: _}) do
-    if Server.show(:relays, id) do
-      Server.delete(:relays, id)
+    if Server.show(Relay.fake_server_information, id) do
+      Server.delete(Relay.fake_server_information, id)
       :ok
     else
       {:error, ["The relay could not be deleted"]}

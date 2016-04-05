@@ -6,4 +6,12 @@ defmodule CogApi.Resources.Permission do
     :name,
     :namespace,
   ]
+
+  def fake_server_information do
+    %{
+      key: :permissions,
+      associations: [
+      ]
+    }
+  end
 end

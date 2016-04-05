@@ -17,7 +17,7 @@ defmodule CogApi.Fake.BundlesTest do
 
     it "returns a list of bundles" do
       bundle = %Bundle{id: "id123", name: "a bundle"}
-      Server.create(:bundles, bundle)
+      Server.create(Bundle.fake_server_information, bundle)
 
       {:ok, bundles} = Client.bundle_index(fake_endpoint)
 
@@ -92,7 +92,7 @@ defmodule CogApi.Fake.BundlesTest do
 
     it "only updates the enabled attribute" do
       bundle = %Bundle{id: "id123", name: "a bundle", enabled: true}
-      Server.create(:bundles, bundle)
+      Server.create(Bundle.fake_server_information, bundle)
 
       {:error, error} = Client.bundle_update(
         fake_endpoint,

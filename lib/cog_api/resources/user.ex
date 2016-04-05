@@ -15,4 +15,12 @@ defmodule CogApi.Resources.User do
       groups: [%CogApi.Resources.Group{}],
     }
   end
+
+  def fake_server_information do
+    %{
+      key: :users,
+      associations: [
+      ]
+    }
+  end
 end

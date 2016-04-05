@@ -22,4 +22,12 @@ defmodule CogApi.Resources.Bundle do
       commands: [%CogApi.Resources.Command{}],
     }
   end
+
+  def fake_server_information do
+    %{
+      key: :bundles,
+      associations: [
+      ]
+    }
+  end
 end

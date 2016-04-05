@@ -20,41 +20,65 @@ defmodule CogApi.Fake.Server do
     end)
   end
 
-  def index(resource_name) do
+  def index(%{key: resource_name, associations: associations}) do
+    find_all(resource_name)
+    |> Enum.map(fn resource -> expand_assocations(resource, associations) end)
+  end
+
+  defp find_all(resource_name) do
     Agent.get(__MODULE__, fn server ->
       Map.fetch!(server, resource_name)
     end)
   end
 
-  def show(resource_name, id) do
+  def show(%{key: resource_name, associations: associations}, id) do
+    resource = Agent.get(__MODULE__, fn server ->
+      find_by_id(server, resource_name, id)
+    end)
+
+    if resource do
+      expand_assocations(resource, associations)
+    end
+  end
+
+  def raw_show(%{key: resource_name}, id) do
     Agent.get(__MODULE__, fn server ->
       find_by_id(server, resource_name, id)
     end)
   end
 
-  def show_by_key(resource_name, key, value) do
-    Agent.get(__MODULE__, fn server ->
+  def show_by_key(%{key: resource_name, associations: associations}, key, value) do
+    resource = Agent.get(__MODULE__, fn server ->
       find_by_key(server, resource_name, key, value)
     end)
+
+    if resource do
+      expand_assocations(resource, associations)
+    end
   end
 
-  def create(resource_name, new_resource) do
+  def create(%{key: resource_name, associations: associations}, new_resource) do
     Agent.get_and_update(__MODULE__, fn server ->
       Map.get_and_update(server, resource_name, fn list ->
-        {new_resource, list ++ [new_resource]}
+        reduced_resource = reduce_associations(new_resource, associations)
+        {reduced_resource, list ++ [reduced_resource]}
       end)
     end)
+
+    new_resource
   end
 
-  def update(resource_name, id, new_resource) do
-    Agent.get_and_update(__MODULE__, fn server ->
+  def update(%{key: resource_name, associations: associations}, id, new_resource) do
+    resource = Agent.get_and_update(__MODULE__, fn server ->
       Map.get_and_update(server, resource_name, fn list ->
-        update_by_id(list, id, new_resource)
+        update_by_id(list, id, reduce_associations(new_resource, associations))
       end)
     end)
+
+    expand_assocations(resource, associations)
   end
 
-  def delete(resource_name, id) do
+  def delete(%{key: resource_name}, id) do
     Agent.update(__MODULE__, fn server ->
       Map.update!(server, resource_name, fn list ->
         delete_by_id(list, id)
@@ -82,5 +106,31 @@ defmodule CogApi.Fake.Server do
   defp find_by_key(server, resource_name, key, value) do
     Map.fetch!(server, resource_name)
     |> Enum.find(fn resource -> Map.get(resource, key) == value end)
+  end
+
+  defp expand_assocations(resource, associations) do
+    Enum.reduce(associations, resource, fn {relationship_name, server_key}, resource ->
+      items = resource
+      |> Map.get(relationship_name)
+      |> Enum.map(fn id -> show(server_key, id) end)
+
+      Map.put resource, relationship_name, items
+    end)
+  end
+
+  defp reduce_associations(resource, associations) do
+    Enum.reduce(associations, resource, fn {relationship_name, _}, resource ->
+      ids = Map.get(resource, relationship_name)
+      |> map_by_id
+      Map.put(resource, relationship_name, ids)
+    end)
+  end
+
+  defp map_by_id(nil) do
+    []
+  end
+
+  defp map_by_id(list) do
+    list |> Enum.map(&(&1.id))
   end
 end

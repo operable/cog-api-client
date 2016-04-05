@@ -6,4 +6,12 @@ defmodule CogApi.Resources.Rule do
     :command,
     :rule,
   ]
+
+  def fake_server_information do
+    %{
+      key: :rules,
+      associations: [
+      ]
+    }
+  end
 end
