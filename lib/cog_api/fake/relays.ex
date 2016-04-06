@@ -12,6 +12,10 @@ defmodule CogApi.Fake.Relays do
   end
 
   def show(_, %Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
+  def show(%{name: name}, %Endpoint{}=endpoint) do
+    relay = Server.show_by_key(Relay, :name, name)
+    show(relay.id, endpoint)
+  end
   def show(id, %Endpoint{}) do
     {:ok, Server.show(Relay, id)}
   end
@@ -26,6 +30,10 @@ defmodule CogApi.Fake.Relays do
   end
 
   def update(_, _, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
+  def update(%{name: name}, params, %Endpoint{}=endpoint) do
+    relay = Server.show_by_key(Relay, :name, name)
+    update(relay.id, params, endpoint)
+  end
   def update(id, params, %Endpoint{token: _}) do
     catch_errors params, fn ->
       {:ok, Server.update(Relay, id, params)}
@@ -33,6 +41,10 @@ defmodule CogApi.Fake.Relays do
   end
 
   def delete(_, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
+  def delete(%{name: name}, %Endpoint{}=endpoint) do
+    relay = Server.show_by_key(Relay, :name, name)
+    delete(relay.id, endpoint)
+  end
   def delete(id, %Endpoint{token: _}) do
     if Server.show(Relay, id) do
       Server.delete(Relay, id)
