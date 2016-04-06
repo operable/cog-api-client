@@ -7,11 +7,11 @@ defmodule CogApi.Resources.Rule do
     :rule,
   ]
 
-  def fake_server_information do
-    %{
-      key: :rules,
-      associations: [
-      ]
-    }
+  def fake_key do
+    :rules
+  end
+
+  def associations do
+    []
   end
 end

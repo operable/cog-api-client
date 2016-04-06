@@ -1,6 +1,8 @@
 defmodule CogApi.Resources.User do
   @derive [Poison.Encoder]
 
+  alias CogApi.Resources.Group
+
   defstruct [
     :id,
     :first_name,
@@ -12,15 +14,17 @@ defmodule CogApi.Resources.User do
 
   def format do
     %__MODULE__{
-      groups: [%CogApi.Resources.Group{}],
+      groups: [%Group{}],
     }
   end
 
-  def fake_server_information do
-    %{
-      key: :users,
-      associations: [
-      ]
-    }
+  def fake_key do
+    :users
+  end
+
+  def associations do
+    [
+      groups: Group
+    ]
   end
 end

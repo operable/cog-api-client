@@ -18,12 +18,13 @@ defmodule CogApi.Resources.RelayGroup do
     }
   end
 
-  def fake_server_information do
-    %{
-      key: :relay_groups,
-      associations: [
-        relays: Relay.fake_server_information,
-      ]
-    }
+  def fake_key do
+    :relay_groups
+  end
+
+  def associations do
+    [
+      relays: Relay,
+    ]
   end
 end

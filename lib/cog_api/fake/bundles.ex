@@ -9,12 +9,12 @@ defmodule CogApi.Fake.Bundles do
 
   def index(%Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
   def index(%Endpoint{}) do
-    {:ok, Server.index(Bundle.fake_server_information)}
+    {:ok, Server.index(Bundle)}
   end
 
   def show(%Endpoint{token: nil}, _),  do: Endpoint.invalid_endpoint
   def show(%Endpoint{}=endpoint, id) do
-    bundle = Server.show(Bundle.fake_server_information, id)
+    bundle = Server.show(Bundle, id)
     bundle = %{bundle | commands: add_rules(endpoint, bundle)}
     {:ok, bundle}
   end
@@ -34,22 +34,22 @@ defmodule CogApi.Fake.Bundles do
   def create(%Endpoint{token: _}, params) do
     new_bundle = %Bundle{id: random_string(8)}
     new_bundle = Map.merge(new_bundle, params)
-    {:ok, Server.create(Bundle.fake_server_information, new_bundle)}
+    {:ok, Server.create(Bundle, new_bundle)}
   end
 
   def update(%Endpoint{token: _}, %{name: name}, %{enabled: enabled} = params) do
     catch_errors params, fn ->
-      current_bundle = Server.show_by_key(Bundle.fake_server_information, :name, name)
+      current_bundle = Server.show_by_key(Bundle, :name, name)
       updated_bundle = %{current_bundle | enabled: ensure_bundle_encode_status(enabled)}
-      {:ok, Server.update(Bundle.fake_server_information, current_bundle.id, updated_bundle)}
+      {:ok, Server.update(Bundle, current_bundle.id, updated_bundle)}
     end
   end
   def update(%Endpoint{token: _}, id, %{enabled: enabled} = params) do
     catch_errors params, fn ->
-      current_bundle = Server.show(Bundle.fake_server_information, id)
+      current_bundle = Server.show(Bundle, id)
       updated_bundle = %{current_bundle | enabled: ensure_bundle_encode_status(enabled)}
 
-      {:ok, Server.update(Bundle.fake_server_information, id, updated_bundle)}
+      {:ok, Server.update(Bundle, id, updated_bundle)}
     end
   end
 
@@ -59,8 +59,8 @@ defmodule CogApi.Fake.Bundles do
 
   def delete(%Endpoint{token: nil}, _), do: Endpoint.invalid_endpoint
   def delete(%Endpoint{token: _}, id) do
-    if Server.show(Bundle.fake_server_information, id) do
-      Server.delete(Bundle.fake_server_information, id)
+    if Server.show(Bundle, id) do
+      Server.delete(Bundle, id)
       :ok
     else
       {:error, ["The bundle could not be deleted"]}

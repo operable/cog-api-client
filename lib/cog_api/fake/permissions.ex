@@ -8,7 +8,7 @@ defmodule CogApi.Fake.Permissions do
 
   def index(%Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
   def index(%Endpoint{}) do
-    {:ok, Server.index(Permission.fake_server_information)}
+    {:ok, Server.index(Permission)}
   end
 
   def create(%Endpoint{token: nil}, %{name: _}), do: Endpoint.invalid_endpoint
@@ -21,7 +21,7 @@ defmodule CogApi.Fake.Permissions do
       namespace: %Namespace{id: random_string(8), name: namespace},
     }
 
-    {:ok, Server.create(Permission.fake_server_information, new_permission)}
+    {:ok, Server.create(Permission, new_permission)}
   end
 
   defp build_namespaced_name(name) do

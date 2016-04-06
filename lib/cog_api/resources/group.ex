@@ -15,11 +15,12 @@ defmodule CogApi.Resources.Group do
     }
   end
 
-  def fake_server_information do
-    %{
-      key: :groups,
-      associations: [
-      ]
-    }
+  def fake_key do
+    :groups
+  end
+
+  def associations do
+    [
+    ]
   end
 end
