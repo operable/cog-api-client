@@ -1,0 +1,133 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"6xy5VaSZjnDFh7mc8yNyLyqcPqZy165887X6/gYxGeI=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 07 Apr 2016 13:38:22 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "1ro1us805q9ml356o9jm1ieqbkl69f8l"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"role\":{\"name\":\"developer2\"}}",
+      "headers": {
+        "authorization": "token 6xy5VaSZjnDFh7mc8yNyLyqcPqZy165887X6/gYxGeI=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/roles"
+    },
+    "response": {
+      "body": "{\"role\":{\"permissions\":[],\"name\":\"developer2\",\"id\":\"e0764566-164b-459b-ab75-3f8633bb85fc\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 07 Apr 2016 13:38:22 GMT",
+        "content-length": "91",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "b6qg3ipu4jbh9n309bk55sv6pdurdmrb",
+        "location": "/v1/roles/e0764566-164b-459b-ab75-3f8633bb85fc"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"permission\":{\"name\":\"write_code2\"}}",
+      "headers": {
+        "authorization": "token 6xy5VaSZjnDFh7mc8yNyLyqcPqZy165887X6/gYxGeI=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/permissions"
+    },
+    "response": {
+      "body": "{\"permission\":{\"namespace\":\"site\",\"name\":\"write_code2\",\"id\":\"f29371d5-740c-486c-9a19-bbef7e6d3060\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 07 Apr 2016 13:38:23 GMT",
+        "content-length": "100",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "3q8upfnbngd81mgqed3c55mgv7b7phjo",
+        "location": "/v1/permissions/f29371d5-740c-486c-9a19-bbef7e6d3060"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"permissions\":{\"grant\":[\"site:write_code2\"]}}",
+      "headers": {
+        "authorization": "token 6xy5VaSZjnDFh7mc8yNyLyqcPqZy165887X6/gYxGeI=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/roles/e0764566-164b-459b-ab75-3f8633bb85fc/permissions"
+    },
+    "response": {
+      "body": "{\"permissions\":[{\"namespace\":\"site\",\"name\":\"write_code2\",\"id\":\"f29371d5-740c-486c-9a19-bbef7e6d3060\"}]}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 07 Apr 2016 13:38:23 GMT",
+        "content-length": "103",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "v91jpvph51bf2q99sqgkkv1i19ioscfv"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"permissions\":{\"revoke\":[\"site:write_code2\"]}}",
+      "headers": {
+        "authorization": "token 6xy5VaSZjnDFh7mc8yNyLyqcPqZy165887X6/gYxGeI=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/roles/e0764566-164b-459b-ab75-3f8633bb85fc/permissions"
+    },
+    "response": {
+      "body": "{\"permissions\":[]}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 07 Apr 2016 13:38:23 GMT",
+        "content-length": "18",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "sqbda6r67ru9om1uve918vlodgbsiqfs"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

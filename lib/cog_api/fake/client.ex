@@ -152,6 +152,14 @@ defmodule CogApi.Fake.Client do
     Roles.revoke(endpoint, role, group)
   end
 
+  def role_add_permission(endpoint, role, permission) do
+    Roles.add_permission(endpoint, role, permission)
+  end
+
+  def role_remove_permission(endpoint, role, permission) do
+    Roles.remove_permission(endpoint, role, permission)
+  end
+
   def rule_index(command, %Endpoint{}=endpoint) do
     Rules.index(command, endpoint)
   end

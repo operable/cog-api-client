@@ -4,6 +4,7 @@ defmodule CogApi.Fake.Roles do
   alias CogApi.Endpoint
   alias CogApi.Fake.Server
   alias CogApi.Resources.Group
+  alias CogApi.Resources.Permission
   alias CogApi.Resources.Role
 
   def index(%Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
@@ -46,5 +47,21 @@ defmodule CogApi.Fake.Roles do
   def revoke(%Endpoint{}, role, group) do
     group = %{group | roles: List.delete(group.roles, role)}
     {:ok, Server.update(Group.fake_server_information, group.id, group)}
+  end
+
+  def add_permission(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
+  def add_permission(%Endpoint{}, role, permission) do
+    if found_permission  = Server.show(Permission.fake_server_information, permission.id) do
+      role = %{role | permissions: role.permissions ++ [found_permission]}
+      {:ok, Server.update(Role.fake_server_information, role.id, role)}
+    else
+      {:error, ["Not found permissions - #{Permission.full_name(permission)}"]}
+    end
+  end
+
+  def remove_permission(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
+  def remove_permission(%Endpoint{}, role, permission) do
+    role = %{role | permissions: List.delete(role.permissions, permission)}
+    {:ok, Server.update(Role.fake_server_information, role.id, role)}
   end
 end

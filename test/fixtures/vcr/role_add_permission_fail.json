@@ -1,0 +1,80 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"lZ72JGNacHq94tmEddFybOWwm2+LDDjNz6SeNslK3w8=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 06 Apr 2016 20:08:07 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "sv14fkeroo3i43na5cgt2otb4f9kkl9e"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"role\":{\"name\":\"designer\"}}",
+      "headers": {
+        "authorization": "token lZ72JGNacHq94tmEddFybOWwm2+LDDjNz6SeNslK3w8=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/roles"
+    },
+    "response": {
+      "body": "{\"role\":{\"permissions\":[],\"name\":\"designer\",\"id\":\"0476727e-fe01-4b88-aa2a-d51b2c2c3538\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 06 Apr 2016 20:08:07 GMT",
+        "content-length": "89",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "2ibr4mbkjt94gi8ve5r7pnju9rvt217g",
+        "location": "/v1/roles/0476727e-fe01-4b88-aa2a-d51b2c2c3538"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"permissions\":{\"grant\":[\":\"]}}",
+      "headers": {
+        "authorization": "token lZ72JGNacHq94tmEddFybOWwm2+LDDjNz6SeNslK3w8=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/roles/0476727e-fe01-4b88-aa2a-d51b2c2c3538/permissions"
+    },
+    "response": {
+      "body": "{\"errors\":{\"not_found\":{\"permissions\":[\":\"]}}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 06 Apr 2016 20:08:07 GMT",
+        "content-length": "46",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "dme8v0l4bbels1s7m80h91cjrk3jnmjk"
+      },
+      "status_code": 422,
+      "type": "ok"
+    }
+  }
+]

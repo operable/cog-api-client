@@ -2,6 +2,7 @@ defmodule CogApi.HTTP.RolesTest do
   use CogApi.HTTPCase
 
   alias CogApi.HTTP.Client
+  alias CogApi.Resources.Permission
 
   doctest CogApi.HTTP.Roles
 
@@ -118,6 +119,51 @@ defmodule CogApi.HTTP.RolesTest do
         group = Client.role_revoke(endpoint, role, group) |> get_value
 
         assert group.roles == []
+      end
+    end
+  end
+
+  describe "role_add_permission" do
+    it "adds the permission to the role" do
+      cassette "role_add_permission" do
+        endpoint = valid_endpoint
+        role = Client.role_create(endpoint, %{name: "developer"}) |> get_value
+        permission = Client.permission_create(endpoint, "write_code") |> get_value
+        assert role.permissions == []
+
+        role = Client.role_add_permission(endpoint, role, permission) |> get_value
+
+        assert role.permissions == [permission]
+      end
+    end
+
+    context "when the permission cannot be added" do
+      it "returns an :error" do
+        cassette "role_add_permission_fail" do
+          endpoint = valid_endpoint
+          role = Client.role_create(endpoint, %{name: "designer"}) |> get_value
+          permission = %Permission{name: "", namespace: ""}
+
+          {:error, error} = Client.role_add_permission(endpoint, role, permission)
+
+          assert error == ["Not found permissions - :"]
+        end
+      end
+    end
+  end
+
+  describe "role_remove_permission" do
+    it "removes the permission from the role" do
+      cassette "role_remove_permissions" do
+        endpoint = valid_endpoint
+        role = Client.role_create(endpoint, %{name: "developer2"}) |> get_value
+        permission = Client.permission_create(endpoint, "write_code2") |> get_value
+        role = Client.role_add_permission(endpoint, role, permission) |> get_value
+        assert role.permissions == [permission]
+
+        role = Client.role_remove_permission(endpoint, role, permission) |> get_value
+
+        assert role.permissions == []
       end
     end
   end

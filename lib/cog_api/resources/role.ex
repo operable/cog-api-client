@@ -1,6 +1,8 @@
 defmodule CogApi.Resources.Role do
   @derive [Poison.Encoder]
 
+  alias CogApi.Resources.Permission
+
   defstruct [
     :id,
     :name,
@@ -9,7 +11,7 @@ defmodule CogApi.Resources.Role do
 
   def format do
     %__MODULE__{
-      permissions: [%CogApi.Resources.Permission{}],
+      permissions: [%Permission{}],
     }
   end
 
@@ -17,6 +19,7 @@ defmodule CogApi.Resources.Role do
     %{
       key: :roles,
       associations: [
+        permissions: Permission.fake_server_information,
       ]
     }
   end

@@ -2,6 +2,7 @@ defmodule CogApi.HTTP.Roles do
   alias CogApi.Endpoint
   alias CogApi.HTTP.ApiResponse
   alias CogApi.HTTP.Base
+  alias CogApi.Resources.Permission
   alias CogApi.Resources.Role
 
   def index(%Endpoint{}=endpoint) do
@@ -53,5 +54,26 @@ defmodule CogApi.HTTP.Roles do
       ApiResponse.type(response),
       %{group | roles: roles }
     }
+  end
+
+  def add_permission(endpoint, role, permission) do
+    build_role_with_new_permissions(endpoint, role, permission, :grant)
+  end
+
+  def remove_permission(endpoint, role, permission) do
+    build_role_with_new_permissions(endpoint, role, permission, :revoke)
+  end
+
+  defp build_role_with_new_permissions(endpoint, role = %{id: role_id}, permission, action) do
+    with {:ok, permissions} <- update_permissions(endpoint, role_id, permission, action) do
+      {:ok, %{role | permissions: permissions}}
+    end
+  end
+
+  defp update_permissions(endpoint, role_id, permission, action) do
+    permission_name = Permission.full_name(permission)
+    path = "roles/#{role_id}/permissions"
+    Base.post(endpoint, path, %{permissions: %{action =>  [permission_name]}})
+    |> ApiResponse.format(%{"permissions" => [Permission.format]})
   end
 end

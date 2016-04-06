@@ -53,6 +53,8 @@ defmodule CogApi.Client do
   @callback role_delete(%Endpoint{}, String.t) :: atom
   @callback role_grant(%Endpoint{}, %Role{}, %Group{}) :: {atom, %Group{}}
   @callback role_revoke(%Endpoint{}, %Role{}, %Group{}) :: {atom, %Group{}}
+  @callback role_add_permission(%Endpoint{}, %Role{}, %Permission{}) :: {atom, %Role{}}
+  @callback role_remove_permission(%Endpoint{}, %Role{}, %Permission{}) :: {atom, %Role{}}
 
   @callback rule_index(String.t, %Endpoint{}) :: {atom, [%Rule{}]}
   @callback rule_create(String.t, %Endpoint{}) :: {atom, %Rule{}}

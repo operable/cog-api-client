@@ -2,6 +2,7 @@ defmodule CogApi.Fake.RolesTest do
   use CogApi.FakeCase
 
   alias CogApi.Fake.Client
+  alias CogApi.Resources.Permission
 
   doctest CogApi.Fake.Roles
 
@@ -122,6 +123,42 @@ defmodule CogApi.Fake.RolesTest do
       group = Client.role_revoke(fake_endpoint, role, group) |> get_value
 
       assert group.roles == []
+    end
+  end
+
+  describe "role_add_permission" do
+    it "adds the permission to the role" do
+      role = Client.role_create(fake_endpoint, %{name: "role"}) |> get_value
+      permission = Client.permission_create(fake_endpoint, "permission") |> get_value
+      assert role.permissions == []
+
+      role = Client.role_add_permission(fake_endpoint, role, permission) |> get_value
+
+      assert role.permissions == [permission]
+    end
+
+    context "when the permission cannot be added" do
+      it "returns an :error" do
+        role = Client.role_create(fake_endpoint, %{name: "designer"}) |> get_value
+        permission = %Permission{name: "fake_permission", namespace: "s3"}
+
+        {:error, error} = Client.role_add_permission(fake_endpoint, role, permission)
+
+        assert error == ["Not found permissions - s3:fake_permission"]
+      end
+    end
+  end
+
+  describe "role_remove_permission" do
+    it "removes the permission from the role" do
+      role = Client.role_create(fake_endpoint, %{name: "role"}) |> get_value
+      permission = Client.permission_create(fake_endpoint, "permission") |> get_value
+      role = Client.role_add_permission(fake_endpoint, role, permission) |> get_value
+      assert role.permissions == [permission]
+
+      role = Client.role_remove_permission(fake_endpoint, role, permission) |> get_value
+
+      assert role.permissions == []
     end
   end
 end
