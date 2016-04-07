@@ -31,13 +31,13 @@ defmodule CogApi.Fake.Server do
     end)
   end
 
-  def show(module, id) do
+  def show(module, id, stop_recursion \\ nil) do
     resource = Agent.get(__MODULE__, fn server ->
       find_by_id(server, module.fake_key, id)
     end)
 
     if resource do
-      expand_assocations(resource, module.associations)
+      expand_assocations(resource, module.associations, stop_recursion)
     end
   end
 
@@ -75,7 +75,6 @@ defmodule CogApi.Fake.Server do
       end)
     end)
 
-
     expand_assocations(resource, module.associations)
   end
 
@@ -109,11 +108,13 @@ defmodule CogApi.Fake.Server do
     |> Enum.find(fn resource -> Map.get(resource, key) == value end)
   end
 
-  defp expand_assocations(resource, associations) do
+  defp expand_assocations(resource, associations, stop_recursion \\ nil)
+  defp expand_assocations(resource, _, :stop_recursion), do: resource
+  defp expand_assocations(resource, associations, _) do
     Enum.reduce(associations, resource, fn {relationship_name, server_key}, resource ->
       items = resource
       |> Map.get(relationship_name)
-      |> Enum.map(fn id -> show(server_key, id) end)
+      |> Enum.map(fn id -> show(server_key, id, :stop_recursion) end)
 
       Map.put resource, relationship_name, items
     end)

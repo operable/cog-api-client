@@ -21,6 +21,7 @@ defmodule CogApi.Resources.Group do
 
   def associations do
     [
+      users: CogApi.Resources.User,
     ]
   end
 end

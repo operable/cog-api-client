@@ -53,21 +53,31 @@ defmodule CogApi.Fake.Groups do
 
   def add_user(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def add_user(%Endpoint{token: _}, group, user) do
-    user = Server.show_by_key(User, :email_address, user.email_address)
     group = Server.show(Group, group.id)
-    users = group.users ++ [user]
-    group = %{group | users: users}
+    user = Server.show_by_key(User, :email_address, user.email_address)
 
-    {:ok, Server.update(Group, group.id, group)}
+    group = %{group | users: group.users ++ [user]}
+    updated_group = Server.update(Group, group.id, group)
+
+    user = %{user | groups: user.groups ++ [updated_group]}
+    Server.update(User, user.id, user)
+
+    {:ok, updated_group}
   end
 
   def remove_user(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def remove_user(%Endpoint{token: _}, group, user) do
-    user = Server.show_by_key(User, :email_address, user.email_address)
     group = Server.show(Group, group.id)
-    users = group.users -- [user]
-    group = %{group | users: users}
+    user = Server.show_by_key(User, :email_address, user.email_address)
 
-    {:ok, Server.update(Group, group.id, group)}
+    new_users = Enum.reject(group.users, &(&1.id == user.id))
+    group = %{group | users: new_users}
+    updated_group = Server.update(Group, group.id, group)
+
+    new_groups = Enum.reject(user.groups, &(&1.id == updated_group.id))
+    user = %{user | groups: new_groups}
+    Server.update(User, user.id, user)
+
+    {:ok, updated_group}
   end
 end

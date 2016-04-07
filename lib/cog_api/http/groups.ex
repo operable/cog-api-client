@@ -56,12 +56,12 @@ defmodule CogApi.HTTP.Groups do
 
   defp format_group_response(response) do
     json_structure = %{"group" => GroupDecoder.format}
-    groups = Poison.decode!(response.body, as: json_structure)["group"]
+    group = Poison.decode!(response.body, as: json_structure)["group"]
     |> GroupDecoder.to_group
 
     {
       ApiResponse.type(response),
-      groups
+      group
     }
   end
 

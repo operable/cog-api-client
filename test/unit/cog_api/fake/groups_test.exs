@@ -90,10 +90,17 @@ defmodule CogApi.Fake.GroupsTest do
       second_user = Client.user_create(fake_endpoint, %{email_address: "sam@example.com"}) |> get_value
       assert group.users == []
 
-      Client.group_add_user(fake_endpoint, group, first_user)
-      group = Client.group_add_user(fake_endpoint, group, second_user) |> get_value
+      {:ok, group} = Client.group_add_user(fake_endpoint, group, first_user)
+      {:ok, group} = Client.group_add_user(fake_endpoint, group, second_user)
 
-      assert group.users == [first_user, second_user]
+      assert ids_for(group.users) == [first_user.id, second_user.id]
+
+
+      first_user = Client.user_show(fake_endpoint, first_user.id) |> get_value
+      assert ids_for(first_user.groups) == [group.id]
+
+      second_user = Client.user_show(fake_endpoint, second_user.id) |> get_value
+      assert ids_for(second_user.groups) == [group.id]
     end
   end
 
@@ -101,17 +108,25 @@ defmodule CogApi.Fake.GroupsTest do
     it "removes the user from the group" do
       {group, user} = create_group_with_user(fake_endpoint)
 
-      group = Client.group_remove_user(fake_endpoint, group, user) |> get_value
+      {:ok, group} = Client.group_remove_user(fake_endpoint, group, user)
 
       assert group.users == []
+
+      user = Client.user_show(fake_endpoint, user.id) |> get_value
+      assert user.groups == []
     end
+  end
+
+  defp ids_for(records) do
+    Enum.map(records, &(&1.id))
   end
 
   def create_group_with_user(endpoint) do
     group = Client.group_create(endpoint, %{name: "Group"}) |> get_value
     user = Client.user_create(endpoint, %{username: "User"}) |> get_value
-    group = Client.group_add_user(endpoint, group, user) |> get_value
+    {:ok, group} = Client.group_add_user(endpoint, group, user)
 
+    user = Client.user_show(endpoint, user.id) |> get_value
     {group, user}
   end
 end
