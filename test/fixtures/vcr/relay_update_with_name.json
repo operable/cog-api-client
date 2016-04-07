@@ -1,0 +1,106 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"0fRQV6qQypbusThm8qdtmQYLacSHw0jODTGKjlk5AoY=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 07 Apr 2016 18:00:13 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "28l943fq13gjfr1u97b3ljg97inglptj"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"relay\":{\"token\":\"1234\",\"name\":\"my_relay\"}}",
+      "headers": {
+        "authorization": "token 0fRQV6qQypbusThm8qdtmQYLacSHw0jODTGKjlk5AoY=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/relays"
+    },
+    "response": {
+      "body": "{\"relay\":{\"updated_at\":\"2016-04-07T18:00:15Z\",\"name\":\"my_relay\",\"inserted_at\":\"2016-04-07T18:00:15Z\",\"id\":\"f40b83bb-9ce8-4283-8fc0-f8094200fcf1\",\"groups\":[],\"enabled\":false,\"description\":null}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 07 Apr 2016 18:00:14 GMT",
+        "content-length": "193",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "3kn53s11vu3rfo4a7nsrhm1p8dgg9urb",
+        "location": "/v1/relays/f40b83bb-9ce8-4283-8fc0-f8094200fcf1"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token 0fRQV6qQypbusThm8qdtmQYLacSHw0jODTGKjlk5AoY=",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/relays"
+    },
+    "response": {
+      "body": "{\"relays\":[{\"updated_at\":\"2016-04-07T18:00:12Z\",\"name\":\"ShowName\",\"inserted_at\":\"2016-04-07T18:00:12Z\",\"id\":\"8f517668-cd11-49a7-84d1-5da933e22300\",\"groups\":[],\"enabled\":true,\"description\":\"This is a test\"},{\"updated_at\":\"2016-04-07T18:00:15Z\",\"name\":\"my_relay\",\"inserted_at\":\"2016-04-07T18:00:15Z\",\"id\":\"f40b83bb-9ce8-4283-8fc0-f8094200fcf1\",\"groups\":[],\"enabled\":false,\"description\":null}]}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 07 Apr 2016 18:00:14 GMT",
+        "content-length": "391",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "hf8i4el7jlpu94fjd9d1cu73qq36p17r"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"relay\":{\"description\":\"Hello\"}}",
+      "headers": {
+        "authorization": "token 0fRQV6qQypbusThm8qdtmQYLacSHw0jODTGKjlk5AoY=",
+        "Content-Type": "application/json"
+      },
+      "method": "patch",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/relays/f40b83bb-9ce8-4283-8fc0-f8094200fcf1"
+    },
+    "response": {
+      "body": "{\"relay\":{\"updated_at\":\"2016-04-07T18:00:15Z\",\"name\":\"my_relay\",\"inserted_at\":\"2016-04-07T18:00:15Z\",\"id\":\"f40b83bb-9ce8-4283-8fc0-f8094200fcf1\",\"groups\":[],\"enabled\":false,\"description\":\"Hello\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 07 Apr 2016 18:00:14 GMT",
+        "content-length": "196",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "gkjeejul5omlhqoeen934129hl4e7eoa"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

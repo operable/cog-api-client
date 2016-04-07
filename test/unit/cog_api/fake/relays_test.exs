@@ -1,4 +1,4 @@
-defmodule CogApi.Fak.RelaysTest do
+defmodule CogApi.Fake.RelaysTest do
   use CogApi.FakeCase
 
   alias CogApi.Fake.Client
@@ -33,7 +33,7 @@ defmodule CogApi.Fak.RelaysTest do
 
   describe "relay_show" do
     it "returns a list of relays" do
-      params = %{name: "Show", token: "1234", enabled: true}
+      params = %{name: "Show", token: "1234", enabled: true, description: "This is a test"}
       created_relay = Client.relay_create(params, fake_endpoint) |> get_value
 
       found_relay = Client.relay_show(created_relay.id, fake_endpoint) |> get_value
@@ -41,6 +41,22 @@ defmodule CogApi.Fak.RelaysTest do
       assert created_relay.id == found_relay.id
       assert created_relay.name == found_relay.name
       assert created_relay.enabled == true
+      assert created_relay.description == found_relay.description
+    end
+
+    context "when given a name instead of an id" do
+      it "returns a relay" do
+        params = %{name: "Show", token: "1234", enabled: true,
+                   description: "This is a test", inserted_at: "Some date"}
+        created_relay = Client.relay_create(params, fake_endpoint) |> get_value
+
+        found_relay = Client.relay_show(%{name: created_relay.name}, fake_endpoint) |> get_value
+
+        assert created_relay.id == found_relay.id
+        assert created_relay.name == found_relay.name
+        assert created_relay.enabled == true
+        assert created_relay.description == found_relay.description
+      end
     end
   end
 
@@ -90,6 +106,23 @@ defmodule CogApi.Fak.RelaysTest do
         assert error == "Name is invalid"
       end
     end
+
+    context "when given a relay name" do
+      it "returns the updated relay" do
+        new_relay = Client.relay_create(%{name: "new_relay", token: "1234"}, fake_endpoint)
+        |> get_value
+
+        assert new_relay.description == nil
+
+        updated = Client.relay_update(
+          %{name: new_relay.name},
+          %{description: "Hello"},
+          fake_endpoint
+        ) |> get_value
+
+        assert updated.description == "Hello"
+      end
+    end
   end
 
   describe "relay_delete" do
@@ -107,5 +140,15 @@ defmodule CogApi.Fak.RelaysTest do
         assert error == "The relay could not be deleted"
       end
     end
+
+    context "when given a name instead of an id" do
+      it "returns :ok" do
+        relay = Client.relay_create(%{name: "delete me", token: "1234"}, fake_endpoint)
+        |> get_value
+
+        assert :ok == Client.relay_delete(%{name: relay.name}, fake_endpoint)
+      end
+    end
   end
+
 end

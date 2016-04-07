@@ -46,13 +46,33 @@ defmodule CogApi.HTTP.RelaysTest do
       cassette "relay_show" do
         endpoint = valid_endpoint
         name = "Show"
-        created_relay = Client.relay_create(%{name: name, token: "1234", enabled: true}, endpoint) |> get_value
+        params = %{name: name, token: "1234", enabled: true, description: "This is a test"}
+        created_relay = Client.relay_create(params, endpoint) |> get_value
 
         found_relay = Client.relay_show(created_relay.id, endpoint) |> get_value
 
         assert created_relay.id == found_relay.id
         assert created_relay.name == found_relay.name
         assert created_relay.enabled == true
+      end
+    end
+
+    context "when given a relay name" do
+      it "returns a relay" do
+        cassette "relay_show_with_name" do
+          endpoint = valid_endpoint
+          name = "ShowName"
+          params = %{name: name, token: "1234", enabled: true, description: "This is a test"}
+          created_relay = Client.relay_create(params, endpoint) |> get_value
+
+          found_relay = Client.relay_show(%{name: created_relay.name}, endpoint) |> get_value
+
+          assert created_relay.id == found_relay.id
+          assert created_relay.name == found_relay.name
+          assert found_relay.enabled == true
+          assert found_relay.description == "This is a test"
+          assert present found_relay.inserted_at
+        end
       end
     end
   end
@@ -89,13 +109,14 @@ defmodule CogApi.HTTP.RelaysTest do
         new_relay = Client.relay_create(%{name: "new_relay", token: "1234"}, endpoint)
         |> get_value
 
+        assert new_relay.description == nil
         updated = Client.relay_update(
           new_relay.id,
-          %{name: "updated"},
+          %{description: "Hello"},
           endpoint
         ) |> get_value
 
-        assert updated.name == "updated"
+        assert updated.description == "Hello"
       end
     end
 
@@ -112,6 +133,26 @@ defmodule CogApi.HTTP.RelaysTest do
           )
 
           assert error == "Name can't be blank"
+        end
+      end
+    end
+
+    context "when given a relay name" do
+      it "returns the updated relay" do
+        cassette "relay_update_with_name" do
+          endpoint = valid_endpoint
+          new_relay = Client.relay_create(%{name: "my_relay", token: "1234"}, endpoint)
+          |> get_value
+
+          assert new_relay.description == nil
+
+          updated = Client.relay_update(
+            %{name: new_relay.name},
+            %{description: "Hello"},
+            endpoint
+          ) |> get_value
+
+          assert updated.description == "Hello"
         end
       end
     end
@@ -134,6 +175,18 @@ defmodule CogApi.HTTP.RelaysTest do
           {:error, [error]} = Client.relay_delete("not real", valid_endpoint)
 
           assert error == "The relay could not be deleted"
+        end
+      end
+    end
+
+    context "when passing the relay name" do
+      it "returns :ok" do
+        cassette "relay_delete_with_name" do
+          endpoint = valid_endpoint
+          relay = Client.relay_create(%{name: "delete me", token: "1234"}, endpoint)
+          |> get_value
+
+          assert :ok == Client.relay_delete(%{name: relay.name}, endpoint)
         end
       end
     end
