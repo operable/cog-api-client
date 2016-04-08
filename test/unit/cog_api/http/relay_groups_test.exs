@@ -39,6 +39,21 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         assert created_group.name == found_group.name
       end
     end
+
+    context "when passing relay group name" do
+      it "returns a relay group" do
+        cassette "relay_group_show_with_name" do
+          endpoint = valid_endpoint
+          name = "ShowName"
+          created_group = Client.relay_group_create(%{name: name}, endpoint) |> get_value
+
+          found_group = Client.relay_group_show(%{name: created_group.name}, endpoint) |> get_value
+
+          assert created_group.id == found_group.id
+          assert created_group.name == found_group.name
+        end
+      end
+    end
   end
 
   describe "relay_group_create" do
@@ -95,6 +110,18 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         end
       end
     end
+
+    context "when given the relay group name" do
+      it "returns :ok" do
+        cassette "relay_group_delete_with_name" do
+          endpoint = valid_endpoint
+          relay_group = Client.relay_group_create(%{name: "nada"}, endpoint)
+          |> get_value
+
+          assert :ok == Client.relay_group_delete(%{name: relay_group.name}, endpoint)
+        end
+      end
+    end
   end
 
   describe "relay_group_add_relay" do
@@ -112,6 +139,23 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         assert grouped_relay.id == relay.id
       end
     end
+
+    context "when passing relay group name" do
+      it "adds relay to the relay group" do
+        cassette "relay_group_add_with_name" do
+          endpoint = valid_endpoint
+          relay = Client.relay_create(%{name: "relay1", token: "1234"}, endpoint) |> get_value
+          group = Client.relay_group_create(%{name: "mygroup"}, endpoint) |> get_value
+          assert group.relays == []
+
+          group = Client.relay_group_add_relay(%{name: group.name}, %{relay: relay.name}, endpoint) |> get_value
+
+          [grouped_relay] = group.relays
+
+          assert grouped_relay.id == relay.id
+        end
+      end
+    end
   end
 
   describe "relay_group_remove_relay" do
@@ -126,6 +170,22 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         group = Client.relay_group_remove_relay(group.id, relay.id, endpoint) |> get_value
 
         assert group.relays == []
+      end
+    end
+
+    context "when passing relay group name" do
+      it "removes relay from the relay group" do
+        cassette "relay_group_remove_with_name" do
+          endpoint = valid_endpoint
+          relay = Client.relay_create(%{name: "relay2", token: "1234"}, endpoint) |> get_value
+          group = Client.relay_group_create(%{name: "myrelays"}, endpoint) |> get_value
+          group = Client.relay_group_add_relay(group.id, relay.id, endpoint) |> get_value
+          assert group.relays != []
+
+          group = Client.relay_group_remove_relay(%{name: group.name}, %{relay: relay.name}, endpoint) |> get_value
+
+          assert group.relays == []
+        end
       end
     end
   end

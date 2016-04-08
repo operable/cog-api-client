@@ -30,6 +30,18 @@ defmodule CogApi.Fake.RelayGroupsTest do
       assert created_group.id == found_group.id
       assert created_group.name == found_group.name
     end
+
+    context "when passing relay group name" do
+      it "returns a relay group" do
+        name = "ShowName"
+        created_group = Client.relay_group_create(%{name: name}, fake_endpoint) |> get_value
+
+        found_group = Client.relay_group_show(%{name: created_group.name}, fake_endpoint) |> get_value
+
+        assert created_group.id == found_group.id
+        assert created_group.name == found_group.name
+      end
+    end
   end
 
   describe "relay_group_create" do
@@ -70,6 +82,13 @@ defmodule CogApi.Fake.RelayGroupsTest do
         assert error == "The relay group could not be deleted"
       end
     end
+
+    context "when given the relay group name" do
+      it "returns :ok" do
+        {:ok, relay_group} = Client.relay_group_create(%{name: "nada"}, fake_endpoint)
+        assert :ok == Client.relay_group_delete(%{name: relay_group.name}, fake_endpoint)
+      end
+    end
   end
 
   describe "relay_group_add_relay" do
@@ -104,6 +123,26 @@ defmodule CogApi.Fake.RelayGroupsTest do
 
       assert relay_name == new_name
     end
+
+    context "when given the relay group name" do
+      it "adds the relay to the group" do
+        relay = Client.relay_create(%{name: "relay1", token: "1234"}, fake_endpoint) |> get_value
+        group = Client.relay_group_create(%{name: "mygroup"}, fake_endpoint) |> get_value
+
+        group = Client.relay_group_add_relay(%{name: group.name}, %{relay: relay.name}, fake_endpoint) |> get_value
+
+        [grouped_relay] = group.relays
+
+        assert grouped_relay.id == relay.id
+
+        first_group = Client.relay_show(relay.id, fake_endpoint)
+        |> get_value
+        |> Map.get(:groups)
+        |> List.first
+
+        assert first_group.id == group.id
+      end
+    end
   end
 
   describe "relay_group_remove_relay" do
@@ -121,6 +160,24 @@ defmodule CogApi.Fake.RelayGroupsTest do
         |> get_value
         |> Map.get(:groups)
       assert relay_groups == []
+    end
+
+    context "when given the relay group name" do
+      it "reomves the relay from the group" do
+        relay = Client.relay_create(%{name: "relay2", token: "1234"}, fake_endpoint) |> get_value
+        group = Client.relay_group_create(%{name: "my-relays"}, fake_endpoint) |> get_value
+        group = Client.relay_group_add_relay(group.id, relay.id, fake_endpoint) |> get_value
+        assert group.relays != []
+
+        group = Client.relay_group_remove_relay(%{name: group.name}, %{relay: relay.name}, fake_endpoint) |> get_value
+
+        assert group.relays == []
+
+        relay_groups = Client.relay_show(relay.id, fake_endpoint)
+        |> get_value
+        |> Map.get(:groups)
+        assert relay_groups == []
+      end
     end
   end
 end
