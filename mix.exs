@@ -37,7 +37,7 @@ defmodule CogApi.Mixfile do
       {:exvcr, "~> 0.7", only: :test},
       {:httpotion, "~> 2.1.0"},
       {:ibrowse, "~> 4.2.2"},
-      {:poison, "~> 2.0"},
+      {:poison, "~> 1.5.2"},
       {:dialyxir, "~> 0.3"},
     ]
   end
