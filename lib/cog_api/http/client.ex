@@ -32,6 +32,10 @@ defmodule CogApi.HTTP.Client do
     Bundles.delete(endpoint, bundle_id)
   end
 
+  def bundle_create(%Endpoint{}=endpoint, params) do
+    Bundles.create(endpoint, params)
+  end
+
   def group_index(%Endpoint{}=endpoint) do
     Groups.index(endpoint)
   end

@@ -23,6 +23,11 @@ defmodule CogApi.HTTP.Bundles do
     |> ApiResponse.format_delete("The bundle could not be deleted")
   end
 
+  def create(%Endpoint{}=endpoint, params) do
+    Base.post(endpoint, "bundles", %{bundle: params})
+    |> ApiResponse.format(%{"bundle" => %Bundle{}})
+  end
+
   defp find_bundle(endpoint, id) do
     Base.get(endpoint, "bundles/#{id}")
     |> ApiResponse.format(%{"bundle" => Bundle.format})
