@@ -10,6 +10,10 @@ defmodule CogApi.HTTP.RelayGroups do
     |> ApiResponse.format(%{"relay_groups" => [RelayGroup.format]})
   end
 
+  def show(%{name: name}, %Endpoint{}=endpoint) do
+    Base.get_by(endpoint, "relay_groups", name: name)
+    |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
+  end
   def show(id, %Endpoint{}=endpoint) do
     Base.get(endpoint, resource_path(id))
     |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
@@ -25,15 +29,33 @@ defmodule CogApi.HTTP.RelayGroups do
     |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
   end
 
+  def delete(%{name: name}, %Endpoint{}=endpoint) do
+    Base.delete_by(endpoint, "relay_groups", name: name)
+    |> ApiResponse.format_delete("The relay group could not be deleted")
+  end
   def delete(id, %Endpoint{}=endpoint) do
     Base.delete(endpoint, resource_path(id))
     |> ApiResponse.format_delete("The relay group could not be deleted")
   end
 
+  def add_relay(%{name: name}, %{relay: relay_name}, %Endpoint{}=endpoint) do
+    {:ok, relay} = Base.get_by(endpoint, "relays", name: relay_name)
+    |> ApiResponse.format(%{"relay" => CogApi.Resources.Relay.format})
+    {:ok, relaygroup} = Base.get_by(endpoint, "relay_groups", name: name)
+    |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
+    update_membership(relaygroup.id, relay.id, :add, endpoint)
+  end
   def add_relay(relay_group_id, relay_id, %Endpoint{}=endpoint) do
     update_membership(relay_group_id, relay_id, :add, endpoint)
   end
 
+  def remove_relay(%{name: name}, %{relay: relay_name}, %Endpoint{}=endpoint) do
+    {:ok, relay} = Base.get_by(endpoint, "relays", name: relay_name)
+    |> ApiResponse.format(%{"relay" => CogApi.Resources.Relay.format})
+    {:ok, relaygroup} = Base.get_by(endpoint, "relay_groups", name: name)
+    |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
+    update_membership(relaygroup.id, relay.id, :remove, endpoint)
+  end
   def remove_relay(relay_group_id, relay_id, %Endpoint{}=endpoint) do
     update_membership(relay_group_id, relay_id, :remove, endpoint)
   end

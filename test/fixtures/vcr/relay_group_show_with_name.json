@@ -1,0 +1,106 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"VeppI9k+OeEQL0vTFL7jgz56zgUBmQdDC5QEipySgLo=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Fri, 08 Apr 2016 21:02:53 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "74iu4vjk524stibs2m6p2gcr6ea4snm6"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"relay_group\":{\"name\":\"ShowName\"}}",
+      "headers": {
+        "authorization": "token VeppI9k+OeEQL0vTFL7jgz56zgUBmQdDC5QEipySgLo=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/relay_groups"
+    },
+    "response": {
+      "body": "{\"relay_group\":{\"updated_at\":\"2016-04-08T21:02:54Z\",\"relays\":[],\"name\":\"ShowName\",\"inserted_at\":\"2016-04-08T21:02:54Z\",\"id\":\"11f6eefb-c474-4013-b7b6-e23b5434ba40\",\"bundles\":[]}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Fri, 08 Apr 2016 21:02:54 GMT",
+        "content-length": "177",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "07v6ppik5l4v01vrtucn1pmdehd4tu18",
+        "location": "/v1/groups/11f6eefb-c474-4013-b7b6-e23b5434ba40"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token VeppI9k+OeEQL0vTFL7jgz56zgUBmQdDC5QEipySgLo=",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/relay_groups"
+    },
+    "response": {
+      "body": "{\"relay_groups\":[{\"updated_at\":\"2016-04-08T21:02:48Z\",\"relays\":[{\"updated_at\":\"2016-04-08T21:02:48Z\",\"name\":\"relay1\",\"inserted_at\":\"2016-04-08T21:02:48Z\",\"id\":\"c461d2aa-72eb-434c-aa0f-cac97413be08\",\"enabled\":false,\"description\":null}],\"name\":\"mygroup\",\"inserted_at\":\"2016-04-08T21:02:48Z\",\"id\":\"e40cf040-8ae5-46da-990e-df36f70820ba\",\"bundles\":[]},{\"updated_at\":\"2016-04-08T21:02:52Z\",\"relays\":[],\"name\":\"myrelays\",\"inserted_at\":\"2016-04-08T21:02:52Z\",\"id\":\"d88e2793-28f2-45f1-a190-5f628a80f524\",\"bundles\":[]},{\"updated_at\":\"2016-04-08T21:02:54Z\",\"relays\":[],\"name\":\"ShowName\",\"inserted_at\":\"2016-04-08T21:02:54Z\",\"id\":\"11f6eefb-c474-4013-b7b6-e23b5434ba40\",\"bundles\":[]}]}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Fri, 08 Apr 2016 21:02:54 GMT",
+        "content-length": "672",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "dcgmju16peg7d7q8ksqd12np0pemuj5g"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token VeppI9k+OeEQL0vTFL7jgz56zgUBmQdDC5QEipySgLo=",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/relay_groups/11f6eefb-c474-4013-b7b6-e23b5434ba40"
+    },
+    "response": {
+      "body": "{\"relay_group\":{\"updated_at\":\"2016-04-08T21:02:54Z\",\"relays\":[],\"name\":\"ShowName\",\"inserted_at\":\"2016-04-08T21:02:54Z\",\"id\":\"11f6eefb-c474-4013-b7b6-e23b5434ba40\",\"bundles\":[]}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Fri, 08 Apr 2016 21:02:54 GMT",
+        "content-length": "177",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "ppu94eerihgjfjiog467599hhpotas3g"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
