@@ -1,5 +1,6 @@
 defmodule CogApi.Fake.RelayGroups do
   import CogApi.Fake.Random
+  import CogApi.Fake.Helpers
 
   alias CogApi.Endpoint
   alias CogApi.Fake.Server
@@ -21,9 +22,11 @@ defmodule CogApi.Fake.RelayGroups do
   end
 
   def create(_, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
-  def create(%{name: name}, %Endpoint{token: _}) do
-    new_relay_group = %RelayGroup{id: random_string(8), name: name, relays: []}
-    {:ok, Server.create(RelayGroup, new_relay_group)}
+  def create(params=%{name: name}, %Endpoint{token: _}) do
+    catch_errors params, fn ->
+      new_relay_group = %RelayGroup{id: random_string(8), name: name, relays: []}
+      {:ok, Server.create(RelayGroup, new_relay_group)}
+    end
   end
 
   def update(_, _, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint

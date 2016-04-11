@@ -54,6 +54,14 @@ defmodule CogApi.Fake.RelayGroupsTest do
       assert present relay_group.bundles
       assert present relay_group.relays
     end
+
+    context "when given invalid params" do
+      it "returns a list of errors" do
+        {:error, [error]} = Client.relay_group_create(%{name: "ERROR"}, fake_endpoint)
+
+        assert error == "Name is invalid"
+      end
+    end
   end
 
   describe "relay_group_updated" do
