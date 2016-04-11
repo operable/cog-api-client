@@ -1,5 +1,7 @@
 # Changelog
 
+* Added `bundles_create` that takes a config file and installs a bundle.
+
 * The `role_revoke` function now takes a `%Role{}`, and a `%Group{}` instead of
   names. It returns a `%Group{}` with the associated roles as an attribute. The
   original `role_revoke` can still be used for users.
