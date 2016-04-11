@@ -51,7 +51,7 @@ defmodule CogApi.Fake.Roles do
 
   def add_permission(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def add_permission(%Endpoint{}, role, permission) do
-    if found_permission  = Server.show(Permission, permission.id) do
+    if found_permission  = matching_permission(Server.index(Permission), permission) do
       role = %{role | permissions: role.permissions ++ [found_permission]}
       {:ok, Server.update(Role, role.id, role)}
     else
@@ -61,7 +61,18 @@ defmodule CogApi.Fake.Roles do
 
   def remove_permission(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def remove_permission(%Endpoint{}, role, permission) do
-    role = %{role | permissions: List.delete(role.permissions, permission)}
-    {:ok, Server.update(Role, role.id, role)}
+    if matching_permission(Server.index(Permission), permission) do
+      role = %{role | permissions: List.delete(role.permissions, permission)}
+      {:ok, Server.update(Role, role.id, role)}
+    end
+  end
+
+  defp matching_permission(haystack, needle) do
+    haystack
+    |> Enum.find(fn permission -> permissions_match?(permission, needle) end)
+  end
+
+  defp permissions_match?(%Permission{} = permission, %Permission{} = match) do
+    permission.namespace == match.namespace && permission.name == match.name
   end
 end
