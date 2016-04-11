@@ -29,8 +29,8 @@ defmodule CogApi.Fake.BundlesTest do
 
   describe "bundle_show" do
     it "returns the bundle" do
-      bundle = %Bundle{name: "postgres"}
-      bundle = Client.bundle_create(fake_endpoint, bundle) |> get_value
+      config = %{minimal_config | name: "postgres"}
+      bundle = Client.bundle_create(fake_endpoint, config) |> get_value
 
       bundle = Client.bundle_show(fake_endpoint, bundle.id) |> get_value
       assert bundle.name == "postgres"
@@ -38,8 +38,8 @@ defmodule CogApi.Fake.BundlesTest do
 
     it "includes the rules for each command" do
       command = %CogApi.Resources.Command{name: "help"}
-      bundle = %Bundle{name: "postgres", commands: [command]}
-      bundle = Client.bundle_create(fake_endpoint, bundle) |> get_value
+      config = %{minimal_config | name: "postgres", commands: [command]}
+      bundle = Client.bundle_create(fake_endpoint, config) |> get_value
       rule_text = "when command is postgres:help must have operable:manage_commands"
       rule_text |> Client.rule_create(fake_endpoint) |> get_value
 
@@ -55,9 +55,8 @@ defmodule CogApi.Fake.BundlesTest do
 
   describe "bundle_create" do
     it "allows adding a new bundle" do
-      bundle = %{name: "a bundle"}
-
-      bundle = Client.bundle_create(fake_endpoint, bundle) |> get_value
+      config = minimal_config
+      bundle = Client.bundle_create(fake_endpoint, config) |> get_value
 
       assert bundle.name == "a bundle"
       assert present bundle.id
@@ -66,8 +65,8 @@ defmodule CogApi.Fake.BundlesTest do
 
   describe "bundle_update" do
     it "returns the updated bundle" do
-      bundle = %Bundle{name: "a bundle", enabled: true}
-      bundle = Client.bundle_create(fake_endpoint, bundle) |> get_value
+      config = minimal_config
+      bundle = Client.bundle_create(fake_endpoint, config) |> get_value
 
       {:ok, updated_bundle} = Client.bundle_update(
         fake_endpoint,
@@ -79,15 +78,15 @@ defmodule CogApi.Fake.BundlesTest do
     end
 
     it "will allow a string for enabled" do
-      bundle = %Bundle{name: "a bundle", enabled: true}
-      bundle = Client.bundle_create(fake_endpoint, bundle) |> get_value
+      config = minimal_config
+      bundle = Client.bundle_create(fake_endpoint, config) |> get_value
 
       {:ok, updated_bundle} = Client.bundle_update(
         fake_endpoint,
         bundle.id,
-        %{enabled: "false"}
+        %{enabled: "true"}
       )
-      assert updated_bundle.enabled == false
+      assert updated_bundle.enabled == true
     end
 
     it "only updates the enabled attribute" do
@@ -104,8 +103,8 @@ defmodule CogApi.Fake.BundlesTest do
     end
 
     it "allows a way to test errors" do
-      bundle = %Bundle{id: "id123", name: "a bundle", enabled: true}
-      bundle = Client.bundle_create(fake_endpoint, bundle) |> get_value
+      config = minimal_config
+      bundle = Client.bundle_create(fake_endpoint, config) |> get_value
 
       {:error, [error]} = Client.bundle_update(
         fake_endpoint,
@@ -117,8 +116,8 @@ defmodule CogApi.Fake.BundlesTest do
     end
 
     it "returns the updated bundle given a bundle name" do
-      bundle = %Bundle{name: "my bundle", enabled: true}
-      bundle = Client.bundle_create(fake_endpoint, bundle) |> get_value
+      config = minimal_config
+      bundle = Client.bundle_create(fake_endpoint, config) |> get_value
 
       {:ok, updated_bundle} = Client.bundle_update(
         fake_endpoint,
@@ -132,8 +131,8 @@ defmodule CogApi.Fake.BundlesTest do
 
   describe "bundle_delete" do
     it "returns :ok" do
-      bundle = %Bundle{name: "a bundle"}
-      bundle = Client.bundle_create(fake_endpoint, bundle) |> get_value
+      config = minimal_config
+      bundle = Client.bundle_create(fake_endpoint, config) |> get_value
 
       assert :ok == Client.bundle_delete(
         fake_endpoint,
@@ -148,5 +147,13 @@ defmodule CogApi.Fake.BundlesTest do
         assert error == "The bundle could not be deleted"
       end
     end
+  end
+
+  defp minimal_config do
+    %{name: "a bundle",
+      version: "0.0.1",
+      commands: %{
+        test_command: %{
+          executable: "/bin/foobar"}}}
   end
 end

@@ -21,20 +21,28 @@ defmodule CogApi.Fake.Bundles do
 
   defp add_rules(endpoint, bundle) do
     bundle.commands
-    |> Enum.map(fn command -> %{command | rules: find_rules(endpoint, bundle, command)} end)
+    |> Enum.map(fn ({command, _}) ->
+                     %{name: command, rules: find_rules(endpoint, bundle, command)}
+                   (%CogApi.Resources.Command{}=command) ->
+                     %{command | rules: find_rules(endpoint, bundle, command.name)}
+    end)
   end
 
   defp find_rules(endpoint, bundle, command) do
-    full_command_name = "#{bundle.name}:#{command.name}"
+    full_command_name = "#{bundle.name}:#{command}"
     {:ok, rules} = Rules.index(full_command_name, endpoint)
     rules
   end
 
   def create(%Endpoint{token: nil}, %{name: _}), do: Endpoint.invalid_endpoint
   def create(%Endpoint{token: _}, params) do
-    new_bundle = %Bundle{id: random_string(8)}
-    new_bundle = Map.merge(new_bundle, params)
-    {:ok, Server.create(Bundle, new_bundle)}
+    if Enum.all?([:name, :version, :commands], &(&1 in Map.keys(params))) do
+      new_bundle = %Bundle{id: random_string(8)}
+      new_bundle = Map.merge(new_bundle, params)
+      {:ok, Server.create(Bundle, new_bundle)}
+    else
+      {:error, "Invalid bundle config"}
+    end
   end
 
   def update(%Endpoint{token: _}, %{name: name}, %{enabled: enabled} = params) do
