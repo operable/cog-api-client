@@ -5,6 +5,24 @@ defmodule CogApi.HTTP.BundlesTest do
 
   doctest CogApi.HTTP.Bundles
 
+  describe "bundle_create" do
+    it "creates a new bundle" do
+      cassette "bundles_create" do
+        params = %{
+          "name" => "test_bundle",
+          "version" => "0.0.1",
+          "commands" => %{
+            "test_command" => %{
+              "executable" => "/bin/foobar"}}}
+
+        bundle = Client.bundle_create(valid_endpoint, params) |> get_value
+
+        assert present bundle.id
+        assert present bundle.name
+      end
+    end
+  end
+
   describe "bundle_index" do
     it "returns a list of bundles" do
       cassette "bundles_index" do

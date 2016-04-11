@@ -1,0 +1,54 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"8RwzC8RlFOTFKgu5RuNr2QkNC29LUhYYaTIdwesJfhE=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 11 Apr 2016 15:33:45 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "q67m2iou7oq0dgcs193t1fe9bsolk2d5"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"bundle\":{\"version\":\"0.0.1\",\"name\":\"test_bundle\",\"commands\":{\"test_command\":{\"executable\":\"/bin/foobar\"}}}}",
+      "headers": {
+        "authorization": "token 8RwzC8RlFOTFKgu5RuNr2QkNC29LUhYYaTIdwesJfhE=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/bundles"
+    },
+    "response": {
+      "body": "{\"bundle\":{\"updated_at\":\"2016-04-11T15:33:46Z\",\"relay_groups\":[],\"name\":\"test_bundle\",\"inserted_at\":\"2016-04-11T15:33:46Z\",\"id\":\"da93c4b0-71bc-4bb5-bfbd-97b6dde42577\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"461142cb-f063-4cba-855a-eff1b267fd5a\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 11 Apr 2016 15:33:45 GMT",
+        "content-length": "337",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "spua8taddk98tk0mokff0eo74sd9v2nr",
+        "location": "/v1/bundles/da93c4b0-71bc-4bb5-bfbd-97b6dde42577"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  }
+]
