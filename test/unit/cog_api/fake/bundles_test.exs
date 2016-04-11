@@ -56,7 +56,7 @@ defmodule CogApi.Fake.BundlesTest do
   describe "bundle_create" do
     it "allows adding a new bundle" do
       params = %{
-        name: "test_bundle",
+        name: "a bundle",
         version: "0.0.1",
         commands: %{
           test_command: %{
@@ -64,7 +64,7 @@ defmodule CogApi.Fake.BundlesTest do
 
       bundle = Client.bundle_create(fake_endpoint, params) |> get_value
 
-      assert bundle.name == "test_bundle"
+      assert bundle.name == "a bundle"
       assert present bundle.id
     end
   end
