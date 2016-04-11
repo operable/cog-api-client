@@ -14,7 +14,7 @@ defmodule CogApi.Fake.PermissionsTest do
       first_permission = List.first permissions
       assert present first_permission.id
       assert first_permission.name == "foobar"
-      assert first_permission.namespace.name == "custom"
+      assert first_permission.namespace == "custom"
     end
   end
 
@@ -25,8 +25,7 @@ defmodule CogApi.Fake.PermissionsTest do
 
       assert present permission.id
       assert permission.name == "view_all_things"
-      assert present permission.namespace.id
-      assert permission.namespace.name == "site"
+      assert permission.namespace == "site"
     end
 
     it "allows creating permissions in specifc namespaces" do
@@ -35,8 +34,7 @@ defmodule CogApi.Fake.PermissionsTest do
 
       assert present permission.id
       assert permission.name == "foobar"
-      assert present permission.namespace.id
-      assert permission.namespace.name == "custom"
+      assert permission.namespace == "custom"
     end
   end
 end
