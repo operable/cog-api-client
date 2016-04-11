@@ -132,7 +132,8 @@ defmodule CogApi.Fake.RolesTest do
       permission = Client.permission_create(fake_endpoint, "permission") |> get_value
       assert role.permissions == []
 
-      role = Client.role_add_permission(fake_endpoint, role, permission) |> get_value
+      permission_without_id = Map.delete permission, :id
+      role = Client.role_add_permission(fake_endpoint, role, permission_without_id) |> get_value
 
       assert role.permissions == [permission]
     end
@@ -156,7 +157,8 @@ defmodule CogApi.Fake.RolesTest do
       role = Client.role_add_permission(fake_endpoint, role, permission) |> get_value
       assert role.permissions == [permission]
 
-      role = Client.role_remove_permission(fake_endpoint, role, permission) |> get_value
+      permission_without_id = Map.delete permission, :id
+      role = Client.role_remove_permission(fake_endpoint, role, permission_without_id) |> get_value
 
       assert role.permissions == []
     end

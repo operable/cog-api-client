@@ -61,7 +61,7 @@ defmodule CogApi.Fake.Roles do
 
   def remove_permission(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def remove_permission(%Endpoint{}, role, permission) do
-    if matching_permission(Server.index(Permission), permission) do
+    if permission = matching_permission(Server.index(Permission), permission) do
       role = %{role | permissions: List.delete(role.permissions, permission)}
       {:ok, Server.update(Role, role.id, role)}
     end
