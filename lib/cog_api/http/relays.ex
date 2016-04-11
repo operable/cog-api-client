@@ -35,7 +35,7 @@ defmodule CogApi.HTTP.Relays do
 
   def delete(%{name: name}, %Endpoint{}=endpoint) do
     Base.delete_by(endpoint, "relays", name: name)
-    |> ApiResponse.format_delete("The relay could not be deleted")
+    |> ApiResponse.format_delete("The relay #{name} could not be deleted")
   end
   def delete(id, %Endpoint{}=endpoint) do
     Base.delete(endpoint, resource_path(id))

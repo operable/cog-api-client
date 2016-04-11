@@ -150,5 +150,4 @@ defmodule CogApi.Fake.RelaysTest do
       end
     end
   end
-
 end

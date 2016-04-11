@@ -31,7 +31,7 @@ defmodule CogApi.HTTP.RelayGroups do
 
   def delete(%{name: name}, %Endpoint{}=endpoint) do
     Base.delete_by(endpoint, "relay_groups", name: name)
-    |> ApiResponse.format_delete("The relay group could not be deleted")
+    |> ApiResponse.format_delete("The relay group #{name} could not be deleted")
   end
   def delete(id, %Endpoint{}=endpoint) do
     Base.delete(endpoint, resource_path(id))
@@ -39,22 +39,22 @@ defmodule CogApi.HTTP.RelayGroups do
   end
 
   def add_relay(%{name: name}, %{relay: relay_name}, %Endpoint{}=endpoint) do
-    {:ok, relay} = Base.get_by(endpoint, "relays", name: relay_name)
-    |> ApiResponse.format(%{"relay" => CogApi.Resources.Relay.format})
-    {:ok, relaygroup} = Base.get_by(endpoint, "relay_groups", name: name)
-    |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
-    update_membership(relaygroup.id, relay.id, :add, endpoint)
+    with relay <- Base.get_by(endpoint, "relays", name: relay_name),
+      {:ok, formatted_relay} <- ApiResponse.format(relay, %{"relay" => CogApi.Resources.Relay.format}),
+      relaygroup <- Base.get_by(endpoint, "relay_groups", name: name),
+      {:ok, formatted_group} <- ApiResponse.format(relaygroup, %{"relay_group" => RelayGroup.format}),
+      do: update_membership(formatted_group.id, formatted_relay.id, :add, endpoint)
   end
   def add_relay(relay_group_id, relay_id, %Endpoint{}=endpoint) do
     update_membership(relay_group_id, relay_id, :add, endpoint)
   end
 
   def remove_relay(%{name: name}, %{relay: relay_name}, %Endpoint{}=endpoint) do
-    {:ok, relay} = Base.get_by(endpoint, "relays", name: relay_name)
-    |> ApiResponse.format(%{"relay" => CogApi.Resources.Relay.format})
-    {:ok, relaygroup} = Base.get_by(endpoint, "relay_groups", name: name)
-    |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
-    update_membership(relaygroup.id, relay.id, :remove, endpoint)
+    with relay <- Base.get_by(endpoint, "relays", name: relay_name),
+      {:ok, formatted_relay} <- ApiResponse.format(relay, %{"relay" => CogApi.Resources.Relay.format}),
+      relaygroup <- Base.get_by(endpoint, "relay_groups", name: name),
+      {:ok, formatted_group} <- ApiResponse.format(relaygroup, %{"relay_group" => RelayGroup.format}),
+      do: update_membership(formatted_group.id, formatted_relay.id, :remove, endpoint)
   end
   def remove_relay(relay_group_id, relay_id, %Endpoint{}=endpoint) do
     update_membership(relay_group_id, relay_id, :remove, endpoint)
