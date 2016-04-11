@@ -18,7 +18,7 @@ defmodule CogApi.HTTP.BundlesTest do
         bundle = Client.bundle_create(valid_endpoint, params) |> get_value
 
         assert present bundle.id
-        assert present bundle.name
+        assert bundle.name == params["name"]
       end
     end
   end
