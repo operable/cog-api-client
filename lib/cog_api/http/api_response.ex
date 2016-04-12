@@ -39,6 +39,9 @@ defmodule CogApi.HTTP.ApiResponse do
   def format_delete(%Response{}, error_message) do
     {:error, [error_message]}
   end
+  def format_delete({:error, server_error}, error_message) do
+    {:error, [error_message <> ": " <> server_error]}
+  end
 
   def parse_struct(response, struct= %{__struct__: _}) do
     Poison.decode!(response.body, as: struct)

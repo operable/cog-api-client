@@ -122,6 +122,16 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         end
       end
     end
+
+    context "when the relay group by name cannot be deleted" do
+      it "returns an error" do
+        cassette "relay_group_delete_failure_by_name" do
+          {:error, [error]} = Client.relay_group_delete(%{name: "nada"}, valid_endpoint)
+
+          assert error == "The relay group `nada` could not be deleted: Resource not found"
+        end
+      end
+    end
   end
 
   describe "relay_group_add_relay" do
