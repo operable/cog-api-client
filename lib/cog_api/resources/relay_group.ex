@@ -1,6 +1,8 @@
 defmodule CogApi.Resources.RelayGroup do
   @derive [Poison.Encoder]
+
   alias CogApi.Resources.Relay
+  alias CogApi.Resources.Bundle
 
   defstruct [
     :id,
@@ -9,11 +11,12 @@ defmodule CogApi.Resources.RelayGroup do
     :inserted_at,
     bundles: [],
     relays: [],
+    bundles: [],
   ]
 
   def format do
     %__MODULE__{
-      bundles: [%CogApi.Resources.Bundle{}],
+      bundles: [%Bundle{}],
       relays: [%Relay{}],
     }
   end
@@ -25,6 +28,7 @@ defmodule CogApi.Resources.RelayGroup do
   def associations do
     [
       relays: Relay,
+      bundles: Bundle,
     ]
   end
 end

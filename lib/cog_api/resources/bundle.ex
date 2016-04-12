@@ -1,13 +1,17 @@
 defmodule CogApi.Resources.Bundle do
   @derive [Poison.Encoder]
 
+  alias CogApi.Resources.RelayGroup
+
   defstruct [
     :id,
     :enabled,
     :name,
     :inserted_at,
     :updated_at,
+    :version,
     commands: [],
+    relay_groups: [],
   ]
 
   def decode_status("enabled"), do: true
@@ -20,6 +24,7 @@ defmodule CogApi.Resources.Bundle do
   def format do
     %__MODULE__{
       commands: [%CogApi.Resources.Command{}],
+      relay_groups: [%RelayGroup{}],
     }
   end
 
@@ -28,6 +33,8 @@ defmodule CogApi.Resources.Bundle do
   end
 
   def associations do
-    []
+    [
+      relay_groups: RelayGroup
+    ]
   end
 end

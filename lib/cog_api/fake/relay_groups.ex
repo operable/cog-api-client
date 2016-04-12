@@ -5,6 +5,7 @@ defmodule CogApi.Fake.RelayGroups do
   alias CogApi.Endpoint
   alias CogApi.Fake.Server
   alias CogApi.Resources.Relay
+  alias CogApi.Resources.Bundle
   alias CogApi.Resources.RelayGroup
 
   def index(%Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
@@ -89,6 +90,52 @@ defmodule CogApi.Fake.RelayGroups do
 
   defp update_relays(relay, relay_group) do
     Server.update(Relay, relay.id, relay)
+    {:ok, Server.update(RelayGroup, relay_group.id, relay_group)}
+  end
+
+  def add_bundle(_, _, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
+  def add_bundle(%{name: name}, %{bundle: bundle_name}, %Endpoint{token: _}) do
+    bundle = Server.show_by_key(Bundle, :name, bundle_name)
+    relay_group = Server.show_by_key(RelayGroup, :name, name)
+    add_bundle(bundle, relay_group)
+  end
+  def add_bundle(id, bundle_id, %Endpoint{token: _}) do
+    bundle = Server.show(Bundle, bundle_id)
+    relay_group = Server.show(RelayGroup, id)
+    add_bundle(bundle, relay_group)
+  end
+
+  defp add_bundle(%Bundle{}=bundle, %RelayGroup{}=relay_group) do
+    bundle_with_group = %{bundle | relay_groups: bundle.relay_groups ++ [relay_group]}
+    bundles = relay_group.bundles ++ [bundle_with_group]
+    relay_group = %{relay_group | bundles: bundles}
+    update_bundles(bundle_with_group, relay_group)
+  end
+
+  def remove_bundle(_, _, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
+  def remove_bundle(%{name: name}, %{bundle: bundle_name}, %Endpoint{token: _}) do
+    bundle = Server.show_by_key(Bundle, :name, bundle_name)
+    relay_group = Server.show_by_key(RelayGroup, :name, name)
+    remove_bundle(bundle, relay_group)
+  end
+  def remove_bundle(id, bundle_id, %Endpoint{token: _}) do
+    bundle = Server.show(Bundle, bundle_id)
+    relay_group = Server.show(RelayGroup, id)
+    remove_bundle(bundle, relay_group)
+  end
+
+  defp remove_bundle(%Bundle{}=bundle, %RelayGroup{}=relay_group) do
+    bundles = Enum.reject(relay_group.bundles, &(&1.id == bundle.id))
+    relay_group = %{relay_group | bundles: bundles}
+
+    relay_groups = Enum.reject(bundle.relay_groups, &(&1.id == relay_group.id))
+    bundle_without_group = %{bundle | relay_groups: relay_groups}
+
+    update_bundles(bundle_without_group, relay_group)
+  end
+
+  defp update_bundles(bundle, relay_group) do
+    Server.update(Bundle, bundle.id, bundle)
     {:ok, Server.update(RelayGroup, relay_group.id, relay_group)}
   end
 end

@@ -39,19 +39,16 @@ defmodule CogApi.HTTP.RelayGroups do
   end
 
   def add_relay(%{name: name}, %{relay: relay_name}, %Endpoint{}=endpoint) do
-    with {:ok, relay} <- Base.get_by(endpoint, "relays", name: relay_name)
-      |> ApiResponse.format(%{"relay" => CogApi.Resources.Relay.format}),
-      {:ok, relay_group} <- Base.get_by(endpoint, "relay_groups", name: name)
-      |> ApiResponse.format(%{"relay_group" => RelayGroup.format}),
-      do: update_membership(relay_group.id, relay.id, :add, endpoint)
+    {relay, relay_group} = get_group_relay(name, relay_name, endpoint)
+    update_membership(relay_group.id, relay.id, :add, endpoint)
   end
   def add_relay(relay_group_id, relay_id, %Endpoint{}=endpoint) do
     update_membership(relay_group_id, relay_id, :add, endpoint)
   end
 
   def remove_relay(%{name: name}, %{relay: relay_name}, %Endpoint{}=endpoint) do
-    {relay, relaygroup} = get_group_relay(name, relay_name, endpoint)
-    update_membership(relaygroup.id, relay.id, :remove, endpoint)
+    {relay, relay_group} = get_group_relay(name, relay_name, endpoint)
+    update_membership(relay_group.id, relay.id, :remove, endpoint)
   end
   def remove_relay(relay_group_id, relay_id, %Endpoint{}=endpoint) do
     update_membership(relay_group_id, relay_id, :remove, endpoint)
@@ -60,9 +57,8 @@ defmodule CogApi.HTTP.RelayGroups do
   defp get_group_relay(name, relay_name, endpoint) do
     with {:ok, relay} <- Base.get_by(endpoint, "relays", name: relay_name)
         |> ApiResponse.format(%{"relay" => CogApi.Resources.Relay.format}),
-      {:ok, relaygroup} <- Base.get_by(endpoint, "relay_groups", name: name)
-        |> ApiResponse.format(%{"relay_group" => RelayGroup.format}),
-    do: {relay, relaygroup}
+      {:ok, relay_group} <- show(%{name: name}, endpoint),
+    do: {relay, relay_group}
   end
 
   defp update_membership(relay_group_id, relay_id, action, endpoint) do
@@ -90,8 +86,7 @@ defmodule CogApi.HTTP.RelayGroups do
   defp get_relay_bundle(name, bundle_name, endpoint) do
     with {:ok, bundle} <- Base.get_by(endpoint, "bundles", name: bundle_name)
         |> ApiResponse.format(%{"bundle" => CogApi.Resources.Bundle.format}),
-      {:ok, relay_group} <- Base.get_by(endpoint, "relay_groups", name: name)
-        |> ApiResponse.format(%{"relay_group" => RelayGroup.format}),
+      {:ok, relay_group} <- show(%{name: name}, endpoint),
       do: {relay_group, bundle}
   end
 

@@ -134,6 +134,75 @@ defmodule CogApi.HTTP.RelayGroupsTest do
     end
   end
 
+  describe "relay_group_add_bundle" do
+    it "adds the bundle to the group" do
+      cassette "relay_group_add_bundle" do
+        endpoint = valid_endpoint
+        bundle = create_bundle(endpoint, "add_bundle")
+        group = Client.relay_group_create(%{name: "add_bundle"}, endpoint) |> get_value
+        assert group.bundles == []
+
+        group = Client.relay_group_add_bundle(group.id, bundle.id, endpoint) |> get_value
+
+        [grouped_bundle] = group.bundles
+
+        assert grouped_bundle.id == bundle.id
+      end
+    end
+
+    context "when passing names" do
+      it "adds bundle to the relay group" do
+        cassette "relay_group_add_bundle_with_name" do
+          endpoint = valid_endpoint
+
+          bundle = create_bundle(endpoint, "add_bundle_with_name")
+          group = Client.relay_group_create(%{name: "mygroup"}, endpoint) |> get_value
+          assert group.bundles == []
+
+          group = Client.relay_group_add_bundle(%{name: group.name}, %{bundle: bundle.name}, endpoint) |> get_value
+
+          [grouped_bundle] = group.bundles
+
+          assert grouped_bundle.id == bundle.id
+        end
+      end
+    end
+  end
+
+  describe "relay_group_remove_bundle" do
+    it "removes the bundle from the group" do
+      cassette "relay_group_remove_bundle" do
+        endpoint = valid_endpoint
+        bundle = create_bundle(endpoint, "remove_bundle")
+        group = Client.relay_group_create(%{name: "add_bundle"}, endpoint) |> get_value
+        group = Client.relay_group_add_bundle(group.id, bundle.id, endpoint) |> get_value
+        assert group.bundles != []
+
+        group = Client.relay_group_remove_bundle(group.id, bundle.id, endpoint) |> get_value
+
+        assert group.bundles == []
+      end
+    end
+
+    context "when passing names" do
+      it "removes bundle from the relay group" do
+        cassette "relay_group_remove_bundle_with_name" do
+          endpoint = valid_endpoint
+          name = "remove_bundle_with_name"
+          bundle = create_bundle(endpoint, name)
+          group = Client.relay_group_create(%{name: name}, endpoint) |> get_value
+          group = Client.relay_group_add_bundle(group.id, bundle.id, endpoint) |> get_value
+          assert group.bundles != []
+
+          group = Client.relay_group_remove_bundle(%{name: group.name},
+          %{bundle: bundle.name}, endpoint) |> get_value
+
+          assert group.bundles == []
+        end
+      end
+    end
+  end
+
   describe "relay_group_add_relay" do
     it "adds the relay to the group" do
       cassette "relay_group_add_relay" do
@@ -198,5 +267,19 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         end
       end
     end
+  end
+
+  defp create_bundle(endpoint, name) do
+    params = %{
+      "name" => name,
+      "version" => "0.0.1",
+      "commands" => %{
+        "test_command" => %{
+          "executable" => "/bin/foobar",
+        },
+      },
+    }
+
+    Client.bundle_create(endpoint, params) |> get_value
   end
 end
