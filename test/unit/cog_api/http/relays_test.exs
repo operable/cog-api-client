@@ -196,7 +196,7 @@ defmodule CogApi.HTTP.RelaysTest do
         cassette "relay_delete_failure_by_name" do
           {:error, [error]} = Client.relay_delete(%{name: "nada"}, valid_endpoint)
 
-          assert error == "Resource not found: The relay nada could not be deleted"
+          assert error == "The relay `nada` could not be deleted: Resource not found"
         end
       end
     end
