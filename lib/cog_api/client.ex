@@ -20,7 +20,7 @@ defmodule CogApi.Client do
 
   @callback group_index(%Endpoint{}) :: {atom, [%Group{}]}
   @callback group_show(%Endpoint{}, String.t) :: {atom, %Group{}}
-  @callback group_find(%Endpoint{}, %{}) :: {atom, %Group{}}
+  @callback group_find(%Endpoint{}, Keyword.t) :: {:ok, %Group{}} | {:error, term}
   @callback group_create(%Endpoint{}, %{}) :: {atom, %Group{}}
   @callback group_update(%Endpoint{}, String.t, %{}) :: {atom, %Group{}}
   @callback group_delete(%Endpoint{}, String.t) :: atom
