@@ -10,6 +10,7 @@ defmodule CogApi.HTTP.Client do
   alias CogApi.HTTP.RelayGroups
   alias CogApi.HTTP.Roles
   alias CogApi.HTTP.Rules
+  alias CogApi.HTTP.Triggers
   alias CogApi.HTTP.Users
 
   def authenticate(%Endpoint{token: nil}=endpoint) do
@@ -178,6 +179,30 @@ defmodule CogApi.HTTP.Client do
 
   def rule_delete(rule_id, %Endpoint{}=endpoint) do
     Rules.delete(rule_id, endpoint)
+  end
+
+  def trigger_show_by_name(%Endpoint{}=endpoint, name) do
+    Triggers.by_name(endpoint, name)
+  end
+
+  def trigger_create(%Endpoint{}=endpoint, params) do
+    Triggers.create(endpoint, params)
+  end
+
+  def trigger_delete(%Endpoint{}=endpoint, id) do
+    Triggers.delete(endpoint, id)
+  end
+
+  def trigger_index(%Endpoint{}=endpoint) do
+    Triggers.index(endpoint)
+  end
+
+  def trigger_show(%Endpoint{}=endpoint, id) do
+    Triggers.show(endpoint, id)
+  end
+
+  def trigger_update(%Endpoint{}=endpoint, id, params) do
+    Triggers.update(endpoint, id, params)
   end
 
   def user_index(%Endpoint{}=endpoint) do

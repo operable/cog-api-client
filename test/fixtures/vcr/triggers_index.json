@@ -1,0 +1,80 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"l0XktXn0+JHn1Mbi8NEaTVKMiLFcrUe5i/qpoSC0r60=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 12 Apr 2016 01:31:05 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "9fi2sc0bnikrotb8okpdqaamp4gfn9b6"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"trigger\":{\"timeout_sec\":42,\"pipeline\":\"echo 'trigger_index' > chat://#general\",\"name\":\"echo_trigger_index\",\"description\":\"Echoes some data, probably 'trigger_index' :P\",\"as_user\":\"somebody_else\"}}",
+      "headers": {
+        "authorization": "token l0XktXn0+JHn1Mbi8NEaTVKMiLFcrUe5i/qpoSC0r60=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/triggers"
+    },
+    "response": {
+      "body": "{\"trigger\":{\"timeout_sec\":42,\"pipeline\":\"echo 'trigger_index' > chat://#general\",\"name\":\"echo_trigger_index\",\"invocation_url\":\"http://localhost:4001/v1/triggers/b81a970a-2def-4ee2-9efb-969e9c10fec4\",\"id\":\"b81a970a-2def-4ee2-9efb-969e9c10fec4\",\"description\":\"Echoes some data, probably 'trigger_index' :P\",\"as_user\":\"somebody_else\",\"active\":true}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 12 Apr 2016 01:31:05 GMT",
+        "content-length": "346",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "14v07eg0aaaekp02jc866h9f7nag38rt",
+        "location": "/v1/triggers/b81a970a-2def-4ee2-9efb-969e9c10fec4"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token l0XktXn0+JHn1Mbi8NEaTVKMiLFcrUe5i/qpoSC0r60=",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/triggers"
+    },
+    "response": {
+      "body": "{\"triggers\":[{\"timeout_sec\":42,\"pipeline\":\"echo 'trigger_create' > chat://#general\",\"name\":\"echo_trigger_create\",\"invocation_url\":\"http://localhost:4001/v1/triggers/cca427d9-540e-4540-a6f2-944b3613999d\",\"id\":\"cca427d9-540e-4540-a6f2-944b3613999d\",\"description\":\"Echoes some data, probably 'trigger_create' :P\",\"as_user\":\"somebody_else\",\"active\":true},{\"timeout_sec\":42,\"pipeline\":\"echo 'trigger_create_errors' > chat://#general\",\"name\":\"echo_trigger_create_errors\",\"invocation_url\":\"http://localhost:4001/v1/triggers/c2392c7c-8ce6-47e8-9bac-3d2b5b6f7043\",\"id\":\"c2392c7c-8ce6-47e8-9bac-3d2b5b6f7043\",\"description\":\"Echoes some data, probably 'trigger_create_errors' :P\",\"as_user\":\"somebody_else\",\"active\":true},{\"timeout_sec\":42,\"pipeline\":\"echo 'trigger_index' > chat://#general\",\"name\":\"echo_trigger_index\",\"invocation_url\":\"http://localhost:4001/v1/triggers/b81a970a-2def-4ee2-9efb-969e9c10fec4\",\"id\":\"b81a970a-2def-4ee2-9efb-969e9c10fec4\",\"description\":\"Echoes some data, probably 'trigger_index' :P\",\"as_user\":\"somebody_else\",\"active\":true}]}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 12 Apr 2016 01:31:06 GMT",
+        "content-length": "1046",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "po6fjsf5cq5euajr3rqrrkv2c047pkrb"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

@@ -1,0 +1,53 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"N64gTbXXBUip8/NVxxZKb6J9UZjsiG72qXLueLyTkew=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 12 Apr 2016 02:02:05 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "q0g237gm4fj7hs600htvk2nuenuj270a"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token N64gTbXXBUip8/NVxxZKb6J9UZjsiG72qXLueLyTkew=",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/triggers?name=nothing_is_named_this"
+    },
+    "response": {
+      "body": "{\"triggers\":[]}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 12 Apr 2016 02:02:05 GMT",
+        "content-length": "15",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "5nh335cb536g4noisi0iqtjdr0vsr5mt"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

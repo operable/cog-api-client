@@ -7,6 +7,7 @@ defmodule CogApi.Fake.Server do
     relay_groups: [],
     roles: [],
     rules: [],
+    triggers: [],
     users: [],
   ]
 

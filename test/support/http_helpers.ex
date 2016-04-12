@@ -6,7 +6,7 @@ defmodule CogApi.Test.HTTPHelpers do
       username: "admin",
       password: "password",
       host: "localhost",
-      port: "4000",
+      port: "4000"
     } |> CogApi.HTTP.Client.authenticate
 
     endpoint
@@ -31,5 +31,13 @@ defmodule CogApi.Test.HTTPHelpers do
       username: "chief_of_staff#{test_name}",
       password: "supersecret",
     }
+  end
+
+  def trigger_params(test_name) do
+    %{name: "echo_#{test_name}",
+      pipeline: "echo '#{test_name}' > chat://#general",
+      as_user: "somebody_else",
+      timeout_sec: 42,
+      description: "Echoes some data, probably '#{test_name}' :P"}
   end
 end

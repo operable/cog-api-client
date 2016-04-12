@@ -8,6 +8,7 @@ defmodule CogApi.Client do
   alias CogApi.Resources.RelayGroup
   alias CogApi.Resources.Role
   alias CogApi.Resources.Rule
+  alias CogApi.Resources.Trigger
   alias CogApi.Resources.User
 
   @callback authenticate(%Endpoint{}) :: {atom, %Endpoint{}}
@@ -20,7 +21,7 @@ defmodule CogApi.Client do
 
   @callback group_index(%Endpoint{}) :: {atom, [%Group{}]}
   @callback group_show(%Endpoint{}, String.t) :: {atom, %Group{}}
-  @callback group_find(%Endpoint{}, %{}) :: {atom, %Group{}}
+  @callback group_find(%Endpoint{}, Keyword.t) :: {:ok, %Group{}} | {:error, term}
   @callback group_create(%Endpoint{}, %{}) :: {atom, %Group{}}
   @callback group_update(%Endpoint{}, String.t, %{}) :: {atom, %Group{}}
   @callback group_delete(%Endpoint{}, String.t) :: atom
@@ -61,6 +62,13 @@ defmodule CogApi.Client do
   @callback rule_create(String.t, %Endpoint{}) :: {atom, %Rule{}}
   @callback rule_delete(String.t, %Endpoint{}) :: atom
   @callback rule_delete(String.t, %Endpoint{}) :: {atom, [String.t]}
+
+  @callback trigger_show_by_name(%Endpoint{}, String.t) :: {:ok, %Trigger{}} | {:error, term}
+  @callback trigger_create(%Endpoint{}, %{}) :: {:ok, %Trigger{}} | {:error, term}
+  @callback trigger_delete(%Endpoint{}, String.t) :: :ok | {:error, term}
+  @callback trigger_index(%Endpoint{}) :: {:ok, [%Trigger{}]} | {:error, term}
+  @callback trigger_show(%Endpoint{}, String.t) :: {:ok, %Trigger{}} | {:error, term}
+  @callback trigger_update(%Endpoint{}, String.t, %{}) :: {:ok, %Trigger{}} | {:error, term}
 
   @callback user_index(%Endpoint{}) :: {atom, [%User{}]}
   @callback user_show(%Endpoint{}, String.t) :: {atom, %User{}}
