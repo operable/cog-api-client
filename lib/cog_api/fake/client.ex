@@ -173,23 +173,29 @@ defmodule CogApi.Fake.Client do
     Rules.delete(rule_id, endpoint)
   end
 
-  def trigger_by_name(%Endpoint{}=endpoint, name),
-    do: Triggers.by_name(endpoint, name)
+  def trigger_by_name(%Endpoint{}=endpoint, name) do
+    Triggers.by_name(endpoint, name)
+  end
 
-  def trigger_show(%Endpoint{}=endpoint, params),
-    do: Triggers.show(endpoint, params)
+  def trigger_create(%Endpoint{}=endpoint, params) do
+    Triggers.create(endpoint, params)
+  end
 
-  def trigger_create(%Endpoint{}=endpoint, params),
-    do: Triggers.create(endpoint, params)
+  def trigger_delete(%Endpoint{}=endpoint, id) do
+    Triggers.delete(endpoint, id)
+  end
 
-  def trigger_delete(%Endpoint{}=endpoint, id),
-    do: Triggers.delete(endpoint, id)
+  def trigger_index(%Endpoint{}=endpoint) do
+    Triggers.index(endpoint)
+  end
 
-  def trigger_index(%Endpoint{}=endpoint),
-    do: Triggers.index(endpoint)
+  def trigger_show(%Endpoint{}=endpoint, id) do
+    Triggers.show(endpoint, id)
+  end
 
-  def trigger_update(%Endpoint{}=endpoint, id, params),
-    do: Triggers.update(endpoint, id, params)
+  def trigger_update(%Endpoint{}=endpoint, id, params) do
+    Triggers.update(endpoint, id, params)
+  end
 
   def user_index(%Endpoint{}=endpoint) do
     Users.index(endpoint)
