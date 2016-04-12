@@ -1,0 +1,105 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"PstBKY858rbgCDTpk92SJOJGGsqG+oJu00YCWDXjZow=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 12 Apr 2016 01:45:50 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "9jccjhf4oat17ep3qrela009r9fvahmj"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"trigger\":{\"timeout_sec\":42,\"pipeline\":\"echo 'trigger_delete' > chat://#general\",\"name\":\"echo_trigger_delete\",\"description\":\"Echoes some data, probably 'trigger_delete' :P\",\"as_user\":\"somebody_else\"}}",
+      "headers": {
+        "authorization": "token PstBKY858rbgCDTpk92SJOJGGsqG+oJu00YCWDXjZow=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/triggers"
+    },
+    "response": {
+      "body": "{\"trigger\":{\"timeout_sec\":42,\"pipeline\":\"echo 'trigger_delete' > chat://#general\",\"name\":\"echo_trigger_delete\",\"invocation_url\":\"http://localhost:4001/v1/triggers/d0e29204-6367-40bd-9e13-ba8b675cf017\",\"id\":\"d0e29204-6367-40bd-9e13-ba8b675cf017\",\"description\":\"Echoes some data, probably 'trigger_delete' :P\",\"as_user\":\"somebody_else\",\"active\":true}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 12 Apr 2016 01:45:50 GMT",
+        "content-length": "349",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "bmvp8o7e081mr16aa5k1nihkgpavog3r",
+        "location": "/v1/triggers/d0e29204-6367-40bd-9e13-ba8b675cf017"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token PstBKY858rbgCDTpk92SJOJGGsqG+oJu00YCWDXjZow=",
+        "Accept": "application/json"
+      },
+      "method": "delete",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/triggers/d0e29204-6367-40bd-9e13-ba8b675cf017"
+    },
+    "response": {
+      "body": "",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 12 Apr 2016 01:45:50 GMT",
+        "content-length": "0",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "g1ks9o8179ocqmn8b1l0i63m33ooc2n1"
+      },
+      "status_code": 204,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token PstBKY858rbgCDTpk92SJOJGGsqG+oJu00YCWDXjZow=",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/triggers"
+    },
+    "response": {
+      "body": "{\"triggers\":[{\"timeout_sec\":42,\"pipeline\":\"echo 'trigger_show' > chat://#general\",\"name\":\"echo_trigger_show\",\"invocation_url\":\"http://localhost:4001/v1/triggers/c0c9dac3-b322-4b6d-8d42-08a29f4449e0\",\"id\":\"c0c9dac3-b322-4b6d-8d42-08a29f4449e0\",\"description\":\"Echoes some data, probably 'trigger_show' :P\",\"as_user\":\"somebody_else\",\"active\":true},{\"timeout_sec\":42,\"pipeline\":\"echo 'something that nobody has ever echoed before' > chat://#general\",\"name\":\"echo_trigger_update\",\"invocation_url\":\"http://localhost:4001/v1/triggers/d11019c1-36f3-4140-bd05-bf0fec5f84a9\",\"id\":\"d11019c1-36f3-4140-bd05-bf0fec5f84a9\",\"description\":\"Echoes some data, probably 'trigger_update' :P\",\"as_user\":\"somebody_else\",\"active\":true}]}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 12 Apr 2016 01:45:50 GMT",
+        "content-length": "714",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "c2r0dunme1828dr6sflv6t890eof6p3a"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

@@ -1,0 +1,80 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"7jDRNqeEr7WiQlLJB/3hmGn0pxnUimNXE4KnMD3pwR0=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 12 Apr 2016 01:44:39 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "pa3sm8ahl71i5igto162nnd66aoqvh22"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"trigger\":{\"timeout_sec\":42,\"pipeline\":\"echo 'trigger_update' > chat://#general\",\"name\":\"echo_trigger_update\",\"description\":\"Echoes some data, probably 'trigger_update' :P\",\"as_user\":\"somebody_else\"}}",
+      "headers": {
+        "authorization": "token 7jDRNqeEr7WiQlLJB/3hmGn0pxnUimNXE4KnMD3pwR0=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/triggers"
+    },
+    "response": {
+      "body": "{\"trigger\":{\"timeout_sec\":42,\"pipeline\":\"echo 'trigger_update' > chat://#general\",\"name\":\"echo_trigger_update\",\"invocation_url\":\"http://localhost:4001/v1/triggers/d11019c1-36f3-4140-bd05-bf0fec5f84a9\",\"id\":\"d11019c1-36f3-4140-bd05-bf0fec5f84a9\",\"description\":\"Echoes some data, probably 'trigger_update' :P\",\"as_user\":\"somebody_else\",\"active\":true}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 12 Apr 2016 01:44:39 GMT",
+        "content-length": "349",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "jtsdgbe2s5ejjfnmbprti0qp8p5b2bmf",
+        "location": "/v1/triggers/d11019c1-36f3-4140-bd05-bf0fec5f84a9"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"trigger\":{\"pipeline\":\"echo 'something that nobody has ever echoed before' > chat://#general\"}}",
+      "headers": {
+        "authorization": "token 7jDRNqeEr7WiQlLJB/3hmGn0pxnUimNXE4KnMD3pwR0=",
+        "Content-Type": "application/json"
+      },
+      "method": "patch",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/triggers/d11019c1-36f3-4140-bd05-bf0fec5f84a9"
+    },
+    "response": {
+      "body": "{\"trigger\":{\"timeout_sec\":42,\"pipeline\":\"echo 'something that nobody has ever echoed before' > chat://#general\",\"name\":\"echo_trigger_update\",\"invocation_url\":\"http://localhost:4001/v1/triggers/d11019c1-36f3-4140-bd05-bf0fec5f84a9\",\"id\":\"d11019c1-36f3-4140-bd05-bf0fec5f84a9\",\"description\":\"Echoes some data, probably 'trigger_update' :P\",\"as_user\":\"somebody_else\",\"active\":true}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 12 Apr 2016 01:44:39 GMT",
+        "content-length": "379",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "buvbvahqekjj427al4gev7rigo0jualh"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

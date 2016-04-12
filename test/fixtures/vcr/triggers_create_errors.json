@@ -1,0 +1,80 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"KT2JXnQhRBv8j1WU2ZdDblMaoit9R9AKARCI0AVLbTw=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 12 Apr 2016 01:27:39 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "42gvr79vpujpph00o6m66nt94ejcmd1v"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"trigger\":{\"timeout_sec\":42,\"pipeline\":\"echo 'trigger_create_errors' > chat://#general\",\"name\":\"echo_trigger_create_errors\",\"description\":\"Echoes some data, probably 'trigger_create_errors' :P\",\"as_user\":\"somebody_else\"}}",
+      "headers": {
+        "authorization": "token KT2JXnQhRBv8j1WU2ZdDblMaoit9R9AKARCI0AVLbTw=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/triggers"
+    },
+    "response": {
+      "body": "{\"trigger\":{\"timeout_sec\":42,\"pipeline\":\"echo 'trigger_create_errors' > chat://#general\",\"name\":\"echo_trigger_create_errors\",\"invocation_url\":\"http://localhost:4001/v1/triggers/c2392c7c-8ce6-47e8-9bac-3d2b5b6f7043\",\"id\":\"c2392c7c-8ce6-47e8-9bac-3d2b5b6f7043\",\"description\":\"Echoes some data, probably 'trigger_create_errors' :P\",\"as_user\":\"somebody_else\",\"active\":true}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 12 Apr 2016 01:27:39 GMT",
+        "content-length": "370",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "8jmb07lknd9u06gaqkvkqo4vhcrk538t",
+        "location": "/v1/triggers/c2392c7c-8ce6-47e8-9bac-3d2b5b6f7043"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"trigger\":{\"timeout_sec\":42,\"pipeline\":\"echo 'something else altogether' > chat://#general\",\"name\":\"echo_trigger_create_errors\",\"description\":\"Echoes some data, probably 'trigger_create_errors' :P\",\"as_user\":\"somebody_else\"}}",
+      "headers": {
+        "authorization": "token KT2JXnQhRBv8j1WU2ZdDblMaoit9R9AKARCI0AVLbTw=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/triggers"
+    },
+    "response": {
+      "body": "{\"errors\":{\"name\":[\"has already been taken\"]}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 12 Apr 2016 01:27:39 GMT",
+        "content-length": "46",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "95622rm3q63u3ue37akvea0e2m6sgolb"
+      },
+      "status_code": 422,
+      "type": "ok"
+    }
+  }
+]

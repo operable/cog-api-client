@@ -11,6 +11,7 @@ defmodule CogApi.Fake.Client do
   alias CogApi.Fake.Roles
   alias CogApi.Fake.Rules
   alias CogApi.Fake.Users
+  alias CogApi.Fake.Triggers
 
   def authenticate(%Endpoint{token: nil}=endpoint) do
     CogApi.Fake.Authentication.get_and_merge_token(endpoint)
@@ -171,6 +172,24 @@ defmodule CogApi.Fake.Client do
   def rule_delete(rule_id, %Endpoint{}=endpoint) do
     Rules.delete(rule_id, endpoint)
   end
+
+  def trigger_by_name(%Endpoint{}=endpoint, name),
+    do: Triggers.by_name(endpoint, name)
+
+  def trigger_show(%Endpoint{}=endpoint, params),
+    do: Triggers.show(endpoint, params)
+
+  def trigger_create(%Endpoint{}=endpoint, params),
+    do: Triggers.create(endpoint, params)
+
+  def trigger_delete(%Endpoint{}=endpoint, id),
+    do: Triggers.delete(endpoint, id)
+
+  def trigger_index(%Endpoint{}=endpoint),
+    do: Triggers.index(endpoint)
+
+  def trigger_update(%Endpoint{}=endpoint, id, params),
+    do: Triggers.update(endpoint, id, params)
 
   def user_index(%Endpoint{}=endpoint) do
     Users.index(endpoint)

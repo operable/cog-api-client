@@ -1,0 +1,54 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"HZpXKav7fUeDCUibKstObsfQTQtOFNfB09zBePSm74U=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 12 Apr 2016 01:25:26 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "7qn2k96vm2es358ogljli0ihq0kefn5h"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"trigger\":{\"timeout_sec\":42,\"pipeline\":\"echo 'trigger_create' > chat://#general\",\"name\":\"echo_trigger_create\",\"description\":\"Echoes some data, probably 'trigger_create' :P\",\"as_user\":\"somebody_else\"}}",
+      "headers": {
+        "authorization": "token HZpXKav7fUeDCUibKstObsfQTQtOFNfB09zBePSm74U=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/triggers"
+    },
+    "response": {
+      "body": "{\"trigger\":{\"timeout_sec\":42,\"pipeline\":\"echo 'trigger_create' > chat://#general\",\"name\":\"echo_trigger_create\",\"invocation_url\":\"http://localhost:4001/v1/triggers/cca427d9-540e-4540-a6f2-944b3613999d\",\"id\":\"cca427d9-540e-4540-a6f2-944b3613999d\",\"description\":\"Echoes some data, probably 'trigger_create' :P\",\"as_user\":\"somebody_else\",\"active\":true}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 12 Apr 2016 01:25:26 GMT",
+        "content-length": "349",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "pk496nncd1ka5vd56rdllauit429csjj",
+        "location": "/v1/triggers/cca427d9-540e-4540-a6f2-944b3613999d"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  }
+]
