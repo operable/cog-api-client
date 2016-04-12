@@ -55,14 +55,14 @@ defmodule CogApi.HTTP.TriggersTest do
         endpoint = valid_endpoint
 
         {:ok, trigger}  = Client.trigger_create(endpoint, params)
-        assert {:ok, ^trigger} = Client.trigger_by_name(endpoint, params[:name])
+        assert {:ok, ^trigger} = Client.trigger_show_by_name(endpoint, params[:name])
       end
     end
 
     it "returns nothing if searching by an invalid name" do
       cassette "triggers_search_error" do
         endpoint = valid_endpoint
-        assert {:error, :not_found} = Client.trigger_by_name(endpoint, "nothing_is_named_this")
+        assert {:error, :not_found} = Client.trigger_show_by_name(endpoint, "nothing_is_named_this")
       end
     end
   end

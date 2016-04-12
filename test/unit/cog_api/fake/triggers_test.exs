@@ -60,11 +60,11 @@ defmodule CogApi.Fake.TriggersTest do
                  description: "Echoes stuff"}
 
       {:ok, trigger}  = Client.trigger_create(fake_endpoint, params)
-      assert {:ok, ^trigger} = Client.trigger_by_name(fake_endpoint, params[:name])
+      assert {:ok, ^trigger} = Client.trigger_show_by_name(fake_endpoint, params[:name])
     end
 
     it "returns nothing if searching by an invalid name" do
-      assert {:error, :not_found} = Client.trigger_by_name(fake_endpoint, "nothing_is_named_this")
+      assert {:error, :not_found} = Client.trigger_show_by_name(fake_endpoint, "nothing_is_named_this")
     end
   end
 

@@ -181,7 +181,7 @@ defmodule CogApi.HTTP.Client do
     Rules.delete(rule_id, endpoint)
   end
 
-  def trigger_by_name(%Endpoint{}=endpoint, name) do
+  def trigger_show_by_name(%Endpoint{}=endpoint, name) do
     Triggers.by_name(endpoint, name)
   end
 

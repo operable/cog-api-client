@@ -63,7 +63,7 @@ defmodule CogApi.Client do
   @callback rule_delete(String.t, %Endpoint{}) :: atom
   @callback rule_delete(String.t, %Endpoint{}) :: {atom, [String.t]}
 
-  @callback trigger_by_name(%Endpoint{}, String.t) :: {:ok, %Trigger{}} | {:error, term}
+  @callback trigger_show_by_name(%Endpoint{}, String.t) :: {:ok, %Trigger{}} | {:error, term}
   @callback trigger_create(%Endpoint{}, %{}) :: {:ok, %Trigger{}} | {:error, term}
   @callback trigger_delete(%Endpoint{}, String.t) :: :ok | {:error, term}
   @callback trigger_index(%Endpoint{}) :: {:ok, [%Trigger{}]} | {:error, term}
