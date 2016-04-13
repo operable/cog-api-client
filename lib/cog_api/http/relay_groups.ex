@@ -68,16 +68,24 @@ defmodule CogApi.HTTP.RelayGroups do
   end
 
   def add_bundle(%{name: name}, %{bundle: bundle_name}, %Endpoint{}=endpoint) do
-    {relay_group, bundle} = get_relay_bundle(name, bundle_name, endpoint)
-    update_assignments(relay_group.id, bundle.id, :add, endpoint)
+    case get_relay_bundle(name, bundle_name, endpoint) do
+      {:ok, relay_group, bundle} ->
+        update_assignments(relay_group.id, bundle.id, :add, endpoint)
+      error ->
+        error
+    end
   end
   def add_bundle(relay_group_id, bundle_id, %Endpoint{}=endpoint) do
     update_assignments(relay_group_id, bundle_id, :add, endpoint)
   end
 
   def remove_bundle(%{name: name}, %{bundle: bundle_name}, %Endpoint{}=endpoint) do
-    {relay_group, bundle} = get_relay_bundle(name, bundle_name, endpoint)
-    update_assignments(relay_group.id, bundle.id, :remove, endpoint)
+    case get_relay_bundle(name, bundle_name, endpoint) do
+      {:ok, relay_group, bundle} ->
+        update_assignments(relay_group.id, bundle.id, :remove, endpoint)
+      error ->
+        error
+    end
   end
   def remove_bundle(relay_group_id, bundle_id, %Endpoint{}=endpoint) do
     update_assignments(relay_group_id, bundle_id, :remove, endpoint)
@@ -87,7 +95,7 @@ defmodule CogApi.HTTP.RelayGroups do
     with {:ok, bundle} <- Base.get_by(endpoint, "bundles", name: bundle_name)
         |> ApiResponse.format(%{"bundle" => CogApi.Resources.Bundle.format}),
       {:ok, relay_group} <- show(%{name: name}, endpoint),
-      do: {relay_group, bundle}
+      do: {:ok, relay_group, bundle}
   end
 
   defp update_assignments(relay_group_id, relay_id, action, endpoint) do
