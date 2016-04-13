@@ -58,7 +58,7 @@ defmodule CogApi.HTTP.Base do
         %{"id" => id} ->
           {:ok, id}
         nil ->
-          {:error, "Resource not found"}
+          {:error, "Resource not found for: '#{resource}'"}
       end
     end
   end
