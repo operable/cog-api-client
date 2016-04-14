@@ -11,14 +11,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"XvyeMV84vKMDQYA07YoE01cMU1GgSm1VthYB7hBakEI=\"}}",
+      "body": "{\"token\":{\"value\":\"sOjWO3ZB7vaSoYhXtTpyc/OhrwWOHprZ31JC1DTZeY8=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Tue, 12 Apr 2016 20:18:59 GMT",
+        "date": "Thu, 14 Apr 2016 14:14:31 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "jgifvkuc56b8e8rtilac9peovvm21sbf"
+        "x-request-id": "c75noocvg1gt7krh120qtv712pa5ema5"
       },
       "status_code": 201,
       "type": "ok"
@@ -26,9 +26,9 @@
   },
   {
     "request": {
-      "body": "{\"bundle\":{\"version\":\"0.0.1\",\"name\":\"remove_bundle\",\"commands\":{\"test_command\":{\"executable\":\"/bin/foobar\"}}}}",
+      "body": "{\"bundle\":{\"version\":\"0.0.1\",\"name\":\"remove_bundle\",\"commands\":{\"test_command\":{\"executable\":\"/bin/foobar\"}},\"cog_bundle_version\":2}}",
       "headers": {
-        "authorization": "token XvyeMV84vKMDQYA07YoE01cMU1GgSm1VthYB7hBakEI=",
+        "authorization": "token sOjWO3ZB7vaSoYhXtTpyc/OhrwWOHprZ31JC1DTZeY8=",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,15 +37,15 @@
       "url": "http://localhost:4000/v1/bundles"
     },
     "response": {
-      "body": "{\"bundle\":{\"updated_at\":\"2016-04-12T20:19:00Z\",\"relay_groups\":[],\"name\":\"remove_bundle\",\"inserted_at\":\"2016-04-12T20:19:00Z\",\"id\":\"67e83410-7291-4e77-8cee-3b69b4df3d48\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"2e97a1ef-a751-467a-9c54-97c1cbbd5f00\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]}}",
+      "body": "{\"bundle\":{\"updated_at\":\"2016-04-14T14:14:32Z\",\"relay_groups\":[],\"name\":\"remove_bundle\",\"inserted_at\":\"2016-04-14T14:14:32Z\",\"id\":\"67bfb156-ca5a-4815-bde6-1a283000f623\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"743b153e-205d-45cd-ba72-d5b20957410a\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Tue, 12 Apr 2016 20:18:59 GMT",
+        "date": "Thu, 14 Apr 2016 14:14:31 GMT",
         "content-length": "339",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "mpvp3lpltq3bjeauk2pds58t9t1heccs",
-        "location": "/v1/bundles/67e83410-7291-4e77-8cee-3b69b4df3d48"
+        "x-request-id": "37ob77sipdomplm1n4mlis33ajdif88b",
+        "location": "/v1/bundles/67bfb156-ca5a-4815-bde6-1a283000f623"
       },
       "status_code": 201,
       "type": "ok"
@@ -55,7 +55,7 @@
     "request": {
       "body": "{\"relay_group\":{\"name\":\"add_bundle\"}}",
       "headers": {
-        "authorization": "token XvyeMV84vKMDQYA07YoE01cMU1GgSm1VthYB7hBakEI=",
+        "authorization": "token sOjWO3ZB7vaSoYhXtTpyc/OhrwWOHprZ31JC1DTZeY8=",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -64,15 +64,15 @@
       "url": "http://localhost:4000/v1/relay_groups"
     },
     "response": {
-      "body": "{\"relay_group\":{\"updated_at\":\"2016-04-12T20:19:00Z\",\"relays\":[],\"name\":\"add_bundle\",\"inserted_at\":\"2016-04-12T20:19:00Z\",\"id\":\"daf6110a-96cf-472d-ae24-2da909f3f9a2\",\"bundles\":[]}}",
+      "body": "{\"relay_group\":{\"updated_at\":\"2016-04-14T14:14:32Z\",\"relays\":[],\"name\":\"add_bundle\",\"inserted_at\":\"2016-04-14T14:14:32Z\",\"id\":\"0853f0bc-562b-40cd-8836-03f982579c12\",\"bundles\":[]}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Tue, 12 Apr 2016 20:18:59 GMT",
+        "date": "Thu, 14 Apr 2016 14:14:32 GMT",
         "content-length": "179",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "l7fjosrb3v3rquurh6hm6n75pgirqs9j",
-        "location": "/v1/groups/daf6110a-96cf-472d-ae24-2da909f3f9a2"
+        "x-request-id": "24bi5ko157s9uqk3683lak2pacebjjag",
+        "location": "/v1/groups/0853f0bc-562b-40cd-8836-03f982579c12"
       },
       "status_code": 201,
       "type": "ok"
@@ -80,25 +80,25 @@
   },
   {
     "request": {
-      "body": "{\"bundles\":{\"add\":[\"67e83410-7291-4e77-8cee-3b69b4df3d48\"]}}",
+      "body": "{\"bundles\":{\"add\":[\"67bfb156-ca5a-4815-bde6-1a283000f623\"]}}",
       "headers": {
-        "authorization": "token XvyeMV84vKMDQYA07YoE01cMU1GgSm1VthYB7hBakEI=",
+        "authorization": "token sOjWO3ZB7vaSoYhXtTpyc/OhrwWOHprZ31JC1DTZeY8=",
         "Content-Type": "application/json"
       },
       "method": "post",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/relay_groups/daf6110a-96cf-472d-ae24-2da909f3f9a2/assignment"
+      "url": "http://localhost:4000/v1/relay_groups/0853f0bc-562b-40cd-8836-03f982579c12/assignment"
     },
     "response": {
-      "body": "{\"relay_group\":{\"updated_at\":\"2016-04-12T20:19:00Z\",\"relays\":[],\"name\":\"add_bundle\",\"inserted_at\":\"2016-04-12T20:19:00Z\",\"id\":\"daf6110a-96cf-472d-ae24-2da909f3f9a2\",\"bundles\":[{\"updated_at\":\"2016-04-12T20:19:00Z\",\"name\":\"remove_bundle\",\"inserted_at\":\"2016-04-12T20:19:00Z\",\"id\":\"67e83410-7291-4e77-8cee-3b69b4df3d48\",\"enabled\":false}]}}",
+      "body": "{\"relay_group\":{\"updated_at\":\"2016-04-14T14:14:32Z\",\"relays\":[],\"name\":\"add_bundle\",\"inserted_at\":\"2016-04-14T14:14:32Z\",\"id\":\"0853f0bc-562b-40cd-8836-03f982579c12\",\"bundles\":[{\"updated_at\":\"2016-04-14T14:14:32Z\",\"name\":\"remove_bundle\",\"inserted_at\":\"2016-04-14T14:14:32Z\",\"id\":\"67bfb156-ca5a-4815-bde6-1a283000f623\",\"enabled\":false}]}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Tue, 12 Apr 2016 20:19:00 GMT",
+        "date": "Thu, 14 Apr 2016 14:14:32 GMT",
         "content-length": "336",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "jth2gmv073okl4f33e661omvmgls48hi"
+        "x-request-id": "je6607vl3i35i1b1ldv0ba1bpitfmmcd"
       },
       "status_code": 200,
       "type": "ok"
@@ -106,25 +106,25 @@
   },
   {
     "request": {
-      "body": "{\"bundles\":{\"remove\":[\"67e83410-7291-4e77-8cee-3b69b4df3d48\"]}}",
+      "body": "{\"bundles\":{\"remove\":[\"67bfb156-ca5a-4815-bde6-1a283000f623\"]}}",
       "headers": {
-        "authorization": "token XvyeMV84vKMDQYA07YoE01cMU1GgSm1VthYB7hBakEI=",
+        "authorization": "token sOjWO3ZB7vaSoYhXtTpyc/OhrwWOHprZ31JC1DTZeY8=",
         "Content-Type": "application/json"
       },
       "method": "post",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/relay_groups/daf6110a-96cf-472d-ae24-2da909f3f9a2/assignment"
+      "url": "http://localhost:4000/v1/relay_groups/0853f0bc-562b-40cd-8836-03f982579c12/assignment"
     },
     "response": {
-      "body": "{\"relay_group\":{\"updated_at\":\"2016-04-12T20:19:00Z\",\"relays\":[],\"name\":\"add_bundle\",\"inserted_at\":\"2016-04-12T20:19:00Z\",\"id\":\"daf6110a-96cf-472d-ae24-2da909f3f9a2\",\"bundles\":[]}}",
+      "body": "{\"relay_group\":{\"updated_at\":\"2016-04-14T14:14:32Z\",\"relays\":[],\"name\":\"add_bundle\",\"inserted_at\":\"2016-04-14T14:14:32Z\",\"id\":\"0853f0bc-562b-40cd-8836-03f982579c12\",\"bundles\":[]}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Tue, 12 Apr 2016 20:19:00 GMT",
+        "date": "Thu, 14 Apr 2016 14:14:32 GMT",
         "content-length": "179",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "sfe599ugc8ir5la0rq289hu9ep34uqsj"
+        "x-request-id": "7uupko626ggdh8b1gqufcall94bcbvua"
       },
       "status_code": 200,
       "type": "ok"

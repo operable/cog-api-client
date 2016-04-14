@@ -128,7 +128,7 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         cassette "relay_group_delete_failure_by_name" do
           {:error, [error]} = Client.relay_group_delete(%{name: "nada"}, valid_endpoint)
 
-          assert error == "The relay group `nada` could not be deleted: Resource not found"
+          assert error == "The relay group `nada` could not be deleted: Resource not found for: 'relay_groups'"
         end
       end
     end
@@ -147,6 +147,30 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         [grouped_bundle] = group.bundles
 
         assert grouped_bundle.id == bundle.id
+      end
+    end
+
+    it "errors when adding a bundle to group that does not exist" do
+      cassette "relay_group_add_bundle_to_bad_group" do
+        endpoint = valid_endpoint
+        bundle = create_bundle(endpoint, "add_bundle")
+
+        {:error, [error]} = Client.relay_group_add_bundle(%{name: "foo"}, %{bundle: bundle.name}, endpoint)
+
+        assert error == "Resource not found for: 'relay_groups'"
+      end
+    end
+
+    it "errors when adding a non existent bundle to a group" do
+      cassette "relay_group_add_bad_bundle" do
+        endpoint = valid_endpoint
+
+        group = Client.relay_group_create(%{name: "add_bundle"}, endpoint) |> get_value
+        assert group.bundles == []
+
+        {:error, [error]} = Client.relay_group_add_bundle(%{name: group.name}, %{bundle: "foo"}, endpoint)
+
+        assert error == "Resource not found for: 'bundles'"
       end
     end
 
@@ -273,6 +297,7 @@ defmodule CogApi.HTTP.RelayGroupsTest do
     params = %{
       "name" => name,
       "version" => "0.0.1",
+      "cog_bundle_version" => 2,
       "commands" => %{
         "test_command" => %{
           "executable" => "/bin/foobar",
