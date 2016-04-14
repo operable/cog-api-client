@@ -31,10 +31,16 @@ defmodule CogApi.HTTP.UsersTest do
           endpoint = valid_endpoint
           params = user_params("user_show")
           created_user = Client.user_create(endpoint, params) |> get_value
+          role = Client.role_create(endpoint, %{name: "user_show_role"}) |> get_value
+          group = Client.group_create(endpoint, %{name: "user_show_group"}) |> get_value
+          Client.role_grant(endpoint, role, group)
+          Client.group_add_user(endpoint, group, created_user)
 
           found_user = Client.user_show(endpoint, created_user.id) |> get_value
 
           assert found_user.id == created_user.id
+          assert Enum.map(found_user.groups, &(&1.id)) == [group.id]
+          assert List.first(found_user.groups).roles == [role]
         end
       end
     end

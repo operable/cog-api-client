@@ -14,7 +14,7 @@ defmodule CogApi.Resources.User do
 
   def format do
     %__MODULE__{
-      groups: [%Group{}],
+      groups: [Group.format],
     }
   end
 
