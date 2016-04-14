@@ -133,8 +133,8 @@ defmodule CogApi.HTTP.Client do
     RelayGroups.remove_relay(relay_group_id, relay_id, endpoint)
   end
 
-  def relay_group_add_bundle(relay_group_id, bundle_id, %Endpoint{}=endpoint) do
-    RelayGroups.add_bundle(relay_group_id, bundle_id, endpoint)
+  def relay_group_assign_bundles(relay_group, bundles, %Endpoint{}=endpoint) do
+    RelayGroups.assign_bundles(relay_group, bundles, endpoint)
   end
 
   def relay_group_remove_bundle(relay_group_id, bundle_id, %Endpoint{}=endpoint) do
