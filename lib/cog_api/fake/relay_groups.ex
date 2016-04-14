@@ -32,7 +32,9 @@ defmodule CogApi.Fake.RelayGroups do
 
   def update(_, _, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
   def update(id, params, %Endpoint{token: _}) do
-    {:ok, Server.update(RelayGroup, id, params)}
+    catch_errors params, fn ->
+      {:ok, Server.update(RelayGroup, id, params)}
+    end
   end
 
   def delete(_, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
