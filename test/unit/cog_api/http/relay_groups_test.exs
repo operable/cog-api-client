@@ -150,6 +150,30 @@ defmodule CogApi.HTTP.RelayGroupsTest do
       end
     end
 
+    it "errors when adding a bundle to group that does not exist" do
+      cassette "relay_group_add_bundle_to_bad_group" do
+        endpoint = valid_endpoint
+        bundle = create_bundle(endpoint, "add_bundle")
+
+        {:error, [error]} = Client.relay_group_add_bundle(%{name: "foo"}, %{bundle: bundle.name}, endpoint)
+
+        assert error == "Resource not found for: 'relay_groups'"
+      end
+    end
+
+    it "errors when adding a non existent bundle to a group" do
+      cassette "relay_group_add_bad_bundle" do
+        endpoint = valid_endpoint
+
+        group = Client.relay_group_create(%{name: "add_bundle"}, endpoint) |> get_value
+        assert group.bundles == []
+
+        {:error, [error]} = Client.relay_group_add_bundle(%{name: group.name}, %{bundle: "foo"}, endpoint)
+
+        assert error == "Resource not found for: 'bundles'"
+      end
+    end
+
     context "when passing names" do
       it "adds bundle to the relay group" do
         cassette "relay_group_add_bundle_with_name" do
@@ -273,6 +297,7 @@ defmodule CogApi.HTTP.RelayGroupsTest do
     params = %{
       "name" => name,
       "version" => "0.0.1",
+      "cog_bundle_version" => 2,
       "commands" => %{
         "test_command" => %{
           "executable" => "/bin/foobar",
