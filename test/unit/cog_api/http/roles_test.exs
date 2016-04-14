@@ -18,6 +18,7 @@ defmodule CogApi.HTTP.RolesTest do
         last_role = List.last(roles)
         assert last_role.id == role.id
         assert last_role.name == role.name
+        assert last_role.groups == []
       end
     end
   end

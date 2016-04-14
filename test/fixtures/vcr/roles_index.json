@@ -11,14 +11,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"fvr/HyNIIa+HenMJlRkXIVWMbb1XmW+9i+KEOGy6tMU=\"}}",
+      "body": "{\"token\":{\"value\":\"sh+CSDr62Kxkxt4NsIZJsJSBeaBsIkGeIMuI12rZSyI=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 31 Mar 2016 19:52:11 GMT",
+        "date": "Thu, 14 Apr 2016 18:48:03 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "sb6ivckb6ffk2jsia2jvgtel8d1lt5i2"
+        "x-request-id": "n4p0otgnjit07q6ge5n5if6bt0pbskg6"
       },
       "status_code": 201,
       "type": "ok"
@@ -28,7 +28,7 @@
     "request": {
       "body": "{\"role\":{\"name\":\"role_index\"}}",
       "headers": {
-        "authorization": "token fvr/HyNIIa+HenMJlRkXIVWMbb1XmW+9i+KEOGy6tMU=",
+        "authorization": "token sh+CSDr62Kxkxt4NsIZJsJSBeaBsIkGeIMuI12rZSyI=",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,15 +37,15 @@
       "url": "http://localhost:4000/v1/roles"
     },
     "response": {
-      "body": "{\"role\":{\"permissions\":[],\"name\":\"role_index\",\"id\":\"ff97a096-9e60-452b-bdd3-f737758d06bf\"}}",
+      "body": "{\"role\":{\"permissions\":[],\"name\":\"role_index\",\"id\":\"6f0ab08f-a196-4d4a-8f61-c9ecd9e233b7\",\"groups\":[]}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 31 Mar 2016 19:52:11 GMT",
-        "content-length": "91",
+        "date": "Thu, 14 Apr 2016 18:48:03 GMT",
+        "content-length": "103",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "ooc2p1ugnk0lqqbkbqrtr9kk3hlg7u72",
-        "location": "/v1/roles/ff97a096-9e60-452b-bdd3-f737758d06bf"
+        "x-request-id": "nm3khc4vrn8au5krhbbqs3icv2qd8u31",
+        "location": "/v1/roles/6f0ab08f-a196-4d4a-8f61-c9ecd9e233b7"
       },
       "status_code": 201,
       "type": "ok"
@@ -55,7 +55,7 @@
     "request": {
       "body": "",
       "headers": {
-        "authorization": "token fvr/HyNIIa+HenMJlRkXIVWMbb1XmW+9i+KEOGy6tMU=",
+        "authorization": "token sh+CSDr62Kxkxt4NsIZJsJSBeaBsIkGeIMuI12rZSyI=",
         "Accept": "application/json"
       },
       "method": "get",
@@ -64,14 +64,14 @@
       "url": "http://localhost:4000/v1/roles"
     },
     "response": {
-      "body": "{\"roles\":[{\"permissions\":[],\"name\":\"role_grant\",\"id\":\"7d012052-3fe7-49dc-aab7-05b6717d8454\"},{\"permissions\":[],\"name\":\"updated role\",\"id\":\"e3c9f216-33fb-41a1-8cb0-79e029abb13e\"},{\"permissions\":[],\"name\":\"role_index\",\"id\":\"ff97a096-9e60-452b-bdd3-f737758d06bf\"}]}",
+      "body": "{\"roles\":[{\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_commands\",\"id\":\"6c341612-af32-4448-a346-7a8c7f66b65a\"},{\"namespace\":\"operable\",\"name\":\"manage_groups\",\"id\":\"9019982e-a460-4329-9d58-3c0cbdcfca5b\"},{\"namespace\":\"operable\",\"name\":\"manage_permissions\",\"id\":\"67ba1773-e7a3-4a48-b9e2-80a50e285b9b\"},{\"namespace\":\"operable\",\"name\":\"manage_roles\",\"id\":\"5911a318-eb90-4301-a248-8604a647fa8a\"},{\"namespace\":\"operable\",\"name\":\"manage_users\",\"id\":\"4834ac27-9b19-49a3-86f8-8c288397ebee\"},{\"namespace\":\"operable\",\"name\":\"manage_relays\",\"id\":\"2decddbf-6bdb-47f9-9b9a-9016c81a17bd\"},{\"namespace\":\"operable\",\"name\":\"manage_triggers\",\"id\":\"50ed85c0-b8ef-455e-a427-6f30a83cd736\"}],\"name\":\"cog-admin\",\"id\":\"bca420a6-6cce-4a0f-8767-09dc884f47c9\",\"groups\":[{\"name\":\"cog-admin\",\"id\":\"1b3f8196-3380-4933-9caa-5d14f5366c1c\"}]},{\"permissions\":[],\"name\":\"role_index\",\"id\":\"6f0ab08f-a196-4d4a-8f61-c9ecd9e233b7\",\"groups\":[]}]}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 31 Mar 2016 19:52:11 GMT",
-        "content-length": "262",
+        "date": "Thu, 14 Apr 2016 18:48:03 GMT",
+        "content-length": "914",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "6l5l6bnlsmefeqatr4nij6ulcfdvb0eq"
+        "x-request-id": "6rlfaqka5e3ru919hnqllf60ms93drni"
       },
       "status_code": 200,
       "type": "ok"

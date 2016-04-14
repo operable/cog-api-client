@@ -9,15 +9,15 @@ defmodule CogApi.Fake.Roles do
 
   def index(%Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
   def index(%Endpoint{}) do
-    {:ok, Server.index(Role)}
+    {:ok, Server.index(Role) |> Enum.map(&(prepare_role(&1)))}
   end
 
   def show(%Endpoint{token: nil}, _),  do: Endpoint.invalid_endpoint
   def show(%Endpoint{}, %{name: name}) do
-    {:ok, Server.show_by_key(Role, :name, name)}
+    {:ok, prepare_role(Server.show_by_key(Role, :name, name))}
   end
   def show(%Endpoint{}, id) do
-    {:ok, Server.show(Role, id)}
+    {:ok, prepare_role(Server.show(Role, id))}
   end
 
   def create(%Endpoint{token: nil}, %{name: _}), do: Endpoint.invalid_endpoint
@@ -28,7 +28,7 @@ defmodule CogApi.Fake.Roles do
 
   def update(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def update(%Endpoint{token: _}, id, params) do
-    {:ok, Server.update(Role, id, params)}
+    {:ok, Server.update(Role, id, params) |> prepare_role}
   end
 
   def delete(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
@@ -53,7 +53,7 @@ defmodule CogApi.Fake.Roles do
   def add_permission(%Endpoint{}, role, permission) do
     if found_permission  = matching_permission(Server.index(Permission), permission) do
       role = %{role | permissions: role.permissions ++ [found_permission]}
-      {:ok, Server.update(Role, role.id, role)}
+      {:ok, Server.update(Role, role.id, role) |> prepare_role}
     else
       {:error, ["Not found permissions - #{Permission.full_name(permission)}"]}
     end
@@ -63,7 +63,7 @@ defmodule CogApi.Fake.Roles do
   def remove_permission(%Endpoint{}, role, permission) do
     if permission = matching_permission(Server.index(Permission), permission) do
       role = %{role | permissions: List.delete(role.permissions, permission)}
-      {:ok, Server.update(Role, role.id, role)}
+      {:ok, Server.update(Role, role.id, role) |> prepare_role}
     end
   end
 
@@ -74,5 +74,12 @@ defmodule CogApi.Fake.Roles do
 
   defp permissions_match?(%Permission{} = permission, %Permission{} = match) do
     permission.namespace == match.namespace && permission.name == match.name
+  end
+
+  defp prepare_role(role) do
+    groups = Server.index(Group)
+    |> Enum.filter(fn group -> Enum.member?(group.roles, role) end)
+
+    %{role | groups: groups}
   end
 end

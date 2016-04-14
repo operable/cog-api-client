@@ -33,6 +33,18 @@ defmodule CogApi.Fake.RolesTest do
         {:ok, found_role} = Client.role_show(fake_endpoint, created_role.id)
 
         assert found_role.id == created_role.id
+        assert found_role.groups == []
+      end
+
+      it "returns the groups that are associated with that role" do
+        role = Client.role_create(fake_endpoint, %{name: "role"}) |> get_value
+        group = Client.group_create(fake_endpoint, %{name: "group"}) |> get_value
+
+        group = Client.role_grant(fake_endpoint, role, group) |> get_value
+
+        role = Client.role_show(fake_endpoint, role.id) |> get_value
+
+        assert role.groups == [group]
       end
     end
   end
