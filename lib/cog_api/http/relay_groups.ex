@@ -67,7 +67,7 @@ defmodule CogApi.HTTP.RelayGroups do
     |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
   end
 
-  def update_assignments(action, %{name: name}, %{bundles: bundle_names}, endpoint) do
+  def update_assignments(action, %{name: name}, %{bundles: bundle_names}, endpoint) when is_list(bundle_names) do
     with {:ok, relay_group} <- show(%{name: name}, endpoint),
          {:ok, bundle_ids}  <- get_bundle_ids(bundle_names, endpoint) do
       update_assignments(action, relay_group.id, bundle_ids, endpoint)

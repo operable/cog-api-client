@@ -100,9 +100,11 @@ defmodule CogApi.Fake.RelayGroups do
     relay_group = Server.show_by_key(RelayGroup, :name, name)
     Enum.map(bundle_names, &Server.show_by_key(Bundle, :name, &1))
     |> Enum.map(&add_bundle(&1, relay_group))
+    |> reduce_groups
   end
   def add_bundles(id, bundle_ids, %Endpoint{token: _}=endpoint) when is_list(bundle_ids) do
     Enum.map(bundle_ids, &add_bundles(id, &1, endpoint))
+    |> reduce_groups
   end
   def add_bundles(id, bundle_id, %Endpoint{token: _}) do
     bundle = Server.show(Bundle, bundle_id)
@@ -122,9 +124,11 @@ defmodule CogApi.Fake.RelayGroups do
     relay_group = Server.show_by_key(RelayGroup, :name, name)
     Enum.map(bundle_names, &Server.show_by_key(Bundle, :name, &1))
     |> Enum.map(&remove_bundle(&1, relay_group))
+    |> reduce_groups
   end
   def remove_bundles(id, bundle_ids, %Endpoint{token: _}=endpoint) when is_list(bundle_ids) do
     Enum.map(bundle_ids, &remove_bundles(id, &1, endpoint))
+    |> reduce_groups
   end
   def remove_bundles(id, bundle_id, %Endpoint{token: _}) do
     bundle = Server.show(Bundle, bundle_id)
@@ -145,5 +149,15 @@ defmodule CogApi.Fake.RelayGroups do
   defp update_bundles(bundle, relay_group) do
     Server.update(Bundle, bundle.id, bundle)
     {:ok, Server.update(RelayGroup, relay_group.id, relay_group)}
+  end
+
+  # Takes a list of relay group tuples and returns {:ok, [groups]} or error
+  defp reduce_groups(groups) do
+    Enum.reduce_while(groups, [], fn
+      ({:ok, bundle}, {:ok, acc}) ->
+        {:cont, {:ok, [bundle | acc]}}
+      (error, _) ->
+        {:halt, error}
+    end)
   end
 end
