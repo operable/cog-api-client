@@ -135,11 +135,11 @@ defmodule CogApi.HTTP.Client do
   end
 
   def relay_group_add_relay(relay_group_id, relay_id, %Endpoint{}=endpoint) do
-    RelayGroups.add_relay(relay_group_id, relay_id, endpoint)
+    RelayGroups.update_memberships(:add, relay_group_id, relay_id, endpoint)
   end
 
   def relay_group_remove_relay(relay_group_id, relay_id, %Endpoint{}=endpoint) do
-    RelayGroups.remove_relay(relay_group_id, relay_id, endpoint)
+    RelayGroups.update_memberships(:remove, relay_group_id, relay_id, endpoint)
   end
 
   def relay_group_add_bundles(relay_group_id, bundle_ids, %Endpoint{}=endpoint) do
