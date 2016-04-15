@@ -189,6 +189,7 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         returned_bundle_ids = MapSet.new(updated_group.bundles, &Map.fetch!(&1, :id))
         intersection = MapSet.intersection(MapSet.new(bundle_ids), returned_bundle_ids)
 
+        assert length(updated_group.bundles) == length(bundle_ids)
         assert MapSet.size(intersection) == length(bundle_ids)
       end
     end
