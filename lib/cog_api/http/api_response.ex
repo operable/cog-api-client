@@ -2,10 +2,12 @@ defmodule CogApi.HTTP.ApiResponse do
   alias HTTPotion.Response
 
   @no_content 204
-  @forbidden 403
-  @unprocessable 422
 
-  @error_codes [@forbidden, @unprocessable]
+  defmacrop http_error?(status_code) do
+    quote do
+      unquote(status_code) > 399
+    end
+  end
 
   def format(response, struct_map \\ nil)
 
@@ -14,7 +16,7 @@ defmodule CogApi.HTTP.ApiResponse do
   end
 
   def format(%Response{status_code: @no_content}, _), do: :ok
-  def format(response = %Response{status_code: code}, _) when code in @error_codes do
+  def format(%Response{status_code: code}=response, _) when http_error?(code) do
     format_error(response)
   end
 
@@ -106,4 +108,5 @@ defmodule CogApi.HTTP.ApiResponse do
       :error
     end
   end
+
 end
