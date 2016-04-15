@@ -75,7 +75,7 @@ defmodule CogApi.HTTP.RelayGroups do
   end
   def update_assignments(action, relay_group_id, bundle_ids, endpoint) when is_list(bundle_ids) do
     path = "relay_groups/#{relay_group_id}/assignment"
-    Base.post(endpoint, path, %{bundles: %{action =>  bundle_ids}})
+    Base.post(endpoint, path, %{bundles: %{action => bundle_ids}})
     |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
   end
   def update_assignments(action, relay_group_id, bundle_id, endpoint) when is_binary(bundle_id),

@@ -9,7 +9,7 @@ defmodule CogApi.TestHelpers do
 
   def get_value({:ok, value}), do: value
   def get_value({:error, errors}) do
-    raise "Expected {:ok, value} and got {:error, error} - `#{errors}`"
+    raise "Expected {:ok, value} and got {:error, error} - `#{inspect errors}`"
   end
   def get_value(nil), do: raise "Expected :ok but got `nil`"
 end
