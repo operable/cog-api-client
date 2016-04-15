@@ -67,29 +67,22 @@ defmodule CogApi.HTTP.RelayGroups do
     |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
   end
 
-  def assign_bundles(%{name: name}, %{bundles: bundle_names}, endpoint) do
+  def update_assignments(action, %{name: name}, %{bundles: bundle_names}, endpoint) do
     with {:ok, relay_group} <- show(%{name: name}, endpoint),
          {:ok, bundle_ids}  <- get_bundle_ids(bundle_names, endpoint) do
-      update_assignments(relay_group.id, bundle_ids, :add, endpoint)
+      update_assignments(action, relay_group.id, bundle_ids, endpoint)
     end
   end
-  def assign_bundles(relay_group_id, bundle_ids, %Endpoint{}=endpoint) do
-    update_assignments(relay_group_id, bundle_ids, :add, endpoint)
+  def update_assignments(action, relay_group_id, bundle_ids, endpoint) when is_list(bundle_ids) do
+    path = "relay_groups/#{relay_group_id}/assignment"
+    Base.post(endpoint, path, %{bundles: %{action =>  bundle_ids}})
+    |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
   end
+  def update_assignments(action, relay_group_id, bundle_id, endpoint) when is_binary(bundle_id),
+    do: update_assignments(action, relay_group_id, [bundle_id], endpoint)
 
-  def remove_bundle(%{name: name}, %{bundle: bundle_name}, %Endpoint{}=endpoint) do
-    case get_relay_bundle(name, bundle_name, endpoint) do
-      {:ok, relay_group, bundle} ->
-        update_assignments(relay_group.id, bundle.id, :remove, endpoint)
-      error ->
-        error
-    end
-  end
-  def remove_bundle(relay_group_id, bundle_id, %Endpoint{}=endpoint) do
-    update_assignments(relay_group_id, bundle_id, :remove, endpoint)
-  end
 
-  defp get_bundle_ids(bundle_names, endpoint), when is_list(bundle_names) do
+  defp get_bundle_ids(bundle_names, endpoint) when is_list(bundle_names) do
     get_bundle_id = fn(name, acc, endpoint) ->
       case Base.get_by(endpoint, "bundles", name: name)
       |> ApiResponse.format(%{"bundle" => CogApi.Resources.Bundle.format}) do
@@ -107,23 +100,8 @@ defmodule CogApi.HTTP.RelayGroups do
         error
     end
   end
-  defp get_bundle_ids((bundle_name, endpoint),
+  defp get_bundle_ids(bundle_name, endpoint),
     do: get_bundle_ids([bundle_name], endpoint)
-
-  defp get_relay_bundle(name, bundle_name, endpoint) do
-    with {:ok, bundle} <- Base.get_by(endpoint, "bundles", name: bundle_name)
-        |> ApiResponse.format(%{"bundle" => CogApi.Resources.Bundle.format}),
-      {:ok, relay_group} <- show(%{name: name}, endpoint),
-      do: {:ok, relay_group, bundle}
-  end
-
-  defp update_assignments(relay_group_id, bundle_ids, action, endpoint) when is_list(bundle_ids) do
-    path = "relay_groups/#{relay_group_id}/assignment"
-    Base.post(endpoint, path, %{bundles: %{action =>  bundle_ids}})
-    |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
-  end
-  defp update_assignments(relay_group_id, bundle_id, action, endpoint),
-    do: update_assignments(relay_group_id, [bundle_id], action, endpoint)
 
   defp resource_path(id) do
     "relay_groups/#{id}"

@@ -95,13 +95,16 @@ defmodule CogApi.Fake.RelayGroups do
     {:ok, Server.update(RelayGroup, relay_group.id, relay_group)}
   end
 
-  def add_bundle(_, _, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
-  def add_bundle(%{name: name}, %{bundle: bundle_name}, %Endpoint{token: _}) do
-    bundle = Server.show_by_key(Bundle, :name, bundle_name)
+  def add_bundles(_, _, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
+  def add_bundles(%{name: name}, %{bundles: bundle_names}, %Endpoint{token: _}) do
     relay_group = Server.show_by_key(RelayGroup, :name, name)
-    add_bundle(bundle, relay_group)
+    Enum.map(bundle_names, &Server.show_by_key(Bundle, :name, &1))
+    |> Enum.map(&add_bundle(&1, relay_group))
   end
-  def add_bundle(id, bundle_id, %Endpoint{token: _}) do
+  def add_bundles(id, bundle_ids, %Endpoint{token: _}=endpoint) when is_list(bundle_ids) do
+    Enum.map(bundle_ids, &add_bundles(id, &1, endpoint))
+  end
+  def add_bundles(id, bundle_id, %Endpoint{token: _}) do
     bundle = Server.show(Bundle, bundle_id)
     relay_group = Server.show(RelayGroup, id)
     add_bundle(bundle, relay_group)
@@ -114,13 +117,16 @@ defmodule CogApi.Fake.RelayGroups do
     update_bundles(bundle_with_group, relay_group)
   end
 
-  def remove_bundle(_, _, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
-  def remove_bundle(%{name: name}, %{bundle: bundle_name}, %Endpoint{token: _}) do
-    bundle = Server.show_by_key(Bundle, :name, bundle_name)
+  def remove_bundles(_, _, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
+  def remove_bundles(%{name: name}, %{bundles: bundle_names}, %Endpoint{token: _}) do
     relay_group = Server.show_by_key(RelayGroup, :name, name)
-    remove_bundle(bundle, relay_group)
+    Enum.map(bundle_names, &Server.show_by_key(Bundle, :name, &1))
+    |> Enum.map(&remove_bundle(&1, relay_group))
   end
-  def remove_bundle(id, bundle_id, %Endpoint{token: _}) do
+  def remove_bundles(id, bundle_ids, %Endpoint{token: _}=endpoint) when is_list(bundle_ids) do
+    Enum.map(bundle_ids, &remove_bundles(id, &1, endpoint))
+  end
+  def remove_bundles(id, bundle_id, %Endpoint{token: _}) do
     bundle = Server.show(Bundle, bundle_id)
     relay_group = Server.show(RelayGroup, id)
     remove_bundle(bundle, relay_group)
