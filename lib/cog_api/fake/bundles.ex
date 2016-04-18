@@ -36,6 +36,7 @@ defmodule CogApi.Fake.Bundles do
 
   def create(%Endpoint{token: nil}, %{name: _}), do: Endpoint.invalid_endpoint
   def create(%Endpoint{token: _}, params) do
+    params = to_atom_keys(params)
     if Enum.all?([:name, :version, :commands], &(&1 in Map.keys(params))) do
       new_bundle = %Bundle{id: random_string(8)}
       new_bundle = Map.merge(new_bundle, params)
@@ -78,5 +79,15 @@ defmodule CogApi.Fake.Bundles do
   defp ensure_bundle_encode_status(status) do
     Bundle.encode_status(status)
     status == "true"
+  end
+
+  defp to_atom_keys(map) do
+    Enum.reduce(map, %{}, fn ({key, val}, acc) ->
+      if is_atom(key) do
+        Map.put(acc, key, val)
+      else
+        Map.put(acc, String.to_atom(key), val)
+      end
+    end)
   end
 end
