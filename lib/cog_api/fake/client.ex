@@ -61,6 +61,14 @@ defmodule CogApi.Fake.Client do
     Groups.delete(endpoint, group_id)
   end
 
+  def group_add_role(%Endpoint{}=endpoint, group, role) do
+    Groups.add_role(endpoint, group, role)
+  end
+
+  def group_remove_role(%Endpoint{}=endpoint, group, role) do
+    Groups.remove_role(endpoint, group, role)
+  end
+
   def group_add_user(%Endpoint{}=endpoint, group, user) do
     Groups.add_user(endpoint, group, user)
   end
@@ -151,14 +159,6 @@ defmodule CogApi.Fake.Client do
 
   def role_delete(%Endpoint{}=endpoint, role_id) do
     Roles.delete(endpoint, role_id)
-  end
-
-  def role_grant(%Endpoint{}=endpoint, role, group) do
-    Roles.grant(endpoint, role, group)
-  end
-
-  def role_revoke(%Endpoint{}=endpoint, role, group) do
-    Roles.revoke(endpoint, role, group)
   end
 
   def role_add_permission(endpoint, role, permission) do

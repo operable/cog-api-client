@@ -4,6 +4,7 @@ defmodule CogApi.HTTP.Groups do
 
   alias CogApi.Endpoint
   alias CogApi.Resources.Group
+  alias CogApi.Resources.Role
   alias CogApi.Decoders.Group, as: GroupDecoder
 
   def index(%Endpoint{}=endpoint) do
@@ -34,6 +35,28 @@ defmodule CogApi.HTTP.Groups do
   def delete(%Endpoint{}=endpoint, group_id) do
     Base.delete(endpoint, "groups/#{group_id}")
     |> ApiResponse.format_delete("The group could not be deleted")
+  end
+
+  def add_role(%Endpoint{}=endpoint, group, role) do
+    update_roles_for_group(endpoint, group, role, :grant)
+  end
+
+  def remove_role(%Endpoint{}=endpoint, group, role) do
+    update_roles_for_group(endpoint, group, role, :revoke)
+  end
+
+  def update_roles_for_group(endpoint, group, role, action) do
+    path = "groups/#{group.id}/roles"
+    Base.post(endpoint, path, %{roles: %{action => [role.name]}})
+    |> format_response(group)
+  end
+
+  defp format_response(response, group) do
+    roles = ApiResponse.parse_struct(response,  %{"roles" => [Role.format]})
+    {
+      ApiResponse.type(response),
+      %{group | roles: roles }
+    }
   end
 
   def add_user(%Endpoint{}=endpoint, group, user) do

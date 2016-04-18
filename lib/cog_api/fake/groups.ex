@@ -5,6 +5,7 @@ defmodule CogApi.Fake.Groups do
   alias CogApi.Endpoint
   alias CogApi.Fake.Server
   alias CogApi.Resources.Group
+  alias CogApi.Resources.Role
   alias CogApi.Resources.User
 
   def index(%Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
@@ -49,6 +50,22 @@ defmodule CogApi.Fake.Groups do
     else
       {:error, ["The group could not be deleted"]}
     end
+  end
+
+  def add_role(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
+  def add_role(%Endpoint{}, %Group{id: group_id}, %Role{name: role_name}) do
+    group = Server.show(Group, group_id)
+    role = Server.show_by_key(Role, :name, role_name)
+    group = %{group | roles: group.roles ++ [role]}
+    {:ok, Server.update(Group, group.id, group)}
+  end
+
+  def remove_role(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
+  def remove_role(%Endpoint{}, %Group{id: group_id}, %Role{name: role_name}) do
+    group = Server.show(Group, group_id)
+    role = Server.show_by_key(Role, :name, role_name)
+    group = %{group | roles: List.delete(group.roles, role)}
+    {:ok, Server.update(Group, group.id, group)}
   end
 
   def add_user(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint

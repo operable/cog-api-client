@@ -2,7 +2,6 @@ defmodule CogApi.Fake.RolesTest do
   use CogApi.FakeCase
 
   alias CogApi.Fake.Client
-  alias CogApi.Resources.Group
   alias CogApi.Resources.Permission
 
   doctest CogApi.Fake.Roles
@@ -41,7 +40,7 @@ defmodule CogApi.Fake.RolesTest do
         role = Client.role_create(fake_endpoint, %{name: "role"}) |> get_value
         group = Client.group_create(fake_endpoint, %{name: "group"}) |> get_value
 
-        group = Client.role_grant(fake_endpoint, role, group) |> get_value
+        group = Client.group_add_role(fake_endpoint, group, role) |> get_value
 
         role = Client.role_show(fake_endpoint, role.id) |> get_value
 
@@ -111,33 +110,6 @@ defmodule CogApi.Fake.RolesTest do
     it "returns :ok" do
       {:ok, role} = Client.role_create(fake_endpoint, %{name: "new role"})
       assert :ok == Client.role_delete(fake_endpoint, role.id)
-    end
-  end
-
-  describe "role_grant" do
-    it "returns the roles that are associated with that group" do
-      role = Client.role_create(fake_endpoint, %{name: "role"}) |> get_value
-      group = Client.group_create(fake_endpoint, %{name: "group"}) |> get_value
-
-      updated_group = Client.role_grant(fake_endpoint, role, %Group{id: group.id}) |> get_value
-
-      first_role = List.first updated_group.roles
-      assert updated_group.name == group.name
-      assert first_role.id == role.id
-    end
-  end
-
-  describe "role_revoke" do
-    it "returns the roles that are associated with that group" do
-      role = Client.role_create(fake_endpoint, %{name: "role123"}) |> get_value
-      group = Client.group_create(fake_endpoint, %{name: "group123"}) |> get_value
-      group = Client.role_grant(fake_endpoint, role, group) |> get_value
-      assert group.roles != []
-
-      updated_group = Client.role_revoke(fake_endpoint, role, %Group{id: group.id}) |> get_value
-
-      assert updated_group.name == group.name
-      assert updated_group.roles == []
     end
   end
 

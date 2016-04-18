@@ -34,28 +34,6 @@ defmodule CogApi.HTTP.Roles do
     |> ApiResponse.format(%{"role" => Role.format})
   end
 
-  def grant(%Endpoint{}=endpoint, role, group) do
-    update_roles_for_group(endpoint, role, group, :grant)
-  end
-
-  def revoke(%Endpoint{}=endpoint, role, group) do
-    update_roles_for_group(endpoint, role, group, :revoke)
-  end
-
-  def update_roles_for_group(endpoint, role, group, action) do
-    path = "groups/#{group.id}/roles"
-    Base.post(endpoint, path, %{roles: %{action => [role.name]}})
-    |> format_response(group)
-  end
-
-  defp format_response(response, group) do
-    roles = ApiResponse.parse_struct(response,  %{"roles" => [Role.format]})
-    {
-      ApiResponse.type(response),
-      %{group | roles: roles }
-    }
-  end
-
   def add_permission(endpoint, role, permission) do
     build_role_with_new_permissions(endpoint, role, permission, :grant)
   end

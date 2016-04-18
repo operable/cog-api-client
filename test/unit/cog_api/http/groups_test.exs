@@ -114,6 +114,37 @@ defmodule CogApi.HTTP.GroupsTest do
     end
   end
 
+  describe "group_add_role" do
+    it "returns the roles that are associated with that group" do
+      cassette "group_add_role" do
+        endpoint = valid_endpoint
+        role = Client.role_create(endpoint, %{name: "role_grant"}) |> get_value
+        group = Client.group_create(endpoint, %{name: "group_role_grant"}) |> get_value
+
+        updated_group = Client.group_add_role(endpoint, group, role) |> get_value
+
+        first_role = List.first updated_group.roles
+        assert first_role.id == role.id
+      end
+    end
+  end
+
+  describe "group_remove_role" do
+    it "returns the roles that are associated with that group" do
+      cassette "group_remove_role" do
+        endpoint = valid_endpoint
+        role = Client.role_create(endpoint, %{name: "role_revoke"}) |> get_value
+        group = Client.group_create(endpoint, %{name: "group_role_revoke"}) |> get_value
+        group = Client.group_add_role(endpoint, group, role) |> get_value
+        assert group.roles != []
+
+        group = Client.group_remove_role(endpoint, group, role) |> get_value
+
+        assert group.roles == []
+      end
+    end
+  end
+
   describe "group_add_user" do
     it "adds the user to the group" do
       cassette "groups_add" do
@@ -153,7 +184,7 @@ defmodule CogApi.HTTP.GroupsTest do
   defp create_group_with_user_and_role(endpoint, test_name) do
     {group, user} = create_group_with_user(endpoint, test_name)
     role = Client.role_create(endpoint, %{name: "group#{test_name}"}) |> get_value
-    group = Client.role_grant(endpoint, role, group) |> get_value
+    group = Client.group_add_role(endpoint, group, role) |> get_value
 
     {group, user, role}
   end

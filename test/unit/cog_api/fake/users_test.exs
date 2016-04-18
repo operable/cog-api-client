@@ -39,7 +39,7 @@ defmodule CogApi.Fake.UsersTest do
       created_user = Client.user_create(fake_endpoint, params) |> get_value
       role = Client.role_create(fake_endpoint, %{name: "user_show_role"}) |> get_value
       group = Client.group_create(fake_endpoint, %{name: "user_show_group"}) |> get_value
-      Client.role_grant(fake_endpoint, role, group)
+      Client.group_add_role(fake_endpoint, group, role)
       Client.group_add_user(fake_endpoint, group, created_user)
 
       found_user = Client.user_show(fake_endpoint, created_user.id) |> get_value

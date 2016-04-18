@@ -26,6 +26,8 @@ defmodule CogApi.Client do
   @callback group_update(%Endpoint{}, String.t, %{}) :: {atom, %Group{}}
   @callback group_delete(%Endpoint{}, String.t) :: atom
   @callback group_delete(%Endpoint{}, String.t) :: {atom, [String.t]}
+  @callback group_add_role(%Endpoint{}, %Group{}, %Role{}) :: {atom, %Group{}}
+  @callback group_remove_role(%Endpoint{}, %Group{}, %Group{}) :: {atom, %Group{}}
   @callback group_add_user(%Endpoint{}, %Group{}, %User{}) :: {atom, %Group{}}
   @callback group_remove_user(%Endpoint{}, %Group{}, %User{}) :: {atom, %Group{}}
 
@@ -57,8 +59,6 @@ defmodule CogApi.Client do
   @callback role_create(%Endpoint{}, %{}) :: {atom, %Role{}}
   @callback role_update(%Endpoint{}, String.t, %{}) :: {atom, %Role{}}
   @callback role_delete(%Endpoint{}, String.t) :: atom
-  @callback role_grant(%Endpoint{}, %Role{}, %Group{}) :: {atom, %Group{}}
-  @callback role_revoke(%Endpoint{}, %Role{}, %Group{}) :: {atom, %Group{}}
   @callback role_add_permission(%Endpoint{}, %Role{}, %Permission{}) :: {atom, %Role{}}
   @callback role_remove_permission(%Endpoint{}, %Role{}, %Permission{}) :: {atom, %Role{}}
 

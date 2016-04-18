@@ -37,20 +37,6 @@ defmodule CogApi.Fake.Roles do
     :ok
   end
 
-  def grant(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
-  def grant(%Endpoint{}, role, %Group{id: group_id}) do
-    group = Server.show(Group, group_id)
-    group = %{group | roles: group.roles ++ [role]}
-    {:ok, Server.update(Group, group.id, group)}
-  end
-
-  def revoke(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
-  def revoke(%Endpoint{}, role, %Group{id: group_id}) do
-    group = Server.show(Group, group_id)
-    group = %{group | roles: List.delete(group.roles, role)}
-    {:ok, Server.update(Group, group.id, group)}
-  end
-
   def add_permission(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def add_permission(%Endpoint{}, role, permission) do
     if found_permission  = matching_permission(Server.index(Permission), permission) do
