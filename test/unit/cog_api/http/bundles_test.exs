@@ -21,6 +21,17 @@ defmodule CogApi.HTTP.BundlesTest do
         assert bundle.name == params["name"]
       end
     end
+
+    context "with an invalid bundle config" do
+      it "creates a new bundle" do
+        cassette "invalid_bundles_create" do
+          params = %{}
+          {:error, errors} = Client.bundle_create(valid_endpoint, params)
+
+          assert List.first(errors) == "Invalid config file."
+        end
+      end
+    end
   end
 
   describe "bundle_index" do

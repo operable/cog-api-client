@@ -63,8 +63,8 @@ defmodule CogApi.Fake.BundlesTest do
     end
 
     it "fails without valid info" do
-      {:error, message} = Client.bundle_create(fake_endpoint, %{})
-      assert message == "Invalid bundle config"
+      {:error, errors} = Client.bundle_create(fake_endpoint, %{})
+      assert errors == ["Invalid bundle config"]
     end
   end
 

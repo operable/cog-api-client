@@ -41,7 +41,7 @@ defmodule CogApi.Fake.Bundles do
       new_bundle = Map.merge(new_bundle, params)
       {:ok, Server.create(Bundle, new_bundle)}
     else
-      {:error, "Invalid bundle config"}
+      {:error, ["Invalid bundle config"]}
     end
   end
 
