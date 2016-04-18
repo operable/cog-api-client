@@ -1,0 +1,53 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"nh/HPNwTzj++XpBGgGlxjvSSo+ZpnwgnIa6qwupy/X4=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 18 Apr 2016 17:32:26 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "pjip7md262dli6ku2be1plcpnhcalgj1"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"bundle\":{}}",
+      "headers": {
+        "authorization": "token nh/HPNwTzj++XpBGgGlxjvSSo+ZpnwgnIa6qwupy/X4=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/bundles"
+    },
+    "response": {
+      "body": "{\"errors\":[\"Invalid config file.\",\"Error near #: Required property cog_bundle_version was not present.\",\"Error near #: Required property name was not present.\",\"Error near #: Required property version was not present.\",\"Error near #: Required property commands was not present.\"]}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 18 Apr 2016 17:32:26 GMT",
+        "content-length": "280",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "m9nogm4pnsh3g7k1570ipc7dkuqau729",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "status_code": 422,
+      "type": "ok"
+    }
+  }
+]

@@ -62,9 +62,17 @@ defmodule CogApi.Fake.BundlesTest do
       assert present bundle.id
     end
 
+    it "works with string keys" do
+      config = to_string_keys(minimal_config)
+      bundle = Client.bundle_create(fake_endpoint, config) |> get_value
+
+      assert bundle.name == "a bundle"
+      assert present bundle.id
+    end
+
     it "fails without valid info" do
-      {:error, message} = Client.bundle_create(fake_endpoint, %{})
-      assert message == "Invalid bundle config"
+      {:error, errors} = Client.bundle_create(fake_endpoint, %{})
+      assert errors == ["Invalid bundle config"]
     end
   end
 
@@ -160,5 +168,11 @@ defmodule CogApi.Fake.BundlesTest do
       commands: %{
         test_command: %{
           executable: "/bin/foobar"}}}
+  end
+
+  defp to_string_keys(map) do
+    Enum.reduce(map, %{}, fn ({key, val}, acc) ->
+      Map.put(acc, Atom.to_string(key), val)
+    end)
   end
 end

@@ -2,6 +2,7 @@ defmodule CogApi.Fake.GroupsTest do
   use CogApi.FakeCase
 
   alias CogApi.Fake.Client
+  alias CogApi.Resources.Group
 
   doctest CogApi.Fake.Groups
 
@@ -83,6 +84,33 @@ defmodule CogApi.Fake.GroupsTest do
     end
   end
 
+  describe "group_add_role" do
+    it "returns the roles that are associated with that group" do
+      role = Client.role_create(fake_endpoint, %{name: "role"}) |> get_value
+      group = Client.group_create(fake_endpoint, %{name: "group"}) |> get_value
+
+      updated_group = Client.group_add_role(fake_endpoint, %Group{id: group.id}, role) |> get_value
+
+      first_role = List.first updated_group.roles
+      assert updated_group.name == group.name
+      assert first_role.id == role.id
+    end
+  end
+
+  describe "group_remove_role" do
+    it "returns the roles that are associated with that group" do
+      role = Client.role_create(fake_endpoint, %{name: "role123"}) |> get_value
+      group = Client.group_create(fake_endpoint, %{name: "group123"}) |> get_value
+      group = Client.group_add_role(fake_endpoint, group, role) |> get_value
+      assert group.roles != []
+
+      updated_group = Client.group_remove_role(fake_endpoint, %Group{id: group.id}, role) |> get_value
+
+      assert updated_group.name == group.name
+      assert updated_group.roles == []
+    end
+  end
+
   describe "group_add_user" do
     it "adds the user to the group" do
       group = Client.group_create(fake_endpoint, %{name: "user_group"}) |> get_value
@@ -94,7 +122,6 @@ defmodule CogApi.Fake.GroupsTest do
       {:ok, group} = Client.group_add_user(fake_endpoint, group, second_user)
 
       assert ids_for(group.users) == [first_user.id, second_user.id]
-
 
       first_user = Client.user_show(fake_endpoint, first_user.id) |> get_value
       assert ids_for(first_user.groups) == [group.id]

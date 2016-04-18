@@ -2,7 +2,7 @@
   "ex_spec": {:hex, :ex_spec, "1.0.0"},
   "exactor": {:hex, :exactor, "2.2.0"},
   "exjsx": {:hex, :exjsx, "3.2.0"},
-  "exvcr": {:hex, :exvcr, "0.7.1"},
+  "exvcr": {:git, "https://github.com/operable/exvcr.git", "f64a59aeaf5e4b07bc2ba560786abb6e3bea12dc", [branch: "fix-cached-status-code"]},
   "httpotion": {:hex, :httpotion, "2.1.0"},
   "ibrowse": {:hex, :ibrowse, "4.2.2"},
   "jsx": {:hex, :jsx, "2.6.2"},

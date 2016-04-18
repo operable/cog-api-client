@@ -207,7 +207,7 @@ defmodule CogApi.Fake.RelayGroupsTest do
       bundle = create_bundle
       group = Client.relay_group_create(%{name: "group"}, fake_endpoint) |> get_value
 
-      group = Client.relay_group_add_bundle(group.id, bundle.id, fake_endpoint) |> get_value
+      group = Client.relay_group_add_bundles(group.id, bundle.id, fake_endpoint) |> get_value
 
       [grouped_bundle] = group.bundles
 
@@ -221,10 +221,30 @@ defmodule CogApi.Fake.RelayGroupsTest do
       assert first_group.id == group.id
     end
 
+    it "adds multiple bundles to the group" do
+      bundle_ids = Enum.map(1..5, &create_bundle(%{name: "bundle#{&1}"}))
+      |> Enum.map(&Map.fetch!(&1, :id))
+
+      group = Client.relay_group_create(%{name: "group"}, fake_endpoint) |> get_value
+
+      group = Client.relay_group_add_bundles(group.id, bundle_ids, fake_endpoint) |> get_value
+
+      returned_bundle_ids = MapSet.new(group.bundles, &Map.fetch!(&1, :id))
+      intersection = MapSet.intersection(MapSet.new(bundle_ids), returned_bundle_ids)
+
+      assert length(group.bundles) == length(bundle_ids)
+      assert MapSet.size(intersection) == length(bundle_ids)
+
+      # Do all of our group ids match the group id we started with?
+      assert Enum.map(group.bundles, &Map.fetch!(&1, :relay_groups))
+             |> Enum.map(&hd/1)
+             |> Enum.all?(&(&1 == group.id))
+    end
+
     it "handles a bundle that was externally updated" do
       bundle = create_bundle(%{enabled: false})
       group = Client.relay_group_create(%{name: "group"}, fake_endpoint) |> get_value
-      group = Client.relay_group_add_bundle(group.id, bundle.id, fake_endpoint) |> get_value
+      group = Client.relay_group_add_bundles(group.id, bundle.id, fake_endpoint) |> get_value
 
       Client.bundle_update(fake_endpoint, bundle.id, %{enabled: "true"})
 
@@ -238,7 +258,7 @@ defmodule CogApi.Fake.RelayGroupsTest do
       it "adds the bundle to the relay group" do
         bundle = create_bundle
         group = Client.relay_group_create(%{name: "my-relays"}, fake_endpoint) |> get_value
-        group = Client.relay_group_add_bundle(%{name: group.name}, %{bundle: bundle.name}, fake_endpoint) |> get_value
+        group = Client.relay_group_add_bundles(%{name: group.name}, %{bundles: [bundle.name]}, fake_endpoint) |> get_value
         [grouped_bundle] = group.bundles
 
         assert grouped_bundle.id == bundle.id
@@ -250,6 +270,27 @@ defmodule CogApi.Fake.RelayGroupsTest do
 
         assert relay_group.id == group.id
       end
+
+      it "adds multiple bundles to the group" do
+        bundles = Enum.map(1..5, &create_bundle(%{name: "bundle#{&1}"}))
+        bundle_names = Enum.map(bundles, &Map.fetch!(&1, :name))
+        bundle_ids = Enum.map(bundles, &Map.fetch!(&1, :id))
+
+        group = Client.relay_group_create(%{name: "group"}, fake_endpoint) |> get_value
+
+        group = Client.relay_group_add_bundles(%{name: group.name}, %{bundles: bundle_names}, fake_endpoint) |> get_value
+
+        returned_bundle_ids = MapSet.new(group.bundles, &Map.fetch!(&1, :id))
+        intersection = MapSet.intersection(MapSet.new(bundle_ids), returned_bundle_ids)
+
+        assert length(group.bundles) == length(bundle_ids)
+        assert MapSet.size(intersection) == length(bundle_ids)
+
+        # Do all of our group ids match the group id we started with?
+        assert Enum.map(group.bundles, &Map.fetch!(&1, :relay_groups))
+               |> Enum.map(&hd/1)
+               |> Enum.all?(&(&1 == group.id))
+      end
     end
   end
 
@@ -257,10 +298,10 @@ defmodule CogApi.Fake.RelayGroupsTest do
     it "removes the bundle from the group" do
       bundle = create_bundle
       group = Client.relay_group_create(%{name: "group"}, fake_endpoint) |> get_value
-      group = Client.relay_group_add_bundle(group.id, bundle.id, fake_endpoint) |> get_value
+      group = Client.relay_group_add_bundles(group.id, bundle.id, fake_endpoint) |> get_value
       assert group.bundles != []
 
-      group = Client.relay_group_remove_bundle(group.id, bundle.id, fake_endpoint) |> get_value
+      group = Client.relay_group_remove_bundles(group.id, bundle.id, fake_endpoint) |> get_value
 
       assert group.bundles == []
 
@@ -270,14 +311,27 @@ defmodule CogApi.Fake.RelayGroupsTest do
       assert relay_groups == []
     end
 
+    it "removes multiple bundles from the group" do
+      bundle_ids = Enum.map(1..5, &create_bundle(%{name: "bundle#{&1}"}))
+      |> Enum.map(&Map.fetch!(&1, :id))
+
+      group = Client.relay_group_create(%{name: "group"}, fake_endpoint) |> get_value
+
+      group = Client.relay_group_add_bundles(group.id, bundle_ids, fake_endpoint) |> get_value
+      assert group.bundles != []
+
+      group = Client.relay_group_remove_bundles(group.id, bundle_ids, fake_endpoint) |> get_value
+      assert group.bundles == []
+    end
+
     context "when passed names" do
       it "removes the bundle from the relay group" do
         bundle = create_bundle
         group = Client.relay_group_create(%{name: "my-relays"}, fake_endpoint) |> get_value
-        group = Client.relay_group_add_bundle(group.id, bundle.id, fake_endpoint) |> get_value
+        group = Client.relay_group_add_bundles(group.id, bundle.id, fake_endpoint) |> get_value
         assert group.bundles != []
 
-        group = Client.relay_group_remove_bundle(%{name: group.name}, %{bundle: bundle.name}, fake_endpoint) |> get_value
+        group = Client.relay_group_remove_bundles(%{name: group.name}, %{bundles: [bundle.name]}, fake_endpoint) |> get_value
 
         assert group.bundles == []
 
@@ -285,6 +339,20 @@ defmodule CogApi.Fake.RelayGroupsTest do
         |> get_value
         |> Map.get(:relay_groups)
         assert relay_groups == []
+      end
+
+      it "removes multiple bundles from the group" do
+        bundles = Enum.map(1..5, &create_bundle(%{name: "bundle#{&1}"}))
+        bundle_ids = Enum.map(bundles, &Map.fetch!(&1, :id))
+        bundle_names = Enum.map(bundles, &Map.fetch!(&1, :name))
+
+        group = Client.relay_group_create(%{name: "group"}, fake_endpoint) |> get_value
+
+        group = Client.relay_group_add_bundles(group.id, bundle_ids, fake_endpoint) |> get_value
+        assert group.bundles != []
+
+        group = Client.relay_group_remove_bundles(%{name: group.name}, %{bundles: bundle_names}, fake_endpoint) |> get_value
+        assert group.bundles == []
       end
     end
   end

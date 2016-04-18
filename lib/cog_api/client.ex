@@ -26,6 +26,8 @@ defmodule CogApi.Client do
   @callback group_update(%Endpoint{}, String.t, %{}) :: {atom, %Group{}}
   @callback group_delete(%Endpoint{}, String.t) :: atom
   @callback group_delete(%Endpoint{}, String.t) :: {atom, [String.t]}
+  @callback group_add_role(%Endpoint{}, %Group{}, %Role{}) :: {atom, %Group{}}
+  @callback group_remove_role(%Endpoint{}, %Group{}, %Group{}) :: {atom, %Group{}}
   @callback group_add_user(%Endpoint{}, %Group{}, %User{}) :: {atom, %Group{}}
   @callback group_remove_user(%Endpoint{}, %Group{}, %User{}) :: {atom, %Group{}}
 
@@ -47,18 +49,16 @@ defmodule CogApi.Client do
   @callback relay_group_delete(String.t, %Endpoint{}) :: {atom, [String.t]}
   @callback relay_group_add_relay(String.t, String.t, %Endpoint{}) :: {atom, %RelayGroup{}}
   @callback relay_group_remove_relay(String.t, String.t, %Endpoint{}) :: {atom, %RelayGroup{}}
-  @callback relay_group_add_bundle(String.t, String.t, %Endpoint{}) :: {atom, %RelayGroup{}}
-  @callback relay_group_add_bundle(%{}, %{}, %Endpoint{}) :: {atom, %RelayGroup{}}
-  @callback relay_group_remove_bundle(String.t, String.t, %Endpoint{}) :: {atom, %RelayGroup{}}
-  @callback relay_group_remove_bundle(%{}, %{}, %Endpoint{}) :: {atom, %RelayGroup{}}
+  @callback relay_group_add_bundles(String.t, String.t | List.t, %Endpoint{}) :: {atom, %RelayGroup{}}
+  @callback relay_group_add_bundles(Map.t, Map.t, %Endpoint{}) :: {atom, %RelayGroup{}}
+  @callback relay_group_remove_bundles(String.t, String.t | List.t, %Endpoint{}) :: {atom, %RelayGroup{}}
+  @callback relay_group_remove_bundles(Map.t, Map.t, %Endpoint{}) :: {atom, %RelayGroup{}}
 
   @callback role_index(%Endpoint{}) :: {atom, [%Role{}]}
   @callback role_show(%Endpoint{}, String.t) :: {atom, %Role{}}
   @callback role_create(%Endpoint{}, %{}) :: {atom, %Role{}}
   @callback role_update(%Endpoint{}, String.t, %{}) :: {atom, %Role{}}
   @callback role_delete(%Endpoint{}, String.t) :: atom
-  @callback role_grant(%Endpoint{}, %Role{}, %Group{}) :: {atom, %Group{}}
-  @callback role_revoke(%Endpoint{}, %Role{}, %Group{}) :: {atom, %Group{}}
   @callback role_add_permission(%Endpoint{}, %Role{}, %Permission{}) :: {atom, %Role{}}
   @callback role_remove_permission(%Endpoint{}, %Role{}, %Permission{}) :: {atom, %Role{}}
 

@@ -93,37 +93,6 @@ defmodule CogApi.HTTP.RolesTest do
     end
   end
 
-  describe "role_grant" do
-    it "returns the roles that are associated with that group" do
-      cassette "role_grant" do
-        endpoint = valid_endpoint
-        role = Client.role_create(endpoint, %{name: "role_grant"}) |> get_value
-        group = Client.group_create(endpoint, %{name: "group_role_grant"}) |> get_value
-
-        updated_group = Client.role_grant(endpoint, role, group) |> get_value
-
-        first_role = List.first updated_group.roles
-        assert first_role.id == role.id
-      end
-    end
-  end
-
-  describe "role_revoke" do
-    it "returns the roles that are associated with that group" do
-      cassette "role_revoke" do
-        endpoint = valid_endpoint
-        role = Client.role_create(endpoint, %{name: "role_revoke"}) |> get_value
-        group = Client.group_create(endpoint, %{name: "group_role_revoke"}) |> get_value
-        group = Client.role_grant(endpoint, role, group) |> get_value
-        assert group.roles != []
-
-        group = Client.role_revoke(endpoint, role, group) |> get_value
-
-        assert group.roles == []
-      end
-    end
-  end
-
   describe "role_add_permission" do
     it "adds the permission to the role" do
       cassette "role_add_permission" do
