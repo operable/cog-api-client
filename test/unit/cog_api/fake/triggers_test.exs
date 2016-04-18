@@ -47,6 +47,7 @@ defmodule CogApi.Fake.TriggersTest do
       assert present(trigger.id)
       assert trigger.name == params.name
       assert trigger.pipeline == params.pipeline
+      assert trigger.enabled == true
       assert trigger.as_user == params.as_user
       assert trigger.timeout_sec == params.timeout_sec
       assert trigger.description == params.description
