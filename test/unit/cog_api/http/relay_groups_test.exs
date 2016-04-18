@@ -142,7 +142,7 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         group = Client.relay_group_create(%{name: "add_bundle"}, endpoint) |> get_value
         assert group.bundles == []
 
-        group = Client.relay_group_assign_bundles(group.id, bundle.id, endpoint) |> get_value
+        group = Client.relay_group_add_bundles(group.id, bundle.id, endpoint) |> get_value
 
         [grouped_bundle] = group.bundles
 
@@ -155,7 +155,7 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         endpoint = valid_endpoint
         bundle = create_bundle(endpoint, "add_bundle")
 
-        {:error, [error]} = Client.relay_group_assign_bundles(%{name: "foo"}, %{bundles: [bundle.name]}, endpoint)
+        {:error, [error]} = Client.relay_group_add_bundles(%{name: "foo"}, %{bundles: [bundle.name]}, endpoint)
 
         assert error == "Resource not found for: 'relay_groups'"
       end
@@ -168,7 +168,7 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         group = Client.relay_group_create(%{name: "add_bundle"}, endpoint) |> get_value
         assert group.bundles == []
 
-        {:error, [error]} = Client.relay_group_assign_bundles(%{name: group.name}, %{bundles: ["foo"]}, endpoint)
+        {:error, [error]} = Client.relay_group_add_bundles(%{name: group.name}, %{bundles: ["foo"]}, endpoint)
 
         assert error == "Resource not found for: 'bundles'"
       end
@@ -184,7 +184,7 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         bundle_ids = Enum.map(1..3, &create_bundle(endpoint, "add_multiple_bundles#{&1}"))
         |> Enum.map(&Map.fetch!(&1, :id))
 
-        updated_group = Client.relay_group_assign_bundles(group.id, bundle_ids, endpoint) |> get_value
+        updated_group = Client.relay_group_add_bundles(group.id, bundle_ids, endpoint) |> get_value
 
         returned_bundle_ids = MapSet.new(updated_group.bundles, &Map.fetch!(&1, :id))
         intersection = MapSet.intersection(MapSet.new(bundle_ids), returned_bundle_ids)
@@ -203,7 +203,7 @@ defmodule CogApi.HTTP.RelayGroupsTest do
           group = Client.relay_group_create(%{name: "mygroup"}, endpoint) |> get_value
           assert group.bundles == []
 
-          group = Client.relay_group_assign_bundles(%{name: group.name}, %{bundles: [bundle.name]}, endpoint) |> get_value
+          group = Client.relay_group_add_bundles(%{name: group.name}, %{bundles: [bundle.name]}, endpoint) |> get_value
 
           [grouped_bundle] = group.bundles
 
@@ -221,7 +221,7 @@ defmodule CogApi.HTTP.RelayGroupsTest do
           bundle_names = Enum.map(1..5, &create_bundle(endpoint, "add_multiple_bundles#{&1}"))
           |> Enum.map(&Map.fetch!(&1, :name))
 
-          updated_group = Client.relay_group_assign_bundles(%{name: "mygroup"}, %{bundles: bundle_names}, endpoint)
+          updated_group = Client.relay_group_add_bundles(%{name: "mygroup"}, %{bundles: bundle_names}, endpoint)
                           |> get_value
 
           returned_bundle_names = MapSet.new(updated_group.bundles, &Map.fetch!(&1, :name))
@@ -241,7 +241,7 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         endpoint = valid_endpoint
         bundle = create_bundle(endpoint, "remove_bundle")
         group = Client.relay_group_create(%{name: "add_bundle"}, endpoint) |> get_value
-        group = Client.relay_group_assign_bundles(group.id, bundle.id, endpoint) |> get_value
+        group = Client.relay_group_add_bundles(group.id, bundle.id, endpoint) |> get_value
         assert group.bundles != []
 
         group = Client.relay_group_remove_bundles(group.id, bundle.id, endpoint) |> get_value
@@ -258,7 +258,7 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         |> Enum.map(&Map.fetch!(&1, :id))
 
         group = Client.relay_group_create(%{name: "mygroup"}, endpoint) |> get_value
-        group = Client.relay_group_assign_bundles(group.id, bundle_ids, endpoint) |> get_value
+        group = Client.relay_group_add_bundles(group.id, bundle_ids, endpoint) |> get_value
         assert group.bundles != []
 
         updated_group = Client.relay_group_remove_bundles(group.id, bundle_ids, endpoint) |> get_value
@@ -274,7 +274,7 @@ defmodule CogApi.HTTP.RelayGroupsTest do
           name = "remove_bundle_with_name"
           bundle = create_bundle(endpoint, name)
           group = Client.relay_group_create(%{name: name}, endpoint) |> get_value
-          group = Client.relay_group_assign_bundles(group.id, bundle.id, endpoint) |> get_value
+          group = Client.relay_group_add_bundles(group.id, bundle.id, endpoint) |> get_value
           assert group.bundles != []
 
           group = Client.relay_group_remove_bundles(%{name: group.name},
@@ -293,7 +293,7 @@ defmodule CogApi.HTTP.RelayGroupsTest do
           bundle_names = Enum.map(bundles, &Map.fetch!(&1, :name))
 
           group = Client.relay_group_create(%{name: "mygroup"}, endpoint) |> get_value
-          group = Client.relay_group_assign_bundles(group.id, bundle_ids, endpoint) |> get_value
+          group = Client.relay_group_add_bundles(group.id, bundle_ids, endpoint) |> get_value
           assert group.bundles != []
 
           updated_group = Client.relay_group_remove_bundles(%{name: group.name}, %{bundles: bundle_names}, endpoint) |> get_value
