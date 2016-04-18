@@ -1,0 +1,130 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"2NCcv+n4hayNQEU3N1T2LAdZDCE1E6FSY0EMcdnK5mw=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 19 Apr 2016 13:52:18 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "jvdtogb7ttqv3fqcsqri62tdotnmuioj"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"user\":{\"username\":\"chat_handles_delete\",\"password\":\"password\",\"email_address\":\"chat_handles_delete\"}}",
+      "headers": {
+        "authorization": "token 2NCcv+n4hayNQEU3N1T2LAdZDCE1E6FSY0EMcdnK5mw=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/users"
+    },
+    "response": {
+      "body": "{\"errors\":{\"username\":[\"has already been taken\"]}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 19 Apr 2016 13:52:20 GMT",
+        "content-length": "50",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "rkgj8aug9f1eh151010436rmvjo29nlu"
+      },
+      "status_code": 422,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token 2NCcv+n4hayNQEU3N1T2LAdZDCE1E6FSY0EMcdnK5mw=",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/users"
+    },
+    "response": {
+      "body": "{\"users\":[{\"username\":\"admin\",\"last_name\":\"Administrator\",\"id\":\"5583d520-01ec-42ab-abca-e6870eff18bd\",\"groups\":[{\"roles\":[{\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_commands\",\"id\":\"6a16d86b-449f-4df2-a9f4-8658a1b86045\"},{\"namespace\":\"operable\",\"name\":\"manage_groups\",\"id\":\"c90e9f5e-ff0e-4564-b2a6-809f86ee8721\"},{\"namespace\":\"operable\",\"name\":\"manage_permissions\",\"id\":\"6d667ec8-43f3-478a-8b0d-48282a7da486\"},{\"namespace\":\"operable\",\"name\":\"manage_roles\",\"id\":\"abce184b-eb45-4328-94e1-e0410c9334e9\"},{\"namespace\":\"operable\",\"name\":\"manage_users\",\"id\":\"587ac521-7149-427f-9d4c-7f5a830312ae\"},{\"namespace\":\"operable\",\"name\":\"manage_relays\",\"id\":\"0104cc2d-04d7-470c-be3e-21df40de54e3\"},{\"namespace\":\"operable\",\"name\":\"manage_triggers\",\"id\":\"323f1fcf-eb2d-4cea-8aef-bc1d488f4922\"}],\"name\":\"cog-admin\",\"id\":\"be0e1980-4f26-4184-9cbb-295cbf94e76c\"}],\"name\":\"cog-admin\",\"id\":\"5f8353f1-d156-4759-a66a-369b20e10ae4\"}],\"first_name\":\"Cog\",\"email_address\":\"cog@localhost\"},{\"username\":\"username\",\"last_name\":null,\"id\":\"be92e709-a31f-4c4f-b955-5e906348452a\",\"groups\":[],\"first_name\":null,\"email_address\":\"chat_handles_create\"},{\"username\":\"chat_handles_create_no_handle\",\"last_name\":null,\"id\":\"b2c96d13-7c6c-46f4-a694-975ffbdb5f04\",\"groups\":[],\"first_name\":null,\"email_address\":\"chat_handles_create_no_handle\"},{\"username\":\"chat_handles_create\",\"last_name\":null,\"id\":\"5173e044-2e88-451d-b48e-e67b674ce517\",\"groups\":[],\"first_name\":null,\"email_address\":\"chat_handles_create\"},{\"username\":\"chat_handles_delete\",\"last_name\":null,\"id\":\"d26edc0e-480a-4efc-8ede-e3a42f791f6c\",\"groups\":[],\"first_name\":null,\"email_address\":\"chat_handles_delete\"}]}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 19 Apr 2016 13:52:20 GMT",
+        "content-length": "1638",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "4jval84pl1c1nbqgmdqh4vrc4f17hmil"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"chat_handle\":{\"handle\":\"christian\",\"chat_provider\":\"slack\"}}",
+      "headers": {
+        "authorization": "token 2NCcv+n4hayNQEU3N1T2LAdZDCE1E6FSY0EMcdnK5mw=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/users/d26edc0e-480a-4efc-8ede-e3a42f791f6c/chat_handles"
+    },
+    "response": {
+      "body": "{\"chat_handle\":{\"user\":{\"username\":\"chat_handles_delete\",\"last_name\":null,\"id\":\"d26edc0e-480a-4efc-8ede-e3a42f791f6c\",\"first_name\":null,\"email_address\":\"chat_handles_delete\"},\"id\":\"4d2feda8-3be1-4d3e-be86-6f6942f731d6\",\"handle\":\"christian\",\"chat_provider_user_id\":\"U0R6QRCQK\",\"chat_provider\":{\"name\":\"slack\",\"id\":1}}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 19 Apr 2016 13:52:20 GMT",
+        "content-length": "317",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "e5qek68nk72grb8pcekrc5p7hauotsh8"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token 2NCcv+n4hayNQEU3N1T2LAdZDCE1E6FSY0EMcdnK5mw=",
+        "Accept": "application/json"
+      },
+      "method": "delete",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/chat_handles/4d2feda8-3be1-4d3e-be86-6f6942f731d6"
+    },
+    "response": {
+      "body": "",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 19 Apr 2016 13:52:20 GMT",
+        "content-length": "0",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "pd7qi54nncgd7p7b7coou3276lj9rr5g"
+      },
+      "status_code": 204,
+      "type": "ok"
+    }
+  }
+]

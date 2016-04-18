@@ -4,6 +4,7 @@ defmodule CogApi.HTTP.Client do
   alias CogApi.Endpoint
 
   alias CogApi.HTTP.Bundles
+  alias CogApi.HTTP.ChatHandles
   alias CogApi.HTTP.Groups
   alias CogApi.HTTP.Permissions
   alias CogApi.HTTP.Relays
@@ -35,6 +36,14 @@ defmodule CogApi.HTTP.Client do
 
   def bundle_create(%Endpoint{}=endpoint, params) do
     Bundles.create(endpoint, params)
+  end
+
+  def chat_handle_create(%Endpoint{}=endpoint, user_id, params) do
+    ChatHandles.create(endpoint, user_id, params)
+  end
+
+  def chat_handle_delete(%Endpoint{}=endpoint, chat_handle_id) do
+    ChatHandles.delete(endpoint, chat_handle_id)
   end
 
   def group_index(%Endpoint{}=endpoint) do

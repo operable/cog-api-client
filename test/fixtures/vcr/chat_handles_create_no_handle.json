@@ -1,0 +1,80 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"xRg8yv9jMiuXgP+yREwcI605He905+icEcg1dvz9Bis=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 19 Apr 2016 13:33:27 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "52o5v490dbnrae8fknkl1qmjshun4eq2"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"user\":{\"username\":\"chat_handles_create_no_handle\",\"password\":\"password\",\"email_address\":\"chat_handles_create_no_handle\"}}",
+      "headers": {
+        "authorization": "token xRg8yv9jMiuXgP+yREwcI605He905+icEcg1dvz9Bis=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/users"
+    },
+    "response": {
+      "body": "{\"user\":{\"username\":\"chat_handles_create_no_handle\",\"last_name\":null,\"id\":\"b2c96d13-7c6c-46f4-a694-975ffbdb5f04\",\"groups\":[],\"first_name\":null,\"email_address\":\"chat_handles_create_no_handle\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 19 Apr 2016 13:33:29 GMT",
+        "content-length": "192",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "81rej8u6734op75cbn2kl26oo0t33har",
+        "location": "/v1/users/b2c96d13-7c6c-46f4-a694-975ffbdb5f04"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"chat_handle\":{\"handle\":\"not_real\",\"chat_provider\":\"slack\"}}",
+      "headers": {
+        "authorization": "token xRg8yv9jMiuXgP+yREwcI605He905+icEcg1dvz9Bis=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/users/b2c96d13-7c6c-46f4-a694-975ffbdb5f04/chat_handles"
+    },
+    "response": {
+      "body": "{\"errors\":\"User with handle 'not_real' not found\"}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 19 Apr 2016 13:33:30 GMT",
+        "content-length": "50",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "spgptg05gjuepvobk0gh4ec7v8f5ir9c"
+      },
+      "status_code": 422,
+      "type": "ok"
+    }
+  }
+]

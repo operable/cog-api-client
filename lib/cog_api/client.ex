@@ -2,6 +2,7 @@ defmodule CogApi.Client do
   alias CogApi.Endpoint
 
   alias CogApi.Resources.Bundle
+  alias CogApi.Resources.ChatHandle
   alias CogApi.Resources.Group
   alias CogApi.Resources.Permission
   alias CogApi.Resources.Relay
@@ -18,6 +19,9 @@ defmodule CogApi.Client do
   @callback bundle_update(%Endpoint{}, String.t, %{}) :: {atom, %Bundle{}}
   @callback bundle_delete(%Endpoint{}, String.t) :: atom
   @callback bundle_create(%Endpoint{}, String.t) :: {atom, %Bundle{}}
+
+  @callback chat_handle_create(%Endpoint{}, String.t, %{}) :: {atom, %ChatHandle{}}
+  @callback chat_handle_delete(%Endpoint{}, String.t) :: atom
 
   @callback group_index(%Endpoint{}) :: {atom, [%Group{}]}
   @callback group_show(%Endpoint{}, String.t) :: {atom, %Group{}}

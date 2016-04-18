@@ -1,6 +1,7 @@
 defmodule CogApi.Fake.Server do
   defstruct [
     bundles: [],
+    chat_handles: [],
     groups: [],
     permissions: [],
     relays: [],

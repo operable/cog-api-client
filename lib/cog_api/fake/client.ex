@@ -4,6 +4,7 @@ defmodule CogApi.Fake.Client do
   alias CogApi.Endpoint
 
   alias CogApi.Fake.Bundles
+  alias CogApi.Fake.ChatHandles
   alias CogApi.Fake.Groups
   alias CogApi.Fake.Permissions
   alias CogApi.Fake.Relays
@@ -35,6 +36,14 @@ defmodule CogApi.Fake.Client do
 
   def bundle_delete(%Endpoint{}=endpoint, bundle_id) do
     Bundles.delete(endpoint, bundle_id)
+  end
+
+  def chat_handle_create(%Endpoint{}=endpoint, user_id, params) do
+    ChatHandles.create(endpoint, user_id, params)
+  end
+
+  def chat_handle_delete(%Endpoint{}=endpoint, chat_handle_id) do
+    ChatHandles.delete(endpoint, chat_handle_id)
   end
 
   def group_index(%Endpoint{}=endpoint) do
