@@ -62,7 +62,7 @@ defmodule CogApi.HTTP.RelayGroups do
   end
 
   defp update_membership(relay_group_id, relay_id, action, endpoint) do
-    path = "relay_groups/#{relay_group_id}/membership"
+    path = "relay_groups/#{relay_group_id}/relays"
     Base.post(endpoint, path, %{relays: %{action =>  [relay_id]}})
     |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
   end
@@ -74,7 +74,7 @@ defmodule CogApi.HTTP.RelayGroups do
     end
   end
   def update_assignments(action, relay_group_id, bundle_ids, endpoint) when is_list(bundle_ids) do
-    path = "relay_groups/#{relay_group_id}/assignment"
+    path = "relay_groups/#{relay_group_id}/bundles"
     Base.post(endpoint, path, %{bundles: %{action => bundle_ids}})
     |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
   end
