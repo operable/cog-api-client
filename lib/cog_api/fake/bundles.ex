@@ -6,6 +6,7 @@ defmodule CogApi.Fake.Bundles do
   alias CogApi.Fake.Server
   alias CogApi.Fake.Rules
   alias CogApi.Resources.Bundle
+  alias CogApi.Resources.Command
 
   def index(%Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
   def index(%Endpoint{}) do
@@ -21,11 +22,9 @@ defmodule CogApi.Fake.Bundles do
 
   defp add_rules(endpoint, bundle) do
     bundle.commands
-    |> Enum.map(fn ({command, _}) ->
-                     %{name: command, rules: find_rules(endpoint, bundle, command)}
-                   (%CogApi.Resources.Command{}=command) ->
-                     %{command | rules: find_rules(endpoint, bundle, command.name)}
-    end)
+    |> Enum.map(fn(command) ->
+         %{command | rules: find_rules(endpoint, bundle, command.name)}
+       end)
   end
 
   defp find_rules(endpoint, bundle, command) do
@@ -35,12 +34,14 @@ defmodule CogApi.Fake.Bundles do
   end
 
   def create(%Endpoint{token: nil}, %{name: _}), do: Endpoint.invalid_endpoint
-  def create(%Endpoint{token: _}, params) do
+  def create(endpoint=%Endpoint{token: _}, params) do
     params = to_atom_keys(params)
     if Enum.all?([:name, :version, :commands], &(&1 in Map.keys(params))) do
+      commands = parse_commands(params[:commands], endpoint)
       new_bundle = %Bundle{id: random_string(8)}
-      new_bundle = Map.merge(new_bundle, params)
-      {:ok, Server.create(Bundle, new_bundle)}
+      new_bundle = Map.merge(new_bundle, %{params | commands: commands})
+      new_bundle = Server.create(Bundle, new_bundle)
+      show(endpoint, new_bundle.id)
     else
       {:error, ["Invalid bundle config"]}
     end
@@ -83,11 +84,35 @@ defmodule CogApi.Fake.Bundles do
 
   defp to_atom_keys(map) do
     Enum.reduce(map, %{}, fn ({key, val}, acc) ->
+      if is_map(val) do
+        val = to_atom_keys(val)
+      end
+
       if is_atom(key) do
         Map.put(acc, key, val)
       else
         Map.put(acc, String.to_atom(key), val)
       end
+    end)
+  end
+
+  defp parse_commands(commands, endpoint) do
+    commands
+    |> Enum.map(fn command -> parse_command(command, endpoint) end)
+  end
+
+  defp parse_command(%Command{}=command, _), do: command
+  defp parse_command({name, command}, endpoint) do
+    create_rules(command.rules, endpoint)
+
+    Map.merge(%Command{}, command)
+    |> Map.merge(%{name: name})
+  end
+
+  defp create_rules(rules, endpoint) do
+    Enum.map(rules, fn (rule) ->
+      {:ok, rule} = CogApi.Fake.Rules.create(rule, endpoint)
+      rule
     end)
   end
 end

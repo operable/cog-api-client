@@ -16,7 +16,7 @@ defmodule CogApi.Fake.BundlesTest do
     end
 
     it "returns a list of bundles" do
-      bundle = %Bundle{id: "id123", name: "a bundle"}
+      bundle = %Bundle{id: "id123", name: "bundle"}
       Server.create(Bundle, bundle)
 
       {:ok, bundles} = Client.bundle_index(fake_endpoint)
@@ -29,7 +29,7 @@ defmodule CogApi.Fake.BundlesTest do
 
   describe "bundle_show" do
     it "returns the bundle" do
-      config = %{minimal_config | name: "postgres"}
+      config = %{minimal_bundle_config | name: "postgres"}
       bundle = Client.bundle_create(fake_endpoint, config) |> get_value
 
       bundle = Client.bundle_show(fake_endpoint, bundle.id) |> get_value
@@ -38,7 +38,7 @@ defmodule CogApi.Fake.BundlesTest do
 
     it "includes the rules for each command" do
       command = %CogApi.Resources.Command{name: "help"}
-      config = %{minimal_config | name: "postgres", commands: [command]}
+      config = %{minimal_bundle_config | name: "postgres", commands: [command]}
       bundle = Client.bundle_create(fake_endpoint, config) |> get_value
       rule_text = "when command is postgres:help must have operable:manage_commands"
       rule_text |> Client.rule_create(fake_endpoint) |> get_value
@@ -55,19 +55,24 @@ defmodule CogApi.Fake.BundlesTest do
 
   describe "bundle_create" do
     it "allows adding a new bundle" do
-      config = minimal_config
+      config = minimal_bundle_config
       bundle = Client.bundle_create(fake_endpoint, config) |> get_value
 
-      assert bundle.name == "a bundle"
+      assert bundle.name == "bundle"
+      command = List.first(bundle.commands)
+      assert command.documentation == "Does a thing"
+      assert Enum.map(command.rules, &(&1.rule)) == ["must have bundle:test_command"]
       assert present bundle.id
     end
 
     it "works with string keys" do
-      config = to_string_keys(minimal_config)
+      config = to_string_keys(minimal_bundle_config)
       bundle = Client.bundle_create(fake_endpoint, config) |> get_value
 
-      assert bundle.name == "a bundle"
-      assert present bundle.id
+      assert bundle.name == "bundle"
+      command = List.first(bundle.commands)
+      assert command.documentation == "Does a thing"
+      assert Enum.map(command.rules, &(&1.rule)) == ["must have bundle:test_command"]
     end
 
     it "fails without valid info" do
@@ -78,7 +83,7 @@ defmodule CogApi.Fake.BundlesTest do
 
   describe "bundle_update" do
     it "returns the updated bundle" do
-      config = minimal_config
+      config = minimal_bundle_config
       bundle = Client.bundle_create(fake_endpoint, config) |> get_value
 
       {:ok, updated_bundle} = Client.bundle_update(
@@ -91,7 +96,7 @@ defmodule CogApi.Fake.BundlesTest do
     end
 
     it "will allow a string for enabled" do
-      config = minimal_config
+      config = minimal_bundle_config
       bundle = Client.bundle_create(fake_endpoint, config) |> get_value
 
       {:ok, updated_bundle} = Client.bundle_update(
@@ -116,7 +121,7 @@ defmodule CogApi.Fake.BundlesTest do
     end
 
     it "allows a way to test errors" do
-      config = minimal_config
+      config = minimal_bundle_config
       bundle = Client.bundle_create(fake_endpoint, config) |> get_value
 
       {:error, [error]} = Client.bundle_update(
@@ -129,7 +134,7 @@ defmodule CogApi.Fake.BundlesTest do
     end
 
     it "returns the updated bundle given a bundle name" do
-      config = minimal_config
+      config = minimal_bundle_config
       bundle = Client.bundle_create(fake_endpoint, config) |> get_value
 
       {:ok, updated_bundle} = Client.bundle_update(
@@ -144,7 +149,7 @@ defmodule CogApi.Fake.BundlesTest do
 
   describe "bundle_delete" do
     it "returns :ok" do
-      config = minimal_config
+      config = minimal_bundle_config
       bundle = Client.bundle_create(fake_endpoint, config) |> get_value
 
       assert :ok == Client.bundle_delete(
@@ -162,16 +167,11 @@ defmodule CogApi.Fake.BundlesTest do
     end
   end
 
-  defp minimal_config do
-    %{name: "a bundle",
-      version: "0.0.1",
-      commands: %{
-        test_command: %{
-          executable: "/bin/foobar"}}}
-  end
-
   defp to_string_keys(map) do
     Enum.reduce(map, %{}, fn ({key, val}, acc) ->
+      if is_map(val) do
+        val = to_string_keys(val)
+      end
       Map.put(acc, Atom.to_string(key), val)
     end)
   end

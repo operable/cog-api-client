@@ -12,15 +12,19 @@ defmodule CogApi.Test.FakeHelpers do
     bundle
   end
 
-  defp minimal_bundle_config(params) do
-    defaults = %{
-      name: "a bundle",
+  def minimal_bundle_config do
+    %{name: "bundle",
       version: "0.0.1",
       commands: %{
         test_command: %{
-          executable: "/bin/foobar"}}
+          documentation: "Does a thing",
+          rules: ["must have bundle:test_command"]
+        }
+      }
     }
+  end
 
-    Map.merge(defaults, params)
+  def minimal_bundle_config(params) do
+    Map.merge(minimal_bundle_config, params)
   end
 end
