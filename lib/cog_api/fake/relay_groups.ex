@@ -60,10 +60,13 @@ defmodule CogApi.Fake.RelayGroups do
     add_relays(relay_group.id, relay_ids, endpoint)
   end
   def add_relays(id, relay_ids, %Endpoint{token: _}=endpoint) when is_list(relay_ids) do
-    Enum.map(relay_ids, &add_relays(id, &1, endpoint))
-    |> List.last
+    Enum.map(relay_ids, &add_relay(id, &1, endpoint))
   end
-  def add_relays(id, relay_id, %Endpoint{token: _}) do
+  def add_relays(id, relay_id, %Endpoint{token: _}=endpoint) do
+    [add_relay(id, relay_id, endpoint)]
+  end
+
+  defp add_relay(id, relay_id, %Endpoint{token: _}) do
     relay = Server.show(Relay, relay_id)
     relay_group = Server.show(RelayGroup, id)
     add_relay(relay, relay_group)
@@ -84,10 +87,13 @@ defmodule CogApi.Fake.RelayGroups do
     remove_relays(relay_group.id, relay_ids, endpoint)
   end
   def remove_relays(id, relay_ids, %Endpoint{token: _}=endpoint) when is_list(relay_ids) do
-    Enum.map(relay_ids, &remove_relays(id, &1, endpoint))
-    |> List.last
+    Enum.map(relay_ids, &remove_relay(id, &1, endpoint))
   end
-  def remove_relays(id, relay_id, %Endpoint{token: _}) do
+  def remove_relays(id, relay_id, %Endpoint{token: _}=endpoint) do
+    [remove_relay(id, relay_id, endpoint)]
+  end
+
+  defp remove_relay(id, relay_id, %Endpoint{token: _}) do
     relay = Server.show(Relay, relay_id)
     relay_group = Server.show(RelayGroup, id)
     remove_relay(relay, relay_group)
@@ -116,10 +122,13 @@ defmodule CogApi.Fake.RelayGroups do
     add_bundles(relay_group.id, bundle_ids, endpoint)
   end
   def add_bundles(id, bundle_ids, %Endpoint{token: _}=endpoint) when is_list(bundle_ids) do
-    Enum.map(bundle_ids, &add_bundles(id, &1, endpoint))
-    |> List.last
+    Enum.map(bundle_ids, &add_bundle(id, &1, endpoint))
   end
-  def add_bundles(id, bundle_id, %Endpoint{token: _}) do
+  def add_bundles(id, bundle_id, %Endpoint{token: _}=endpoint) do
+    [add_bundle(id, bundle_id, endpoint)]
+  end
+
+  defp add_bundle(id, bundle_id, %Endpoint{token: _}) do
     bundle = Server.show(Bundle, bundle_id)
     relay_group = Server.show(RelayGroup, id)
     add_bundle(bundle, relay_group)
@@ -140,10 +149,13 @@ defmodule CogApi.Fake.RelayGroups do
     remove_bundles(relay_group.id, bundle_ids, endpoint)
   end
   def remove_bundles(id, bundle_ids, %Endpoint{token: _}=endpoint) when is_list(bundle_ids) do
-    Enum.map(bundle_ids, &remove_bundles(id, &1, endpoint))
-    |> List.last
+    Enum.map(bundle_ids, &remove_bundle(id, &1, endpoint))
   end
-  def remove_bundles(id, bundle_id, %Endpoint{token: _}) do
+  def remove_bundles(id, bundle_id, %Endpoint{token: _}=endpoint) do
+    [remove_bundle(id, bundle_id, endpoint)]
+  end
+
+  defp remove_bundle(id, bundle_id, %Endpoint{token: _}) do
     bundle = Server.show(Bundle, bundle_id)
     relay_group = Server.show(RelayGroup, id)
     remove_bundle(bundle, relay_group)
