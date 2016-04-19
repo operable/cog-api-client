@@ -53,8 +53,10 @@ defmodule CogApi.Client do
   @callback relay_group_update(String.t, %{}, %Endpoint{}) :: {atom, %RelayGroup{}}
   @callback relay_group_delete(String.t, %Endpoint{}) :: atom
   @callback relay_group_delete(String.t, %Endpoint{}) :: {atom, [String.t]}
-  @callback relay_group_add_relay(String.t, String.t, %Endpoint{}) :: {atom, %RelayGroup{}}
-  @callback relay_group_remove_relay(String.t, String.t, %Endpoint{}) :: {atom, %RelayGroup{}}
+  @callback relay_group_add_relays(String.t, String.t | List.t, %Endpoint{}) :: {atom, %RelayGroup{}}
+  @callback relay_group_add_relays(Map.t, Map.t, %Endpoint{}) :: {atom, %RelayGroup{}}
+  @callback relay_group_remove_relays(String.t, String.t, %Endpoint{}) :: {atom, %RelayGroup{}}
+  @callback relay_group_remove_relays(Map.t, Map.t, %Endpoint{}) :: {atom, %RelayGroup{}}
   @callback relay_group_add_bundles(String.t, String.t | List.t, %Endpoint{}) :: {atom, %RelayGroup{}}
   @callback relay_group_add_bundles(Map.t, Map.t, %Endpoint{}) :: {atom, %RelayGroup{}}
   @callback relay_group_remove_bundles(String.t, String.t | List.t, %Endpoint{}) :: {atom, %RelayGroup{}}
