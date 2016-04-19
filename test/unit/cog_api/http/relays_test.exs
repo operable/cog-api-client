@@ -30,7 +30,7 @@ defmodule CogApi.HTTP.RelaysTest do
         name = "IndexGroup"
         relay = Client.relay_create(%{name: name, token: "1234"}, endpoint) |> get_value
         group = Client.relay_group_create(%{name: name}, endpoint) |> get_value
-        group = Client.relay_group_add_relay(group.id, relay.id, endpoint) |> get_value
+        group = Client.relay_group_add_relays(group.id, relay.id, endpoint) |> get_value
 
         last_relay = Client.relay_index(endpoint) |> get_value |> List.last
 
