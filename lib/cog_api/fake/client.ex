@@ -142,12 +142,12 @@ defmodule CogApi.Fake.Client do
     RelayGroups.delete(relay_group_id, endpoint)
   end
 
-  def relay_group_add_relay(relay_group_id, relay_id, %Endpoint{}=endpoint) do
-    RelayGroups.add_relay(relay_group_id, relay_id, endpoint)
+  def relay_group_add_relays(relay_group_id, relay_id, %Endpoint{}=endpoint) do
+    RelayGroups.add_relays(relay_group_id, relay_id, endpoint)
   end
 
-  def relay_group_remove_relay(relay_group_id, relay_id, %Endpoint{}=endpoint) do
-    RelayGroups.remove_relay(relay_group_id, relay_id, endpoint)
+  def relay_group_remove_relays(relay_group_id, relay_id, %Endpoint{}=endpoint) do
+    RelayGroups.remove_relays(relay_group_id, relay_id, endpoint)
   end
 
   def relay_group_add_bundles(relay_group_id, bundle_id, %Endpoint{}=endpoint) do

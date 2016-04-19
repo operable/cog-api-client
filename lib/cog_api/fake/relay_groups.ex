@@ -52,13 +52,18 @@ defmodule CogApi.Fake.RelayGroups do
   end
   defp delete_relay_group(_), do: return_error("The relay group could not be deleted")
 
-  def add_relay(_, _, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
-  def add_relay(%{name: name}, %{relay: relay_name}, %Endpoint{token: _}) do
-    relay = Server.show_by_key(Relay, :name, relay_name)
+  def add_relays(_, _, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
+  def add_relays(%{name: name}, %{relays: relay_names}, %Endpoint{token: _}=endpoint) do
     relay_group = Server.show_by_key(RelayGroup, :name, name)
-    add_relay(relay, relay_group)
+    relay_ids = Enum.map(relay_names, &Server.show_by_key(Relay, :name, &1))
+    |> Enum.map(&Map.fetch!(&1, :id))
+    add_relays(relay_group.id, relay_ids, endpoint)
   end
-  def add_relay(id, relay_id, %Endpoint{token: _}) do
+  def add_relays(id, relay_ids, %Endpoint{token: _}=endpoint) when is_list(relay_ids) do
+    Enum.map(relay_ids, &add_relays(id, &1, endpoint))
+    |> List.last
+  end
+  def add_relays(id, relay_id, %Endpoint{token: _}) do
     relay = Server.show(Relay, relay_id)
     relay_group = Server.show(RelayGroup, id)
     add_relay(relay, relay_group)
@@ -71,22 +76,30 @@ defmodule CogApi.Fake.RelayGroups do
     update_relays(relay_with_group, relay_group)
   end
 
-  def remove_relay(_, _, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
-  def remove_relay(%{name: name}, %{relay: relay_name}, %Endpoint{token: _}) do
-    relay = Server.show_by_key(Relay, :name, relay_name)
+  def remove_relays(_, _, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
+  def remove_relays(%{name: name}, %{relays: relay_names}, %Endpoint{token: _}=endpoint) do
     relay_group = Server.show_by_key(RelayGroup, :name, name)
-    remove_relay(relay, relay_group)
+    relay_ids = Enum.map(relay_names, &Server.show_by_key(Relay, :name, &1))
+    |> Enum.map(&Map.fetch!(&1, :id))
+    remove_relays(relay_group.id, relay_ids, endpoint)
   end
-  def remove_relay(id, relay_id, %Endpoint{token: _}) do
+  def remove_relays(id, relay_ids, %Endpoint{token: _}=endpoint) when is_list(relay_ids) do
+    Enum.map(relay_ids, &remove_relays(id, &1, endpoint))
+    |> List.last
+  end
+  def remove_relays(id, relay_id, %Endpoint{token: _}) do
     relay = Server.show(Relay, relay_id)
     relay_group = Server.show(RelayGroup, id)
     remove_relay(relay, relay_group)
   end
 
   defp remove_relay(%Relay{}=relay, %RelayGroup{}=relay_group) do
-    relays = relay_group.relays -- [relay]
+    relays = Enum.reject(relay_group.relays, &(&1.id == relay.id))
     relay_group = %{relay_group | relays: relays}
-    relay_without_group = %{relay | groups: relay.groups -- [relay_group]}
+
+    relay_groups = Enum.reject(relay.groups, &(&1.id == relay_group.id))
+    relay_without_group = %{relay | groups: relay_groups}
+
     update_relays(relay_without_group, relay_group)
   end
 
