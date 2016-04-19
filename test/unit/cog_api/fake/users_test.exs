@@ -48,6 +48,25 @@ defmodule CogApi.Fake.UsersTest do
       assert Enum.map(found_user.groups, &(&1.id)) == [group.id]
       assert List.first(found_user.groups).roles == [role]
     end
+
+    it "searches by username" do
+      params = %{
+        first_name: "Charlie",
+        last_name: "Young",
+        email_address: "charlie@example.com",
+        username: "aide_to_potus",
+        password: "thesecretest",
+      }
+      created_user = Client.user_create(fake_endpoint, params) |> get_value
+
+      found_user = Client.user_show(
+        fake_endpoint,
+        %{username: created_user.username}
+      ) |> get_value
+
+      assert found_user.id == created_user.id
+      assert found_user.email_address == created_user.email_address
+    end
   end
 
   describe "create" do

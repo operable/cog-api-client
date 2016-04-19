@@ -12,6 +12,9 @@ defmodule CogApi.Fake.Users do
   end
 
   def show(%Endpoint{token: nil}, _),  do: Endpoint.invalid_endpoint
+  def show(%Endpoint{}, %{username: username}) do
+    {:ok, Server.show_by_key(User, :username, username)}
+  end
   def show(%Endpoint{}, id) do
     {:ok, Server.show(User, id)}
   end

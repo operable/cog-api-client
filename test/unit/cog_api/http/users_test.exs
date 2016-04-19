@@ -43,6 +43,19 @@ defmodule CogApi.HTTP.UsersTest do
           assert List.first(found_user.groups).roles == [role]
         end
       end
+
+      it "searches by username" do
+        cassette "users_show_by_username" do
+          endpoint = valid_endpoint
+          params = user_params("user_show_by_username")
+          created_user = Client.user_create(endpoint, params) |> get_value
+
+          found_user = Client.user_show(endpoint, %{username: created_user.username}) |> get_value
+
+          assert found_user.id == created_user.id
+          assert found_user.email_address == created_user.email_address
+        end
+      end
     end
   end
 

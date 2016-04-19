@@ -10,6 +10,10 @@ defmodule CogApi.HTTP.Users do
     |> ApiResponse.format(%{"users" => [User.format]})
   end
 
+  def show(%Endpoint{}=endpoint, %{username: username}) do
+    Base.get(endpoint, "users?username=#{username}")
+    |> ApiResponse.format(%{"user" => User.format})
+  end
   def show(%Endpoint{}=endpoint, id) do
     Base.get(endpoint, "users/#{id}")
     |> ApiResponse.format(%{"user" => User.format})

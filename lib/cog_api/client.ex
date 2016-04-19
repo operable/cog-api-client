@@ -79,7 +79,7 @@ defmodule CogApi.Client do
   @callback trigger_update(%Endpoint{}, String.t, %{}) :: {:ok, %Trigger{}} | {:error, term}
 
   @callback user_index(%Endpoint{}) :: {atom, [%User{}]}
-  @callback user_show(%Endpoint{}, String.t) :: {atom, %User{}}
+  @callback user_show(%Endpoint{}, String.t | %{}) :: {atom, %User{}}
   @callback user_create(%Endpoint{}, %{}) :: {atom, %User{}}
   @callback user_update(%Endpoint{}, String.t, %{}) :: {atom, %User{}}
   @callback user_delete(%Endpoint{}, String.t) :: atom
