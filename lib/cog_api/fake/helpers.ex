@@ -1,4 +1,11 @@
 defmodule CogApi.Fake.Helpers do
+  def catch_errors(struct, params, fun) do
+    keys_to_verify = Map.keys struct
+
+    Map.take(params, keys_to_verify)
+    |> catch_errors(fun)
+  end
+
   def catch_errors(params, fun) do
     errors = find_errors(params)
 
