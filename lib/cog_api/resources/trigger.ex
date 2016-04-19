@@ -5,9 +5,10 @@ defmodule CogApi.Resources.Trigger do
              :name,
              :pipeline,
              :as_user,
-             :timeout_sec,
              :description,
-             :invocation_url]
+             :invocation_url,
+             enabled: true,
+             timeout_sec: 30]
 
   def format,
     do: %__MODULE__{}
