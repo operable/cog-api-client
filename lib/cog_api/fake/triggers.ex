@@ -30,7 +30,7 @@ defmodule CogApi.Fake.Triggers do
   def create(%Endpoint{token: nil}, _),
     do: Endpoint.invalid_endpoint
   def create(%Endpoint{token: _}, params) do
-    catch_errors params, fn ->
+    catch_errors %Trigger{}, params, fn ->
       id = random_string(8)
 
       new_trigger = %Trigger{}
@@ -45,7 +45,7 @@ defmodule CogApi.Fake.Triggers do
   def update(%Endpoint{token: nil}, _, _),
     do: Endpoint.invalid_endpoint
   def update(%Endpoint{token: _}, id, params) do
-    catch_errors params, fn ->
+    catch_errors %Trigger{}, params, fn ->
       {:ok, Server.update(Trigger, id, params)}
     end
   end

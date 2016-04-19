@@ -18,7 +18,7 @@ defmodule CogApi.Fake.Users do
 
   def create(%Endpoint{token: nil}, _), do: Endpoint.invalid_endpoint
   def create(%Endpoint{token: _}, params) do
-    catch_errors params, fn ->
+    catch_errors %User{}, params, fn ->
       new_user = %User{id: random_string(8)}
       new_user = Map.merge(new_user, params)
       {:ok, Server.create(User, new_user)}
@@ -27,7 +27,7 @@ defmodule CogApi.Fake.Users do
 
   def update(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def update(%Endpoint{token: _}, id, params) do
-    catch_errors params, fn ->
+    catch_errors %User{}, params, fn ->
       {:ok, Server.update(User, id, params)}
     end
   end

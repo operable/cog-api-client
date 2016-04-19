@@ -37,7 +37,7 @@ defmodule CogApi.Fake.Groups do
 
   def update(%Endpoint{token: nil}, _), do: Endpoint.invalid_endpoint
   def update(%Endpoint{token: _}, id, %{name: _name}=params) do
-    catch_errors params, fn ->
+    catch_errors %Group{}, params, fn ->
       {:ok, Server.update(Group, id, params)}
     end
   end

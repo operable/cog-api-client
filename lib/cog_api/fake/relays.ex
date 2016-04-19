@@ -22,7 +22,7 @@ defmodule CogApi.Fake.Relays do
 
   def create(_, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
   def create(params = %{name: _}, %Endpoint{token: _}) do
-    catch_errors params, fn ->
+    catch_errors %Relay{}, params, fn ->
       new_relay = %Relay{id: random_string(8)}
       new_relay = Map.merge(new_relay, params)
       {:ok, Server.create(Relay, new_relay)}
@@ -35,7 +35,7 @@ defmodule CogApi.Fake.Relays do
     update(relay.id, params, endpoint)
   end
   def update(id, params, %Endpoint{token: _}) do
-    catch_errors params, fn ->
+    catch_errors %Relay{}, params, fn ->
       {:ok, Server.update(Relay, id, params)}
     end
   end

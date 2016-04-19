@@ -24,7 +24,7 @@ defmodule CogApi.Fake.RelayGroups do
 
   def create(_, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
   def create(params=%{name: name}, %Endpoint{token: _}) do
-    catch_errors params, fn ->
+    catch_errors %RelayGroup{}, params, fn ->
       new_relay_group = %RelayGroup{id: random_string(8), name: name, relays: []}
       {:ok, Server.create(RelayGroup, new_relay_group)}
     end
@@ -32,7 +32,7 @@ defmodule CogApi.Fake.RelayGroups do
 
   def update(_, _, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
   def update(id, params, %Endpoint{token: _}) do
-    catch_errors params, fn ->
+    catch_errors %RelayGroup{}, params, fn ->
       {:ok, Server.update(RelayGroup, id, params)}
     end
   end

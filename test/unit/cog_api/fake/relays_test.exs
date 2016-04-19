@@ -72,9 +72,9 @@ defmodule CogApi.Fake.RelaysTest do
     context "when given invalid params" do
       it "returns a list of errors" do
         name = "invalid relay"
-        {:error, [error]} = Client.relay_create(%{name: name, token: "ERROR"}, fake_endpoint)
+        {:error, [error]} = Client.relay_create(%{name: name, enabled: "ERROR"}, fake_endpoint)
 
-        assert error == "Token is invalid"
+        assert error == "Enabled is invalid"
       end
     end
   end
