@@ -1,0 +1,80 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"/sv6iyiOqVsp1zOEYeGA2T/SNOK7vH6Mr9YoELHI4nI=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Fri, 15 Apr 2016 01:33:47 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "98kua3u6btgd2eqglmcfj12b9amtp3v7"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"relay_group\":{\"name\":\"my_relay_group\"}}",
+      "headers": {
+        "authorization": "token /sv6iyiOqVsp1zOEYeGA2T/SNOK7vH6Mr9YoELHI4nI=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/relay_groups"
+    },
+    "response": {
+      "body": "{\"relay_group\":{\"updated_at\":\"2016-04-15T01:33:48Z\",\"relays\":[],\"name\":\"my_relay_group\",\"inserted_at\":\"2016-04-15T01:33:48Z\",\"id\":\"6f757dcb-05e8-49d6-affa-7d1ae7cdf346\",\"bundles\":[]}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Fri, 15 Apr 2016 01:33:47 GMT",
+        "content-length": "183",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "2v3v3rqpnd1v96psc0l4g7hcn5up3r34",
+        "location": "/v1/groups/6f757dcb-05e8-49d6-affa-7d1ae7cdf346"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token /sv6iyiOqVsp1zOEYeGA2T/SNOK7vH6Mr9YoELHI4nI=",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/relays"
+    },
+    "response": {
+      "body": "{\"relays\":[]}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Fri, 15 Apr 2016 01:33:47 GMT",
+        "content-length": "13",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "erft2j4onaq4ak5nhenq9idbrhbe7gmk"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

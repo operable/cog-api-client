@@ -336,6 +336,21 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         end
       end
     end
+
+    context "when the relay by name cannot be added to a relay group" do
+      it "returns an error" do
+        cassette "relay_group_add_relay_failure" do
+          endpoint = valid_endpoint
+
+          group = Client.relay_group_create(%{name: "my_relays"}, endpoint) |> get_value
+          assert group.relays == []
+
+          {:error, [error]} = Client.relay_group_add_relay(%{name: group.name}, %{relay: "not here"}, endpoint)
+
+          assert error == "Resource not found for: 'relays'"
+        end
+      end
+    end
   end
 
   describe "relay_group_remove_relay" do
@@ -365,6 +380,21 @@ defmodule CogApi.HTTP.RelayGroupsTest do
           group = Client.relay_group_remove_relay(%{name: group.name}, %{relay: relay.name}, endpoint) |> get_value
 
           assert group.relays == []
+        end
+      end
+    end
+
+    context "when the relay by name cannot be removed from a relay group" do
+      it "returns an error" do
+        cassette "relay_group_remove_relay_failure" do
+          endpoint = valid_endpoint
+
+          group = Client.relay_group_create(%{name: "my_relay_group"}, endpoint) |> get_value
+          assert group.relays == []
+
+          {:error, [error]} = Client.relay_group_remove_relay(%{name: group.name}, %{relay: "not here"}, endpoint)
+
+          assert error == "Resource not found for: 'relays'"
         end
       end
     end

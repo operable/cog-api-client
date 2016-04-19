@@ -38,27 +38,23 @@ defmodule CogApi.HTTP.RelayGroups do
     |> ApiResponse.format_delete("The relay group could not be deleted")
   end
 
-  def add_relay(%{name: name}, %{relay: relay_name}, %Endpoint{}=endpoint) do
-    {relay, relay_group} = get_group_relay(name, relay_name, endpoint)
-    update_membership(relay_group.id, relay.id, :add, endpoint)
+  def update_memberships(action, %{name: name}, %{relay: relay_name}, %Endpoint{}=endpoint) do
+    case get_group_relay(name, relay_name, endpoint) do
+      {:ok, relay, relay_group} ->
+        update_membership(relay_group.id, relay.id, action, endpoint)
+      error ->
+        error
+    end
   end
-  def add_relay(relay_group_id, relay_id, %Endpoint{}=endpoint) do
-    update_membership(relay_group_id, relay_id, :add, endpoint)
-  end
-
-  def remove_relay(%{name: name}, %{relay: relay_name}, %Endpoint{}=endpoint) do
-    {relay, relay_group} = get_group_relay(name, relay_name, endpoint)
-    update_membership(relay_group.id, relay.id, :remove, endpoint)
-  end
-  def remove_relay(relay_group_id, relay_id, %Endpoint{}=endpoint) do
-    update_membership(relay_group_id, relay_id, :remove, endpoint)
+  def update_memberships(action, relay_group_id, relay_id, %Endpoint{}=endpoint) do
+    update_membership(relay_group_id, relay_id, action, endpoint)
   end
 
   defp get_group_relay(name, relay_name, endpoint) do
     with {:ok, relay} <- Base.get_by(endpoint, "relays", name: relay_name)
         |> ApiResponse.format(%{"relay" => CogApi.Resources.Relay.format}),
       {:ok, relay_group} <- show(%{name: name}, endpoint),
-    do: {relay, relay_group}
+      do: {:ok, relay, relay_group}
   end
 
   defp update_membership(relay_group_id, relay_id, action, endpoint) do
