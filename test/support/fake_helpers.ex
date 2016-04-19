@@ -3,7 +3,7 @@ defmodule CogApi.Test.FakeHelpers do
   alias CogApi.Fake.Client
 
   def fake_endpoint do
-    {:ok, endpoint} = %Endpoint{} |> CogApi.Fake.Client.authenticate
+    {:ok, endpoint} = %Endpoint{} |> Client.authenticate
     endpoint
   end
 
