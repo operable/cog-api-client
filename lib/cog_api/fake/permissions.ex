@@ -1,5 +1,6 @@
 defmodule CogApi.Fake.Permissions do
   import CogApi.Fake.Random
+  import CogApi.Fake.Helpers
 
   alias CogApi.Endpoint
   alias CogApi.Fake.Server
@@ -12,15 +13,17 @@ defmodule CogApi.Fake.Permissions do
 
   def create(%Endpoint{token: nil}, %{name: _}), do: Endpoint.invalid_endpoint
   def create(%Endpoint{token: _}, name) do
-    [namespace, name] = build_namespaced_name(name)
+    catch_errors %Permission{}, %{name: name}, fn ->
+      [namespace, name] = build_namespaced_name(name)
 
-    new_permission = %Permission{
-      id: random_string(8),
-      name: name,
-      namespace: namespace,
-    }
+      new_permission = %Permission{
+        id: random_string(8),
+        name: name,
+        namespace: namespace,
+      }
 
-    {:ok, Server.create(Permission, new_permission)}
+      {:ok, Server.create(Permission, new_permission)}
+    end
   end
 
   defp build_namespaced_name(name) do
