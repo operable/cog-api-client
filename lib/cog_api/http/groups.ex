@@ -73,29 +73,13 @@ defmodule CogApi.HTTP.Groups do
     |> format_group_response
   end
 
-  defp format_group_response({:error, _}=response) do
-    response
-  end
-
   defp format_group_response(response) do
-    json_structure = %{"group" => GroupDecoder.format}
-    group = Poison.decode!(response.body, as: json_structure)["group"]
-    |> GroupDecoder.to_group
-
-    {
-      ApiResponse.type(response),
-      group
-    }
+    response
+    |> ApiResponse.format_with_decoder(GroupDecoder, "group")
   end
 
   defp format_groups_response(response) do
-    json_structure = %{"groups" => [GroupDecoder.format]}
-    groups = Poison.decode!(response.body, as: json_structure)["groups"]
-    |> Enum.map(&GroupDecoder.to_group/1)
-
-    {
-      ApiResponse.type(response),
-      groups
-    }
+    response
+    |> ApiResponse.format_many_with_decoder(GroupDecoder, "groups")
   end
 end

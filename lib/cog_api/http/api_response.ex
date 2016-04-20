@@ -34,6 +34,9 @@ defmodule CogApi.HTTP.ApiResponse do
     }
   end
 
+  def format_many_with_decoder({:error, error_message}, _, _) do
+    format_error(error_message)
+  end
   def format_many_with_decoder(%Response{status_code: code}=response, _, _) when
   http_error?(code) do
     format_error(response)
@@ -49,6 +52,9 @@ defmodule CogApi.HTTP.ApiResponse do
     }
   end
 
+  def format_with_decoder({:error, error_message}, _, _) do
+    format_error(error_message)
+  end
   def format_with_decoder(%Response{status_code: code}=response, _, _) when
   http_error?(code) do
     format_error(response)

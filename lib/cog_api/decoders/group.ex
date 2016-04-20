@@ -11,7 +11,7 @@ defmodule CogApi.Decoders.Group do
     }
   end
 
-  def to_group(group_decoder) do
+  def to_resource(group_decoder) do
     %CogApi.Resources.Group{
       id: group_decoder.id,
       name: group_decoder.name,
