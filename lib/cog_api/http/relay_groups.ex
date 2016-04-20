@@ -53,19 +53,20 @@ defmodule CogApi.HTTP.RelayGroups do
     |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
   end
 
-  def update_assignments(action, %{name: name}, %{bundles: bundle_names}, endpoint) when is_list(bundle_names) do
-    with {:ok, relay_group} <- show(%{name: name}, endpoint),
+  def update_assignments_by_name(action, relay_group_name, bundle_names, endpoint) do
+    bundle_names = List.wrap(bundle_names)
+    with {:ok, relay_group} <- show(%{name: relay_group_name}, endpoint),
          {:ok, bundle_ids}  <- get_bundle_ids(bundle_names, endpoint) do
-      update_assignments(action, relay_group.id, bundle_ids, endpoint)
+      update_assignments_by_id(action, relay_group.id, bundle_ids, endpoint)
     end
   end
-  def update_assignments(action, relay_group_id, bundle_ids, endpoint) when is_list(bundle_ids) do
+
+  def update_assignments_by_id(action, relay_group_id, bundle_ids, endpoint) do
+    bundle_ids = List.wrap(bundle_ids)
     path = "relay_groups/#{relay_group_id}/bundles"
     Base.post(endpoint, path, %{bundles: %{action => bundle_ids}})
     |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
   end
-  def update_assignments(action, relay_group_id, bundle_id, endpoint) when is_binary(bundle_id),
-    do: update_assignments(action, relay_group_id, [bundle_id], endpoint)
 
   defp get_relay_ids(relay_names, endpoint) when is_list(relay_names) do
     get_relay_id = fn(name, acc, endpoint) ->
