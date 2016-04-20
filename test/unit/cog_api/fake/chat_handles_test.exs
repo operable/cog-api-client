@@ -52,4 +52,31 @@ defmodule CogApi.Fake.ChatHandlesTest do
       assert response == :ok
     end
   end
+
+  describe "chat_handle_for_user" do
+    it "returns the user's chat handles" do
+      params = %{
+        first_name: "Leo",
+        last_name: "McGary",
+        email_address: "cos@example.com",
+        username: "chief_of_staff",
+        password: "supersecret",
+      }
+      user = Client.user_create(fake_endpoint, params) |> get_value
+      handle = Client.chat_handle_create(
+        fake_endpoint,
+        user.id,
+        %{chat_provider: "slack", handle: "bar"}
+      ) |> get_value
+
+      _other_handle = Client.chat_handle_create(
+        fake_endpoint,
+        "other-user-id",
+        %{chat_provider: "slack", handle: "foo"}
+      ) |> get_value
+
+      chat_handles = Client.chat_handle_for_user(user.id, fake_endpoint) |> get_value
+      assert chat_handles == [handle]
+    end
+  end
 end

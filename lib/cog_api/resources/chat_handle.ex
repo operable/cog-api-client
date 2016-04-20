@@ -3,6 +3,7 @@ defmodule CogApi.Resources.ChatHandle do
 
   defstruct [
     :id,
+    :user_id,
     :handle,
   ]
 

@@ -58,4 +58,21 @@ defmodule CogApi.HTTP.ChatHandlesTest do
       end
     end
   end
+
+  describe "chat_handle_for_user" do
+    it "returns the user's chat handles" do
+      cassette "user_chat_handles" do
+        endpoint = valid_endpoint
+        user = find_or_create_user(endpoint, "user_chat_handles")
+        handle = Client.chat_handle_create(
+          endpoint,
+          user.id,
+          %{chat_provider: "slack", handle: "mpeck"}
+        ) |> get_value
+
+        chat_handles = Client.chat_handle_for_user(user.id, endpoint) |> get_value
+        assert chat_handles == [handle]
+      end
+    end
+  end
 end

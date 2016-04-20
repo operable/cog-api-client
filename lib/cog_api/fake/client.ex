@@ -46,6 +46,10 @@ defmodule CogApi.Fake.Client do
     ChatHandles.delete(endpoint, chat_handle_id)
   end
 
+  def chat_handle_for_user(user_id, %Endpoint{}=endpoint) do
+    ChatHandles.for_user(user_id, endpoint)
+  end
+
   def group_index(%Endpoint{}=endpoint) do
     Groups.index(endpoint)
   end

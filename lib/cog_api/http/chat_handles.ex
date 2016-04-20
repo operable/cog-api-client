@@ -15,4 +15,9 @@ defmodule CogApi.HTTP.ChatHandles do
     Base.delete(endpoint, "chat_handles/#{id}")
     |> ApiResponse.format(%{"chat_handle" => ChatHandle.format})
   end
+
+  def for_user(id, %Endpoint{}=endpoint) do
+    Base.get(endpoint, "users/#{id}/chat_handles")
+    |> ApiResponse.format(%{"chat_handles" => [ChatHandle.format]})
+  end
 end
