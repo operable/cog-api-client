@@ -45,14 +45,7 @@ defmodule CogApi.Fake.Groups do
   end
 
   def delete(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
-  def delete(%Endpoint{token: _}, id) do
-    if Server.show(Group, id) do
-      Server.delete(Group, id)
-      :ok
-    else
-      {:error, ["The group could not be deleted"]}
-    end
-  end
+  def delete(%Endpoint{token: _}, id), do: Server.delete(Group, id)
 
   def add_role(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def add_role(%Endpoint{}, %Group{id: group_id}, %Role{name: role_name}) do

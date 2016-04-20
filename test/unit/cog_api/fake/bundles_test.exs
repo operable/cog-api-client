@@ -162,7 +162,7 @@ defmodule CogApi.Fake.BundlesTest do
       it "returns an error" do
         {:error, [error]} = Client.bundle_delete(fake_endpoint, "not real")
 
-        assert error == "The bundle could not be deleted"
+        assert error == "Resource not found for: bundles"
       end
     end
   end

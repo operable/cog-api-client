@@ -27,13 +27,7 @@ defmodule CogApi.Fake.Rules do
   end
 
   def delete(_, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
-  def delete(id, %Endpoint{token: _}) do
-    if Server.show(Rule, id) do
-      Server.delete(Rule, id)
-    else
-      {:error, ["The rule could not be deleted"]}
-    end
-  end
+  def delete(id, %Endpoint{token: _}), do: Server.delete(Rule, id)
 
   defp extract_command(rule) do
     command_pattern = ~r/\w*:\w*/

@@ -54,7 +54,7 @@ defmodule CogApi.Fake.RulesTest do
       it "returns an error" do
         {:error, [error]} = Client.rule_delete("NOT_REAL", fake_endpoint)
 
-        assert error == "The rule could not be deleted"
+        assert error == "Resource not found for: rules"
       end
     end
   end

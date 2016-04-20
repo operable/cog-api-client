@@ -79,7 +79,7 @@ defmodule CogApi.Fake.GroupsTest do
       it "returns an error" do
         {:error, [error]} = Client.group_delete(fake_endpoint, "not real")
 
-        assert error == "The group could not be deleted"
+        assert error == "Resource not found for: groups"
       end
     end
   end

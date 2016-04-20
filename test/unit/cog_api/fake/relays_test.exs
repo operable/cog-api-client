@@ -133,11 +133,11 @@ defmodule CogApi.Fake.RelaysTest do
       assert :ok == Client.relay_delete(relay.id, fake_endpoint)
     end
 
-    context "when the relay  cannot be deleted" do
+    context "when the relay cannot be deleted" do
       it "returns an error" do
         {:error, [error]} = Client.relay_delete("not real", fake_endpoint)
 
-        assert error == "The relay could not be deleted"
+        assert error == "Resource not found for: relays"
       end
     end
 

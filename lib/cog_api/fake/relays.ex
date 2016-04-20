@@ -45,12 +45,5 @@ defmodule CogApi.Fake.Relays do
     relay = Server.show_by_key(Relay, :name, name)
     delete(relay.id, endpoint)
   end
-  def delete(id, %Endpoint{token: _}) do
-    if Server.show(Relay, id) do
-      Server.delete(Relay, id)
-      :ok
-    else
-      {:error, ["The relay could not be deleted"]}
-    end
-  end
+  def delete(id, %Endpoint{token: _}), do: Server.delete(Relay, id)
 end

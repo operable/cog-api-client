@@ -70,14 +70,7 @@ defmodule CogApi.Fake.Bundles do
   end
 
   def delete(%Endpoint{token: nil}, _), do: Endpoint.invalid_endpoint
-  def delete(%Endpoint{token: _}, id) do
-    if Server.show(Bundle, id) do
-      Server.delete(Bundle, id)
-      :ok
-    else
-      {:error, ["The bundle could not be deleted"]}
-    end
-  end
+  def delete(%Endpoint{token: _}, id), do: Server.delete(Bundle, id)
 
   defp ensure_bundle_encode_status(status) do
     Bundle.encode_status(status)

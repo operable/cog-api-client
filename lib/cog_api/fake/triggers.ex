@@ -50,10 +50,6 @@ defmodule CogApi.Fake.Triggers do
     end
   end
 
-  def delete(%Endpoint{token: nil}, _, _),
-    do: Endpoint.invalid_endpoint
-  def delete(%Endpoint{token: _}, id) do
-    Server.delete(Trigger, id)
-    :ok
-  end
+  def delete(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
+  def delete(%Endpoint{token: _}, id), do: Server.delete(Trigger, id)
 end
