@@ -38,6 +38,46 @@ defmodule CogApi.Fake.ChatHandlesTest do
     end
   end
 
+  describe "chat_handles_update" do
+    it "allows updating the chat handle for a user" do
+      endpoint = valid_endpoint
+      user = find_or_create_user(endpoint, "chat_handles_update")
+      handle = Client.chat_handle_create(
+        endpoint,
+        user.id,
+        %{chat_provider: "slack", handle: "drapergeek"}
+      ) |> get_value
+
+      handle = Client.chat_handle_update(
+        endpoint,
+        handle.id,
+        %{chat_provider: "slack", handle: "jsteiner"}
+      ) |> get_value
+
+      assert handle.handle == "jsteiner"
+    end
+
+    context "when the chat handle does not exist for the provider" do
+      it "returns an error" do
+        endpoint = valid_endpoint
+        user = find_or_create_user(endpoint, "chat_handles_update_no_handle")
+        handle = Client.chat_handle_create(
+          endpoint,
+          user.id,
+          %{chat_provider: "slack", handle: "drapergeek"}
+        ) |> get_value
+
+        {:error, [error]} = Client.chat_handle_update(
+          endpoint,
+          handle.id,
+          %{chat_provider: "slack", handle: "ERROR"}
+        )
+
+        assert error == "Handle is invalid"
+      end
+    end
+  end
+
   describe "chat_handles_delete" do
     it "allows deleting a chat handle" do
       endpoint = valid_endpoint

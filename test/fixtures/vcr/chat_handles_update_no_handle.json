@@ -1,0 +1,106 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"Y6CFeoF9Q49EeVLVyHm/iTj+AqwGJM4l3cGNP+v/yDA=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 20 Apr 2016 20:28:18 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "a1dgmj4aa1u1kcr8t6o6tierspkfadgb"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"user\":{\"username\":\"chat_handles_update_no_handle\",\"password\":\"password\",\"email_address\":\"chat_handles_update_no_handle\"}}",
+      "headers": {
+        "authorization": "token Y6CFeoF9Q49EeVLVyHm/iTj+AqwGJM4l3cGNP+v/yDA=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/users"
+    },
+    "response": {
+      "body": "{\"user\":{\"username\":\"chat_handles_update_no_handle\",\"last_name\":null,\"id\":\"b23a4402-adcf-45dc-9d36-cd0ff30ab79e\",\"groups\":[],\"first_name\":null,\"email_address\":\"chat_handles_update_no_handle\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 20 Apr 2016 20:28:19 GMT",
+        "content-length": "192",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "g92plapo0dgd92kal9prr183ves25j5d",
+        "location": "/v1/users/b23a4402-adcf-45dc-9d36-cd0ff30ab79e"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"chat_handle\":{\"handle\":\"drapergeek\",\"chat_provider\":\"slack\"}}",
+      "headers": {
+        "authorization": "token Y6CFeoF9Q49EeVLVyHm/iTj+AqwGJM4l3cGNP+v/yDA=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/users/b23a4402-adcf-45dc-9d36-cd0ff30ab79e/chat_handles"
+    },
+    "response": {
+      "body": "{\"chat_handle\":{\"user\":{\"username\":\"chat_handles_update_no_handle\",\"last_name\":null,\"id\":\"b23a4402-adcf-45dc-9d36-cd0ff30ab79e\",\"first_name\":null,\"email_address\":\"chat_handles_update_no_handle\"},\"id\":\"b246baf2-f1db-4e2a-912e-8f8cec85928f\",\"handle\":\"drapergeek\",\"chat_provider_user_id\":\"U0R79D4E8\",\"chat_provider\":{\"name\":\"slack\",\"id\":1}}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 20 Apr 2016 20:28:20 GMT",
+        "content-length": "338",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "sc0mugekevjfcm3h68prh50tquei6fkl"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"chat_handle\":{\"handle\":\"not_real\",\"chat_provider\":\"slack\"}}",
+      "headers": {
+        "authorization": "token Y6CFeoF9Q49EeVLVyHm/iTj+AqwGJM4l3cGNP+v/yDA=",
+        "Content-Type": "application/json"
+      },
+      "method": "patch",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/chat_handles/b246baf2-f1db-4e2a-912e-8f8cec85928f"
+    },
+    "response": {
+      "body": "{\"errors\":\"User with handle 'not_real' not found\"}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 20 Apr 2016 20:28:20 GMT",
+        "content-length": "50",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "hhc19dk101dmfaum7locai86lifitlc4"
+      },
+      "status_code": 422,
+      "type": "ok"
+    }
+  }
+]

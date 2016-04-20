@@ -15,6 +15,13 @@ defmodule CogApi.Fake.ChatHandles do
     end
   end
 
+  def update(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
+  def update(%Endpoint{token: _}, id, params) do
+    catch_errors %ChatHandle{}, params, fn ->
+      {:ok, Server.update(ChatHandle, id, params)}
+    end
+  end
+
   def delete(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def delete(%Endpoint{token: _}, id), do: Server.delete(ChatHandle, id)
 

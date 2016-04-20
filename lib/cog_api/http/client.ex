@@ -42,6 +42,10 @@ defmodule CogApi.HTTP.Client do
     ChatHandles.create(endpoint, user_id, params)
   end
 
+  def chat_handle_update(%Endpoint{}=endpoint, chat_handle_id, params) do
+    ChatHandles.update(endpoint, chat_handle_id, params)
+  end
+
   def chat_handle_delete(%Endpoint{}=endpoint, chat_handle_id) do
     ChatHandles.delete(endpoint, chat_handle_id)
   end

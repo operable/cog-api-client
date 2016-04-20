@@ -1,0 +1,106 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"KXE9XjtZzPKs5x/7gY5DXgADYfn90sE/jGapBo6PMsk=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 20 Apr 2016 20:27:54 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "jf0atgc5c2id4ljje5lf0saf4c5hmmfa"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"user\":{\"username\":\"chat_handles_update\",\"password\":\"password\",\"email_address\":\"chat_handles_update\"}}",
+      "headers": {
+        "authorization": "token KXE9XjtZzPKs5x/7gY5DXgADYfn90sE/jGapBo6PMsk=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/users"
+    },
+    "response": {
+      "body": "{\"user\":{\"username\":\"chat_handles_update\",\"last_name\":null,\"id\":\"ef0570b0-27e0-4bb3-93b3-0decec85f8d0\",\"groups\":[],\"first_name\":null,\"email_address\":\"chat_handles_update\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 20 Apr 2016 20:27:55 GMT",
+        "content-length": "172",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "1f6nit4s50i9b1tuhq7rvr5undetj550",
+        "location": "/v1/users/ef0570b0-27e0-4bb3-93b3-0decec85f8d0"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"chat_handle\":{\"handle\":\"drapergeek\",\"chat_provider\":\"slack\"}}",
+      "headers": {
+        "authorization": "token KXE9XjtZzPKs5x/7gY5DXgADYfn90sE/jGapBo6PMsk=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/users/ef0570b0-27e0-4bb3-93b3-0decec85f8d0/chat_handles"
+    },
+    "response": {
+      "body": "{\"chat_handle\":{\"user\":{\"username\":\"chat_handles_update\",\"last_name\":null,\"id\":\"ef0570b0-27e0-4bb3-93b3-0decec85f8d0\",\"first_name\":null,\"email_address\":\"chat_handles_update\"},\"id\":\"35400720-da8e-44fd-9500-25c73633c855\",\"handle\":\"drapergeek\",\"chat_provider_user_id\":\"U0R79D4E8\",\"chat_provider\":{\"name\":\"slack\",\"id\":1}}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 20 Apr 2016 20:27:56 GMT",
+        "content-length": "318",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "aqhu10n22dm2bvg5s730qrpe4uk31qil"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"chat_handle\":{\"handle\":\"jsteiner\",\"chat_provider\":\"slack\"}}",
+      "headers": {
+        "authorization": "token KXE9XjtZzPKs5x/7gY5DXgADYfn90sE/jGapBo6PMsk=",
+        "Content-Type": "application/json"
+      },
+      "method": "patch",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/chat_handles/35400720-da8e-44fd-9500-25c73633c855"
+    },
+    "response": {
+      "body": "{\"chat_handle\":{\"user\":{\"username\":\"chat_handles_update\",\"last_name\":null,\"id\":\"ef0570b0-27e0-4bb3-93b3-0decec85f8d0\",\"first_name\":null,\"email_address\":\"chat_handles_update\"},\"id\":\"35400720-da8e-44fd-9500-25c73633c855\",\"handle\":\"jsteiner\",\"chat_provider_user_id\":\"U0R9P45FZ\",\"chat_provider\":{\"name\":\"slack\",\"id\":1}}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 20 Apr 2016 20:27:56 GMT",
+        "content-length": "316",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "igvhb9qojea541hdeh36e09bfkd2jts4"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
