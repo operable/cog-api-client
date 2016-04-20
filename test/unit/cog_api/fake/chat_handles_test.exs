@@ -8,7 +8,7 @@ defmodule CogApi.Fake.ChatHandlesTest do
 
   describe "chat_handles_create" do
     it "allows creating a new chat handle for a user" do
-      endpoint = fake_endpoint
+      endpoint = valid_endpoint
       user = find_or_create_user(endpoint, "chat_handles_create")
 
       handle = Client.chat_handle_create(
@@ -23,7 +23,7 @@ defmodule CogApi.Fake.ChatHandlesTest do
 
     context "when the chat handle does not exist for the provider" do
       it "returns an error" do
-        endpoint = fake_endpoint
+        endpoint = valid_endpoint
         user = find_or_create_user(endpoint, "chat_handles_create_no_handle")
 
         {:error, [error]} = Client.chat_handle_create(
@@ -39,7 +39,7 @@ defmodule CogApi.Fake.ChatHandlesTest do
 
   describe "chat_handles_delete" do
     it "allows deleting a chat handle" do
-      endpoint = fake_endpoint
+      endpoint = valid_endpoint
       user = find_or_create_user(endpoint, "chat_handles_delete")
       handle = Client.chat_handle_create(
         endpoint,
@@ -62,20 +62,20 @@ defmodule CogApi.Fake.ChatHandlesTest do
         username: "chief_of_staff",
         password: "supersecret",
       }
-      user = Client.user_create(fake_endpoint, params) |> get_value
+      user = Client.user_create(valid_endpoint, params) |> get_value
       handle = Client.chat_handle_create(
-        fake_endpoint,
+        valid_endpoint,
         user.id,
         %{chat_provider: "slack", handle: "bar"}
       ) |> get_value
 
       _other_handle = Client.chat_handle_create(
-        fake_endpoint,
+        valid_endpoint,
         "other-user-id",
         %{chat_provider: "slack", handle: "foo"}
       ) |> get_value
 
-      chat_handles = Client.chat_handle_for_user(user.id, fake_endpoint) |> get_value
+      chat_handles = Client.chat_handle_for_user(user.id, valid_endpoint) |> get_value
       assert chat_handles == [handle]
     end
   end

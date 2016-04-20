@@ -9,10 +9,10 @@ defmodule CogApi.Fake.RulesTest do
     it "returns a list of rules" do
       command_name = "operable:bundle"
       matching_rule_text = "when command is #{command_name}"
-      Client.rule_create(matching_rule_text, fake_endpoint)
-      Client.rule_create("when command is something:else", fake_endpoint)
+      Client.rule_create(matching_rule_text, valid_endpoint)
+      Client.rule_create("when command is something:else", valid_endpoint)
 
-      [rule] = Client.rule_index(command_name, fake_endpoint) |> get_value
+      [rule] = Client.rule_index(command_name, valid_endpoint) |> get_value
 
       assert present rule.id
       assert rule.rule == matching_rule_text
@@ -23,7 +23,7 @@ defmodule CogApi.Fake.RulesTest do
   describe "rule_create" do
     it "returns the created rule" do
       rule_text = "when command is operable:help must have operable:manage_commands"
-      rule = rule_text |> Client.rule_create(fake_endpoint) |> get_value
+      rule = rule_text |> Client.rule_create(valid_endpoint) |> get_value
 
       assert present rule.id
       assert rule.rule == rule_text
@@ -33,7 +33,7 @@ defmodule CogApi.Fake.RulesTest do
     context "when the rule is invalid" do
       it "returns the errors" do
         rule_text = "when command ERROR text operable:help"
-        {:error, [error]} = rule_text |> Client.rule_create(fake_endpoint)
+        {:error, [error]} = rule_text |> Client.rule_create(valid_endpoint)
 
         assert error =~ "Rule is invalid"
       end
@@ -43,16 +43,16 @@ defmodule CogApi.Fake.RulesTest do
   describe "rule_delete" do
     it "returns :ok" do
       rule_text = "when command is operable:which must have operable:manage_commands"
-      rule = rule_text |> Client.rule_create(fake_endpoint) |> get_value
+      rule = rule_text |> Client.rule_create(valid_endpoint) |> get_value
 
-      response = Client.rule_delete(rule.id, fake_endpoint)
+      response = Client.rule_delete(rule.id, valid_endpoint)
 
       assert response == :ok
     end
 
     context "when the rule cannot be deleted" do
       it "returns an error" do
-        {:error, [error]} = Client.rule_delete("NOT_REAL", fake_endpoint)
+        {:error, [error]} = Client.rule_delete("NOT_REAL", valid_endpoint)
 
         assert error == "Resource not found for: rules"
       end

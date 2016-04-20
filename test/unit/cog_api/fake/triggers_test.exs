@@ -13,7 +13,7 @@ defmodule CogApi.Fake.TriggersTest do
                  timeout_sec: 1,
                  description: "Echo!"}
 
-      {:ok, trigger} = Client.trigger_create(fake_endpoint, params)
+      {:ok, trigger} = Client.trigger_create(valid_endpoint, params)
 
       assert present(trigger.id)
       assert trigger.name == params.name
@@ -27,7 +27,7 @@ defmodule CogApi.Fake.TriggersTest do
     it "returns errors when invalid" do
       params = %{name: "ERROR"}
 
-      {:error, errors} = Client.trigger_create(fake_endpoint, params)
+      {:error, errors} = Client.trigger_create(valid_endpoint, params)
 
       assert errors == ["Name is invalid"]
     end
@@ -41,8 +41,8 @@ defmodule CogApi.Fake.TriggersTest do
                  timeout_sec: 60,
                  description: "Echoes stuff"}
 
-      {:ok, _}         = Client.trigger_create(fake_endpoint, params)
-      {:ok, [trigger]} = Client.trigger_index(fake_endpoint)
+      {:ok, _}         = Client.trigger_create(valid_endpoint, params)
+      {:ok, [trigger]} = Client.trigger_index(valid_endpoint)
 
       assert present(trigger.id)
       assert trigger.name == params.name
@@ -60,12 +60,12 @@ defmodule CogApi.Fake.TriggersTest do
                  timeout_sec: 60,
                  description: "Echoes stuff"}
 
-      {:ok, trigger}  = Client.trigger_create(fake_endpoint, params)
-      assert {:ok, ^trigger} = Client.trigger_show_by_name(fake_endpoint, params[:name])
+      {:ok, trigger}  = Client.trigger_create(valid_endpoint, params)
+      assert {:ok, ^trigger} = Client.trigger_show_by_name(valid_endpoint, params[:name])
     end
 
     it "returns nothing if searching by an invalid name" do
-      assert {:error, :not_found} = Client.trigger_show_by_name(fake_endpoint, "nothing_is_named_this")
+      assert {:error, :not_found} = Client.trigger_show_by_name(valid_endpoint, "nothing_is_named_this")
     end
   end
 
@@ -77,8 +77,8 @@ defmodule CogApi.Fake.TriggersTest do
                  timeout_sec: 42,
                  description: "Echoes more stuff"}
 
-      {:ok, created}   = Client.trigger_create(fake_endpoint, params)
-      {:ok, retrieved} = Client.trigger_show(fake_endpoint, created.id)
+      {:ok, created}   = Client.trigger_create(valid_endpoint, params)
+      {:ok, retrieved} = Client.trigger_show(valid_endpoint, created.id)
 
       assert retrieved.id == created.id
     end
@@ -92,10 +92,10 @@ defmodule CogApi.Fake.TriggersTest do
                           timeout_sec: 42,
                           description: "Echoes more stuff"}
 
-      {:ok, original} = Client.trigger_create(fake_endpoint, original_params)
+      {:ok, original} = Client.trigger_create(valid_endpoint, original_params)
 
       update_params = %{pipeline: "echo 'so much more stuff' > chat://#general"}
-      {:ok, updated} = Client.trigger_update(fake_endpoint, original.id, update_params)
+      {:ok, updated} = Client.trigger_update(valid_endpoint, original.id, update_params)
 
       assert updated.name == original.name
       assert updated.pipeline == update_params.pipeline
@@ -110,11 +110,11 @@ defmodule CogApi.Fake.TriggersTest do
                  timeout_sec: 100,
                  description: "Echoes all the things"}
 
-      {:ok, trigger} = Client.trigger_create(fake_endpoint, params)
+      {:ok, trigger} = Client.trigger_create(valid_endpoint, params)
 
-      assert :ok = Client.trigger_delete(fake_endpoint, trigger.id)
+      assert :ok = Client.trigger_delete(valid_endpoint, trigger.id)
 
-      {:ok, triggers} = Client.trigger_index(fake_endpoint)
+      {:ok, triggers} = Client.trigger_index(valid_endpoint)
       refute Enum.member?(triggers, trigger)
     end
   end

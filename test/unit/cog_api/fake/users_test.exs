@@ -14,9 +14,9 @@ defmodule CogApi.Fake.UsersTest do
         username: "chief_of_staff",
         password: "supersecret",
       }
-      {:ok, _} = Client.user_create(fake_endpoint, params)
+      {:ok, _} = Client.user_create(valid_endpoint, params)
 
-      users = Client.user_index(fake_endpoint) |> get_value
+      users = Client.user_index(valid_endpoint) |> get_value
 
       last_user = List.last users
       assert present last_user.id
@@ -36,13 +36,13 @@ defmodule CogApi.Fake.UsersTest do
         username: "aide_to_potus",
         password: "thesecretest",
       }
-      created_user = Client.user_create(fake_endpoint, params) |> get_value
-      role = Client.role_create(fake_endpoint, %{name: "user_show_role"}) |> get_value
-      group = Client.group_create(fake_endpoint, %{name: "user_show_group"}) |> get_value
-      Client.group_add_role(fake_endpoint, group, role)
-      Client.group_add_user(fake_endpoint, group, created_user)
+      created_user = Client.user_create(valid_endpoint, params) |> get_value
+      role = Client.role_create(valid_endpoint, %{name: "user_show_role"}) |> get_value
+      group = Client.group_create(valid_endpoint, %{name: "user_show_group"}) |> get_value
+      Client.group_add_role(valid_endpoint, group, role)
+      Client.group_add_user(valid_endpoint, group, created_user)
 
-      found_user = Client.user_show(fake_endpoint, created_user.id) |> get_value
+      found_user = Client.user_show(valid_endpoint, created_user.id) |> get_value
 
       assert found_user.id == created_user.id
       assert Enum.map(found_user.groups, &(&1.id)) == [group.id]
@@ -57,14 +57,14 @@ defmodule CogApi.Fake.UsersTest do
         username: "aide_to_snoopy",
         password: "kicktheball",
       }
-      created_user = Client.user_create(fake_endpoint, params) |> get_value
-      role = Client.role_create(fake_endpoint, %{name: "dancer"}) |> get_value
-      group = Client.group_create(fake_endpoint, %{name: "peanuts"}) |> get_value
-      Client.group_add_role(fake_endpoint, group, role)
-      Client.group_add_user(fake_endpoint, group, created_user)
+      created_user = Client.user_create(valid_endpoint, params) |> get_value
+      role = Client.role_create(valid_endpoint, %{name: "dancer"}) |> get_value
+      group = Client.group_create(valid_endpoint, %{name: "peanuts"}) |> get_value
+      Client.group_add_role(valid_endpoint, group, role)
+      Client.group_add_user(valid_endpoint, group, created_user)
 
       found_user = Client.user_show(
-        fake_endpoint,
+        valid_endpoint,
         %{username: created_user.username}
       ) |> get_value
 
@@ -84,7 +84,7 @@ defmodule CogApi.Fake.UsersTest do
         username: "chief_of_staff",
         password: "supersecret",
       }
-      user = Client.user_create(fake_endpoint, params) |> get_value
+      user = Client.user_create(valid_endpoint, params) |> get_value
 
       assert present user.id
       assert user.first_name == params.first_name
@@ -97,7 +97,7 @@ defmodule CogApi.Fake.UsersTest do
       params = %{
         username: "ERROR",
       }
-      {:error, errors} = Client.user_create(fake_endpoint, params)
+      {:error, errors} = Client.user_create(valid_endpoint, params)
 
       assert errors == ["Username is invalid"]
     end
@@ -112,10 +112,10 @@ defmodule CogApi.Fake.UsersTest do
         username: "arnie",
         password: "12345",
       }
-      new_user = Client.user_create(fake_endpoint, original_params) |> get_value
+      new_user = Client.user_create(valid_endpoint, original_params) |> get_value
 
       update_params = %{first_name: "Arnie"}
-      updated_user = Client.user_update(fake_endpoint, new_user.id, update_params) |> get_value
+      updated_user = Client.user_update(valid_endpoint, new_user.id, update_params) |> get_value
 
       assert updated_user.first_name == update_params.first_name
       assert updated_user.last_name == original_params.last_name
@@ -131,11 +131,11 @@ defmodule CogApi.Fake.UsersTest do
         username: "chief_of_staff",
         password: "supersecret",
       }
-      user = Client.user_create(fake_endpoint, params) |> get_value
+      user = Client.user_create(valid_endpoint, params) |> get_value
 
-      response = Client.user_delete(fake_endpoint, user.id)
+      response = Client.user_delete(valid_endpoint, user.id)
 
-      users = Client.user_index(fake_endpoint) |> get_value
+      users = Client.user_index(valid_endpoint) |> get_value
 
       assert response == :ok
       refute Enum.member?(users, user)

@@ -14,7 +14,7 @@ defmodule CogApi.Fake.AuthenticationTest do
           host: "localhost",
           port: "4000",
         }
-        Client.user_create(fake_endpoint, %{username: "admin"})
+        Client.user_create(valid_endpoint, %{username: "admin"})
         {:ok, updated_endpoint} = Authentication.get_and_merge_token(endpoint)
 
         assert present updated_endpoint.token
