@@ -44,7 +44,7 @@ defmodule CogApi.Fake.Bundles do
         new_bundle = Server.create(Bundle, new_bundle)
         show(endpoint, new_bundle.id)
       else
-        {:error, ["Invalid bundle config"]}
+        return_error("Invalid bundle config")
       end
     end
   end
@@ -66,7 +66,7 @@ defmodule CogApi.Fake.Bundles do
   end
 
   def update(%Endpoint{token: _}, _, %{}) do
-    {:error, "You can only enable or disable a bundle"}
+    return_error("You can only enable or disable a bundle")
   end
 
   def delete(%Endpoint{token: nil}, _), do: Endpoint.invalid_endpoint

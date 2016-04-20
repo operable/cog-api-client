@@ -111,7 +111,7 @@ defmodule CogApi.Fake.BundlesTest do
       bundle = %Bundle{id: "id123", name: "a bundle", enabled: true}
       Server.create(Bundle, bundle)
 
-      {:error, error} = Client.bundle_update(
+      {:error, [error]} = Client.bundle_update(
         fake_endpoint,
         bundle.id,
         %{id: "1234", name: "not a bundle"}

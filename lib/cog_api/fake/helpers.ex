@@ -1,4 +1,8 @@
 defmodule CogApi.Fake.Helpers do
+  def return_error(error) do
+    {:error, [error]}
+  end
+
   def catch_errors(struct, params, fun) do
     keys_to_verify = Map.keys struct
 

@@ -7,7 +7,7 @@ defmodule CogApi.Fake.Authentication do
     if password != "INVALID_PASSWORD" && user_exists?(username) do
       {:ok, %{endpoint | token: "1234"}}
     else
-      {:error, ["Invalid username/password"]}
+      CogApi.Fake.Helpers.return_error("Invalid username/password")
     end
   end
 

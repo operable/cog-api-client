@@ -1,4 +1,6 @@
 defmodule CogApi.Fake.Server do
+  import CogApi.Fake.Helpers, only: [return_error: 1]
+
   defstruct [
     bundles: [],
     chat_handles: [],
@@ -88,7 +90,7 @@ defmodule CogApi.Fake.Server do
         end)
       end)
     else
-      {:error, [not_found_error(module)]}
+      module |> not_found_error |> return_error
     end
   end
 

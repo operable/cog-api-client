@@ -50,7 +50,7 @@ defmodule CogApi.Fake.RelayGroups do
   defp delete_relay_group(%RelayGroup{}=group) do
     Server.delete(RelayGroup, group.id)
   end
-  defp delete_relay_group(_), do: {:error, ["The relay group could not be deleted"]}
+  defp delete_relay_group(_), do: return_error("The relay group could not be deleted")
 
   def add_relay(_, _, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
   def add_relay(%{name: name}, %{relay: relay_name}, %Endpoint{token: _}) do

@@ -45,7 +45,7 @@ defmodule CogApi.Fake.Roles do
       role = %{role | permissions: role.permissions ++ [found_permission]}
       {:ok, Server.update(Role, role.id, role) |> prepare_role}
     else
-      {:error, ["Not found permissions - #{Permission.full_name(permission)}"]}
+      return_error("Not found permissions - #{Permission.full_name(permission)}")
     end
   end
 

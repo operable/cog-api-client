@@ -40,10 +40,6 @@ defmodule CogApi.Fake.Permissions do
     end
   end
 
-  defp return_error(error) do
-    {:error, [error]}
-  end
-
   defp build_namespaced_name(name) do
     case String.split(name, ":") do
       [namespace, name] -> [namespace, name]
