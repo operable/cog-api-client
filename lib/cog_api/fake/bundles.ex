@@ -36,14 +36,16 @@ defmodule CogApi.Fake.Bundles do
   def create(%Endpoint{token: nil}, %{name: _}), do: Endpoint.invalid_endpoint
   def create(endpoint=%Endpoint{token: _}, params) do
     params = to_atom_keys(params)
-    if Enum.all?([:name, :version, :commands], &(&1 in Map.keys(params))) do
-      commands = parse_commands(params[:commands], endpoint)
-      new_bundle = %Bundle{id: random_string(8)}
-      new_bundle = Map.merge(new_bundle, %{params | commands: commands})
-      new_bundle = Server.create(Bundle, new_bundle)
-      show(endpoint, new_bundle.id)
-    else
-      {:error, ["Invalid bundle config"]}
+    catch_errors %Bundle{}, params, fn ->
+      if Enum.all?([:name, :version, :commands], &(&1 in Map.keys(params))) do
+        commands = parse_commands(params[:commands], endpoint)
+        new_bundle = %Bundle{id: random_string(8)}
+        new_bundle = Map.merge(new_bundle, %{params | commands: commands})
+        new_bundle = Server.create(Bundle, new_bundle)
+        show(endpoint, new_bundle.id)
+      else
+        {:error, ["Invalid bundle config"]}
+      end
     end
   end
 

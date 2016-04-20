@@ -35,7 +35,7 @@ defmodule CogApi.Fake.RulesTest do
         rule_text = "when command ERROR text operable:help"
         {:error, [error]} = rule_text |> Client.rule_create(fake_endpoint)
 
-        assert error =~ "Invalid rule syntax"
+        assert error =~ "Rule is invalid"
       end
     end
   end

@@ -1,4 +1,5 @@
 defmodule CogApi.Fake.Rules do
+  import CogApi.Fake.Helpers
   import CogApi.Fake.Random
 
   alias CogApi.Endpoint
@@ -15,9 +16,7 @@ defmodule CogApi.Fake.Rules do
 
   def create(_, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
   def create(rule, %Endpoint{token: _}) do
-    if String.contains?(rule, "ERROR") do
-      {:error, ["Invalid rule syntax"]}
-    else
+    catch_errors %Rule{}, %{rule: rule}, fn ->
       new_rule = %Rule{
         command: extract_command(rule),
         id: random_string(8),

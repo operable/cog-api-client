@@ -1,4 +1,5 @@
 defmodule CogApi.Fake.Roles do
+  import CogApi.Fake.Helpers
   import CogApi.Fake.Random
 
   alias CogApi.Endpoint
@@ -21,14 +22,18 @@ defmodule CogApi.Fake.Roles do
   end
 
   def create(%Endpoint{token: nil}, %{name: _}), do: Endpoint.invalid_endpoint
-  def create(%Endpoint{token: _}, %{name: name}) do
-    new_role = %Role{id: random_string(8), name: name}
-    {:ok, Server.create(Role, new_role)}
+  def create(%Endpoint{token: _}, %{name: name}=params) do
+    catch_errors %Role{}, params, fn ->
+      new_role = %Role{id: random_string(8), name: name}
+      {:ok, Server.create(Role, new_role)}
+    end
   end
 
   def update(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def update(%Endpoint{token: _}, id, params) do
-    {:ok, Server.update(Role, id, params) |> prepare_role}
+    catch_errors %Role{}, params, fn ->
+      {:ok, Server.update(Role, id, params) |> prepare_role}
+    end
   end
 
   def delete(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint

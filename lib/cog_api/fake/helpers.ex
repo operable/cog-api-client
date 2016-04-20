@@ -14,7 +14,7 @@ defmodule CogApi.Fake.Helpers do
 
   defp find_errors(params) do
     Enum.filter_map params,
-      fn {_, value} -> value == "ERROR" end,
+      fn {_, value} -> includes_error_string?(value) end,
       fn {key, _} ->
         key = key
         |> Atom.to_string
@@ -23,5 +23,9 @@ defmodule CogApi.Fake.Helpers do
 
         "#{key} is invalid"
     end
+  end
+
+  defp includes_error_string?(string) do
+    is_binary(string) && String.contains?(string, "ERROR")
   end
 end
