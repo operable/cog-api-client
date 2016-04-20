@@ -142,20 +142,36 @@ defmodule CogApi.Fake.Client do
     RelayGroups.delete(relay_group_id, endpoint)
   end
 
-  def relay_group_add_relay(relay_group_id, relay_id, %Endpoint{}=endpoint) do
-    RelayGroups.add_relay(relay_group_id, relay_id, endpoint)
+  def relay_group_add_relays_by_name(relay_group_name, relay_names, %Endpoint{}=endpoint) do
+    RelayGroups.add_relays_by_name(relay_group_name, relay_names, endpoint)
   end
 
-  def relay_group_remove_relay(relay_group_id, relay_id, %Endpoint{}=endpoint) do
-    RelayGroups.remove_relay(relay_group_id, relay_id, endpoint)
+  def relay_group_add_relays_by_id(relay_group_id, relay_ids, %Endpoint{}=endpoint) do
+    RelayGroups.add_relays_by_id(relay_group_id, relay_ids, endpoint)
   end
 
-  def relay_group_add_bundles(relay_group_id, bundle_id, %Endpoint{}=endpoint) do
-    RelayGroups.add_bundles(relay_group_id, bundle_id, endpoint)
+  def relay_group_remove_relays_by_name(relay_group_name, relay_names, %Endpoint{}=endpoint) do
+    RelayGroups.remove_relays_by_name(relay_group_name, relay_names, endpoint)
   end
 
-  def relay_group_remove_bundles(relay_group_id, bundle_id, %Endpoint{}=endpoint) do
-    RelayGroups.remove_bundles(relay_group_id, bundle_id, endpoint)
+  def relay_group_remove_relays_by_id(relay_group_id, relay_ids, %Endpoint{}=endpoint) do
+    RelayGroups.remove_relays_by_id(relay_group_id, relay_ids, endpoint)
+  end
+
+  def relay_group_add_bundles_by_name(relay_group_name, bundle_names, %Endpoint{}=endpoint) do
+    RelayGroups.add_bundles_by_name(relay_group_name, bundle_names, endpoint)
+  end
+
+  def relay_group_add_bundles_by_id(relay_group_id, bundle_ids, %Endpoint{}=endpoint) do
+    RelayGroups.add_bundles_by_id(relay_group_id, bundle_ids, endpoint)
+  end
+
+  def relay_group_remove_bundles_by_name(relay_group_name, bundle_names, %Endpoint{}=endpoint) do
+    RelayGroups.remove_bundles_by_name(relay_group_name, bundle_names, endpoint)
+  end
+
+  def relay_group_remove_bundles_by_id(relay_group_id, bundle_ids, %Endpoint{}=endpoint) do
+    RelayGroups.remove_bundles_by_id(relay_group_id, bundle_ids, endpoint)
   end
 
   def role_index(endpoint) do

@@ -117,7 +117,8 @@ defmodule CogApi.Fake.RelayGroupsTest do
       relay = Client.relay_create(%{name: "relayyy", token: "1234"}, valid_endpoint) |> get_value
       group = Client.relay_group_create(%{name: "groupyy"}, valid_endpoint) |> get_value
 
-      group = Client.relay_group_add_relay(group.id, relay.id, valid_endpoint) |> get_value
+      group = Client.relay_group_add_relays_by_id(group.id, relay.id, valid_endpoint)
+              |> List.last |> get_value
 
       [grouped_relay] = group.relays
 
@@ -134,7 +135,8 @@ defmodule CogApi.Fake.RelayGroupsTest do
     it "handles a relay that was externally updated" do
       relay = Client.relay_create(%{name: "original_name", token: "1234"}, valid_endpoint) |> get_value
       group = Client.relay_group_create(%{name: "group"}, valid_endpoint) |> get_value
-      group = Client.relay_group_add_relay(group.id, relay.id, valid_endpoint) |> get_value
+      group = Client.relay_group_add_relays_by_id(group.id, relay.id, valid_endpoint)
+              |> List.last |> get_value
 
       new_name = "updated_name"
       Client.relay_update(relay.id, %{name: new_name}, valid_endpoint)
@@ -150,7 +152,8 @@ defmodule CogApi.Fake.RelayGroupsTest do
         relay = Client.relay_create(%{name: "relay1", token: "1234"}, valid_endpoint) |> get_value
         group = Client.relay_group_create(%{name: "mygroup"}, valid_endpoint) |> get_value
 
-        group = Client.relay_group_add_relay(%{name: group.name}, %{relay: relay.name}, valid_endpoint) |> get_value
+        group = Client.relay_group_add_relays_by_name(group.name, relay.name, valid_endpoint)
+                |> List.last |> get_value
 
         [grouped_relay] = group.relays
 
@@ -170,10 +173,12 @@ defmodule CogApi.Fake.RelayGroupsTest do
     it "removes the relay from the group" do
       relay = Client.relay_create(%{name: "relayyy", token: "1234"}, valid_endpoint) |> get_value
       group = Client.relay_group_create(%{name: "groupyy"}, valid_endpoint) |> get_value
-      group = Client.relay_group_add_relay(group.id, relay.id, valid_endpoint) |> get_value
+      group = Client.relay_group_add_relays_by_id(group.id, relay.id, valid_endpoint)
+              |> List.last |> get_value
       assert group.relays != []
 
-      group = Client.relay_group_remove_relay(group.id, relay.id, valid_endpoint) |> get_value
+      group = Client.relay_group_remove_relays_by_id(group.id, relay.id, valid_endpoint)
+              |> List.last |> get_value
 
       assert group.relays == []
 
@@ -184,13 +189,15 @@ defmodule CogApi.Fake.RelayGroupsTest do
     end
 
     context "when given the relay group name" do
-      it "reomves the relay from the group" do
+      it "removes the relay from the group" do
         relay = Client.relay_create(%{name: "relay2", token: "1234"}, valid_endpoint) |> get_value
         group = Client.relay_group_create(%{name: "my-relays"}, valid_endpoint) |> get_value
-        group = Client.relay_group_add_relay(group.id, relay.id, valid_endpoint) |> get_value
+        group = Client.relay_group_add_relays_by_id(group.id, relay.id, valid_endpoint)
+                |> List.last |> get_value
         assert group.relays != []
 
-        group = Client.relay_group_remove_relay(%{name: group.name}, %{relay: relay.name}, valid_endpoint) |> get_value
+        group = Client.relay_group_remove_relays_by_name(group.name, relay.name, valid_endpoint)
+                |> List.last |> get_value
 
         assert group.relays == []
 
@@ -207,7 +214,8 @@ defmodule CogApi.Fake.RelayGroupsTest do
       bundle = create_bundle
       group = Client.relay_group_create(%{name: "group"}, valid_endpoint) |> get_value
 
-      group = Client.relay_group_add_bundles(group.id, bundle.id, valid_endpoint) |> get_value
+      group = Client.relay_group_add_bundles_by_id(group.id, bundle.id, valid_endpoint)
+              |> List.last |> get_value
 
       [grouped_bundle] = group.bundles
 
@@ -227,7 +235,8 @@ defmodule CogApi.Fake.RelayGroupsTest do
 
       group = Client.relay_group_create(%{name: "group"}, valid_endpoint) |> get_value
 
-      group = Client.relay_group_add_bundles(group.id, bundle_ids, valid_endpoint) |> get_value
+      group = Client.relay_group_add_bundles_by_id(group.id, bundle_ids, valid_endpoint)
+              |> List.last |> get_value
 
       returned_bundle_ids = MapSet.new(group.bundles, &Map.fetch!(&1, :id))
       intersection = MapSet.intersection(MapSet.new(bundle_ids), returned_bundle_ids)
@@ -244,7 +253,8 @@ defmodule CogApi.Fake.RelayGroupsTest do
     it "handles a bundle that was externally updated" do
       bundle = create_bundle(%{enabled: false})
       group = Client.relay_group_create(%{name: "group"}, valid_endpoint) |> get_value
-      group = Client.relay_group_add_bundles(group.id, bundle.id, valid_endpoint) |> get_value
+      group = Client.relay_group_add_bundles_by_id(group.id, bundle.id, valid_endpoint)
+              |> List.last |> get_value
 
       Client.bundle_update(valid_endpoint, bundle.id, %{enabled: "true"})
 
@@ -258,7 +268,8 @@ defmodule CogApi.Fake.RelayGroupsTest do
       it "adds the bundle to the relay group" do
         bundle = create_bundle
         group = Client.relay_group_create(%{name: "my-relays"}, valid_endpoint) |> get_value
-        group = Client.relay_group_add_bundles(%{name: group.name}, %{bundles: [bundle.name]}, valid_endpoint) |> get_value
+        group = Client.relay_group_add_bundles_by_name(group.name, bundle.name, valid_endpoint)
+                |> List.last |> get_value
         [grouped_bundle] = group.bundles
 
         assert grouped_bundle.id == bundle.id
@@ -278,7 +289,8 @@ defmodule CogApi.Fake.RelayGroupsTest do
 
         group = Client.relay_group_create(%{name: "group"}, valid_endpoint) |> get_value
 
-        group = Client.relay_group_add_bundles(%{name: group.name}, %{bundles: bundle_names}, valid_endpoint) |> get_value
+        group = Client.relay_group_add_bundles_by_name(group.name, bundle_names, valid_endpoint)
+                |> List.last |> get_value
 
         returned_bundle_ids = MapSet.new(group.bundles, &Map.fetch!(&1, :id))
         intersection = MapSet.intersection(MapSet.new(bundle_ids), returned_bundle_ids)
@@ -298,10 +310,12 @@ defmodule CogApi.Fake.RelayGroupsTest do
     it "removes the bundle from the group" do
       bundle = create_bundle
       group = Client.relay_group_create(%{name: "group"}, valid_endpoint) |> get_value
-      group = Client.relay_group_add_bundles(group.id, bundle.id, valid_endpoint) |> get_value
+      group = Client.relay_group_add_bundles_by_id(group.id, bundle.id, valid_endpoint)
+              |> List.last |> get_value
       assert group.bundles != []
 
-      group = Client.relay_group_remove_bundles(group.id, bundle.id, valid_endpoint) |> get_value
+      group = Client.relay_group_remove_bundles_by_id(group.id, bundle.id, valid_endpoint)
+              |> List.last |> get_value
 
       assert group.bundles == []
 
@@ -317,10 +331,12 @@ defmodule CogApi.Fake.RelayGroupsTest do
 
       group = Client.relay_group_create(%{name: "group"}, valid_endpoint) |> get_value
 
-      group = Client.relay_group_add_bundles(group.id, bundle_ids, valid_endpoint) |> get_value
+      group = Client.relay_group_add_bundles_by_id(group.id, bundle_ids, valid_endpoint)
+              |> List.last |> get_value
       assert group.bundles != []
 
-      group = Client.relay_group_remove_bundles(group.id, bundle_ids, valid_endpoint) |> get_value
+      group = Client.relay_group_remove_bundles_by_id(group.id, bundle_ids, valid_endpoint)
+              |> List.last |> get_value
       assert group.bundles == []
     end
 
@@ -328,10 +344,12 @@ defmodule CogApi.Fake.RelayGroupsTest do
       it "removes the bundle from the relay group" do
         bundle = create_bundle
         group = Client.relay_group_create(%{name: "my-relays"}, valid_endpoint) |> get_value
-        group = Client.relay_group_add_bundles(group.id, bundle.id, valid_endpoint) |> get_value
+        group = Client.relay_group_add_bundles_by_id(group.id, bundle.id, valid_endpoint)
+                |> List.last |> get_value
         assert group.bundles != []
 
-        group = Client.relay_group_remove_bundles(%{name: group.name}, %{bundles: [bundle.name]}, valid_endpoint) |> get_value
+        group = Client.relay_group_remove_bundles_by_name(group.name, bundle.name, valid_endpoint)
+                |> List.last |> get_value
 
         assert group.bundles == []
 
@@ -348,10 +366,12 @@ defmodule CogApi.Fake.RelayGroupsTest do
 
         group = Client.relay_group_create(%{name: "group"}, valid_endpoint) |> get_value
 
-        group = Client.relay_group_add_bundles(group.id, bundle_ids, valid_endpoint) |> get_value
+        group = Client.relay_group_add_bundles_by_id(group.id, bundle_ids, valid_endpoint)
+                |> List.last |> get_value
         assert group.bundles != []
 
-        group = Client.relay_group_remove_bundles(%{name: group.name}, %{bundles: bundle_names}, valid_endpoint) |> get_value
+        group = Client.relay_group_remove_bundles_by_name(group.name, bundle_names, valid_endpoint)
+                |> List.last |> get_value
         assert group.bundles == []
       end
     end

@@ -53,12 +53,14 @@ defmodule CogApi.Client do
   @callback relay_group_update(String.t, %{}, %Endpoint{}) :: {atom, %RelayGroup{}}
   @callback relay_group_delete(String.t, %Endpoint{}) :: atom
   @callback relay_group_delete(String.t, %Endpoint{}) :: {atom, [String.t]}
-  @callback relay_group_add_relay(String.t, String.t, %Endpoint{}) :: {atom, %RelayGroup{}}
-  @callback relay_group_remove_relay(String.t, String.t, %Endpoint{}) :: {atom, %RelayGroup{}}
-  @callback relay_group_add_bundles(String.t, String.t | List.t, %Endpoint{}) :: {atom, %RelayGroup{}}
-  @callback relay_group_add_bundles(Map.t, Map.t, %Endpoint{}) :: {atom, %RelayGroup{}}
-  @callback relay_group_remove_bundles(String.t, String.t | List.t, %Endpoint{}) :: {atom, %RelayGroup{}}
-  @callback relay_group_remove_bundles(Map.t, Map.t, %Endpoint{}) :: {atom, %RelayGroup{}}
+  @callback relay_group_add_relays_by_name(String.t, String.t | List.t, %Endpoint{}) :: {atom, %RelayGroup{}}
+  @callback relay_group_add_relays_by_id(String.t, String.t | List.t, %Endpoint{}) :: {atom, %RelayGroup{}}
+  @callback relay_group_remove_relays_by_name(String.t, String.t | List.t, %Endpoint{}) :: {atom, %RelayGroup{}}
+  @callback relay_group_remove_relays_by_id(String.t, String.t | List.t, %Endpoint{}) :: {atom, %RelayGroup{}}
+  @callback relay_group_add_bundles_by_name(String.t, String.t | List.t, %Endpoint{}) :: {atom, %RelayGroup{}}
+  @callback relay_group_add_bundles_by_id(String.t, String.t | List.t, %Endpoint{}) :: {atom, %RelayGroup{}}
+  @callback relay_group_remove_bundles_by_name(String.t, String.t | List.t, %Endpoint{}) :: {atom, %RelayGroup{}}
+  @callback relay_group_remove_bundles_by_id(String.t, String.t | List.t, %Endpoint{}) :: {atom, %RelayGroup{}}
 
   @callback role_index(%Endpoint{}) :: {atom, [%Role{}]}
   @callback role_show(%Endpoint{}, String.t) :: {atom, %Role{}}
