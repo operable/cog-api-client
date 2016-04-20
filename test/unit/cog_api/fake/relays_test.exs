@@ -21,7 +21,7 @@ defmodule CogApi.Fake.RelaysTest do
     it "includes the group for the relay" do
       relay = Client.relay_create(%{name: "relay", token: "1234"}, valid_endpoint) |> get_value
       group = Client.relay_group_create(%{name: "group"}, valid_endpoint) |> get_value
-      group = Client.relay_group_add_relays(group.id, relay.id, valid_endpoint)
+      group = Client.relay_group_add_relays_by_id(group.id, relay.id, valid_endpoint)
               |> List.last |> get_value
 
       last_relay = Client.relay_index(valid_endpoint) |> get_value |> List.last
