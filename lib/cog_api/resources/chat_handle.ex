@@ -5,6 +5,7 @@ defmodule CogApi.Resources.ChatHandle do
     :id,
     :user_id,
     :handle,
+    :chat_provider,
   ]
 
   def format do

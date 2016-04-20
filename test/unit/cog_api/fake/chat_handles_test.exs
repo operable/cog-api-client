@@ -19,6 +19,7 @@ defmodule CogApi.Fake.ChatHandlesTest do
 
       assert present handle.id
       assert handle.handle == "mpeck"
+      assert handle.chat_provider == "slack"
     end
 
     context "when the chat handle does not exist for the provider" do

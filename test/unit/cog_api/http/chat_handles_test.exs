@@ -20,6 +20,7 @@ defmodule CogApi.HTTP.ChatHandlesTest do
 
         assert present handle.id
         assert handle.handle == "mpeck"
+        assert handle.chat_provider == "slack"
       end
     end
 

@@ -34,6 +34,36 @@ defmodule CogApi.HTTP.ApiResponse do
     }
   end
 
+  def format_many_with_decoder(%Response{status_code: code}=response, _, _) when
+  http_error?(code) do
+    format_error(response)
+  end
+  def format_many_with_decoder(response, decoder, key) do
+    json_structure = %{key => [decoder.format]}
+    resources = Poison.decode!(response.body, as: json_structure)[key]
+    |> Enum.map(&decoder.to_resource/1)
+
+    {
+      type(response),
+      resources
+    }
+  end
+
+  def format_with_decoder(%Response{status_code: code}=response, _, _) when
+  http_error?(code) do
+    format_error(response)
+  end
+  def format_with_decoder(response, decoder, key) do
+    json_structure = %{key => decoder.format}
+    resource = Poison.decode!(response.body, as: json_structure)[key]
+    |> decoder.to_resource
+
+    {
+      type(response),
+      resource
+    }
+  end
+
   def format_delete(%Response{status_code: @no_content}, _) do
     :ok
   end
