@@ -41,7 +41,7 @@ defmodule CogApi.HTTP.RelayGroups do
   def update_memberships_by_name(action, relay_group_name, relay_names, endpoint) do
     relay_names = List.wrap(relay_names)
     with {:ok, relay_group} <- show(%{name: relay_group_name}, endpoint),
-         {:ok, relay_ids}   <- get_relay_ids(relay_names, endpoint) do
+         {:ok, relay_ids}   <- resource_names_to_ids(:relay, relay_names, endpoint) do
       update_memberships_by_id(action, relay_group.id, relay_ids, endpoint)
     end
   end
@@ -56,7 +56,7 @@ defmodule CogApi.HTTP.RelayGroups do
   def update_assignments_by_name(action, relay_group_name, bundle_names, endpoint) do
     bundle_names = List.wrap(bundle_names)
     with {:ok, relay_group} <- show(%{name: relay_group_name}, endpoint),
-         {:ok, bundle_ids}  <- get_bundle_ids(bundle_names, endpoint) do
+         {:ok, bundle_ids}  <- resource_names_to_ids(:bundle, bundle_names, endpoint) do
       update_assignments_by_id(action, relay_group.id, bundle_ids, endpoint)
     end
   end
@@ -68,49 +68,32 @@ defmodule CogApi.HTTP.RelayGroups do
     |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
   end
 
-  defp get_relay_ids(relay_names, endpoint) when is_list(relay_names) do
-    get_relay_id = fn(name, acc, endpoint) ->
-      case Base.get_by(endpoint, "relays", name: name)
-      |> ApiResponse.format(%{"relay" => CogApi.Resources.Relay.format}) do
-        {:ok, relay} ->
-          {:cont, [relay.id | acc]}
+  defp resource_names_to_ids(resource_type, resource_list, endpoint) do
+    get_resource_id = fn(name, acc, endpoint, resource_type) ->
+      resource_name = resource_name(resource_type)
+      resource_module = resource_module(resource_type)
+
+      case Base.get_by(endpoint, resource_name, name: name)
+      |> ApiResponse.format(%{Atom.to_string(resource_type) => resource_module.format}) do
+        {:ok, resource} ->
+          {:ok, acc} = acc
+          {:cont, {:ok, [resource.id | acc]}}
         error ->
           {:halt, error}
       end
     end
 
-    case Enum.reduce_while(relay_names, [], &get_relay_id.(&1, &2, endpoint)) do
-      relay_ids when is_list(relay_ids) ->
-        {:ok, relay_ids}
-      error ->
-        error
-    end
+    List.wrap(resource_list)
+    |> Enum.reduce_while({:ok, []}, &get_resource_id.(&1, &2, endpoint, resource_type))
   end
-  defp get_relay_ids(relay_name, endpoint),
-    do: get_relay_ids([relay_name], endpoint)
-
-  defp get_bundle_ids(bundle_names, endpoint) when is_list(bundle_names) do
-    get_bundle_id = fn(name, acc, endpoint) ->
-      case Base.get_by(endpoint, "bundles", name: name)
-      |> ApiResponse.format(%{"bundle" => CogApi.Resources.Bundle.format}) do
-        {:ok, bundle} ->
-          {:cont, [bundle.id | acc]}
-        error ->
-          {:halt, error}
-      end
-    end
-
-    case Enum.reduce_while(bundle_names, [], &get_bundle_id.(&1, &2, endpoint)) do
-      bundle_ids when is_list(bundle_ids) ->
-        {:ok, bundle_ids}
-      error ->
-        error
-    end
-  end
-  defp get_bundle_ids(bundle_name, endpoint),
-    do: get_bundle_ids([bundle_name], endpoint)
 
   defp resource_path(id) do
     "relay_groups/#{id}"
   end
+
+  defp resource_module(:bundle), do: CogApi.Resources.Bundle
+  defp resource_module(:relay), do: CogApi.Resources.Relay
+
+  defp resource_name(:bundle), do: "bundles"
+  defp resource_name(:relay), do: "relays"
 end
