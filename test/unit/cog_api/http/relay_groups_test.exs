@@ -312,7 +312,7 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         group = Client.relay_group_create(%{name: "groupyy"}, endpoint) |> get_value
         assert group.relays == []
 
-        group = Client.relay_group_add_relays(group.id, relay.id, endpoint) |> get_value
+        group = Client.relay_group_add_relays_by_id(group.id, relay.id, endpoint) |> get_value
 
         [grouped_relay] = group.relays
 
@@ -328,7 +328,7 @@ defmodule CogApi.HTTP.RelayGroupsTest do
           group = Client.relay_group_create(%{name: "mygroup"}, endpoint) |> get_value
           assert group.relays == []
 
-          group = Client.relay_group_add_relays(%{name: group.name}, %{relays: [relay.name]}, endpoint) |> get_value
+          group = Client.relay_group_add_relays_by_name(group.name, relay.name, endpoint) |> get_value
 
           [grouped_relay] = group.relays
 
@@ -345,7 +345,7 @@ defmodule CogApi.HTTP.RelayGroupsTest do
           group = Client.relay_group_create(%{name: "my_relays"}, endpoint) |> get_value
           assert group.relays == []
 
-          {:error, [error]} = Client.relay_group_add_relays(%{name: group.name}, %{relays: ["not here"]}, endpoint)
+          {:error, [error]} = Client.relay_group_add_relays_by_name(group.name, "not here", endpoint)
 
           assert error == "Resource not found for: 'relays'"
         end
@@ -359,10 +359,10 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         endpoint = valid_endpoint
         relay = Client.relay_create(%{name: "Remove", token: "1234"}, endpoint) |> get_value
         group = Client.relay_group_create(%{name: "Remove"}, endpoint) |> get_value
-        group = Client.relay_group_add_relays(group.id, relay.id, endpoint) |> get_value
+        group = Client.relay_group_add_relays_by_id(group.id, relay.id, endpoint) |> get_value
         assert group.relays != []
 
-        group = Client.relay_group_remove_relays(group.id, relay.id, endpoint) |> get_value
+        group = Client.relay_group_remove_relays_by_id(group.id, relay.id, endpoint) |> get_value
 
         assert group.relays == []
       end
@@ -374,10 +374,10 @@ defmodule CogApi.HTTP.RelayGroupsTest do
           endpoint = valid_endpoint
           relay = Client.relay_create(%{name: "relay2", token: "1234"}, endpoint) |> get_value
           group = Client.relay_group_create(%{name: "myrelays"}, endpoint) |> get_value
-          group = Client.relay_group_add_relays(group.id, relay.id, endpoint) |> get_value
+          group = Client.relay_group_add_relays_by_id(group.id, relay.id, endpoint) |> get_value
           assert group.relays != []
 
-          group = Client.relay_group_remove_relays(%{name: group.name}, %{relays: [relay.name]}, endpoint) |> get_value
+          group = Client.relay_group_remove_relays_by_name(group.name, relay.name, endpoint) |> get_value
 
           assert group.relays == []
         end
@@ -392,7 +392,7 @@ defmodule CogApi.HTTP.RelayGroupsTest do
           group = Client.relay_group_create(%{name: "my_relay_group"}, endpoint) |> get_value
           assert group.relays == []
 
-          {:error, [error]} = Client.relay_group_remove_relays(%{name: group.name}, %{relays: ["not here"]}, endpoint)
+          {:error, [error]} = Client.relay_group_remove_relays_by_name(group.name, "not here", endpoint)
 
           assert error == "Resource not found for: 'relays'"
         end

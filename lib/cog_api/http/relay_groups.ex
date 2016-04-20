@@ -38,19 +38,20 @@ defmodule CogApi.HTTP.RelayGroups do
     |> ApiResponse.format_delete("The relay group could not be deleted")
   end
 
-  def update_memberships(action, %{name: name}, %{relays: relay_names}, endpoint) when is_list(relay_names) do
-    with {:ok, relay_group} <- show(%{name: name}, endpoint),
+  def update_memberships_by_name(action, relay_group_name, relay_names, endpoint) do
+    relay_names = List.wrap(relay_names)
+    with {:ok, relay_group} <- show(%{name: relay_group_name}, endpoint),
          {:ok, relay_ids}   <- get_relay_ids(relay_names, endpoint) do
-      update_memberships(action, relay_group.id, relay_ids, endpoint)
+      update_memberships_by_id(action, relay_group.id, relay_ids, endpoint)
     end
   end
-  def update_memberships(action, relay_group_id, relay_ids, endpoint) when is_list(relay_ids) do
+
+  def update_memberships_by_id(action, relay_group_id, relay_ids, endpoint) do
+    relay_ids = List.wrap(relay_ids)
     path = "relay_groups/#{relay_group_id}/relays"
     Base.post(endpoint, path, %{relays: %{action => relay_ids}})
     |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
   end
-  def update_memberships(action, relay_group_id, relay_id, endpoint) when is_binary(relay_id),
-    do: update_memberships(action, relay_group_id, [relay_id], endpoint)
 
   def update_assignments(action, %{name: name}, %{bundles: bundle_names}, endpoint) when is_list(bundle_names) do
     with {:ok, relay_group} <- show(%{name: name}, endpoint),

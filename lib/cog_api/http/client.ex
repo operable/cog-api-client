@@ -142,12 +142,20 @@ defmodule CogApi.HTTP.Client do
     RelayGroups.delete(relay_group_id, endpoint)
   end
 
-  def relay_group_add_relays(relay_group_id, relay_ids, %Endpoint{}=endpoint) do
-    RelayGroups.update_memberships(:add, relay_group_id, relay_ids, endpoint)
+  def relay_group_add_relays_by_name(relay_group_name, relay_names, %Endpoint{}=endpoint) do
+    RelayGroups.update_memberships_by_name(:add, relay_group_name, relay_names, endpoint)
   end
 
-  def relay_group_remove_relays(relay_group_id, relay_ids, %Endpoint{}=endpoint) do
-    RelayGroups.update_memberships(:remove, relay_group_id, relay_ids, endpoint)
+  def relay_group_add_relays_by_id(relay_group_id, relay_ids, %Endpoint{}=endpoint) do
+    RelayGroups.update_memberships_by_id(:add, relay_group_id, relay_ids, endpoint)
+  end
+
+  def relay_group_remove_relays_by_name(relay_group_name, relay_names, %Endpoint{}=endpoint) do
+    RelayGroups.update_memberships_by_name(:remove, relay_group_name, relay_names, endpoint)
+  end
+
+  def relay_group_remove_relays_by_id(relay_group_id, relay_ids, %Endpoint{}=endpoint) do
+    RelayGroups.update_memberships_by_id(:remove, relay_group_id, relay_ids, endpoint)
   end
 
   def relay_group_add_bundles(relay_group_id, bundle_ids, %Endpoint{}=endpoint) do
