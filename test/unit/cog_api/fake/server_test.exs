@@ -73,4 +73,20 @@ defmodule CogApi.Fake.ServerTest do
       assert group.relays == [relay.id]
     end
   end
+
+  describe "delete" do
+    it "returns :ok" do
+      relay = Server.create(Relay, %Relay{id: 1})
+
+      assert :ok == Server.delete(Relay, relay.id)
+    end
+
+    context "when the item does not exist" do
+      it "returns an error" do
+        {:error, [error]} = Server.delete(Relay, "1234")
+
+        assert error == "Resource not found for: relays"
+      end
+    end
+  end
 end

@@ -81,11 +81,19 @@ defmodule CogApi.Fake.Server do
   end
 
   def delete(module, id) do
-    Agent.update(__MODULE__, fn server ->
-      Map.update!(server, module.fake_key, fn list ->
-        delete_by_id(list, id)
+    if show(module, id) do
+      Agent.update(__MODULE__, fn server ->
+        Map.update!(server, module.fake_key, fn list ->
+          delete_by_id(list, id)
+        end)
       end)
-    end)
+    else
+      {:error, [not_found_error(module)]}
+    end
+  end
+
+  def not_found_error(module) do
+    "Resource not found for: #{module.fake_key}"
   end
 
   defp update_by_id(list, id, params) do
