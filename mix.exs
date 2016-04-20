@@ -39,6 +39,8 @@ defmodule CogApi.Mixfile do
       {:ibrowse, "~> 4.2.2", override: true},
       {:poison, "~> 2.0"},
       {:dialyxir, "~> 0.3"},
+
+      {:mix_test_watch, "~> 0.1.1", only: [:test, :dev]}
     ]
   end
 end
