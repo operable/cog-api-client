@@ -30,4 +30,35 @@ defmodule CogApi.HTTP.PermissionsTest do
       end
     end
   end
+
+  describe "permission_delete" do
+    it "allows deleting permissions in the site namespace" do
+      cassette "permission_delete" do
+        endpoint = valid_endpoint
+        name = "permission_delete"
+        permission = Client.permission_create(endpoint, name) |> get_value
+
+        assert :ok == Client.permission_delete(endpoint, permission.id)
+      end
+    end
+
+    context "when the permission is not in the site namespace" do
+      it "returns an error" do
+        cassette "permission_delete_non_site" do
+          endpoint = valid_endpoint
+          manage_commands_permission = find_command(endpoint, "operable", "manage_commands")
+
+          {:error, [error]} = Client.permission_delete(endpoint, manage_commands_permission.id)
+
+          assert error == "Deleting permissions outside of the site namespace is forbidden."
+        end
+      end
+    end
+  end
+
+  def find_command(endpoint, namespace, name) do
+    Client.permission_index(endpoint)
+    |> get_value
+    |> Enum.find(fn permission -> permission.name == name && permission.namespace == namespace end)
+  end
 end

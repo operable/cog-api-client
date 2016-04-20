@@ -98,6 +98,10 @@ defmodule CogApi.HTTP.Client do
     Permissions.create(endpoint, name)
   end
 
+  def permission_delete(%Endpoint{}=endpoint, permission_id) do
+    Permissions.delete(endpoint, permission_id)
+  end
+
   def relay_index(%Endpoint{}=endpoint) do
     Relays.index(endpoint)
   end

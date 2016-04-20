@@ -26,6 +26,24 @@ defmodule CogApi.Fake.Permissions do
     end
   end
 
+  def delete(%Endpoint{token: nil}, _), do: Endpoint.invalid_endpoint
+  def delete(%Endpoint{token: _}, id) do
+    if permission = Server.show(Permission, id) do
+      if permission.namespace == "site" do
+        Server.delete(Permission, id)
+        :ok
+      else
+        return_error("Deleting permissions outside of the site namespace is forbidden.")
+      end
+    else
+      return_error("The permission could not be deleted")
+    end
+  end
+
+  defp return_error(error) do
+    {:error, [error]}
+  end
+
   defp build_namespaced_name(name) do
     case String.split(name, ":") do
       [namespace, name] -> [namespace, name]

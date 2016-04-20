@@ -1,0 +1,79 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"YnqVdGyuPMvNSEWEDB0laGGXSySlr9xbMYOJAgBIuHo=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 20 Apr 2016 15:33:02 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "ptq6a1aiprglhsqifgnhehj03fi7hak5"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token YnqVdGyuPMvNSEWEDB0laGGXSySlr9xbMYOJAgBIuHo=",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/permissions"
+    },
+    "response": {
+      "body": "{\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_commands\",\"id\":\"3116cb14-e18f-48cf-bf16-07bda97a105e\"},{\"namespace\":\"operable\",\"name\":\"manage_groups\",\"id\":\"2de82387-617e-4ff1-b2a0-a0c31d74248d\"},{\"namespace\":\"operable\",\"name\":\"manage_permissions\",\"id\":\"24573e83-3148-4c01-a9cd-887fbc9c6f38\"},{\"namespace\":\"operable\",\"name\":\"manage_roles\",\"id\":\"7c8bcfe9-f02e-4057-a975-1f59ed70d56e\"},{\"namespace\":\"operable\",\"name\":\"manage_users\",\"id\":\"926e91e5-fac0-4f33-9197-601876f1590c\"},{\"namespace\":\"operable\",\"name\":\"manage_relays\",\"id\":\"b51d474a-8b4a-4b92-8c25-59b4c1baf060\"},{\"namespace\":\"operable\",\"name\":\"manage_triggers\",\"id\":\"88a63a0b-387d-49c7-a519-bd300b73ea89\"}]}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 20 Apr 2016 15:33:02 GMT",
+        "content-length": "668",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "0r0h7oa62s41c75q6fmt7k01u8053tug"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token YnqVdGyuPMvNSEWEDB0laGGXSySlr9xbMYOJAgBIuHo=",
+        "Accept": "application/json"
+      },
+      "method": "delete",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/permissions/3116cb14-e18f-48cf-bf16-07bda97a105e"
+    },
+    "response": {
+      "body": "{\"errors\":\"Deleting permissions outside of the site namespace is forbidden.\"}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 20 Apr 2016 15:33:02 GMT",
+        "content-length": "77",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "0apgptac51edh4d7c3kur1f0ege9117i"
+      },
+      "status_code": 403,
+      "type": "ok"
+    }
+  }
+]

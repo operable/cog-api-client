@@ -13,4 +13,9 @@ defmodule CogApi.HTTP.Permissions do
     Base.post(endpoint, "permissions", %{"permission" => %{"name" => name}})
     |> ApiResponse.format(%{"permission" => %Permission{}})
   end
+
+  def delete(%Endpoint{}=endpoint, id) do
+    Base.delete(endpoint, "permissions/#{id}")
+    |> ApiResponse.format(%{"permission" => Permission.format})
+  end
 end

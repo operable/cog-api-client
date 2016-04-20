@@ -38,6 +38,7 @@ defmodule CogApi.Client do
 
   @callback permission_index(%Endpoint{}) :: {atom, [%Permission{}]}
   @callback permission_create(%Endpoint{}, String.t) :: {atom, %Permission{}}
+  @callback permission_delete(%Endpoint{}, String.t) :: atom
 
   @callback relay_index(%Endpoint{}) :: {atom, [%Relay{}]}
   @callback relay_show(String.t, %Endpoint{}) :: {atom, %Relay{}}

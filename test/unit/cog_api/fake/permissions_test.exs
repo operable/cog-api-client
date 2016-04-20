@@ -37,4 +37,27 @@ defmodule CogApi.Fake.PermissionsTest do
       assert permission.namespace == "custom"
     end
   end
+
+  describe "permission_delete" do
+    it "allows deleting permissions in the site namespace" do
+      endpoint = fake_endpoint
+      name = "permission_delete"
+      permission = Client.permission_create(endpoint, name) |> get_value
+
+      assert :ok == Client.permission_delete(endpoint, permission.id)
+    end
+
+    context "when the permission is not in the site namespace" do
+      it "returns an error" do
+        endpoint = fake_endpoint
+        name = "operable:manage_comamnds"
+        manage_commands_permission = Client.permission_create(endpoint, name)
+        |> get_value
+
+        {:error, [error]} = Client.permission_delete(endpoint, manage_commands_permission.id)
+
+        assert error == "Deleting permissions outside of the site namespace is forbidden."
+      end
+    end
+  end
 end

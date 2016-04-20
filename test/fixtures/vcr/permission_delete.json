@@ -1,0 +1,79 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"mqjPt4GiCQYQ/eTYhC6tGSWOiQ9BRYmFiZ6X+BrSkMg=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 20 Apr 2016 15:29:42 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "3lt9ge7immbqq6q1kc8ae7nkihu6pkr9"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"permission\":{\"name\":\"permission_delete\"}}",
+      "headers": {
+        "authorization": "token mqjPt4GiCQYQ/eTYhC6tGSWOiQ9BRYmFiZ6X+BrSkMg=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/permissions"
+    },
+    "response": {
+      "body": "{\"permission\":{\"namespace\":\"site\",\"name\":\"permission_delete\",\"id\":\"df932101-7dde-4f97-be8e-03390d30ae2b\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 20 Apr 2016 15:29:42 GMT",
+        "content-length": "106",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "ovj86htl49rdv4v8eqrp7smoc6po1gkp",
+        "location": "/v1/permissions/df932101-7dde-4f97-be8e-03390d30ae2b"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token mqjPt4GiCQYQ/eTYhC6tGSWOiQ9BRYmFiZ6X+BrSkMg=",
+        "Accept": "application/json"
+      },
+      "method": "delete",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/permissions/df932101-7dde-4f97-be8e-03390d30ae2b"
+    },
+    "response": {
+      "body": "",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Wed, 20 Apr 2016 15:29:42 GMT",
+        "content-length": "0",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "rmhu04brj07spf9431rodprl0vh1b002"
+      },
+      "status_code": 204,
+      "type": "ok"
+    }
+  }
+]
