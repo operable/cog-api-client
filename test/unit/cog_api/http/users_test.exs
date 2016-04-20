@@ -57,24 +57,6 @@ defmodule CogApi.HTTP.UsersTest do
         end
       end
     end
-
-    it "returns user by name" do
-      cassette "users_show_by_name" do
-        endpoint = valid_endpoint
-        params = user_params("user_By_name")
-        created_user = Client.user_create(endpoint, params) |> get_value
-        role = Client.role_create(endpoint, %{name: "user_show_by_name_role"}) |> get_value
-        group = Client.group_create(endpoint, %{name: "user_show_by_name_group"}) |> get_value
-        Client.group_add_role(endpoint, group, role)
-        Client.group_add_user(endpoint, group, created_user)
-
-        found_user = Client.user_show(endpoint, name: created_user.username) |> get_value
-
-        assert found_user.id == created_user.id
-        assert Enum.map(found_user.groups, &(&1.id)) == [group.id]
-        assert List.first(found_user.groups).roles == [role]
-      end
-    end
   end
 
   describe "create" do

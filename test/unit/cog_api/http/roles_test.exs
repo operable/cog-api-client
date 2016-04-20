@@ -47,7 +47,7 @@ defmodule CogApi.HTTP.RolesTest do
           params = %{name: "role_show_by_name"}
           {:ok, created_role} = Client.role_create(endpoint, params)
 
-          {:ok, found_role} = Client.role_show(endpoint, name: created_role.name)
+          {:ok, found_role} = Client.role_show(endpoint, %{name: created_role.name})
 
           assert found_role.id == created_role.id
         end
