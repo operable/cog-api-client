@@ -108,5 +108,4 @@ defmodule CogApi.HTTP.ApiResponse do
       :error
     end
   end
-
 end

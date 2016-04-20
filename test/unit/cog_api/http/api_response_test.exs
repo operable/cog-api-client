@@ -18,11 +18,8 @@ defmodule CogApi.HTTP.ApiResponseTest do
     for code <- 400..500 do
       it "returns an error for a #{code}" do
         http_response = %Response{status_code: unquote(code), body: Poison.encode!(%{error: "oops"})}
-        expected = {:error, ["oops"]}
-        assert expected == ApiResponse.format(http_response)
+        assert {:error, ["oops"]} == ApiResponse.format(http_response)
       end
     end
-
   end
-
 end
