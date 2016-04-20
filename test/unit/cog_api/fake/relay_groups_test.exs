@@ -173,7 +173,7 @@ defmodule CogApi.Fake.RelayGroupsTest do
     it "removes the relay from the group" do
       relay = Client.relay_create(%{name: "relayyy", token: "1234"}, valid_endpoint) |> get_value
       group = Client.relay_group_create(%{name: "groupyy"}, valid_endpoint) |> get_value
-      group = Client.relay_group_add_relays(group.id, relay.id, valid_endpoint)
+      group = Client.relay_group_add_relays_by_id(group.id, relay.id, valid_endpoint)
               |> List.last |> get_value
       assert group.relays != []
 
