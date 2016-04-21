@@ -65,6 +65,7 @@ defmodule CogApi.Fake.RelayGroups do
   def add_relays_by_id(id, relay_ids, %Endpoint{}=endpoint) do
     List.wrap(relay_ids)
     |> Enum.map(&add_relay(id, &1, endpoint))
+    |> List.last
   end
 
   defp add_relay(id, relay_id, %Endpoint{token: _}) do
@@ -93,6 +94,7 @@ defmodule CogApi.Fake.RelayGroups do
   def remove_relays_by_id(id, relay_ids, %Endpoint{token: _}=endpoint) do
     List.wrap(relay_ids)
     |> Enum.map(&remove_relay(id, &1, endpoint))
+    |> List.last
   end
 
   defp remove_relay(id, relay_id, %Endpoint{token: _}) do
@@ -129,6 +131,7 @@ defmodule CogApi.Fake.RelayGroups do
   def add_bundles_by_id(id, bundle_ids, %Endpoint{}=endpoint) do
     List.wrap(bundle_ids)
     |> Enum.map(&add_bundle(id, &1, endpoint))
+    |> List.last
   end
 
   defp add_bundle(id, bundle_id, %Endpoint{}) do
@@ -157,6 +160,7 @@ defmodule CogApi.Fake.RelayGroups do
   def remove_bundles_by_id(id, bundle_ids, %Endpoint{}=endpoint) do
     List.wrap(bundle_ids)
     |> Enum.map(&remove_bundle(id, &1, endpoint))
+    |> List.last
   end
 
   defp remove_bundle(id, bundle_id, %Endpoint{token: _}) do
