@@ -19,16 +19,35 @@ defmodule CogApi.Fake.ServerTest do
     end
   end
 
-  describe "show" do
+  describe "show!" do
     it "expands the relationships based on the server_information" do
       relay = %Relay{id: 1}
       relay_group = %RelayGroup{id: 1, relays: [relay]}
       Server.create(RelayGroup, relay_group)
       Server.create(Relay, relay)
 
-      group_from_server = Server.show(RelayGroup, relay_group.id)
+      group_from_server = Server.show!(RelayGroup, relay_group.id)
 
       assert group_from_server.relays == [relay]
+    end
+  end
+
+  describe "show" do
+    it "returns a tuple with the resource" do
+      relay = %Relay{id: 1}
+      Server.create(Relay, relay)
+
+      {:ok, found_relay} = Server.show(Relay, 1)
+
+      assert found_relay.id == 1
+    end
+
+    context "when the resource does not exist" do
+      it "returns an error" do
+        {:error, [error]} = Server.show(RelayGroup, "FAKEID")
+
+        assert error == "Server internal error"
+      end
     end
   end
 

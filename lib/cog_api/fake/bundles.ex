@@ -17,7 +17,7 @@ defmodule CogApi.Fake.Bundles do
 
   def show(%Endpoint{token: nil}, _),  do: Endpoint.invalid_endpoint
   def show(%Endpoint{}=endpoint, id) do
-    bundle = Server.show(Bundle, id)
+    bundle = Server.show!(Bundle, id)
     bundle = %{bundle | commands: add_rules(endpoint, bundle)}
     {:ok, bundle}
   end
@@ -64,7 +64,7 @@ defmodule CogApi.Fake.Bundles do
   end
   def update(%Endpoint{token: _}, id, %{enabled: enabled} = params) do
     catch_errors %Bundle{}, params, fn ->
-      current_bundle = Server.show(Bundle, id)
+      current_bundle = Server.show!(Bundle, id)
       updated_bundle = %{current_bundle | enabled: ensure_bundle_encode_status(enabled)}
 
       {:ok, Server.update(Bundle, id, updated_bundle)}

@@ -19,7 +19,7 @@ defmodule CogApi.Fake.RelayGroups do
     show(relaygroup.id, endpoint)
   end
   def show(id, %Endpoint{}) do
-    {:ok, Server.show(RelayGroup, id)}
+    Server.show(RelayGroup, id)
   end
 
   def create(_, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint
@@ -43,7 +43,7 @@ defmodule CogApi.Fake.RelayGroups do
     |> delete_relay_group
   end
   def delete(id, %Endpoint{token: _}) do
-    Server.show(RelayGroup, id)
+    Server.show!(RelayGroup, id)
     |> delete_relay_group
   end
 
@@ -69,8 +69,8 @@ defmodule CogApi.Fake.RelayGroups do
   end
 
   defp add_relay(id, relay_id, %Endpoint{token: _}) do
-    relay = Server.show(Relay, relay_id)
-    relay_group = Server.show(RelayGroup, id)
+    relay = Server.show!(Relay, relay_id)
+    relay_group = Server.show!(RelayGroup, id)
     add_relay(relay, relay_group)
   end
 
@@ -98,8 +98,8 @@ defmodule CogApi.Fake.RelayGroups do
   end
 
   defp remove_relay(id, relay_id, %Endpoint{token: _}) do
-    relay = Server.show(Relay, relay_id)
-    relay_group = Server.show(RelayGroup, id)
+    relay = Server.show!(Relay, relay_id)
+    relay_group = Server.show!(RelayGroup, id)
     remove_relay(relay, relay_group)
   end
 
@@ -135,8 +135,8 @@ defmodule CogApi.Fake.RelayGroups do
   end
 
   defp add_bundle(id, bundle_id, %Endpoint{}) do
-    bundle = Server.show(Bundle, bundle_id)
-    relay_group = Server.show(RelayGroup, id)
+    bundle = Server.show!(Bundle, bundle_id)
+    relay_group = Server.show!(RelayGroup, id)
     add_bundle(bundle, relay_group)
   end
 
@@ -164,8 +164,8 @@ defmodule CogApi.Fake.RelayGroups do
   end
 
   defp remove_bundle(id, bundle_id, %Endpoint{token: _}) do
-    bundle = Server.show(Bundle, bundle_id)
-    relay_group = Server.show(RelayGroup, id)
+    bundle = Server.show!(Bundle, bundle_id)
+    relay_group = Server.show!(RelayGroup, id)
     remove_bundle(bundle, relay_group)
   end
 

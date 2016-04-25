@@ -36,9 +36,17 @@ defmodule CogApi.Fake.Server do
   end
 
   def show(module, id, stop_recursion \\ nil) do
-    resource = Agent.get(__MODULE__, fn server ->
-      find_by_id(server, module.fake_key, id)
-    end)
+    resource = show!(module, id, stop_recursion)
+
+    if resource do
+      {:ok, resource}
+    else
+      return_error("Server internal error")
+    end
+  end
+
+  def show!(module, id, stop_recursion \\ nil) do
+    resource = raw_show(module, id)
 
     if resource do
       expand_assocations(resource, module.associations, stop_recursion)
@@ -83,7 +91,7 @@ defmodule CogApi.Fake.Server do
   end
 
   def delete(module, id) do
-    if show(module, id) do
+    if show!(module, id) do
       Agent.update(__MODULE__, fn server ->
         Map.update!(server, module.fake_key, fn list ->
           delete_by_id(list, id)
@@ -126,7 +134,7 @@ defmodule CogApi.Fake.Server do
     Enum.reduce(associations, resource, fn {relationship_name, server_key}, resource ->
       items = resource
       |> Map.get(relationship_name)
-      |> Enum.map(fn id -> show(server_key, id, :stop_recursion) end)
+      |> Enum.map(fn id -> show!(server_key, id, :stop_recursion) end)
 
       Map.put resource, relationship_name, items
     end)

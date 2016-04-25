@@ -18,7 +18,7 @@ defmodule CogApi.Fake.Roles do
     {:ok, prepare_role(Server.show_by_key(Role, :name, name))}
   end
   def show(%Endpoint{}, id) do
-    {:ok, prepare_role(Server.show(Role, id))}
+    {:ok, prepare_role(Server.show!(Role, id))}
   end
 
   def create(%Endpoint{token: nil}, %{name: _}), do: Endpoint.invalid_endpoint

@@ -17,15 +17,11 @@ defmodule CogApi.Fake.Triggers do
     end
   end
 
-  def index(%Endpoint{token: nil}),
-    do: Endpoint.invalid_endpoint
-  def index(%Endpoint{}),
-    do: {:ok, Server.index(Trigger)}
+  def index(%Endpoint{token: nil}), do: Endpoint.invalid_endpoint
+  def index(%Endpoint{}), do: {:ok, Server.index(Trigger)}
 
-  def show(%Endpoint{token: nil}, _),
-    do: Endpoint.invalid_endpoint
-  def show(%Endpoint{}, id),
-    do: {:ok, Server.show(Trigger, id)}
+  def show(%Endpoint{token: nil}, _), do: Endpoint.invalid_endpoint
+  def show(%Endpoint{}, id), do: Server.show(Trigger, id)
 
   def create(%Endpoint{token: nil}, _),
     do: Endpoint.invalid_endpoint

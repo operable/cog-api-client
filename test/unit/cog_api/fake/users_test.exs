@@ -73,6 +73,14 @@ defmodule CogApi.Fake.UsersTest do
       assert Enum.map(found_user.groups, &(&1.id)) == [group.id]
       assert List.first(found_user.groups).roles == [role]
     end
+
+    context "when the user does not exist" do
+      it "returns an error" do
+        {:error, [error]} = Client.user_show(valid_endpoint, "FAKE_ID")
+
+        assert error == "Server internal error"
+      end
+    end
   end
 
   describe "create" do

@@ -107,6 +107,7 @@ defmodule CogApi.HTTP.ApiResponse do
 
   defp extract_errors(%{"errors" => errors}), do: errors
   defp extract_errors(%{"error" => error}), do: [error]
+  defp extract_errors(error), do: [error]
 
   defp parse_errors(errors = %{}) do
     Enum.flat_map errors, fn {key, values} ->

@@ -15,7 +15,7 @@ defmodule CogApi.Fake.Groups do
 
   def show(%Endpoint{token: nil}, _), do: Endpoint.invalid_endpoint
   def show(%Endpoint{token: _}, id) do
-    {:ok, Server.show(Group, id)}
+    Server.show(Group, id)
   end
 
   def find(%Endpoint{token: nil}, _), do: Endpoint.invalid_endpoint
@@ -49,7 +49,7 @@ defmodule CogApi.Fake.Groups do
 
   def add_role(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def add_role(%Endpoint{}, %Group{id: group_id}, %Role{name: role_name}) do
-    group = Server.show(Group, group_id)
+    group = Server.show!(Group, group_id)
     role = Server.show_by_key(Role, :name, role_name)
     group = %{group | roles: group.roles ++ [role]}
     {:ok, Server.update(Group, group.id, group)}
@@ -57,7 +57,7 @@ defmodule CogApi.Fake.Groups do
 
   def remove_role(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def remove_role(%Endpoint{}, %Group{id: group_id}, %Role{name: role_name}) do
-    group = Server.show(Group, group_id)
+    group = Server.show!(Group, group_id)
     role = Server.show_by_key(Role, :name, role_name)
     group = %{group | roles: List.delete(group.roles, role)}
     {:ok, Server.update(Group, group.id, group)}
@@ -65,7 +65,7 @@ defmodule CogApi.Fake.Groups do
 
   def add_user(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def add_user(%Endpoint{token: _}, group, user) do
-    group = Server.show(Group, group.id)
+    group = Server.show!(Group, group.id)
     user = Server.show_by_key(User, :email_address, user.email_address)
 
     group = %{group | users: group.users ++ [user]}
@@ -79,7 +79,7 @@ defmodule CogApi.Fake.Groups do
 
   def remove_user(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def remove_user(%Endpoint{token: _}, group, user) do
-    group = Server.show(Group, group.id)
+    group = Server.show!(Group, group.id)
     user = Server.show_by_key(User, :email_address, user.email_address)
 
     new_users = Enum.reject(group.users, &(&1.id == user.id))

@@ -17,7 +17,7 @@ defmodule CogApi.Fake.Relays do
     show(relay.id, endpoint)
   end
   def show(id, %Endpoint{}) do
-    {:ok, Server.show(Relay, id)}
+    Server.show(Relay, id)
   end
 
   def create(_, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint

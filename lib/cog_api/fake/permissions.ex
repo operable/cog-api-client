@@ -28,7 +28,7 @@ defmodule CogApi.Fake.Permissions do
 
   def delete(%Endpoint{token: nil}, _), do: Endpoint.invalid_endpoint
   def delete(%Endpoint{token: _}, id) do
-    if permission = Server.show(Permission, id) do
+    if permission = Server.show!(Permission, id) do
       if permission.namespace == "site" do
         Server.delete(Permission, id)
         :ok

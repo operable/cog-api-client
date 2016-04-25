@@ -57,6 +57,16 @@ defmodule CogApi.HTTP.UsersTest do
         end
       end
     end
+
+    context "when the user does not exist" do
+      it "returns an error" do
+        cassette "users_show_no_user" do
+          {:error, [error]} = Client.user_show(valid_endpoint, "FAKE_ID")
+
+          assert error == "Server internal error"
+        end
+      end
+    end
   end
 
   describe "create" do

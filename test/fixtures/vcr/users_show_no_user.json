@@ -1,0 +1,55 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"vJxFKiEtkO4b/2u2tUlwdh/s1M4GsAi+Newry5K2wBk=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 25 Apr 2016 20:06:12 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "0iaamsr8mkd6qpntjhnhqop5cauo8767"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token vJxFKiEtkO4b/2u2tUlwdh/s1M4GsAi+Newry5K2wBk=",
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/users/FAKE_ID"
+    },
+    "response": {
+      "body": "\"Server internal error\"",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 25 Apr 2016 20:06:12 GMT",
+        "content-length": "23",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "2ac2f55reen03sim9ag3n6s25o3fmeu7"
+      },
+      "status_code": 400,
+      "type": "ok"
+    }
+  }
+]
