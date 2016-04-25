@@ -2,6 +2,7 @@ defmodule CogApi.Fake.BundlesTest do
   use CogApi.FakeCase
 
   alias CogApi.Resources.Bundle
+  alias CogApi.Resources.Permission
   alias CogApi.Fake.Server
   alias CogApi.Fake.Client
 
@@ -35,6 +36,9 @@ defmodule CogApi.Fake.BundlesTest do
       bundle = Client.bundle_show(valid_endpoint, bundle.id) |> get_value
       assert bundle.name == "postgres"
       assert bundle.modifiable == true
+
+      [permission] = bundle.permissions
+      assert Permission.full_name(permission) =~ "postgres:permission"
     end
 
     context "the operable bundle" do

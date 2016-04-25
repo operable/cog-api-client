@@ -10,8 +10,9 @@ defmodule CogApi.Resources.Bundle do
     :name,
     :updated_at,
     :version,
+    :modifiable,
     commands: [],
-    modifiable: true,
+    permissions: [],
     relay_groups: [],
   ]
 
@@ -26,6 +27,7 @@ defmodule CogApi.Resources.Bundle do
     %__MODULE__{
       commands: [%CogApi.Resources.Command{}],
       relay_groups: [%RelayGroup{}],
+      permissions: [%CogApi.Resources.Permission{}],
     }
   end
 

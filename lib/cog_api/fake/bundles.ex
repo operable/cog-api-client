@@ -39,10 +39,14 @@ defmodule CogApi.Fake.Bundles do
   def create(endpoint=%Endpoint{token: _}, params) do
     params = to_atom_keys(params)
     catch_errors %Bundle{}, params, fn ->
-      if Enum.all?([:name, :version, :commands], &(&1 in Map.keys(params))) do
+      if Enum.all?([:name, :version, :commands, :permissions], &(&1 in Map.keys(params))) do
         commands = parse_commands(params[:commands], endpoint)
+        permissions = parse_permissions(params[:permissions], endpoint)
         new_bundle = %Bundle{id: random_string(8), modifiable: modifiable?(params.name)}
-        new_bundle = Map.merge(new_bundle, %{params | commands: commands})
+        new_bundle = Map.merge(new_bundle, %{params |
+          commands: commands,
+          permissions: permissions
+        })
         new_bundle = Server.create(Bundle, new_bundle)
         show(endpoint, new_bundle.id)
       else
@@ -91,6 +95,16 @@ defmodule CogApi.Fake.Bundles do
         Map.put(acc, String.to_atom(key), val)
       end
     end)
+  end
+
+  defp parse_permissions(permissions, endpoint) do
+    permissions
+    |> Enum.map(fn permission -> parse_permission(permission, endpoint) end)
+  end
+
+  defp parse_permission(permission, endpoint) do
+    {:ok, permission} = CogApi.Fake.Permissions.create(endpoint, permission)
+    permission
   end
 
   defp parse_commands(commands, endpoint) do

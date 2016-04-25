@@ -7,6 +7,7 @@ defmodule CogApi.Decoders.Bundle do
     :updated_at,
     :version,
     commands: [],
+    permissions: [],
     relay_groups: [],
   ]
 
@@ -14,6 +15,7 @@ defmodule CogApi.Decoders.Bundle do
     %__MODULE__{
       commands: [%CogApi.Resources.Command{}],
       relay_groups: [%CogApi.Resources.RelayGroup{}],
+      permissions: [%CogApi.Resources.Permission{}],
     }
   end
 
@@ -25,6 +27,7 @@ defmodule CogApi.Decoders.Bundle do
       inserted_at: decoder.inserted_at,
       modifiable: modifiable?(decoder.name),
       name: decoder.name,
+      permissions: decoder.permissions,
       relay_groups: decoder.relay_groups,
       updated_at: decoder.updated_at,
       version: decoder.version,

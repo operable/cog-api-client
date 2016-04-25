@@ -2,6 +2,7 @@ defmodule CogApi.HTTP.BundlesTest do
   use CogApi.HTTPCase
 
   alias CogApi.HTTP.Client
+  alias CogApi.Resources.Permission
 
   doctest CogApi.HTTP.Bundles
 
@@ -66,6 +67,9 @@ defmodule CogApi.HTTP.BundlesTest do
 
         [rule] = bundle_command.rules
         assert rule.rule =~ "when command is bundle:test_command"
+
+        [permission] = bundle.permissions
+        assert Permission.full_name(permission) =~ "bundle:permission"
       end
     end
 
