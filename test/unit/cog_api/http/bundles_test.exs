@@ -8,17 +8,11 @@ defmodule CogApi.HTTP.BundlesTest do
   describe "bundle_create" do
     it "creates a new bundle" do
       cassette "bundles_create" do
-        params = %{
-          "name" => "test_bundle",
-          "version" => "0.0.1",
-          "commands" => %{
-            "test_command" => %{
-              "executable" => "/bin/foobar"}}}
-
+        params = bundle_config(%{name: "bundle_create"})
         bundle = Client.bundle_create(valid_endpoint, params) |> get_value
 
         assert present bundle.id
-        assert bundle.name == params["name"]
+        assert bundle.name == "bundle_create"
       end
     end
 

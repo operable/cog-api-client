@@ -24,7 +24,7 @@ defmodule CogApi.HTTP.Bundles do
   end
 
   def create(%Endpoint{}=endpoint, params) do
-    Base.post(endpoint, "bundles", %{bundle: params})
+    Base.post(endpoint, "bundles", %{bundle: %{config: params}})
     |> ApiResponse.format(%{"bundle" => %Bundle{}})
   end
 

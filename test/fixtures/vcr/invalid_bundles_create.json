@@ -11,14 +11,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"nh/HPNwTzj++XpBGgGlxjvSSo+ZpnwgnIa6qwupy/X4=\"}}",
+      "body": "{\"token\":{\"value\":\"UzHR+kHiZmal/3hEM+7EZVyrIiQGLHpGfxBdiR+tyII=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 18 Apr 2016 17:32:26 GMT",
+        "date": "Mon, 25 Apr 2016 17:46:17 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "pjip7md262dli6ku2be1plcpnhcalgj1"
+        "x-request-id": "cursssev5901ad7oi3ddai1diao03gkk"
       },
       "status_code": 201,
       "type": "ok"
@@ -26,9 +26,9 @@
   },
   {
     "request": {
-      "body": "{\"bundle\":{}}",
+      "body": "{\"bundle\":{\"config\":{}}}",
       "headers": {
-        "authorization": "token nh/HPNwTzj++XpBGgGlxjvSSo+ZpnwgnIa6qwupy/X4=",
+        "authorization": "token UzHR+kHiZmal/3hEM+7EZVyrIiQGLHpGfxBdiR+tyII=",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -40,10 +40,10 @@
       "body": "{\"errors\":[\"Invalid config file.\",\"Error near #: Required property cog_bundle_version was not present.\",\"Error near #: Required property name was not present.\",\"Error near #: Required property version was not present.\",\"Error near #: Required property commands was not present.\"]}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 18 Apr 2016 17:32:26 GMT",
+        "date": "Mon, 25 Apr 2016 17:46:17 GMT",
         "content-length": "280",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "m9nogm4pnsh3g7k1570ipc7dkuqau729",
+        "x-request-id": "o46sd6klda8coae1f4d4o4443tkms39h",
         "content-type": "application/json; charset=utf-8"
       },
       "status_code": 422,

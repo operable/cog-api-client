@@ -153,9 +153,9 @@ defmodule CogApi.HTTP.RelayGroupsTest do
     it "errors when adding a bundle to group that does not exist" do
       cassette "relay_group_add_bundle_to_bad_group" do
         endpoint = valid_endpoint
-        bundle = create_bundle(endpoint, "add_bundle")
+        bundle = create_bundle(endpoint, "bad_group")
 
-        {:error, [error]} = Client.relay_group_add_bundles_by_name("foo", bundle.name, endpoint)
+        {:error, [error]} = Client.relay_group_add_bundles_by_name("bad_group", bundle.name, endpoint)
 
         assert error == "Resource not found for: 'relay_groups'"
       end
@@ -178,7 +178,7 @@ defmodule CogApi.HTTP.RelayGroupsTest do
       cassette "relay_group_add_multiple_bundles" do
         endpoint = valid_endpoint
 
-        group = Client.relay_group_create(%{name: "mygroup"}, endpoint) |> get_value
+        group = Client.relay_group_create(%{name: "add_multiple_bundles"}, endpoint) |> get_value
         assert group.bundles == []
 
         bundle_ids = Enum.map(1..3, &create_bundle(endpoint, "add_multiple_bundles#{&1}"))
@@ -200,7 +200,7 @@ defmodule CogApi.HTTP.RelayGroupsTest do
           endpoint = valid_endpoint
 
           bundle = create_bundle(endpoint, "add_bundle_with_name")
-          group = Client.relay_group_create(%{name: "mygroup"}, endpoint) |> get_value
+          group = Client.relay_group_create(%{name: "add_bundle_with_name"}, endpoint) |> get_value
           assert group.bundles == []
 
           group = Client.relay_group_add_bundles_by_name(group.name, bundle.name, endpoint) |> get_value
@@ -215,14 +215,17 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         cassette "relay_group_add_multiple_bundles_with_name" do
           endpoint = valid_endpoint
 
-          group = Client.relay_group_create(%{name: "mygroup"}, endpoint) |> get_value
+          group = Client.relay_group_create(%{name: "multiple_bundle_group"}, endpoint) |> get_value
           assert group.bundles == []
 
           bundle_names = Enum.map(1..5, &create_bundle(endpoint, "add_multiple_bundles#{&1}"))
           |> Enum.map(&Map.fetch!(&1, :name))
 
-          updated_group = Client.relay_group_add_bundles_by_name("mygroup", bundle_names, endpoint)
-                          |> get_value
+          updated_group = Client.relay_group_add_bundles_by_name(
+            "multiple_bundle_group",
+            bundle_names,
+            endpoint
+          ) |> get_value
 
           returned_bundle_names = MapSet.new(updated_group.bundles, &Map.fetch!(&1, :name))
           intersection = MapSet.intersection(MapSet.new(bundle_names), returned_bundle_names)
