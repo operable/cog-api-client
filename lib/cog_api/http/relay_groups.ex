@@ -3,30 +3,30 @@ defmodule CogApi.HTTP.RelayGroups do
   alias CogApi.HTTP.Base
 
   alias CogApi.Endpoint
-  alias CogApi.Resources.RelayGroup
+  alias CogApi.Decoders.RelayGroup, as: RelayGroupDecoder
 
   def index(%Endpoint{}=endpoint) do
     Base.get(endpoint, "relay_groups")
-    |> ApiResponse.format(%{"relay_groups" => [RelayGroup.format]})
+    |> ApiResponse.format_many_with_decoder(RelayGroupDecoder, "relay_groups")
   end
 
   def show(%{name: name}, %Endpoint{}=endpoint) do
     Base.get_by(endpoint, "relay_groups", name: name)
-    |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
+    |> ApiResponse.format_with_decoder(RelayGroupDecoder, "relay_group")
   end
   def show(id, %Endpoint{}=endpoint) do
     Base.get(endpoint, resource_path(id))
-    |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
+    |> ApiResponse.format_with_decoder(RelayGroupDecoder, "relay_group")
   end
 
   def create(params, %Endpoint{}=endpoint) do
     Base.post(endpoint, "relay_groups", %{relay_group: params})
-    |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
+    |> ApiResponse.format_with_decoder(RelayGroupDecoder, "relay_group")
   end
 
   def update(id, params, %Endpoint{}=endpoint) do
     Base.patch(endpoint, resource_path(id), %{relay_group: params})
-    |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
+    |> ApiResponse.format_with_decoder(RelayGroupDecoder, "relay_group")
   end
 
   def delete(%{name: name}, %Endpoint{}=endpoint) do
@@ -50,7 +50,7 @@ defmodule CogApi.HTTP.RelayGroups do
     relay_ids = List.wrap(relay_ids)
     path = "relay_groups/#{relay_group_id}/relays"
     Base.post(endpoint, path, %{relays: %{action => relay_ids}})
-    |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
+    |> ApiResponse.format_with_decoder(RelayGroupDecoder, "relay_group")
   end
 
   def update_assignments_by_name(action, relay_group_name, bundle_names, endpoint) do
@@ -65,7 +65,7 @@ defmodule CogApi.HTTP.RelayGroups do
     bundle_ids = List.wrap(bundle_ids)
     path = "relay_groups/#{relay_group_id}/bundles"
     Base.post(endpoint, path, %{bundles: %{action => bundle_ids}})
-    |> ApiResponse.format(%{"relay_group" => RelayGroup.format})
+    |> ApiResponse.format_with_decoder(RelayGroupDecoder, "relay_group")
   end
 
   defp resource_names_to_ids(resource_type, resource_list, endpoint) do

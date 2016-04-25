@@ -1,4 +1,6 @@
 defmodule CogApi.Test.HTTPHelpers do
+  import CogApi.TestHelpers
+
   alias CogApi.Endpoint
 
   def valid_endpoint do
@@ -39,5 +41,12 @@ defmodule CogApi.Test.HTTPHelpers do
       as_user: "somebody_else",
       timeout_sec: 42,
       description: "Echoes some data, probably '#{test_name}' :P"}
+  end
+
+  def get_bundle(endpoint, bundle_name) do
+    endpoint
+    |> CogApi.HTTP.Client.bundle_index
+    |> get_value
+    |> Enum.find(fn(bundle) -> bundle.name == bundle_name end)
   end
 end

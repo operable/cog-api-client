@@ -5,10 +5,11 @@ defmodule CogApi.HTTP.Bundles do
 
   alias CogApi.Endpoint
   alias CogApi.Resources.Bundle
+  alias CogApi.Decoders.Bundle, as: BundleDecoder
 
   def index(%Endpoint{}=endpoint) do
     Base.get(endpoint, "bundles")
-    |> ApiResponse.format(%{"bundles" => [Bundle.format]})
+    |> ApiResponse.format_many_with_decoder(BundleDecoder, "bundles")
   end
 
   def show(%Endpoint{}=endpoint, id) do
@@ -25,12 +26,12 @@ defmodule CogApi.HTTP.Bundles do
 
   def create(%Endpoint{}=endpoint, params) do
     Base.post(endpoint, "bundles", %{bundle: %{config: params}})
-    |> ApiResponse.format(%{"bundle" => %Bundle{}})
+    |> ApiResponse.format_with_decoder(BundleDecoder, "bundle")
   end
 
   defp find_bundle(endpoint, id) do
     Base.get(endpoint, "bundles/#{id}")
-    |> ApiResponse.format(%{"bundle" => Bundle.format})
+    |> ApiResponse.format_with_decoder(BundleDecoder, "bundle")
   end
 
   defp add_rules(endpoint, bundle) do

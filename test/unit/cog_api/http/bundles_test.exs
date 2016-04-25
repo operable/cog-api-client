@@ -44,19 +44,20 @@ defmodule CogApi.HTTP.BundlesTest do
     it "returns the bundle" do
       cassette "bundles_show" do
         endpoint = valid_endpoint
-        bundles = Client.bundle_index(endpoint) |> get_value
-        operable_bundle = List.first(bundles)
+        params = bundle_config(%{name: "bundle"})
+        created_bundle = Client.bundle_create(endpoint, params) |> get_value
 
-        bundle = Client.bundle_show(endpoint, operable_bundle.id) |> get_value
+        bundle = Client.bundle_show(endpoint, created_bundle.id) |> get_value
 
-        assert bundle.id == operable_bundle.id
-        assert bundle.name == operable_bundle.name
-        assert bundle.enabled == true
+        assert bundle.id == created_bundle.id
+        assert bundle.name == created_bundle.name
+        assert bundle.enabled == false
+        assert bundle.modifiable == true
         assert present bundle.inserted_at
         assert present bundle.updated_at
 
         bundle_command = bundle.commands
-        |> Enum.find(fn command -> command.name == "bundle" end)
+        |> Enum.find(fn command -> command.name == "test_command" end)
 
         assert present bundle_command.id
         assert present bundle_command.name
@@ -64,7 +65,21 @@ defmodule CogApi.HTTP.BundlesTest do
         assert bundle_command.enforcing == true
 
         [rule] = bundle_command.rules
-        assert rule.rule =~ "when command is operable:bundle"
+        assert rule.rule =~ "when command is bundle:test_command"
+      end
+    end
+
+    context "for the operable bundle" do
+      it "returns modifiable as false" do
+        cassette "bundles_show_operable" do
+          endpoint = valid_endpoint
+          bundles = Client.bundle_index(endpoint) |> get_value
+          operable_bundle = List.first(bundles)
+
+          bundle = Client.bundle_show(endpoint, operable_bundle.id) |> get_value
+
+          assert bundle.modifiable == false
+        end
       end
     end
   end
@@ -146,12 +161,5 @@ defmodule CogApi.HTTP.BundlesTest do
         end
       end
     end
-  end
-
-  def get_bundle(endpoint, bundle_name) do
-    endpoint
-    |> Client.bundle_index
-    |> get_value
-    |> Enum.find(fn(bundle) -> bundle.name == bundle_name end)
   end
 end

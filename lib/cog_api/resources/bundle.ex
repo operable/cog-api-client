@@ -4,13 +4,14 @@ defmodule CogApi.Resources.Bundle do
   alias CogApi.Resources.RelayGroup
 
   defstruct [
-    :id,
     :enabled,
-    :name,
+    :id,
     :inserted_at,
+    :name,
     :updated_at,
     :version,
     commands: [],
+    modifiable: true,
     relay_groups: [],
   ]
 

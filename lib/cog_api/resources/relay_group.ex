@@ -11,7 +11,6 @@ defmodule CogApi.Resources.RelayGroup do
     :inserted_at,
     bundles: [],
     relays: [],
-    bundles: [],
   ]
 
   def format do

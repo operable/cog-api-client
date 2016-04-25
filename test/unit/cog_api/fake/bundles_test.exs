@@ -34,6 +34,18 @@ defmodule CogApi.Fake.BundlesTest do
 
       bundle = Client.bundle_show(valid_endpoint, bundle.id) |> get_value
       assert bundle.name == "postgres"
+      assert bundle.modifiable == true
+    end
+
+    context "the operable bundle" do
+      it "sets modifiable to false" do
+        config = bundle_config(%{name: "operable"})
+        bundle = Client.bundle_create(valid_endpoint, config) |> get_value
+
+        bundle = Client.bundle_show(valid_endpoint, bundle.id) |> get_value
+        assert bundle.name == "operable"
+        assert bundle.modifiable == false
+      end
     end
 
     it "includes the rules for each command" do

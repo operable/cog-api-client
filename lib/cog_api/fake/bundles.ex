@@ -8,6 +8,8 @@ defmodule CogApi.Fake.Bundles do
   alias CogApi.Resources.Bundle
   alias CogApi.Resources.Command
 
+  import CogApi.Decoders.Bundle, only: [modifiable?: 1]
+
   def index(%Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
   def index(%Endpoint{}) do
     {:ok, Server.index(Bundle)}
@@ -39,7 +41,7 @@ defmodule CogApi.Fake.Bundles do
     catch_errors %Bundle{}, params, fn ->
       if Enum.all?([:name, :version, :commands], &(&1 in Map.keys(params))) do
         commands = parse_commands(params[:commands], endpoint)
-        new_bundle = %Bundle{id: random_string(8)}
+        new_bundle = %Bundle{id: random_string(8), modifiable: modifiable?(params.name)}
         new_bundle = Map.merge(new_bundle, %{params | commands: commands})
         new_bundle = Server.create(Bundle, new_bundle)
         show(endpoint, new_bundle.id)

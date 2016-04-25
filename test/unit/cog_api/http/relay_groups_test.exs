@@ -54,6 +54,40 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         end
       end
     end
+
+    it "displays the relay_group's bundles" do
+      cassette "relay_group_show_bundle" do
+        endpoint = valid_endpoint
+        bundle = create_bundle(endpoint, "show_bundle")
+        group = Client.relay_group_create(%{name: "add_bundle"}, endpoint) |> get_value
+        assert group.bundles == []
+
+        group = Client.relay_group_add_bundles_by_id(group.id, bundle.id, endpoint) |> get_value
+
+        [grouped_bundle] = group.bundles
+
+        assert grouped_bundle.id == bundle.id
+        assert grouped_bundle.modifiable == true
+      end
+    end
+
+    context "the operable bundle" do
+      it "sets modifiable to false" do
+        cassette "relay_group_show_operable_bundle" do
+          endpoint = valid_endpoint
+          bundle = get_bundle(endpoint, "operable")
+          group = Client.relay_group_create(%{name: "add_operable_bundle"}, endpoint) |> get_value
+          assert group.bundles == []
+
+          group = Client.relay_group_add_bundles_by_id(group.id, bundle.id, endpoint) |> get_value
+
+          [grouped_bundle] = group.bundles
+
+          assert grouped_bundle.id == bundle.id
+          assert grouped_bundle.modifiable == false
+        end
+      end
+    end
   end
 
   describe "relay_group_create" do

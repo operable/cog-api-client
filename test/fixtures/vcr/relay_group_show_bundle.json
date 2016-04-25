@@ -1,0 +1,107 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"k+NVCcOlP67OUdO9lQOyHOZF5V3VbVYzVBqR66wLwfM=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 25 Apr 2016 17:07:11 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "os2goihrud6dsmqjdsj9c9j691io9dhe"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"bundle\":{\"config\":{\"version\":\"0.0.1\",\"name\":\"show_bundle\",\"commands\":{\"test_command\":{\"executable\":\"/bin/foobar\"}},\"cog_bundle_version\":2}}}",
+      "headers": {
+        "authorization": "token k+NVCcOlP67OUdO9lQOyHOZF5V3VbVYzVBqR66wLwfM=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/bundles"
+    },
+    "response": {
+      "body": "{\"bundle\":{\"updated_at\":\"2016-04-25T17:07:12Z\",\"relay_groups\":[],\"permissions\":[],\"name\":\"show_bundle\",\"inserted_at\":\"2016-04-25T17:07:12Z\",\"id\":\"3b31ec24-e080-4a0b-a187-bbb0b690b618\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"25f608b2-a790-42c8-a29e-7ba3805b46ea\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 25 Apr 2016 17:07:12 GMT",
+        "content-length": "354",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "pjkscjvra4flqbkkg7qu722u6un6uekv",
+        "location": "/v1/bundles/3b31ec24-e080-4a0b-a187-bbb0b690b618"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"relay_group\":{\"name\":\"add_bundle\"}}",
+      "headers": {
+        "authorization": "token k+NVCcOlP67OUdO9lQOyHOZF5V3VbVYzVBqR66wLwfM=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/relay_groups"
+    },
+    "response": {
+      "body": "{\"relay_group\":{\"updated_at\":\"2016-04-25T17:07:12Z\",\"relays\":[],\"name\":\"add_bundle\",\"inserted_at\":\"2016-04-25T17:07:12Z\",\"id\":\"9266236c-1082-4d3d-9aaf-68d3e02d3625\",\"bundles\":[]}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 25 Apr 2016 17:07:12 GMT",
+        "content-length": "179",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "mlo3n4kdkse4cjjk0el1l7sn38semula",
+        "location": "/v1/groups/9266236c-1082-4d3d-9aaf-68d3e02d3625"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"bundles\":{\"add\":[\"3b31ec24-e080-4a0b-a187-bbb0b690b618\"]}}",
+      "headers": {
+        "authorization": "token k+NVCcOlP67OUdO9lQOyHOZF5V3VbVYzVBqR66wLwfM=",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/relay_groups/9266236c-1082-4d3d-9aaf-68d3e02d3625/bundles"
+    },
+    "response": {
+      "body": "{\"relay_group\":{\"updated_at\":\"2016-04-25T17:07:12Z\",\"relays\":[],\"name\":\"add_bundle\",\"inserted_at\":\"2016-04-25T17:07:12Z\",\"id\":\"9266236c-1082-4d3d-9aaf-68d3e02d3625\",\"bundles\":[{\"updated_at\":\"2016-04-25T17:07:12Z\",\"name\":\"show_bundle\",\"inserted_at\":\"2016-04-25T17:07:12Z\",\"id\":\"3b31ec24-e080-4a0b-a187-bbb0b690b618\",\"enabled\":false}]}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 25 Apr 2016 17:07:12 GMT",
+        "content-length": "334",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "6ah4taiihu36tktam15lkt42cejodb3o"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
