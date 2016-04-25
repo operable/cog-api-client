@@ -13,14 +13,14 @@ defmodule CogApi.HTTP.Base do
   def post(%Endpoint{}=endpoint, resource, params) do
     rescue_econnrefused(fn ->
       body = Poison.encode!(params)
-      HTTPotion.post(make_url(endpoint, resource), body: body, headers: make_headers(endpoint, ["Content-Type": "application/json"]))
+      HTTPotion.post(make_url(endpoint, resource), body: body, headers: make_headers(endpoint))
     end)
   end
 
   def patch(%Endpoint{}=endpoint, resource, params) do
     rescue_econnrefused(fn ->
       body = Poison.encode!(params)
-      HTTPotion.patch(make_url(endpoint, resource), body: body, headers: make_headers(endpoint, ["Content-Type": "application/json"]))
+      HTTPotion.patch(make_url(endpoint, resource), body: body, headers: make_headers(endpoint))
     end)
   end
 
@@ -99,12 +99,13 @@ defmodule CogApi.HTTP.Base do
     URI.encode(url <> "?" <> URI.encode_query(params))
   end
 
-  defp make_headers(endpoint, others \\ ["Accept": "application/json"])
-  defp make_headers(%Endpoint{token: nil}, others) do
-    others
+  @default_headers ["Accept": "application/json", "Content-Type": "application/json"]
+
+  defp make_headers(%Endpoint{token: nil}) do
+    @default_headers
   end
-  defp make_headers(%Endpoint{token: token}, others) do
-    ["authorization": "token " <> token] ++ others
+  defp make_headers(%Endpoint{token: token}) do
+    ["authorization": "token " <> token] ++ @default_headers
   end
 
   def response_type(%HTTPotion.Response{} = response) do

@@ -3,6 +3,7 @@
     "request": {
       "body": "{\"username\":\"admin\",\"password\":\"password\"}",
       "headers": {
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -11,14 +12,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"Fm0t6PAiTdA2hps3+x50XkdL5DJuvCi13o6ff2zBA8I=\"}}",
+      "body": "{\"token\":{\"value\":\"WVSXaeMFkep26k8u1ncdbKgj8CLHPQ6kDrlb8HTuY4o=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 31 Mar 2016 20:07:59 GMT",
+        "date": "Mon, 25 Apr 2016 17:48:41 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "s9ti0emrf13cfa2lqeher20i66e8e0tt"
+        "x-request-id": "tg8qiustvia7o411mq6nrth97gs4lqut"
       },
       "status_code": 201,
       "type": "ok"
@@ -28,7 +29,8 @@
     "request": {
       "body": "{\"user\":{\"username\":\"chief_of_staffuser_create\",\"password\":\"supersecret\",\"last_name\":\"McGary\",\"first_name\":\"Leo\",\"email_address\":\"cosuser_create@example.com\"}}",
       "headers": {
-        "authorization": "token Fm0t6PAiTdA2hps3+x50XkdL5DJuvCi13o6ff2zBA8I=",
+        "authorization": "token WVSXaeMFkep26k8u1ncdbKgj8CLHPQ6kDrlb8HTuY4o=",
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,15 +39,15 @@
       "url": "http://localhost:4000/v1/users"
     },
     "response": {
-      "body": "{\"user\":{\"username\":\"chief_of_staffuser_create\",\"last_name\":\"McGary\",\"id\":\"d827630a-d0f0-4f88-8d98-0be57e394976\",\"groups\":[],\"first_name\":\"Leo\",\"email_address\":\"cosuser_create@example.com\"}}",
+      "body": "{\"user\":{\"username\":\"chief_of_staffuser_create\",\"last_name\":\"McGary\",\"id\":\"c8e46057-8e62-4b66-9f23-4f5027ea7cff\",\"groups\":[],\"first_name\":\"Leo\",\"email_address\":\"cosuser_create@example.com\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 31 Mar 2016 20:08:01 GMT",
+        "date": "Mon, 25 Apr 2016 17:48:42 GMT",
         "content-length": "190",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "0d0hka2ue4lvrttq3hh06l1numroce9m",
-        "location": "/v1/users/d827630a-d0f0-4f88-8d98-0be57e394976"
+        "x-request-id": "pu2oa379g1ip47ckbboumiq50gee4pqc",
+        "location": "/v1/users/c8e46057-8e62-4b66-9f23-4f5027ea7cff"
       },
       "status_code": 201,
       "type": "ok"

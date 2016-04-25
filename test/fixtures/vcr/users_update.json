@@ -3,6 +3,7 @@
     "request": {
       "body": "{\"username\":\"admin\",\"password\":\"password\"}",
       "headers": {
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -11,14 +12,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"xhcYJfyCYnqS9mwAz9seqvl73mYmb4EgcjOgEGBJfd0=\"}}",
+      "body": "{\"token\":{\"value\":\"+szO5lhLj/UOUMHBZG5/r8Oj92VRSPMgVJ+pDUpMDO4=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 31 Mar 2016 20:08:05 GMT",
+        "date": "Mon, 25 Apr 2016 17:48:44 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "j6crdiii1hmu8vukvh9e8orei82qh0b7"
+        "x-request-id": "l24tp1uqbboqq76n9vtgpjqptco48uu9"
       },
       "status_code": 201,
       "type": "ok"
@@ -28,7 +29,8 @@
     "request": {
       "body": "{\"user\":{\"username\":\"chief_of_staffuser_update\",\"password\":\"supersecret\",\"last_name\":\"McGary\",\"first_name\":\"Leo\",\"email_address\":\"cosuser_update@example.com\"}}",
       "headers": {
-        "authorization": "token xhcYJfyCYnqS9mwAz9seqvl73mYmb4EgcjOgEGBJfd0=",
+        "authorization": "token +szO5lhLj/UOUMHBZG5/r8Oj92VRSPMgVJ+pDUpMDO4=",
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,15 +39,15 @@
       "url": "http://localhost:4000/v1/users"
     },
     "response": {
-      "body": "{\"user\":{\"username\":\"chief_of_staffuser_update\",\"last_name\":\"McGary\",\"id\":\"5d32aef3-819c-46c5-a2eb-af4deb479aca\",\"groups\":[],\"first_name\":\"Leo\",\"email_address\":\"cosuser_update@example.com\"}}",
+      "body": "{\"user\":{\"username\":\"chief_of_staffuser_update\",\"last_name\":\"McGary\",\"id\":\"9fdb4609-d4d3-431f-87c4-c7c1350b6d81\",\"groups\":[],\"first_name\":\"Leo\",\"email_address\":\"cosuser_update@example.com\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 31 Mar 2016 20:08:07 GMT",
+        "date": "Mon, 25 Apr 2016 17:48:45 GMT",
         "content-length": "190",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "ovp90bnbd1kl33eo8klt1k2hvbjah3o0",
-        "location": "/v1/users/5d32aef3-819c-46c5-a2eb-af4deb479aca"
+        "x-request-id": "iu4g6ukpt8hbdell9fs234kcklqt3o3c",
+        "location": "/v1/users/9fdb4609-d4d3-431f-87c4-c7c1350b6d81"
       },
       "status_code": 201,
       "type": "ok"
@@ -55,23 +57,24 @@
     "request": {
       "body": "{\"user\":{\"first_name\":\"Arnie\"}}",
       "headers": {
-        "authorization": "token xhcYJfyCYnqS9mwAz9seqvl73mYmb4EgcjOgEGBJfd0=",
+        "authorization": "token +szO5lhLj/UOUMHBZG5/r8Oj92VRSPMgVJ+pDUpMDO4=",
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "patch",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/users/5d32aef3-819c-46c5-a2eb-af4deb479aca"
+      "url": "http://localhost:4000/v1/users/9fdb4609-d4d3-431f-87c4-c7c1350b6d81"
     },
     "response": {
-      "body": "{\"user\":{\"username\":\"chief_of_staffuser_update\",\"last_name\":\"McGary\",\"id\":\"5d32aef3-819c-46c5-a2eb-af4deb479aca\",\"groups\":[],\"first_name\":\"Arnie\",\"email_address\":\"cosuser_update@example.com\"}}",
+      "body": "{\"user\":{\"username\":\"chief_of_staffuser_update\",\"last_name\":\"McGary\",\"id\":\"9fdb4609-d4d3-431f-87c4-c7c1350b6d81\",\"groups\":[],\"first_name\":\"Arnie\",\"email_address\":\"cosuser_update@example.com\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 31 Mar 2016 20:08:07 GMT",
+        "date": "Mon, 25 Apr 2016 17:48:45 GMT",
         "content-length": "192",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "mo7oefquo3q2h4nspl8sfjct605ncav2"
+        "x-request-id": "ahamkb2dhkdgtaja4uvj0k7pqa5jbi0t"
       },
       "status_code": 200,
       "type": "ok"
