@@ -3,7 +3,6 @@ defmodule CogApi.HTTP.Groups do
   alias CogApi.HTTP.Base
 
   alias CogApi.Endpoint
-  alias CogApi.Resources.Group
   alias CogApi.Resources.Role
   alias CogApi.Decoders.Group, as: GroupDecoder
 
@@ -24,12 +23,12 @@ defmodule CogApi.HTTP.Groups do
 
   def create(%Endpoint{}=endpoint, params) do
     Base.post(endpoint, "groups", %{group: params})
-    |> ApiResponse.format(%{"group" => %Group{}})
+    |> format_group_response
   end
 
   def update(%Endpoint{}=endpoint, group_id, params) do
     Base.patch(endpoint, "groups/#{group_id}", %{"group" => params})
-    |> ApiResponse.format(%{"group" => Group.format})
+    |> format_group_response
   end
 
   def delete(%Endpoint{}=endpoint, group_id) do
@@ -55,7 +54,7 @@ defmodule CogApi.HTTP.Groups do
     roles = ApiResponse.parse_struct(response,  %{"roles" => [Role.format]})
     {
       ApiResponse.type(response),
-      %{group | roles: roles }
+      %{group | roles: roles}
     }
   end
 
