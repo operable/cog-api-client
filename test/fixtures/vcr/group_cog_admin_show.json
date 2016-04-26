@@ -1,0 +1,83 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"X2Bbtks/wIrZECqsCIS7JtGXXboO0zkh5OdhbgcnGIo=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 26 Apr 2016 15:10:40 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "jqun2voq8hhrv5q2stj0q38lo94b9nba"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"group\":{\"name\":\"cog-admin\"}}",
+      "headers": {
+        "authorization": "token X2Bbtks/wIrZECqsCIS7JtGXXboO0zkh5OdhbgcnGIo=",
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/groups"
+    },
+    "response": {
+      "body": "{\"group\":{\"name\":\"cog-admin\",\"members\":{\"users\":[],\"roles\":[],\"groups\":[]},\"id\":\"af1a793d-1921-461b-ad38-9b06a566be97\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 26 Apr 2016 15:10:40 GMT",
+        "content-length": "120",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "3krpadc1kjeh7oufst8lqd7nc857qd3m",
+        "location": "/v1/groups/af1a793d-1921-461b-ad38-9b06a566be97"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token X2Bbtks/wIrZECqsCIS7JtGXXboO0zkh5OdhbgcnGIo=",
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/groups/af1a793d-1921-461b-ad38-9b06a566be97"
+    },
+    "response": {
+      "body": "{\"group\":{\"name\":\"cog-admin\",\"members\":{\"users\":[],\"roles\":[],\"groups\":[]},\"id\":\"af1a793d-1921-461b-ad38-9b06a566be97\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Tue, 26 Apr 2016 15:10:40 GMT",
+        "content-length": "120",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "0t8nl79bfl2qp902pmp91cltnii1qcn0"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

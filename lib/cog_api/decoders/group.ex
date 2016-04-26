@@ -11,12 +11,17 @@ defmodule CogApi.Decoders.Group do
     }
   end
 
-  def to_resource(group_decoder) do
+  def to_resource(decoder) do
     %CogApi.Resources.Group{
-      id: group_decoder.id,
-      name: group_decoder.name,
-      users: group_decoder.members.users,
-      roles: group_decoder.members.roles,
+      id: decoder.id,
+      modifiable: modifiable?(decoder.name),
+      name: decoder.name,
+      users: decoder.members.users,
+      roles: decoder.members.roles,
     }
+  end
+
+  def modifiable?(name) do
+    name != "cog-admin"
   end
 end

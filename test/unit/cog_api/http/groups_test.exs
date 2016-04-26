@@ -38,6 +38,19 @@ defmodule CogApi.HTTP.GroupsTest do
         end
       end
     end
+
+    context "the cog-admin group" do
+      it "sets modifiable to false" do
+        cassette "group_cog_admin_show" do
+          endpoint = valid_endpoint
+          {:ok, group} = Client.group_create(valid_endpoint, %{name: "cog-admin"})
+
+          found_group = Client.group_show(endpoint, group.id) |> get_value
+
+          assert found_group.modifiable == false
+        end
+      end
+    end
   end
 
   describe "group_find" do

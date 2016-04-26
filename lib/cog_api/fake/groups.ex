@@ -8,6 +8,8 @@ defmodule CogApi.Fake.Groups do
   alias CogApi.Resources.Role
   alias CogApi.Resources.User
 
+  import CogApi.Decoders.Group, only: [modifiable?: 1]
+
   def index(%Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
   def index(%Endpoint{}) do
     {:ok, Server.index(Group)}
@@ -32,7 +34,11 @@ defmodule CogApi.Fake.Groups do
   def create(%Endpoint{token: nil}, _), do: Endpoint.invalid_endpoint
   def create(%Endpoint{token: _}, %{name: name}=params) do
     catch_errors %Group{}, params, fn ->
-      new_group = %Group{id: random_string(8), name: name}
+      new_group = %Group{
+        id: random_string(8),
+        name: name,
+        modifiable: modifiable?(name)
+      }
       {:ok, Server.create(Group, new_group)}
     end
   end

@@ -30,6 +30,16 @@ defmodule CogApi.Fake.GroupsTest do
         assert found_group.id == created_group.id
       end
     end
+
+    context "the cog-admin group" do
+      it "sets modifiable to false" do
+        {:ok, group} = Client.group_create(valid_endpoint, %{name: "cog-admin"})
+
+        found_group = Client.group_show(valid_endpoint, group.id) |> get_value
+
+        assert found_group.modifiable == false
+      end
+    end
   end
 
   describe "group_find" do
