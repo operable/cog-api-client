@@ -61,7 +61,7 @@ defmodule CogApi.HTTP.Bundles do
 
   defp format_update_response(response, bundle_id) do
     if response.status_code == 400 do
-      ApiResponse.format_error(response)
+      ApiResponse.format(response, Bundle)
     else
       {
         ApiResponse.type(response),

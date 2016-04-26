@@ -1,8 +1,8 @@
 defmodule CogApi.HTTP.ApiResponse do
   alias HTTPotion.Response
+  alias CogApi.HTTP.ApiErrorHandler
 
   @no_content 204
-  @unauthorized 401
 
   defmacrop http_error?(status_code) do
     quote do
@@ -13,17 +13,13 @@ defmodule CogApi.HTTP.ApiResponse do
   def format(response, struct_map \\ nil)
 
   def format({:error, error_message}, _) do
-    format_error(error_message)
+    ApiErrorHandler.format_error(error_message)
   end
 
   def format(%Response{status_code: @no_content}, _), do: :ok
 
-  def format(%Response{status_code: @unauthorized}=response, _) do
-    {:authentication_error, format_error_list(response)}
-  end
-
   def format(%Response{status_code: code}=response, _) when http_error?(code) do
-    format_error(response)
+    ApiErrorHandler.format_error(response)
   end
 
   def format(response = %Response{}, struct_map) when is_nil(struct_map) do
@@ -41,11 +37,11 @@ defmodule CogApi.HTTP.ApiResponse do
   end
 
   def format_many_with_decoder({:error, error_message}, _, _) do
-    format_error(error_message)
+    ApiErrorHandler.format_error(error_message)
   end
   def format_many_with_decoder(%Response{status_code: code}=response, _, _) when
   http_error?(code) do
-    format_error(response)
+    ApiErrorHandler.format_error(response)
   end
   def format_many_with_decoder(response, decoder, key) do
     json_structure = %{key => [decoder.format]}
@@ -59,11 +55,11 @@ defmodule CogApi.HTTP.ApiResponse do
   end
 
   def format_with_decoder({:error, error_message}, _, _) do
-    format_error(error_message)
+    ApiErrorHandler.format_error(error_message)
   end
   def format_with_decoder(%Response{status_code: code}=response, _, _) when
   http_error?(code) do
-    format_error(response)
+    ApiErrorHandler.format_error(response)
   end
   def format_with_decoder(response, decoder, key) do
     json_structure = %{key => decoder.format}
@@ -94,48 +90,6 @@ defmodule CogApi.HTTP.ApiResponse do
   def parse_struct(response, struct_map) do
     resource = struct_map |> Map.keys |> List.first
     Poison.decode!(response.body, as: struct_map)[resource]
-  end
-
-  def format_error_list(response=%Response{}) do
-    response.body
-    |> Poison.decode!
-    |> extract_errors
-    |> parse_errors
-  end
-
-  def format_error(response=%Response{}) do
-    {:error, format_error_list(response)}
-  end
-  def format_error(error_message) do
-    {
-      :error,
-      parse_errors(error_message)
-    }
-  end
-
-  defp extract_errors(%{"errors" => errors}), do: errors
-  defp extract_errors(%{"error" => error}), do: [error]
-  defp extract_errors(error), do: [error]
-
-  defp parse_errors(errors = %{}) do
-    Enum.flat_map errors, fn {key, values} ->
-      key = String.replace(key, "_", " ") |> String.capitalize
-
-      Enum.map(values, &format_error(key, &1))
-    end
-  end
-
-  defp parse_errors(errors) when is_list(errors), do: errors
-  defp parse_errors(errors) when is_binary(errors) do
-    [errors]
-  end
-
-  defp format_error(key, {error_key, value}) do
-    "#{key} #{error_key} - #{Enum.join(value, "")}"
-  end
-
-  defp format_error(key, value) do
-    "#{key} #{value}"
   end
 
   def type(%HTTPotion.Response{} = response) do
