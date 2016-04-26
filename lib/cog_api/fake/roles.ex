@@ -10,6 +10,8 @@ defmodule CogApi.Fake.Roles do
 
   use CogApi.Fake.InvalidCrudResponses
 
+  import CogApi.Decoders.Role, only: [modifiable?: 1]
+
   def index(%Endpoint{}) do
     {:ok, Server.index(Role) |> Enum.map(&(prepare_role(&1)))}
   end
@@ -23,7 +25,11 @@ defmodule CogApi.Fake.Roles do
 
   def create(%Endpoint{token: _}, %{name: name}=params) do
     catch_errors %Role{}, params, fn ->
-      new_role = %Role{id: random_string(8), name: name}
+      new_role = %Role{
+        id: random_string(8),
+        name: name,
+        modifiable: modifiable?(name),
+      }
       {:ok, Server.create(Role, new_role)}
     end
   end

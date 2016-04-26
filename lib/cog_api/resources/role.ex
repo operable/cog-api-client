@@ -7,6 +7,7 @@ defmodule CogApi.Resources.Role do
   defstruct [
     :id,
     :name,
+    :modifiable,
     groups: [],
     permissions: [],
   ]

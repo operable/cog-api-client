@@ -37,6 +37,19 @@ defmodule CogApi.HTTP.RolesTest do
         end
       end
     end
+
+    context "the cog-admin role" do
+      it "sets modifiable to false" do
+        cassette "role_cog_admin_show" do
+          endpoint = valid_endpoint
+          {:ok, role} = Client.role_create(valid_endpoint, %{name: "cog-admin"})
+
+          found_role = Client.role_show(endpoint, role.id) |> get_value
+
+          assert found_role.modifiable == false
+        end
+      end
+    end
   end
 
   describe "role_show by name" do

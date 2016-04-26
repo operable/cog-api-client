@@ -40,7 +40,8 @@ defmodule CogApi.HTTP.UsersTest do
 
           assert found_user.id == created_user.id
           assert Enum.map(found_user.groups, &(&1.id)) == [group.id]
-          assert List.first(found_user.groups).roles == [role]
+          first_group = List.first(found_user.groups)
+          assert Enum.map(first_group.roles, &(&1.id)) == [role.id]
         end
       end
 

@@ -3,35 +3,35 @@ defmodule CogApi.HTTP.Roles do
   alias CogApi.HTTP.ApiResponse
   alias CogApi.HTTP.Base
   alias CogApi.Resources.Permission
-  alias CogApi.Resources.Role
+  alias CogApi.Decoders.Role, as: RoleDecoder
 
   def index(%Endpoint{}=endpoint) do
     Base.get(endpoint, "roles")
-    |> ApiResponse.format(%{"roles" => [Role.format]})
+    |> ApiResponse.format_many_with_decoder(RoleDecoder, "roles")
   end
 
   def show(%Endpoint{}=endpoint, %{name: role_name}) do
     Base.get(endpoint, "roles?name=#{role_name}")
-    |> ApiResponse.format(%{"role" => Role.format})
+    |> ApiResponse.format_with_decoder(RoleDecoder, "role")
   end
   def show(%Endpoint{}=endpoint, id) do
     Base.get(endpoint, "roles/#{id}")
-    |> ApiResponse.format(%{"role" => Role.format})
+    |> ApiResponse.format_with_decoder(RoleDecoder, "role")
   end
 
   def create(%Endpoint{}=endpoint, params) do
     Base.post(endpoint, "roles", %{"role" => params})
-    |> ApiResponse.format(%{"role" => Role.format})
+    |> ApiResponse.format_with_decoder(RoleDecoder, "role")
   end
 
   def update(%Endpoint{}=endpoint, role_id, params) do
     Base.patch(endpoint, "roles/#{role_id}", %{"role" => params})
-    |> ApiResponse.format(%{"role" => Role.format})
+    |> ApiResponse.format_with_decoder(RoleDecoder, "role")
   end
 
   def delete(%Endpoint{}=endpoint, role_id) do
     Base.delete(endpoint, "roles/#{role_id}")
-    |> ApiResponse.format(%{"role" => Role.format})
+    |> ApiResponse.format_delete("This role could not be deleted")
   end
 
   def add_permission(endpoint, role, permission) do

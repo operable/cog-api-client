@@ -47,6 +47,16 @@ defmodule CogApi.Fake.RolesTest do
         assert role.groups == [group]
       end
     end
+
+    context "the cog-admin role" do
+      it "sets modifiable to false" do
+        {:ok, role} = Client.role_create(valid_endpoint, %{name: "cog-admin"})
+
+        found_role = Client.role_show(valid_endpoint, role.id) |> get_value
+
+        assert found_role.modifiable == false
+      end
+    end
   end
 
   describe "role_show by name" do

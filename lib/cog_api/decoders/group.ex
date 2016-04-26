@@ -1,4 +1,6 @@
 defmodule CogApi.Decoders.Group do
+  import CogApi.Decoders.Helpers
+
   defstruct [
     :id,
     :name,
@@ -17,7 +19,7 @@ defmodule CogApi.Decoders.Group do
       modifiable: modifiable?(decoder.name),
       name: decoder.name,
       users: decoder.members.users,
-      roles: decoder.members.roles,
+      roles: decode_many(decoder.members.roles, CogApi.Decoders.Role),
     }
   end
 

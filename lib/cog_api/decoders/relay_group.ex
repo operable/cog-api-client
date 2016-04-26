@@ -1,4 +1,6 @@
 defmodule CogApi.Decoders.RelayGroup do
+  import CogApi.Decoders.Helpers
+
   alias CogApi.Resources.Relay
   alias CogApi.Resources.Bundle
 
@@ -27,9 +29,5 @@ defmodule CogApi.Decoders.RelayGroup do
       relays: decoder.relays,
       updated_at: decoder.updated_at,
     }
-  end
-
-  defp decode_many(resources, module) do
-    Enum.map(resources, &module.to_resource/1)
   end
 end
