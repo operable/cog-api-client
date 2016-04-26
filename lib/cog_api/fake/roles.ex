@@ -8,12 +8,12 @@ defmodule CogApi.Fake.Roles do
   alias CogApi.Resources.Permission
   alias CogApi.Resources.Role
 
-  def index(%Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
+  use CogApi.Fake.InvalidCrudResponses
+
   def index(%Endpoint{}) do
     {:ok, Server.index(Role) |> Enum.map(&(prepare_role(&1)))}
   end
 
-  def show(%Endpoint{token: nil}, _),  do: Endpoint.invalid_endpoint
   def show(%Endpoint{}, %{name: name}) do
     {:ok, prepare_role(Server.show_by_key(Role, :name, name))}
   end
@@ -21,7 +21,6 @@ defmodule CogApi.Fake.Roles do
     {:ok, prepare_role(Server.show!(Role, id))}
   end
 
-  def create(%Endpoint{token: nil}, %{name: _}), do: Endpoint.invalid_endpoint
   def create(%Endpoint{token: _}, %{name: name}=params) do
     catch_errors %Role{}, params, fn ->
       new_role = %Role{id: random_string(8), name: name}
@@ -29,14 +28,12 @@ defmodule CogApi.Fake.Roles do
     end
   end
 
-  def update(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def update(%Endpoint{token: _}, id, params) do
     catch_errors %Role{}, params, fn ->
       {:ok, Server.update(Role, id, params) |> prepare_role}
     end
   end
 
-  def delete(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def delete(%Endpoint{token: _}, id), do: Server.delete(Role, id)
 
   def add_permission(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint

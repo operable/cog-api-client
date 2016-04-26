@@ -9,13 +9,12 @@ defmodule CogApi.Fake.Bundles do
   alias CogApi.Resources.Command
 
   import CogApi.Decoders.Bundle, only: [modifiable?: 1]
+  use CogApi.Fake.InvalidCrudResponses
 
-  def index(%Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
   def index(%Endpoint{}) do
     {:ok, Server.index(Bundle)}
   end
 
-  def show(%Endpoint{token: nil}, _),  do: Endpoint.invalid_endpoint
   def show(%Endpoint{}=endpoint, id) do
     bundle = Server.show!(Bundle, id)
     bundle = %{bundle | commands: add_rules(endpoint, bundle)}
@@ -35,7 +34,6 @@ defmodule CogApi.Fake.Bundles do
     rules
   end
 
-  def create(%Endpoint{token: nil}, %{name: _}), do: Endpoint.invalid_endpoint
   def create(endpoint=%Endpoint{token: _}, params) do
     params = to_atom_keys(params)
     catch_errors %Bundle{}, params, fn ->
@@ -75,7 +73,6 @@ defmodule CogApi.Fake.Bundles do
     return_error("You can only enable or disable a bundle")
   end
 
-  def delete(%Endpoint{token: nil}, _), do: Endpoint.invalid_endpoint
   def delete(%Endpoint{token: _}, id), do: Server.delete(Bundle, id)
 
   defp ensure_bundle_encode_status(status) do

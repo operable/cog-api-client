@@ -16,9 +16,21 @@ defmodule CogApi.HTTP.ApiResponseTest do
     end
 
     for code <- 400..500 do
-      it "returns an error for a #{code}" do
-        http_response = %Response{status_code: unquote(code), body: Poison.encode!(%{error: "oops"})}
-        assert {:error, ["oops"]} == ApiResponse.format(http_response)
+      if code == 401 do
+        it "returns an authentication error for 401" do
+          http_response = %Response{
+            status_code: 401,
+            body: Poison.encode!(%{error: "User cannot be authenticated"}),
+          }
+
+          expected_error = {:authentication_error, ["User cannot be authenticated"]}
+          assert expected_error == ApiResponse.format(http_response)
+        end
+      else
+        it "returns an error for a #{code}" do
+          http_response = %Response{status_code: unquote(code), body: Poison.encode!(%{error: "oops"})}
+          assert {:error, ["oops"]} == ApiResponse.format(http_response)
+        end
       end
     end
   end

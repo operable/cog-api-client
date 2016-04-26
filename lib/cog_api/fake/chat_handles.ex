@@ -6,7 +6,8 @@ defmodule CogApi.Fake.ChatHandles do
   alias CogApi.Fake.Server
   alias CogApi.Resources.ChatHandle
 
-  def create(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
+  use CogApi.Fake.InvalidCrudResponses
+
   def create(%Endpoint{token: _}, user_id, params) do
     catch_errors %ChatHandle{}, params, fn ->
       new_chat_handle = %ChatHandle{id: random_string(8), user_id: user_id}
@@ -15,14 +16,12 @@ defmodule CogApi.Fake.ChatHandles do
     end
   end
 
-  def update(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def update(%Endpoint{token: _}, id, params) do
     catch_errors %ChatHandle{}, params, fn ->
       {:ok, Server.update(ChatHandle, id, params)}
     end
   end
 
-  def delete(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def delete(%Endpoint{token: _}, id), do: Server.delete(ChatHandle, id)
 
   def for_user(_, %Endpoint{token: nil}), do: Endpoint.invalid_endpoint

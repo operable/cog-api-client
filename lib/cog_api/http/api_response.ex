@@ -2,6 +2,7 @@ defmodule CogApi.HTTP.ApiResponse do
   alias HTTPotion.Response
 
   @no_content 204
+  @unauthorized 401
 
   defmacrop http_error?(status_code) do
     quote do
@@ -16,6 +17,11 @@ defmodule CogApi.HTTP.ApiResponse do
   end
 
   def format(%Response{status_code: @no_content}, _), do: :ok
+
+  def format(%Response{status_code: @unauthorized}=response, _) do
+    {:authentication_error, format_error_list(response)}
+  end
+
   def format(%Response{status_code: code}=response, _) when http_error?(code) do
     format_error(response)
   end
@@ -90,13 +96,15 @@ defmodule CogApi.HTTP.ApiResponse do
     Poison.decode!(response.body, as: struct_map)[resource]
   end
 
-  def format_error(response=%Response{}) do
-    errors = response.body
+  def format_error_list(response=%Response{}) do
+    response.body
     |> Poison.decode!
     |> extract_errors
     |> parse_errors
+  end
 
-    {:error, errors}
+  def format_error(response=%Response{}) do
+    {:error, format_error_list(response)}
   end
   def format_error(error_message) do
     {

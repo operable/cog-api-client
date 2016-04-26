@@ -6,12 +6,12 @@ defmodule CogApi.Fake.Permissions do
   alias CogApi.Fake.Server
   alias CogApi.Resources.Permission
 
-  def index(%Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
+  use CogApi.Fake.InvalidCrudResponses
+
   def index(%Endpoint{}) do
     {:ok, Server.index(Permission)}
   end
 
-  def create(%Endpoint{token: nil}, %{name: _}), do: Endpoint.invalid_endpoint
   def create(%Endpoint{token: _}, name) do
     catch_errors %Permission{}, %{name: name}, fn ->
       [namespace, name] = build_namespaced_name(name)
@@ -26,7 +26,6 @@ defmodule CogApi.Fake.Permissions do
     end
   end
 
-  def delete(%Endpoint{token: nil}, _), do: Endpoint.invalid_endpoint
   def delete(%Endpoint{token: _}, id) do
     if permission = Server.show!(Permission, id) do
       if permission.namespace == "site" do

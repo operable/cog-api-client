@@ -6,6 +6,8 @@ defmodule CogApi.Fake.Triggers do
   alias CogApi.Fake.Server
   alias CogApi.Resources.Trigger
 
+  use CogApi.Fake.InvalidCrudResponses
+
   def by_name(%Endpoint{token: nil}),
     do: Endpoint.invalid_endpoint
   def by_name(%Endpoint{}, name) do
@@ -17,14 +19,10 @@ defmodule CogApi.Fake.Triggers do
     end
   end
 
-  def index(%Endpoint{token: nil}), do: Endpoint.invalid_endpoint
   def index(%Endpoint{}), do: {:ok, Server.index(Trigger)}
 
-  def show(%Endpoint{token: nil}, _), do: Endpoint.invalid_endpoint
   def show(%Endpoint{}, id), do: Server.show(Trigger, id)
 
-  def create(%Endpoint{token: nil}, _),
-    do: Endpoint.invalid_endpoint
   def create(%Endpoint{token: _}, params) do
     catch_errors %Trigger{}, params, fn ->
       id = random_string(8)
@@ -38,8 +36,6 @@ defmodule CogApi.Fake.Triggers do
     end
   end
 
-  def update(%Endpoint{token: nil}, _, _),
-    do: Endpoint.invalid_endpoint
   def update(%Endpoint{token: _}, id, params) do
     catch_errors %Trigger{}, params, fn ->
       {:ok, Server.update(Trigger, id, params)}

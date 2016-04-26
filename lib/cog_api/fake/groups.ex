@@ -9,13 +9,12 @@ defmodule CogApi.Fake.Groups do
   alias CogApi.Resources.User
 
   import CogApi.Decoders.Group, only: [modifiable?: 1]
+  use CogApi.Fake.InvalidCrudResponses
 
-  def index(%Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
   def index(%Endpoint{}) do
     {:ok, Server.index(Group)}
   end
 
-  def show(%Endpoint{token: nil}, _), do: Endpoint.invalid_endpoint
   def show(%Endpoint{token: _}, id) do
     Server.show(Group, id)
   end
@@ -31,7 +30,6 @@ defmodule CogApi.Fake.Groups do
     end
   end
 
-  def create(%Endpoint{token: nil}, _), do: Endpoint.invalid_endpoint
   def create(%Endpoint{token: _}, %{name: name}=params) do
     catch_errors %Group{}, params, fn ->
       new_group = %Group{
@@ -43,14 +41,12 @@ defmodule CogApi.Fake.Groups do
     end
   end
 
-  def update(%Endpoint{token: nil}, _), do: Endpoint.invalid_endpoint
   def update(%Endpoint{token: _}, id, %{name: _name}=params) do
     catch_errors %Group{}, params, fn ->
       {:ok, Server.update(Group, id, params)}
     end
   end
 
-  def delete(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
   def delete(%Endpoint{token: _}, id), do: Server.delete(Group, id)
 
   def add_role(%Endpoint{token: nil}, _, _), do: Endpoint.invalid_endpoint
