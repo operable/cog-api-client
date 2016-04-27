@@ -438,14 +438,16 @@ defmodule CogApi.HTTP.RelayGroupsTest do
 
   defp create_bundle(endpoint, name) do
     params = %{
-      "name" => name,
-      "version" => "0.0.1",
-      "cog_bundle_version" => 2,
-      "commands" => %{
-        "test_command" => %{
-          "executable" => "/bin/foobar",
-        },
-      },
+      "config" => %{
+        "name" => name,
+        "version" => "0.0.1",
+        "cog_bundle_version" => 2,
+        "commands" => %{
+          "test_command" => %{
+            "executable" => "/bin/foobar",
+          }
+        }
+      }
     }
 
     Client.bundle_create(endpoint, params) |> get_value
