@@ -9,7 +9,7 @@ defmodule CogApi.HTTP.BundlesTest do
   describe "bundle_create" do
     it "creates a new bundle" do
       cassette "bundles_create" do
-        params = bundle_config(%{name: "bundle_create"})
+        params = %{config: bundle_config(%{name: "bundle_create"})}
         bundle = Client.bundle_create(valid_endpoint, params) |> get_value
 
         assert present bundle.id
@@ -20,10 +20,10 @@ defmodule CogApi.HTTP.BundlesTest do
     context "with an invalid bundle config" do
       it "creates a new bundle" do
         cassette "invalid_bundles_create" do
-          params = %{}
+          params = %{bundle_config: %{}}
           {:error, errors} = Client.bundle_create(valid_endpoint, params)
 
-          assert List.first(errors) == "Invalid config file."
+          assert List.first(errors) == "Invalid config."
         end
       end
     end
@@ -45,7 +45,7 @@ defmodule CogApi.HTTP.BundlesTest do
     it "returns the bundle" do
       cassette "bundles_show" do
         endpoint = valid_endpoint
-        params = bundle_config(%{name: "bundle"})
+        params = %{config: bundle_config(%{name: "bundle"})}
         created_bundle = Client.bundle_create(endpoint, params) |> get_value
 
         bundle = Client.bundle_show(endpoint, created_bundle.id) |> get_value

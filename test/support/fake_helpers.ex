@@ -10,7 +10,7 @@ defmodule CogApi.Test.FakeHelpers do
   end
 
   def create_bundle(params \\ %{}) do
-    {:ok, bundle} = Client.bundle_create(valid_endpoint, bundle_config(params))
+    {:ok, bundle} = Client.bundle_create(valid_endpoint, %{config: bundle_config(params)})
     bundle
   end
 end

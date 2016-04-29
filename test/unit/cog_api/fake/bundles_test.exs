@@ -37,7 +37,7 @@ defmodule CogApi.Fake.BundlesTest do
 
   describe "bundle_show" do
     it "returns the bundle" do
-      config = bundle_config(%{name: "postgres"})
+      config = %{config: bundle_config(%{name: "postgres"})}
       bundle = Client.bundle_create(valid_endpoint, config) |> get_value
 
       bundle = Client.bundle_show(valid_endpoint, bundle.id) |> get_value
@@ -50,7 +50,7 @@ defmodule CogApi.Fake.BundlesTest do
 
     context "the operable bundle" do
       it "sets modifiable to false" do
-        config = bundle_config(%{name: "operable"})
+        config = %{config: bundle_config(%{name: "operable"})}
         bundle = Client.bundle_create(valid_endpoint, config) |> get_value
 
         bundle = Client.bundle_show(valid_endpoint, bundle.id) |> get_value
@@ -61,7 +61,7 @@ defmodule CogApi.Fake.BundlesTest do
 
     it "includes the rules for each command" do
       command = %CogApi.Resources.Command{name: "help"}
-      config = bundle_config(%{name: "postgres", commands: [command]})
+      config = %{config: bundle_config(%{name: "postgres", commands: [command]})}
       bundle = Client.bundle_create(valid_endpoint, config) |> get_value
       rule_text = "when command is postgres:help must have operable:manage_commands"
       rule_text |> Client.rule_create(valid_endpoint) |> get_value
@@ -78,7 +78,7 @@ defmodule CogApi.Fake.BundlesTest do
 
   describe "bundle_create" do
     it "allows adding a new bundle" do
-      config = bundle_config
+      config = %{config: bundle_config}
       bundle = Client.bundle_create(valid_endpoint, config) |> get_value
 
       assert bundle.name == "bundle"
@@ -91,7 +91,7 @@ defmodule CogApi.Fake.BundlesTest do
     end
 
     it "works with string keys" do
-      config = to_string_keys(bundle_config)
+      config = %{config: to_string_keys(bundle_config)}
       bundle = Client.bundle_create(valid_endpoint, config) |> get_value
 
       assert bundle.name == "bundle"
@@ -104,13 +104,13 @@ defmodule CogApi.Fake.BundlesTest do
 
     it "fails without valid info" do
       {:error, errors} = Client.bundle_create(valid_endpoint, %{})
-      assert errors == ["Invalid bundle config"]
+      assert errors == ["Missing bundle config."]
     end
   end
 
   describe "bundle_update" do
     it "returns the updated bundle" do
-      config = bundle_config
+      config = %{config: bundle_config}
       bundle = Client.bundle_create(valid_endpoint, config) |> get_value
 
       {:ok, updated_bundle} = Client.bundle_update(
@@ -123,7 +123,7 @@ defmodule CogApi.Fake.BundlesTest do
     end
 
     it "will allow a string for enabled" do
-      config = bundle_config
+      config = %{config: bundle_config}
       bundle = Client.bundle_create(valid_endpoint, config) |> get_value
 
       {:ok, updated_bundle} = Client.bundle_update(
@@ -148,7 +148,7 @@ defmodule CogApi.Fake.BundlesTest do
     end
 
     it "allows a way to test errors" do
-      config = bundle_config
+      config = %{config: bundle_config}
       bundle = Client.bundle_create(valid_endpoint, config) |> get_value
 
       {:error, [error]} = Client.bundle_update(
@@ -161,7 +161,7 @@ defmodule CogApi.Fake.BundlesTest do
     end
 
     it "returns the updated bundle given a bundle name" do
-      config = bundle_config
+      config = %{config: bundle_config}
       bundle = Client.bundle_create(valid_endpoint, config) |> get_value
 
       {:ok, updated_bundle} = Client.bundle_update(
@@ -176,7 +176,7 @@ defmodule CogApi.Fake.BundlesTest do
 
   describe "bundle_delete" do
     it "returns :ok" do
-      config = bundle_config
+      config = %{config: bundle_config}
       bundle = Client.bundle_create(valid_endpoint, config) |> get_value
 
       assert :ok == Client.bundle_delete(

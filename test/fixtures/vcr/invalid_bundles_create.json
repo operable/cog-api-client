@@ -3,6 +3,7 @@
     "request": {
       "body": "{\"username\":\"admin\",\"password\":\"password\"}",
       "headers": {
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -11,14 +12,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"UzHR+kHiZmal/3hEM+7EZVyrIiQGLHpGfxBdiR+tyII=\"}}",
+      "body": "{\"token\":{\"value\":\"wcLeT+QSYUxw7tbiD1lkPa/t+k+DKwH5qfM2+9Dd9Bk=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 25 Apr 2016 17:46:17 GMT",
+        "date": "Fri, 29 Apr 2016 17:44:49 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "cursssev5901ad7oi3ddai1diao03gkk"
+        "x-request-id": "2vder5i44ber7av8eo8og2vbr6f8pe6l"
       },
       "status_code": 201,
       "type": "ok"
@@ -26,9 +27,10 @@
   },
   {
     "request": {
-      "body": "{\"bundle\":{\"config\":{}}}",
+      "body": "{\"bundle\":{\"bundle_config\":{}}}",
       "headers": {
-        "authorization": "token UzHR+kHiZmal/3hEM+7EZVyrIiQGLHpGfxBdiR+tyII=",
+        "authorization": "token wcLeT+QSYUxw7tbiD1lkPa/t+k+DKwH5qfM2+9Dd9Bk=",
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,16 +39,16 @@
       "url": "http://localhost:4000/v1/bundles"
     },
     "response": {
-      "body": "{\"errors\":[\"Invalid config file.\",\"Error near #: Required property cog_bundle_version was not present.\",\"Error near #: Required property name was not present.\",\"Error near #: Required property version was not present.\",\"Error near #: Required property commands was not present.\"]}",
+      "body": "{\"error\":\"Invalid config.\"}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 25 Apr 2016 17:46:17 GMT",
-        "content-length": "280",
+        "date": "Fri, 29 Apr 2016 17:44:49 GMT",
+        "content-length": "27",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "o46sd6klda8coae1f4d4o4443tkms39h",
+        "x-request-id": "6t4v6oqmlodtqh1e8135g17tmvum8ndq",
         "content-type": "application/json; charset=utf-8"
       },
-      "status_code": 422,
+      "status_code": 400,
       "type": "ok"
     }
   }
