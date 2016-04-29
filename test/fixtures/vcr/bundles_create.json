@@ -3,6 +3,7 @@
     "request": {
       "body": "{\"username\":\"admin\",\"password\":\"password\"}",
       "headers": {
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -11,14 +12,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"0wtaVprTDX/+KKs6MVXQ7AQ4pJE5tjLhMJeVB4cVg9c=\"}}",
+      "body": "{\"token\":{\"value\":\"KPmzw9A5HP9ElSi74z+GD/svJVuW6i4uXgTLiYc5zAw=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 25 Apr 2016 17:45:25 GMT",
+        "date": "Fri, 29 Apr 2016 16:25:37 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "bc50mcjropqoc4kpon1gbsmk6n3iiop3"
+        "x-request-id": "62cqbva9vj46c9hc9j0427fkk1tcmtvt"
       },
       "status_code": 201,
       "type": "ok"
@@ -28,7 +29,8 @@
     "request": {
       "body": "{\"bundle\":{\"config\":{\"version\":\"0.0.1\",\"permissions\":[\"bundle_create:permission\"],\"name\":\"bundle_create\",\"commands\":{\"test_command\":{\"rules\":[\"when command is bundle_create:test_command must have bundle_create:permission\"],\"executable\":\"/foo/bar\",\"documentation\":\"Does a thing\"}},\"cog_bundle_version\":2}}}",
       "headers": {
-        "authorization": "token 0wtaVprTDX/+KKs6MVXQ7AQ4pJE5tjLhMJeVB4cVg9c=",
+        "authorization": "token KPmzw9A5HP9ElSi74z+GD/svJVuW6i4uXgTLiYc5zAw=",
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,15 +39,15 @@
       "url": "http://localhost:4000/v1/bundles"
     },
     "response": {
-      "body": "{\"bundle\":{\"updated_at\":\"2016-04-25T17:45:26Z\",\"relay_groups\":[],\"permissions\":[{\"namespace\":\"bundle_create\",\"name\":\"permission\",\"id\":\"576f1578-286b-4a59-8545-35f720941c7f\"}],\"name\":\"bundle_create\",\"inserted_at\":\"2016-04-25T17:45:26Z\",\"id\":\"02e1ee49-587a-4338-ad2d-7d677497308d\",\"enabled\":false,\"commands\":[{\"rules\":[{\"rule\":\"when command is bundle_create:test_command must have bundle_create:permission\",\"permissions\":[{\"namespace\":\"bundle_create\",\"name\":\"permission\",\"id\":\"576f1578-286b-4a59-8545-35f720941c7f\"}],\"id\":\"c7bc4d6c-5d52-4b09-b1cc-f947369af669\",\"command\":\"bundle_create:test_command\"}],\"name\":\"test_command\",\"id\":\"44d1a5a2-f9ed-4397-b73d-d2665f94e744\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":\"Does a thing\"}]}}",
+      "body": "{\"bundle\":{\"updated_at\":\"2016-04-29T16:25:38Z\",\"relay_groups\":[],\"permissions\":[{\"namespace\":\"bundle_create\",\"name\":\"permission\",\"id\":\"13c36c62-ee6a-48d4-b0d3-dad00e3471b1\"}],\"name\":\"bundle_create\",\"inserted_at\":\"2016-04-29T16:25:38Z\",\"id\":\"39ec0cbc-6e5c-4e58-aa48-d9697d5b45d0\",\"enabled\":false,\"commands\":[{\"rules\":[{\"rule\":\"when command is bundle_create:test_command must have bundle_create:permission\",\"permissions\":[{\"namespace\":\"bundle_create\",\"name\":\"permission\",\"id\":\"13c36c62-ee6a-48d4-b0d3-dad00e3471b1\"}],\"id\":\"7d1bd140-7348-43c5-ab25-1ab96b0b0473\",\"command\":\"bundle_create:test_command\"}],\"name\":\"test_command\",\"id\":\"aa131b45-5a2f-485c-a091-849d64af1b8e\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":\"Does a thing\"}]}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 25 Apr 2016 17:45:25 GMT",
+        "date": "Fri, 29 Apr 2016 16:25:38 GMT",
         "content-length": "740",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "2trt9qdrk3h3o10acs6hng3n9b1hnb2g",
-        "location": "/v1/bundles/02e1ee49-587a-4338-ad2d-7d677497308d"
+        "x-request-id": "jh2mk0nlerflv9ghhnr85m5h4qmrhoqa",
+        "location": "/v1/bundles/39ec0cbc-6e5c-4e58-aa48-d9697d5b45d0"
       },
       "status_code": 201,
       "type": "ok"
