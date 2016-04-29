@@ -1,37 +1,69 @@
 defmodule CogApi.HTTP.Internal do
   alias CogApi.Endpoint
 
-  def get(%Endpoint{}=endpoint, resource, params \\ %{}) do
+  @doc """
+  Makes a GET request to the cog api
+
+  Returns a tuple containing the status, ':ok | :error', of the response and
+  the parsed response body. Takes '{status_code: true}' as an option and
+  returns the HTTP status code instead of a status atom.
+  """
+  @spec get(%Endpoint{}, String.t, Map.t, Keyword.t) :: {:ok | :error, any()} | {integer(), any()}
+  def get(%Endpoint{}=endpoint, resource, params \\ %{}, opts \\ []) do
     rescue_econnrefused(fn ->
-      response = HTTPotion.get(make_url(endpoint, resource, params), headers: make_headers(endpoint))
-      {response_type(response), Poison.decode!(response.body)}
+      HTTPotion.get(make_url(endpoint, resource, params), headers: make_headers(endpoint))
+      |> respond(opts)
     end)
   end
 
-  def post(%Endpoint{}=endpoint, resource, params) do
+  @doc """
+  Makes a POST request to the cog api
+
+  Returns a tuple containing the status, ':ok | :error', of the response and
+  the parsed response body. Takes '{status_code: true}' as an option and
+  returns the HTTP status code instead of a status atom.
+  """
+  @spec post(%Endpoint{}, String.t, Map.t, Keyword.t) :: {:ok | :error, any()} | {integer(), any()}
+  def post(%Endpoint{}=endpoint, resource, params, opts \\ []) do
     rescue_econnrefused(fn ->
       body = Poison.encode!(params)
-      response = HTTPotion.post(make_url(endpoint, resource), body: body, headers: make_headers(endpoint, ["Content-Type": "application/json"]))
-      {response_type(response), Poison.decode!(response.body)}
+      HTTPotion.post(make_url(endpoint, resource), body: body, headers: make_headers(endpoint, ["Content-Type": "application/json"]))
+      |> respond(opts)
     end)
   end
 
-  def patch(%Endpoint{}=endpoint, resource, params) do
+  @doc """
+  Makes a PATCH request to the cog api
+
+  Returns a tuple containing the status, ':ok | :error', of the response and
+  the parsed response body. Takes '{status_code: true}' as an option and
+  returns the HTTP status code instead of a status atom.
+  """
+  @spec patch(%Endpoint{}, String.t, Map.t, Keyword.t) :: {:ok | :error, any()} | {integer(), any()}
+  def patch(%Endpoint{}=endpoint, resource, params, opts \\ []) do
     rescue_econnrefused(fn ->
       body = Poison.encode!(params)
-      response = HTTPotion.patch(make_url(endpoint, resource), body: body, headers: make_headers(endpoint, ["Content-Type": "application/json"]))
-      {response_type(response), Poison.decode!(response.body)}
+      HTTPotion.patch(make_url(endpoint, resource), body: body, headers: make_headers(endpoint, ["Content-Type": "application/json"]))
+      |> respond(opts)
     end)
   end
 
-  def delete(%Endpoint{}=endpoint, resource) do
+  @doc """
+  Makes a DELETE request to the cog api
+
+  Returns a tuple containing the status, ':ok | :error', of the response and
+  the parsed response body. Takes '{status_code: true}' as an option and
+  returns the HTTP status code instead of a status atom.
+  """
+  @spec delete(%Endpoint{}, String.t, Keyword.t) :: :ok | {:error, any()} | {integer(), any()}
+  def delete(%Endpoint{}=endpoint, resource, opts \\ []) do
     rescue_econnrefused(fn ->
       response = HTTPotion.delete(make_url(endpoint, resource), headers: make_headers(endpoint))
       case response_type(response) do
         :ok ->
           :ok
         :error ->
-          {:error, Poison.decode!(response.body)}
+          respond(response, opts)
       end
     end)
   end
@@ -77,8 +109,13 @@ defmodule CogApi.HTTP.Internal do
     get(endpoint, "bootstrap")
   end
 
-  def bootstrap_create(%Endpoint{}=endpoint) do
-    post(endpoint, "bootstrap", [])
+  @doc """
+  Bootstraps Cog. Returns the admin creds if the instance has not been
+  bootstrapped. Returns an error otherwise.
+  """
+  @spec bootstrap_create(%Endpoint{}, Keyword.t) :: {:ok | :error, any()} | {integer(), any()}
+  def bootstrap_create(%Endpoint{}=endpoint, opts \\ []) do
+    post(endpoint, "bootstrap", %{}, opts)
   end
 
   def bundle_show(%Endpoint{}=endpoint, bundle_name) do
@@ -266,6 +303,14 @@ defmodule CogApi.HTTP.Internal do
   end
   defp make_headers(%Endpoint{token: token}, others) do
     ["authorization": "token " <> token] ++ others
+  end
+
+  defp respond(response, opts) do
+    if Keyword.get(opts, :status_code, false) do
+      {response.status_code, Poison.decode!(response.body)}
+    else
+      {response_type(response), Poison.decode!(response.body)}
+    end
   end
 
   defp response_type(response) do
