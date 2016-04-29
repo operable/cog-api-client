@@ -37,18 +37,19 @@ defmodule CogApi.Fake.Bundles do
   def create(endpoint=%Endpoint{token: _}, params) do
     params = to_atom_keys(params)
     catch_errors %Bundle{}, params, fn ->
-      if Enum.all?([:name, :version, :commands, :permissions], &(&1 in Map.keys(params))) do
-        commands = parse_commands(params[:commands], endpoint)
-        permissions = parse_permissions(params[:permissions], endpoint)
-        new_bundle = %Bundle{id: random_string(8), modifiable: modifiable?(params.name)}
-        new_bundle = Map.merge(new_bundle, %{params |
+      if Enum.all?([:name, :version, :commands, :permissions], &(&1 in Map.keys(Map.get(params, :config, %{})))) do
+        config = params.config
+        commands = parse_commands(config[:commands], endpoint)
+        permissions = parse_permissions(config[:permissions], endpoint)
+        new_bundle = %Bundle{id: random_string(8), modifiable: modifiable?(config.name)}
+        new_bundle = Map.merge(new_bundle, %{config |
           commands: commands,
           permissions: permissions
         })
         new_bundle = Server.create(Bundle, new_bundle)
         show(endpoint, new_bundle.id)
       else
-        return_error("Invalid bundle config")
+        return_error("Missing bundle config.")
       end
     end
   end
