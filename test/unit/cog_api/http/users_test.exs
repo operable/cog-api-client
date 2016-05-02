@@ -57,6 +57,16 @@ defmodule CogApi.HTTP.UsersTest do
           assert found_user.email_address == created_user.email_address
         end
       end
+
+      it "finds the current user" do
+        cassette "users_show_me" do
+          endpoint = valid_endpoint
+
+          found_user = Client.user_show(endpoint, "me") |> get_value
+
+          assert found_user.username == endpoint.username
+        end
+      end
     end
 
     context "when the user does not exist" do

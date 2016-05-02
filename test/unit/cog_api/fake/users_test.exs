@@ -74,6 +74,25 @@ defmodule CogApi.Fake.UsersTest do
       assert List.first(found_user.groups).roles == [role]
     end
 
+    it "finds the current user" do
+      params = %{
+        first_name: "Charlie",
+        last_name: "Brown",
+        email_address: "charles@example.com",
+        username: "aide_to_snoopy",
+        password: "kicktheball",
+      }
+      created_user = Client.user_create(valid_endpoint, params) |> get_value
+
+      found_user = Client.user_show(
+        valid_endpoint(%{username: created_user.username}),
+        "me"
+      ) |> get_value
+
+      assert found_user.id == created_user.id
+      assert found_user.username == created_user.username
+    end
+
     context "when the user does not exist" do
       it "returns an error" do
         {:error, [error]} = Client.user_show(valid_endpoint, "FAKE_ID")

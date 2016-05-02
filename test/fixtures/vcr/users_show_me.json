@@ -1,0 +1,55 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"N/RZJISSpd1pdWB2/OkNt/4J59HPSRVAEKSTxLZlq3I=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 02 May 2016 14:54:26 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "vdite2ja714joar3qcqp542t2stp7s3g"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token N/RZJISSpd1pdWB2/OkNt/4J59HPSRVAEKSTxLZlq3I=",
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/users/me"
+    },
+    "response": {
+      "body": "{\"user\":{\"username\":\"admin\",\"last_name\":\"Administrator\",\"id\":\"2896619b-f5db-446b-92f9-3a732571aed8\",\"groups\":[{\"roles\":[{\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_commands\",\"id\":\"0bf0bc95-95d2-4784-9bf4-3dcde07c1fb3\"},{\"namespace\":\"operable\",\"name\":\"manage_groups\",\"id\":\"e7a898e0-74c9-4d5f-9f02-f7551970c22a\"},{\"namespace\":\"operable\",\"name\":\"manage_permissions\",\"id\":\"7e6d830e-b9f7-4685-ac16-dcde58616738\"},{\"namespace\":\"operable\",\"name\":\"manage_roles\",\"id\":\"51ffb701-ece2-4df0-8dbc-76998313fc93\"},{\"namespace\":\"operable\",\"name\":\"manage_users\",\"id\":\"e3e94c35-f357-4669-93b2-f86e4121f951\"},{\"namespace\":\"operable\",\"name\":\"manage_relays\",\"id\":\"177069e4-332f-4c2b-a511-5f9946204280\"},{\"namespace\":\"operable\",\"name\":\"manage_triggers\",\"id\":\"52ee8198-641b-4943-b4a4-5a15ebabb52e\"}],\"name\":\"cog-admin\",\"id\":\"6cef0889-a46e-4a01-a38a-bb39193ac944\"}],\"name\":\"cog-admin\",\"id\":\"97d2e311-e903-4e15-85ac-1cf762e8565c\"}],\"first_name\":\"Cog\",\"email_address\":\"cog@localhost\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Mon, 02 May 2016 14:54:26 GMT",
+        "content-length": "970",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "9o43bsurulqe342ktmtnvif436dddkit"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

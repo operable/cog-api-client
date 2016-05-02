@@ -4,8 +4,11 @@ defmodule CogApi.Test.FakeHelpers do
   alias CogApi.Endpoint
   alias CogApi.Fake.Client
 
-  def valid_endpoint do
-    {:ok, endpoint} = %Endpoint{} |> Client.authenticate
+  def valid_endpoint(opts \\ %{}) do
+    {:ok, endpoint} = %Endpoint{}
+    |> Map.merge(opts)
+    |> Client.authenticate
+
     endpoint
   end
 
