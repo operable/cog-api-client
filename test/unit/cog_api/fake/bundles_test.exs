@@ -23,6 +23,13 @@ defmodule CogApi.Fake.BundlesTest do
       assert error_message == "User cannot be authenticated"
     end
 
+    it "returns an authorization error with an unauthorized token" do
+      {response, [error_message]} = Client.bundle_index(%Endpoint{token: "UNAUTHORIZED"})
+
+      assert response == :error
+      assert error_message == "Not authorized"
+    end
+
     it "returns a list of bundles" do
       bundle = %Bundle{id: "id123", name: "bundle"}
       Server.create(Bundle, bundle)
