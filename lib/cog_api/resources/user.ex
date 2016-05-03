@@ -27,4 +27,10 @@ defmodule CogApi.Resources.User do
       groups: Group
     ]
   end
+
+  def permissions(user \\ %__MODULE__{}) do
+    Enum.flat_map(user.groups, fn (group) ->
+      Enum.flat_map(group.roles, &(&1.permissions))
+    end)
+  end
 end

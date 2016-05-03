@@ -2,6 +2,7 @@ defmodule CogApi.HTTP.UsersTest do
   use CogApi.HTTPCase
 
   alias CogApi.HTTP.Client
+  alias CogApi.Resources.User
 
   doctest CogApi.HTTP.Users
 
@@ -42,6 +43,7 @@ defmodule CogApi.HTTP.UsersTest do
           assert Enum.map(found_user.groups, &(&1.id)) == [group.id]
           first_group = List.first(found_user.groups)
           assert Enum.map(first_group.roles, &(&1.id)) == [role.id]
+          assert Enum.map(first_group.roles, &(&1.id)) == [role.id]
         end
       end
 
@@ -65,6 +67,24 @@ defmodule CogApi.HTTP.UsersTest do
           found_user = Client.user_show(endpoint, "me") |> get_value
 
           assert found_user.username == endpoint.username
+        end
+      end
+
+      it "returns the user's permissions" do
+        cassette "users_show_permissions" do
+          endpoint = valid_endpoint
+          params = user_params("user_permissions")
+          user = Client.user_create(endpoint, params) |> get_value
+          permission = Client.permission_create(endpoint, "user_permissions") |> get_value
+          role = Client.role_create(endpoint, %{name: "user_permissions_role"}) |> get_value
+          role = Client.role_add_permission(endpoint, role, permission) |> get_value
+          group = Client.group_create(endpoint, %{name: "user_permissions_group"}) |> get_value
+          Client.group_add_role(endpoint, group, role)
+          Client.group_add_user(endpoint, group, user)
+
+          user = Client.user_show(endpoint, user.id) |> get_value
+
+          assert User.permissions(user) == [permission]
         end
       end
     end

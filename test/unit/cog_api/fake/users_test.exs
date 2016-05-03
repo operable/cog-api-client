@@ -2,18 +2,13 @@ defmodule CogApi.Fake.UsersTest do
   use CogApi.FakeCase
 
   alias CogApi.Fake.Client
+  alias CogApi.Resources.User
 
   doctest CogApi.Fake.Users
 
   describe "index" do
     it "returns a list of users" do
-      params = %{
-        first_name: "Leo",
-        last_name: "McGary",
-        email_address: "cos@example.com",
-        username: "chief_of_staff",
-        password: "supersecret",
-      }
+      params = user_params
       {:ok, _} = Client.user_create(valid_endpoint, params)
 
       users = Client.user_index(valid_endpoint) |> get_value
@@ -29,13 +24,7 @@ defmodule CogApi.Fake.UsersTest do
 
   describe "show" do
     it "returns the user" do
-      params = %{
-        first_name: "Charlie",
-        last_name: "Young",
-        email_address: "charlie@example.com",
-        username: "aide_to_potus",
-        password: "thesecretest",
-      }
+      params = user_params
       created_user = Client.user_create(valid_endpoint, params) |> get_value
       role = Client.role_create(valid_endpoint, %{name: "user_show_role"}) |> get_value
       group = Client.group_create(valid_endpoint, %{name: "user_show_group"}) |> get_value
@@ -93,6 +82,22 @@ defmodule CogApi.Fake.UsersTest do
       assert found_user.username == created_user.username
     end
 
+    it "returns the user's permissions" do
+      endpoint = valid_endpoint
+      params = user_params("user_permissions")
+      user = Client.user_create(endpoint, params) |> get_value
+      permission = Client.permission_create(endpoint, "user_permissions") |> get_value
+      role = Client.role_create(endpoint, %{name: "user_permissions_role"}) |> get_value
+      role = Client.role_add_permission(endpoint, role, permission) |> get_value
+      group = Client.group_create(endpoint, %{name: "user_permissions_group"}) |> get_value
+      Client.group_add_role(endpoint, group, role)
+      Client.group_add_user(endpoint, group, user)
+
+      user = Client.user_show(endpoint, user.id) |> get_value
+
+      assert User.permissions(user) == [permission]
+    end
+
     context "when the user does not exist" do
       it "returns an error" do
         {:error, [error]} = Client.user_show(valid_endpoint, "FAKE_ID")
@@ -104,13 +109,7 @@ defmodule CogApi.Fake.UsersTest do
 
   describe "create" do
     it "returns the created user" do
-      params = %{
-        first_name: "Leo",
-        last_name: "McGary",
-        email_address: "cos@example.com",
-        username: "chief_of_staff",
-        password: "supersecret",
-      }
+      params = user_params
       user = Client.user_create(valid_endpoint, params) |> get_value
 
       assert present user.id
@@ -132,13 +131,7 @@ defmodule CogApi.Fake.UsersTest do
 
   describe "update" do
     it "returns the updated user" do
-      original_params = %{
-        first_name: "Arnold",
-        last_name: "Vinick",
-        email_address: "arnold@example.com",
-        username: "arnie",
-        password: "12345",
-      }
+      original_params = user_params
       new_user = Client.user_create(valid_endpoint, original_params) |> get_value
 
       update_params = %{first_name: "Arnie"}
@@ -151,14 +144,7 @@ defmodule CogApi.Fake.UsersTest do
 
   describe "delete" do
     it "deletes the user from the server" do
-      params = %{
-        first_name: "Leo",
-        last_name: "McGary",
-        email_address: "cos@example.com",
-        username: "chief_of_staff",
-        password: "supersecret",
-      }
-      user = Client.user_create(valid_endpoint, params) |> get_value
+      user = Client.user_create(valid_endpoint, user_params) |> get_value
 
       response = Client.user_delete(valid_endpoint, user.id)
 
@@ -167,5 +153,15 @@ defmodule CogApi.Fake.UsersTest do
       assert response == :ok
       refute Enum.member?(users, user)
     end
+  end
+
+  def user_params(name \\ "Leo") do
+    %{
+      first_name: name,
+      last_name: "McGary",
+      email_address: "#{name}@example.com",
+      username: "chief_of_staff",
+      password: "supersecret",
+    }
   end
 end

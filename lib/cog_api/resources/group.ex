@@ -12,7 +12,7 @@ defmodule CogApi.Resources.Group do
 
   def format do
     %__MODULE__{
-      roles: [%CogApi.Resources.Role{}],
+      roles: [CogApi.Resources.Role.format],
       users: [%CogApi.Resources.User{}],
     }
   end
