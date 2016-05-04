@@ -11,11 +11,6 @@ defmodule CogApi.HTTP.ChatHandles do
     |> ApiResponse.format_with_decoder(ChatHandleDecoder, "chat_handle")
   end
 
-  def update(%Endpoint{}=endpoint, id, params) do
-    Base.patch(endpoint, "chat_handles/#{id}", %{chat_handle: params})
-    |> ApiResponse.format_with_decoder(ChatHandleDecoder, "chat_handle")
-  end
-
   def delete(%Endpoint{}=endpoint, id) do
     Base.delete(endpoint, "chat_handles/#{id}")
     |> ApiResponse.format

@@ -21,7 +21,6 @@ defmodule CogApi.Client do
   @callback bundle_create(%Endpoint{}, String.t) :: {atom, %Bundle{}}
 
   @callback chat_handle_create(%Endpoint{}, String.t, %{}) :: {atom, %ChatHandle{}}
-  @callback chat_handle_update(%Endpoint{}, String.t, %{}) :: {atom, %ChatHandle{}}
   @callback chat_handle_delete(%Endpoint{}, String.t) :: atom
   @callback chat_handle_for_user(String.t, %Endpoint{}) :: {:ok, [%ChatHandle{}]}
 
