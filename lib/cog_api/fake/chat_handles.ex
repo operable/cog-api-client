@@ -8,7 +8,7 @@ defmodule CogApi.Fake.ChatHandles do
 
   use CogApi.Fake.InvalidCrudResponses
 
-  def create(%Endpoint{token: _}=endpoint, user_id, params) do
+  def upsert(%Endpoint{token: _}=endpoint, user_id, params) do
     catch_errors %ChatHandle{}, params, fn ->
       new_chat_handle = %ChatHandle{id: random_string(8), user_id: user_id}
       new_chat_handle = Map.merge(new_chat_handle, params)

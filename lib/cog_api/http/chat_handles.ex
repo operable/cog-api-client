@@ -5,7 +5,7 @@ defmodule CogApi.HTTP.ChatHandles do
   alias CogApi.Endpoint
   alias CogApi.Decoders.ChatHandle, as: ChatHandleDecoder
 
-  def create(%Endpoint{}=endpoint, user_id, params) do
+  def upsert(%Endpoint{}=endpoint, user_id, params) do
     path = "users/#{user_id}/chat_handles"
     Base.post(endpoint, path, %{chat_handle: params})
     |> ApiResponse.format_with_decoder(ChatHandleDecoder, "chat_handle")

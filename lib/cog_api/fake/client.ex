@@ -38,8 +38,8 @@ defmodule CogApi.Fake.Client do
     Bundles.delete(endpoint, bundle_id)
   end
 
-  def chat_handle_create(%Endpoint{}=endpoint, user_id, params) do
-    ChatHandles.create(endpoint, user_id, params)
+  def chat_handle_upsert(%Endpoint{}=endpoint, user_id, params) do
+    ChatHandles.upsert(endpoint, user_id, params)
   end
 
   def chat_handle_delete(%Endpoint{}=endpoint, chat_handle_id) do

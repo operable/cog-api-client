@@ -12,7 +12,7 @@ defmodule CogApi.HTTP.ChatHandlesTest do
         endpoint = valid_endpoint
         user = find_or_create_user(endpoint, "chat_handles_create")
 
-        handle = Client.chat_handle_create(
+        handle = Client.chat_handle_upsert(
           endpoint,
           user.id,
           %{chat_provider: "slack", handle: "mpeck"}
@@ -28,13 +28,13 @@ defmodule CogApi.HTTP.ChatHandlesTest do
       cassette "chat_handles_update" do
         endpoint = valid_endpoint
         user = find_or_create_user(endpoint, "chat_handles_update")
-        Client.chat_handle_create(
+        Client.chat_handle_upsert(
           endpoint,
           user.id,
           %{chat_provider: "slack", handle: "drapergeek"}
         ) |> get_value
 
-        handle = Client.chat_handle_create(
+        handle = Client.chat_handle_upsert(
           endpoint,
           user.id,
           %{chat_provider: "slack", handle: "jsteiner"}
@@ -51,7 +51,7 @@ defmodule CogApi.HTTP.ChatHandlesTest do
           endpoint = valid_endpoint
           user = find_or_create_user(endpoint, "chat_handles_create_no_handle")
 
-          {:error, [error]} = Client.chat_handle_create(
+          {:error, [error]} = Client.chat_handle_upsert(
             endpoint,
             user.id,
             %{chat_provider: "slack", handle: "not_real"}
@@ -68,7 +68,7 @@ defmodule CogApi.HTTP.ChatHandlesTest do
       cassette "chat_handles_delete" do
         endpoint = valid_endpoint
         user = find_or_create_user(endpoint, "chat_handles_delete")
-        handle = Client.chat_handle_create(
+        handle = Client.chat_handle_upsert(
           endpoint,
           user.id,
           %{chat_provider: "slack", handle: "christian"}
@@ -86,7 +86,7 @@ defmodule CogApi.HTTP.ChatHandlesTest do
       cassette "user_chat_handles" do
         endpoint = valid_endpoint
         user = find_or_create_user(endpoint, "user_chat_handles")
-        handle = Client.chat_handle_create(
+        handle = Client.chat_handle_upsert(
           endpoint,
           user.id,
           %{chat_provider: "slack", handle: "mpeck"}
