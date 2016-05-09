@@ -37,13 +37,19 @@ defmodule CogApi.HTTP.UsersTest do
           Client.group_add_role(endpoint, group, role)
           Client.group_add_user(endpoint, group, created_user)
 
+          handle = Client.chat_handle_upsert(
+            endpoint,
+            created_user.id,
+            %{chat_provider: "slack", handle: "mpeck"}
+          ) |> get_value
+
           found_user = Client.user_show(endpoint, created_user.id) |> get_value
 
           assert found_user.id == created_user.id
           assert Enum.map(found_user.groups, &(&1.id)) == [group.id]
           first_group = List.first(found_user.groups)
           assert Enum.map(first_group.roles, &(&1.id)) == [role.id]
-          assert Enum.map(first_group.roles, &(&1.id)) == [role.id]
+          assert found_user.chat_handles == [handle]
         end
       end
 

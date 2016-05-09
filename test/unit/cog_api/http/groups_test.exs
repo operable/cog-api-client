@@ -16,7 +16,7 @@ defmodule CogApi.HTTP.GroupsTest do
         last_group = List.last groups
         assert last_group.id == group.id
         assert last_group.name == group.name
-        assert last_group.users == [user]
+        assert last_group.users == [%{user | chat_handles: []}]
         assert last_group.roles == [role]
       end
     end
@@ -33,7 +33,7 @@ defmodule CogApi.HTTP.GroupsTest do
 
           assert found_group.id == group.id
           assert found_group.name == group.name
-          assert found_group.users == [user]
+          assert found_group.users == [%{user | chat_handles: []}]
           assert found_group.roles == [role]
         end
       end
@@ -168,7 +168,7 @@ defmodule CogApi.HTTP.GroupsTest do
 
         group = Client.group_add_user(endpoint, group, user) |> get_value
 
-        assert group.users == [user]
+        assert group.users == [%{user | chat_handles: []}]
       end
     end
   end

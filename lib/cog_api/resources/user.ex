@@ -2,6 +2,7 @@ defmodule CogApi.Resources.User do
   @derive [Poison.Encoder]
 
   alias CogApi.Resources.Group
+  alias CogApi.Resources.ChatHandle
 
   defstruct [
     :id,
@@ -10,11 +11,13 @@ defmodule CogApi.Resources.User do
     :email_address,
     :username,
     groups: [],
+    chat_handles: [],
   ]
 
   def format do
     %__MODULE__{
       groups: [Group.format],
+      chat_handles: [ChatHandle.format],
     }
   end
 

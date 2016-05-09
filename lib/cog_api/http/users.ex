@@ -4,6 +4,7 @@ defmodule CogApi.HTTP.Users do
 
   alias CogApi.Endpoint
   alias CogApi.Resources.User
+  alias CogApi.Decoders.User, as: UserDecoder
 
   def index(%Endpoint{}=endpoint) do
     Base.get(endpoint, "users")
@@ -12,11 +13,11 @@ defmodule CogApi.HTTP.Users do
 
   def show(%Endpoint{}=endpoint, %{username: username}) do
     Base.get(endpoint, "users?username=#{username}")
-    |> ApiResponse.format(%{"user" => User.format})
+    |> ApiResponse.format_with_decoder(UserDecoder, "user")
   end
   def show(%Endpoint{}=endpoint, id) do
     Base.get(endpoint, "users/#{id}")
-    |> ApiResponse.format(%{"user" => User.format})
+    |> ApiResponse.format_with_decoder(UserDecoder, "user")
   end
 
   def create(%Endpoint{}=endpoint, params) do
