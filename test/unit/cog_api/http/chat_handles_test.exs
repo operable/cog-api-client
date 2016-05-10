@@ -40,8 +40,8 @@ defmodule CogApi.HTTP.ChatHandlesTest do
           %{chat_provider: "slack", handle: "jsteiner"}
         ) |> get_value
 
-        chat_handles = Client.chat_handle_for_user(user.id, endpoint) |> get_value
-        assert chat_handles == [handle]
+        user = Client.user_show(endpoint, user.id) |> get_value
+        assert user.chat_handles == [handle]
       end
     end
 
@@ -92,8 +92,8 @@ defmodule CogApi.HTTP.ChatHandlesTest do
           %{chat_provider: "slack", handle: "mpeck"}
         ) |> get_value
 
-        chat_handles = Client.chat_handle_for_user(user.id, endpoint) |> get_value
-        assert chat_handles == [handle]
+        user = Client.user_show(endpoint, user.id) |> get_value
+        assert user.chat_handles == [handle]
       end
     end
   end

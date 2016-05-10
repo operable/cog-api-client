@@ -37,8 +37,8 @@ defmodule CogApi.Fake.ChatHandlesTest do
         %{chat_provider: "slack", handle: "jsteiner"}
       ) |> get_value
 
-      chat_handles = Client.chat_handle_for_user(user.id, endpoint) |> get_value
-      assert chat_handles == [handle]
+      user = Client.user_show(endpoint, user.id) |> get_value
+      assert user.chat_handles == [handle]
     end
 
     context "when the chat handle does not exist for the provider" do
@@ -70,33 +70,6 @@ defmodule CogApi.Fake.ChatHandlesTest do
       response = Client.chat_handle_delete(endpoint, handle.id)
 
       assert response == :ok
-    end
-  end
-
-  describe "chat_handle_for_user" do
-    it "returns the user's chat handles" do
-      params = %{
-        first_name: "Leo",
-        last_name: "McGary",
-        email_address: "cos@example.com",
-        username: "chief_of_staff",
-        password: "supersecret",
-      }
-      user = Client.user_create(valid_endpoint, params) |> get_value
-      handle = Client.chat_handle_upsert(
-        valid_endpoint,
-        user.id,
-        %{chat_provider: "slack", handle: "bar"}
-      ) |> get_value
-
-      _other_handle = Client.chat_handle_upsert(
-        valid_endpoint,
-        "other-user-id",
-        %{chat_provider: "slack", handle: "foo"}
-      ) |> get_value
-
-      chat_handles = Client.chat_handle_for_user(user.id, valid_endpoint) |> get_value
-      assert chat_handles == [handle]
     end
   end
 end

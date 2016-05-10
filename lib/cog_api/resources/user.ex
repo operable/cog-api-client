@@ -27,7 +27,8 @@ defmodule CogApi.Resources.User do
 
   def associations do
     [
-      groups: Group
+      groups: Group,
+      # chat_handles: ChatHandle,
     ]
   end
 

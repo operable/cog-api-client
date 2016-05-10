@@ -22,7 +22,6 @@ defmodule CogApi.Client do
 
   @callback chat_handle_upsert(%Endpoint{}, String.t, %{}) :: {atom, %ChatHandle{}}
   @callback chat_handle_delete(%Endpoint{}, String.t) :: atom
-  @callback chat_handle_for_user(String.t, %Endpoint{}) :: {:ok, [%ChatHandle{}]}
 
   @callback group_index(%Endpoint{}) :: {atom, [%Group{}]}
   @callback group_show(%Endpoint{}, String.t) :: {atom, %Group{}}
