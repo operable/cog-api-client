@@ -134,6 +134,21 @@ defmodule CogApi.Fake.RelaysTest do
       assert :ok == Client.relay_delete(relay.id, valid_endpoint)
     end
 
+    it "deletes the association in relay_groups" do
+      relay = Client.relay_create(%{name: "delete me", token: "1234"}, valid_endpoint)
+      |> get_value
+      group = Client.relay_group_create(%{name: "relay_group"}, valid_endpoint) |> get_value
+      {:ok, group} = Client.relay_group_add_relays_by_id(group.id, relay.id, valid_endpoint)
+
+      assert Enum.map(group.relays, &(&1.id)) == [relay.id]
+
+      Client.relay_delete(relay.id, valid_endpoint)
+
+      group = Client.relay_group_show(group.id, valid_endpoint) |> get_value
+
+      assert group.relays == []
+    end
+
     context "when the relay cannot be deleted" do
       it "returns an error" do
         {:error, [error]} = Client.relay_delete("not real", valid_endpoint)

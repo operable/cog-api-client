@@ -5,6 +5,7 @@ defmodule CogApi.Fake.Relays do
   alias CogApi.Endpoint
   alias CogApi.Fake.Server
   alias CogApi.Resources.Relay
+  alias CogApi.Resources.RelayGroup
 
   def index(%Endpoint{token: nil}),  do: Endpoint.invalid_endpoint
   def index(%Endpoint{}) do
@@ -45,5 +46,17 @@ defmodule CogApi.Fake.Relays do
     relay = Server.show_by_key(Relay, :name, name)
     delete(relay.id, endpoint)
   end
-  def delete(id, %Endpoint{token: _}), do: Server.delete(Relay, id)
+  def delete(id, %Endpoint{token: _}) do
+    case Server.show!(Relay, id) do
+      nil -> nil
+      relay -> delete_associations(relay)
+    end
+    Server.delete(Relay, id)
+  end
+
+  defp delete_associations(relay) do
+    Enum.each(relay.groups, fn group ->
+      Server.update(RelayGroup, group.id, %{group | relays: group.relays -- [relay]})
+    end)
+  end
 end
