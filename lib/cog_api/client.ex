@@ -2,6 +2,7 @@ defmodule CogApi.Client do
   alias CogApi.Endpoint
 
   alias CogApi.Resources.Bundle
+  alias CogApi.Resources.BundleVersion
   alias CogApi.Resources.ChatHandle
   alias CogApi.Resources.Group
   alias CogApi.Resources.Permission
@@ -14,11 +15,21 @@ defmodule CogApi.Client do
 
   @callback authenticate(%Endpoint{}) :: {atom, %Endpoint{}}
 
-  @callback bundle_index(%Endpoint{}) :: {atom, [%Bundle{}]}
-  @callback bundle_show(%Endpoint{}, String.t) :: {atom, %Bundle{}}
-  @callback bundle_update(%Endpoint{}, String.t, %{}) :: {atom, %Bundle{}}
-  @callback bundle_delete(%Endpoint{}, String.t) :: atom
-  @callback bundle_create(%Endpoint{}, String.t) :: {atom, %Bundle{}}
+  @callback bundle_index(%Endpoint{}) :: {atom, [%Bundle{}]} | {:error, any()}
+  @callback bundle_version_index(%Endpoint{}, String.t) :: {atom, [%BundleVersion{}]} | {:error, any()}
+  @callback bundle_version_index_by_name(%Endpoint{}, String.t) :: {atom, [%BundleVersion{}]} | {:error, any()}
+  @callback bundle_show(%Endpoint{}, String.t) :: {atom, %Bundle{}} | {:error, any()}
+  @callback bundle_show_by_name(%Endpoint{}, String.t) :: {atom, %Bundle{}} | {:error, any()}
+  @callback bundle_version_show_by_name(%Endpoint{}, String.t, String.t) :: {atom, %BundleVersion{}} | {:error, any()}
+  @callback bundle_uninstall(%Endpoint{}, String.t) :: atom | {:error, any()}
+  @callback bundle_uninstall_by_name(%Endpoint{}, String.t) :: atom | {:error, any()}
+  @callback bundle_uninstall_version(%Endpoint{}, String.t, String.t) :: atom | {:error, any()}
+  @callback bundle_uninstall_version_by_name(%Endpoint{}, String.t, String.t) :: atom | {:error, any()}
+  @callback bundle_install(%Endpoint{}, Map.t) :: {atom, %Bundle{}} | {:error, any()}
+  @callback bundle_enable_version(%Endpoint{}, String.t, String.t) :: {atom, %BundleVersion{}} | {:error, any()}
+  @callback bundle_enable_version_by_name(%Endpoint{}, String.t, String.t) :: {atom, %BundleVersion{}} | {:error, any()}
+  @callback bundle_disable_version(%Endpoint{}, String.t, String.t) :: {atom, %BundleVersion{}} | {:error, any()}
+  @callback bundle_disable_version_by_name(%Endpoint{}, String.t, String.t) :: {atom, %BundleVersion{}} | {:error, any()}
 
   @callback chat_handle_upsert(%Endpoint{}, String.t, %{}) :: {atom, %ChatHandle{}}
   @callback chat_handle_delete(%Endpoint{}, String.t) :: atom

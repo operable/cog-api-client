@@ -4,8 +4,8 @@ defmodule CogApi.Resources.Command do
   defstruct [
     :id,
     :documentation,
-    :enforcing,
     :name,
+    :bundle,
     rules: [],
   ]
 end

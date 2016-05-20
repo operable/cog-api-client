@@ -22,20 +22,72 @@ defmodule CogApi.HTTP.Client do
     Bundles.index(endpoint)
   end
 
+  def bundle_version_index(%Endpoint{}=endpoint, bundle_id) do
+    Bundles.version_index(endpoint, bundle_id)
+  end
+
+  def bundle_version_index_by_name(%Endpoint{}=endpoint, bundle_name) do
+    Bundles.version_index_by_name(endpoint, bundle_name)
+  end
+
+  def bundle_version_show(%Endpoint{}=endpoint, bundle_id, bundle_version_id) do
+    Bundles.version_show(endpoint, bundle_id, bundle_version_id)
+  end
+
+  def bundle_version_show_by_name(%Endpoint{}=endpoint, bundle_name, bundle_version) do
+    Bundles.version_show_by_name(endpoint, bundle_name, bundle_version)
+  end
+
   def bundle_show(%Endpoint{}=endpoint, bundle_id) do
     Bundles.show(endpoint, bundle_id)
   end
 
-  def bundle_update(%Endpoint{}=endpoint, bundle_id, params) do
-    Bundles.update(endpoint, bundle_id, params)
+  def bundle_show_by_name(%Endpoint{}=endpoint, bundle_name) do
+    Bundles.show_by_name(endpoint, bundle_name)
   end
 
-  def bundle_delete(%Endpoint{}=endpoint, bundle_id) do
-    Bundles.delete(endpoint, bundle_id)
+  def bundle_uninstall(%Endpoint{}=endpoint, bundle_id) do
+    Bundles.uninstall(endpoint, bundle_id)
   end
 
-  def bundle_create(%Endpoint{}=endpoint, params) do
-    Bundles.create(endpoint, params)
+  def bundle_uninstall_by_name(%Endpoint{}=endpoint, bundle_name) do
+    Bundles.uninstall_by_name(endpoint, bundle_name)
+  end
+
+  def bundle_uninstall_version(%Endpoint{}=endpoint, bundle_id, bundle_version_id) do
+    Bundles.uninstall_version(endpoint, bundle_id, bundle_version_id)
+  end
+
+  def bundle_uninstall_version_by_name(%Endpoint{}=endpoint, bundle_name, bundle_version) do
+    Bundles.uninstall_version_by_name(endpoint, bundle_name, bundle_version)
+  end
+
+  def bundle_install(%Endpoint{}=endpoint, params) do
+    Bundles.install(endpoint, params)
+  end
+
+  def bundle_enable_version(%Endpoint{}=endpoint, bundle_id, bundle_version_id) do
+    Bundles.enable_version(endpoint, bundle_id, bundle_version_id)
+  end
+
+  def bundle_enable_version_by_name(%Endpoint{}=endpoint, bundle_name, bundle_version) do
+    Bundles.enable_version_by_name(endpoint, bundle_name, bundle_version)
+  end
+
+  def bundle_enabled_version(%Endpoint{}=endpoint, bundle_id) do
+    Bundles.enabled_version(endpoint, bundle_id)
+  end
+
+  def bundle_enabled_version_by_name(%Endpoint{}=endpoint, bundle_name) do
+    Bundles.enabled_version_by_name(endpoint, bundle_name)
+  end
+
+  def bundle_disable_version(%Endpoint{}=endpoint, bundle_id, bundle_version_id) do
+    Bundles.disable_version(endpoint, bundle_id, bundle_version_id)
+  end
+
+  def bundle_disable_version_by_name(%Endpoint{}=endpoint, bundle_name, bundle_version) do
+    Bundles.disable_version_by_name(endpoint, bundle_name, bundle_version)
   end
 
   def chat_handle_upsert(%Endpoint{}=endpoint, user_id, params) do

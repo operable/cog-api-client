@@ -6,24 +6,24 @@ defmodule CogApi.HTTP.BundlesTest do
 
   doctest CogApi.HTTP.Bundles
 
-  describe "bundle_create" do
-    it "creates a new bundle" do
-      cassette "bundles_create" do
-        params = %{config: bundle_config(%{name: "bundle_create"})}
-        bundle = Client.bundle_create(valid_endpoint, params) |> get_value
+  describe "bundle_install" do
+    it "installs a new bundle" do
+      cassette "bundle_install" do
+        params = %{config: bundle_config(%{name: "bundle_install"})}
+        bundle = Client.bundle_install(valid_endpoint, params) |> get_value
 
         assert present bundle.id
-        assert bundle.name == "bundle_create"
+        assert bundle.name == "bundle_install"
       end
     end
 
     context "with an invalid bundle config" do
-      it "creates a new bundle" do
-        cassette "invalid_bundles_create" do
+      it "installs a new bundle" do
+        cassette "invalid_bundle_install" do
           params = %{bundle_config: %{}}
-          {:error, errors} = Client.bundle_create(valid_endpoint, params)
+          {:error, errors} = Client.bundle_install(valid_endpoint, params)
 
-          assert List.first(errors) == "Invalid config."
+          assert List.first(errors) == "Missing bundle config."
         end
       end
     end
@@ -31,7 +31,7 @@ defmodule CogApi.HTTP.BundlesTest do
 
   describe "bundle_index" do
     it "returns a list of bundles" do
-      cassette "bundles_index" do
+      cassette "bundle_index" do
         bundles = Client.bundle_index(valid_endpoint) |> get_value
 
         first_bundle = List.first bundles
@@ -43,33 +43,88 @@ defmodule CogApi.HTTP.BundlesTest do
 
   describe "bundle_show" do
     it "returns the bundle" do
-      cassette "bundles_show" do
+      cassette "bundle_show" do
         endpoint = valid_endpoint
         params = %{config: bundle_config(%{name: "bundle"})}
-        created_bundle = Client.bundle_create(endpoint, params) |> get_value
+        installed_version = Client.bundle_install(endpoint, params) |> get_value
 
-        bundle = Client.bundle_show(endpoint, created_bundle.id) |> get_value
+        bundle = Client.bundle_show(endpoint, installed_version.bundle_id) |> get_value
 
-        assert bundle.id == created_bundle.id
-        assert bundle.name == created_bundle.name
-        assert bundle.enabled == false
-        assert bundle.modifiable == true
+        assert bundle.id == installed_version.bundle_id
+        assert bundle.name == "bundle"
         assert present bundle.inserted_at
-        assert present bundle.updated_at
+        assert length(bundle.versions) > 0
+      end
+    end
 
-        bundle_command = bundle.commands
+    it "returns the bundle by name" do
+      cassette "bundle_show_by_name" do
+        endpoint = valid_endpoint
+        params = %{config: bundle_config(%{name: "bundle_by_name"})}
+        installed_version = Client.bundle_install(endpoint, params) |> get_value
+
+        bundle = Client.bundle_show_by_name(endpoint, installed_version.name) |> get_value
+
+        assert bundle.id == installed_version.bundle_id
+        assert bundle.name == "bundle_by_name"
+        assert present bundle.inserted_at
+        assert length(bundle.versions) > 0
+      end
+    end
+
+    it "returns the bundle version" do
+      cassette "bundle_version_show" do
+        endpoint = valid_endpoint
+        params = %{config: bundle_config(%{name: "version"})}
+        installed_version = Client.bundle_install(endpoint, params) |> get_value
+
+        version = Client.bundle_version_show(endpoint, installed_version.bundle_id, installed_version.id) |> get_value
+
+        assert version.id == installed_version.id
+        assert version.name == installed_version.name
+        assert version.enabled == false
+        assert present version.inserted_at
+
+        command = version.commands
         |> Enum.find(fn command -> command.name == "test_command" end)
 
-        assert present bundle_command.id
-        assert present bundle_command.name
-        assert present bundle_command.documentation
-        assert bundle_command.enforcing == true
+        assert present command.name
+        #assert present command.id
+        #assert present command.documentation
 
-        [rule] = bundle_command.rules
-        assert rule.rule =~ "when command is bundle:test_command"
+        #[rule] = command.rules
+        #assert rule.rule =~ "when command is bundle:test_command"
 
-        [permission] = bundle.permissions
-        assert Permission.full_name(permission) =~ "bundle:permission"
+        [permission] = version.permissions
+        assert Permission.full_name(permission) =~ "version:permission"
+      end
+    end
+
+    it "returns the bundle version by name" do
+      cassette "bundle_version_show_by_name" do
+        endpoint = valid_endpoint
+        params = %{config: bundle_config(%{name: "version_by_name"})}
+        installed_version = Client.bundle_install(endpoint, params) |> get_value
+
+        version = Client.bundle_version_show_by_name(endpoint, installed_version.name, installed_version.version) |> get_value
+
+        assert version.id == installed_version.id
+        assert version.name == installed_version.name
+        assert version.enabled == false
+        assert present version.inserted_at
+
+        command = version.commands
+        |> Enum.find(fn command -> command.name == "test_command" end)
+
+        assert present command.name
+        #assert present command.id
+        #assert present command.documentation
+
+        #[rule] = command.rules
+        #assert rule.rule =~ "when command is bundle:test_command"
+
+        [permission] = version.permissions
+        assert Permission.full_name(permission) =~ "version_by_name:permission"
       end
     end
 
@@ -88,80 +143,21 @@ defmodule CogApi.HTTP.BundlesTest do
     end
   end
 
-  describe "bundle_update" do
-    it "returns the updated bundle" do
-      cassette "bundles_update" do
-        endpoint = valid_endpoint
-        mist_bundle = get_bundle(endpoint, "mist")
-
-        assert mist_bundle.enabled
-
-        updated_bundle = Client.bundle_update(
-          endpoint,
-          mist_bundle.id,
-          %{enabled: false}
-        ) |> get_value
-
-        assert updated_bundle.enabled == false
-      end
-    end
-
-    context "when given a bundle name to be updated" do
-      it "returns the updated bundle" do
-        cassette "bundles_update" do
-          endpoint = valid_endpoint
-
-          mist_bundle = get_bundle(endpoint, "mist")
-
-          assert mist_bundle.enabled
-
-          updated_bundle = Client.bundle_update(
-              endpoint,
-              %{name: mist_bundle.name},
-              %{enabled: false}
-            ) |> get_value
-
-          assert updated_bundle.enabled == false
-        end
-      end
-    end
-
-    context "when the bundle cannot be update" do
-      it "returns errors" do
-        cassette "bundles_update_invalid" do
-          endpoint = valid_endpoint
-          operable_bundle = get_bundle(endpoint, "operable")
-
-          assert operable_bundle.enabled
-
-          {response, [error]} = Client.bundle_update(
-            endpoint,
-            operable_bundle.id,
-            %{enabled: false}
-          )
-
-          assert response == :error
-          assert error =~ "Cannot modify"
-        end
-      end
-    end
-  end
-
-  describe "bundle_delete" do
+  describe "bundle_uninstall" do
     it "returns :ok" do
-      cassette "bundles_delete" do
+      cassette "bundle_uninstall" do
         endpoint = valid_endpoint
         mist_bundle = get_bundle(endpoint, "mist")
-        assert :ok == Client.bundle_delete(endpoint, mist_bundle.id)
+        assert :ok == Client.bundle_uninstall(endpoint, mist_bundle.id)
       end
     end
 
-    context "when the bundle cannot be deleted" do
+    context "when the bundle cannot be uninstalled" do
       it "returns an error" do
-        cassette "bundles_delete_failure" do
-          {:error, [error]} = Client.bundle_delete(valid_endpoint, "not real")
+        cassette "bundle_uninstall_failure" do
+          {:error, [error]} = Client.bundle_uninstall_by_name(valid_endpoint, "not real")
 
-          assert error == "The bundle could not be deleted"
+          assert error == "A bundle with the name 'not real' could not be found."
         end
       end
     end

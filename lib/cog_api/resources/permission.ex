@@ -4,7 +4,7 @@ defmodule CogApi.Resources.Permission do
   defstruct [
     :id,
     :name,
-    :namespace,
+    :bundle,
   ]
 
   def format do
@@ -20,7 +20,7 @@ defmodule CogApi.Resources.Permission do
     []
   end
 
-  def full_name(%{name: name, namespace: namespace}) do
-    namespace <> ":" <> name
+  def full_name(%{name: name, bundle: bundle}) do
+    bundle <> ":" <> name
   end
 end

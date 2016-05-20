@@ -3,6 +3,8 @@ defmodule CogApi.HTTP.RelayGroupsTest do
 
   alias CogApi.HTTP.Client
 
+  @moduletag :relay_group
+
   doctest CogApi.HTTP.RelayGroups
 
   describe "relay_group_index" do
@@ -58,15 +60,15 @@ defmodule CogApi.HTTP.RelayGroupsTest do
     it "displays the relay_group's bundles" do
       cassette "relay_group_show_bundle" do
         endpoint = valid_endpoint
-        bundle = create_bundle(endpoint, "show_bundle")
+        version = install_version(endpoint, "show_bundle")
         group = Client.relay_group_create(%{name: "add_bundle"}, endpoint) |> get_value
         assert group.bundles == []
 
-        group = Client.relay_group_add_bundles_by_id(group.id, bundle.id, endpoint) |> get_value
+        group = Client.relay_group_add_bundles_by_id(group.id, version.bundle_id, endpoint) |> get_value
 
         [grouped_bundle] = group.bundles
 
-        assert grouped_bundle.id == bundle.id
+        assert grouped_bundle.id == version.bundle_id
         assert grouped_bundle.modifiable == true
       end
     end
@@ -172,22 +174,22 @@ defmodule CogApi.HTTP.RelayGroupsTest do
     it "adds the bundle to the group" do
       cassette "relay_group_add_bundle" do
         endpoint = valid_endpoint
-        bundle = create_bundle(endpoint, "add_bundle")
+        version = install_version(endpoint, "add_bundle")
         group = Client.relay_group_create(%{name: "add_bundle"}, endpoint) |> get_value
         assert group.bundles == []
 
-        group = Client.relay_group_add_bundles_by_id(group.id, bundle.id, endpoint) |> get_value
+        group = Client.relay_group_add_bundles_by_id(group.id, version.bundle_id, endpoint) |> get_value
 
         [grouped_bundle] = group.bundles
 
-        assert grouped_bundle.id == bundle.id
+        assert grouped_bundle.id == version.bundle_id
       end
     end
 
     it "errors when adding a bundle to group that does not exist" do
       cassette "relay_group_add_bundle_to_bad_group" do
         endpoint = valid_endpoint
-        bundle = create_bundle(endpoint, "bad_group")
+        bundle = install_version(endpoint, "bad_group")
 
         {:error, [error]} = Client.relay_group_add_bundles_by_name("bad_group", bundle.name, endpoint)
 
@@ -215,8 +217,8 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         group = Client.relay_group_create(%{name: "add_multiple_bundles"}, endpoint) |> get_value
         assert group.bundles == []
 
-        bundle_ids = Enum.map(1..3, &create_bundle(endpoint, "add_multiple_bundles#{&1}"))
-        |> Enum.map(&Map.fetch!(&1, :id))
+        bundle_ids = Enum.map(1..3, &install_version(endpoint, "add_multiple_bundles#{&1}"))
+        |> Enum.map(&Map.fetch!(&1, :bundle_id))
 
         updated_group = Client.relay_group_add_bundles_by_id(group.id, bundle_ids, endpoint) |> get_value
 
@@ -233,15 +235,15 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         cassette "relay_group_add_bundle_with_name" do
           endpoint = valid_endpoint
 
-          bundle = create_bundle(endpoint, "add_bundle_with_name")
+          version = install_version(endpoint, "add_bundle_with_name")
           group = Client.relay_group_create(%{name: "add_bundle_with_name"}, endpoint) |> get_value
           assert group.bundles == []
 
-          group = Client.relay_group_add_bundles_by_name(group.name, bundle.name, endpoint) |> get_value
+          group = Client.relay_group_add_bundles_by_name(group.name, version.name, endpoint) |> get_value
 
           [grouped_bundle] = group.bundles
 
-          assert grouped_bundle.id == bundle.id
+          assert grouped_bundle.id == version.bundle_id
         end
       end
 
@@ -252,7 +254,7 @@ defmodule CogApi.HTTP.RelayGroupsTest do
           group = Client.relay_group_create(%{name: "multiple_bundle_group"}, endpoint) |> get_value
           assert group.bundles == []
 
-          bundle_names = Enum.map(1..5, &create_bundle(endpoint, "add_multiple_bundles#{&1}"))
+          bundle_names = Enum.map(1..5, &install_version(endpoint, "add_multiple_bundles#{&1}"))
           |> Enum.map(&Map.fetch!(&1, :name))
 
           updated_group = Client.relay_group_add_bundles_by_name(
@@ -276,12 +278,12 @@ defmodule CogApi.HTTP.RelayGroupsTest do
     it "removes the bundle from the group" do
       cassette "relay_group_remove_bundle" do
         endpoint = valid_endpoint
-        bundle = create_bundle(endpoint, "remove_bundle")
+        version = install_version(endpoint, "remove_bundle")
         group = Client.relay_group_create(%{name: "add_bundle"}, endpoint) |> get_value
-        group = Client.relay_group_add_bundles_by_id(group.id, bundle.id, endpoint) |> get_value
+        group = Client.relay_group_add_bundles_by_id(group.id, version.bundle_id, endpoint) |> get_value
         assert group.bundles != []
 
-        group = Client.relay_group_remove_bundles_by_id(group.id, bundle.id, endpoint) |> get_value
+        group = Client.relay_group_remove_bundles_by_id(group.id, version.bundle_id, endpoint) |> get_value
 
         assert group.bundles == []
       end
@@ -291,8 +293,8 @@ defmodule CogApi.HTTP.RelayGroupsTest do
       cassette "relay_group_remove_multiple_bundles" do
         endpoint = valid_endpoint
 
-        bundle_ids = Enum.map(1..3, &create_bundle(endpoint, "add_multiple_bundles#{&1}"))
-        |> Enum.map(&Map.fetch!(&1, :id))
+        bundle_ids = Enum.map(1..3, &install_version(endpoint, "add_multiple_bundles#{&1}"))
+        |> Enum.map(&Map.fetch!(&1, :bundle_id))
 
         group = Client.relay_group_create(%{name: "mygroup"}, endpoint) |> get_value
         group = Client.relay_group_add_bundles_by_id(group.id, bundle_ids, endpoint) |> get_value
@@ -309,9 +311,9 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         cassette "relay_group_remove_bundle_with_name" do
           endpoint = valid_endpoint
           name = "remove_bundle_with_name"
-          bundle = create_bundle(endpoint, name)
+          bundle = install_version(endpoint, name)
           group = Client.relay_group_create(%{name: name}, endpoint) |> get_value
-          group = Client.relay_group_add_bundles_by_id(group.id, bundle.id, endpoint) |> get_value
+          group = Client.relay_group_add_bundles_by_id(group.id, bundle.bundle_id, endpoint) |> get_value
           assert group.bundles != []
 
           group = Client.relay_group_remove_bundles_by_name(group.name, bundle.name, endpoint) |> get_value
@@ -324,8 +326,8 @@ defmodule CogApi.HTTP.RelayGroupsTest do
         cassette "relay_group_remove_multiple_bundles_with_name" do
           endpoint = valid_endpoint
 
-          bundles = Enum.map(1..3, &create_bundle(endpoint, "add_multiple_bundles#{&1}"))
-          bundle_ids = Enum.map(bundles, &Map.fetch!(&1, :id))
+          bundles = Enum.map(1..3, &install_version(endpoint, "add_multiple_bundles#{&1}"))
+          bundle_ids = Enum.map(bundles, &Map.fetch!(&1, :bundle_id))
           bundle_names = Enum.map(bundles, &Map.fetch!(&1, :name))
 
           group = Client.relay_group_create(%{name: "mygroup"}, endpoint) |> get_value
@@ -436,20 +438,9 @@ defmodule CogApi.HTTP.RelayGroupsTest do
     end
   end
 
-  defp create_bundle(endpoint, name) do
-    params = %{
-      "config" => %{
-        "name" => name,
-        "version" => "0.0.1",
-        "cog_bundle_version" => 2,
-        "commands" => %{
-          "test_command" => %{
-            "executable" => "/bin/foobar",
-          }
-        }
-      }
-    }
+  defp install_version(endpoint, name) do
+    params = %{config: bundle_config(%{name: name})}
 
-    Client.bundle_create(endpoint, params) |> get_value
+    Client.bundle_install(endpoint, params) |> get_value
   end
 end

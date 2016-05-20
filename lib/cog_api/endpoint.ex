@@ -1,8 +1,8 @@
 defmodule CogApi.Endpoint do
   defstruct [
     proto: "http",
-    host: nil,
-    port: nil,
+    host: "localhost",
+    port: 4000,
     version: 1,
     token: nil,
     username: nil,
