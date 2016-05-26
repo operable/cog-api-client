@@ -3,6 +3,7 @@
     "request": {
       "body": "{\"username\":\"admin\",\"password\":\"password\"}",
       "headers": {
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -11,14 +12,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"3fvbN9YcEttIDMwa4fFp0clVLXN+0mSSn7divxLrpS4=\"}}",
+      "body": "{\"token\":{\"value\":\"D9GCwtLfKQM1kdQirclaCa3yrAtMpJsMVkvROdvCBo0=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 25 Apr 2016 17:40:52 GMT",
+        "date": "Thu, 26 May 2016 15:05:43 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "ek78egotl9uq336vcpbti9pg1i1jiqe3"
+        "x-request-id": "u4snrgl0jlbleuqc8v375c2g0f2vli3s"
       },
       "status_code": 201,
       "type": "ok"
@@ -28,7 +29,8 @@
     "request": {
       "body": "{\"relay_group\":{\"name\":\"add_multiple_bundles\"}}",
       "headers": {
-        "authorization": "token 3fvbN9YcEttIDMwa4fFp0clVLXN+0mSSn7divxLrpS4=",
+        "authorization": "token D9GCwtLfKQM1kdQirclaCa3yrAtMpJsMVkvROdvCBo0=",
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,15 +39,15 @@
       "url": "http://localhost:4000/v1/relay_groups"
     },
     "response": {
-      "body": "{\"relay_group\":{\"updated_at\":\"2016-04-25T17:40:52Z\",\"relays\":[],\"name\":\"add_multiple_bundles\",\"inserted_at\":\"2016-04-25T17:40:52Z\",\"id\":\"a11621b3-4bfd-49f2-9bb0-dbd4db611953\",\"bundles\":[]}}",
+      "body": "{\"relay_group\":{\"updated_at\":\"2016-05-26T15:05:43Z\",\"relays\":[],\"name\":\"add_multiple_bundles\",\"inserted_at\":\"2016-05-26T15:05:43Z\",\"id\":\"f0c0cb95-34d8-4043-b2d0-ce2145a2ec8f\",\"bundles\":[]}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 25 Apr 2016 17:40:52 GMT",
+        "date": "Thu, 26 May 2016 15:05:43 GMT",
         "content-length": "189",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "f271obd1pgmf98gs9d3ipe6aabn41hqt",
-        "location": "/v1/groups/a11621b3-4bfd-49f2-9bb0-dbd4db611953"
+        "x-request-id": "namt4osb6oro09cia4a7r3tp5f6082hq",
+        "location": "/v1/groups/f0c0cb95-34d8-4043-b2d0-ce2145a2ec8f"
       },
       "status_code": 201,
       "type": "ok"
@@ -53,9 +55,10 @@
   },
   {
     "request": {
-      "body": "{\"bundle\":{\"config\":{\"version\":\"0.0.1\",\"name\":\"add_multiple_bundles1\",\"commands\":{\"test_command\":{\"executable\":\"/bin/foobar\"}},\"cog_bundle_version\":2}}}",
+      "body": "{\"bundle\":{\"config\":{\"version\":\"0.0.1\",\"permissions\":[\"add_multiple_bundles1:permission\"],\"name\":\"add_multiple_bundles1\",\"commands\":{\"test_command\":{\"rules\":[\"when command is add_multiple_bundles1:test_command must have add_multiple_bundles1:permission\"],\"executable\":\"/foo/bar\",\"documentation\":\"Does a thing\"}},\"cog_bundle_version\":2}}}",
       "headers": {
-        "authorization": "token 3fvbN9YcEttIDMwa4fFp0clVLXN+0mSSn7divxLrpS4=",
+        "authorization": "token D9GCwtLfKQM1kdQirclaCa3yrAtMpJsMVkvROdvCBo0=",
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -64,15 +67,14 @@
       "url": "http://localhost:4000/v1/bundles"
     },
     "response": {
-      "body": "{\"bundle\":{\"updated_at\":\"2016-04-25T17:40:53Z\",\"relay_groups\":[],\"permissions\":[],\"name\":\"add_multiple_bundles1\",\"inserted_at\":\"2016-04-25T17:40:53Z\",\"id\":\"fe9c4b7f-ad3a-4537-8075-7199cb3ea6d0\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"da319a60-078c-424d-a878-56d3fcad4e96\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]}}",
+      "body": "{\"warnings\":[\"Warning near #/cog_bundle_version: Bundle config version 2 has been deprecated. Please update to version 3.\"],\"bundle_version\":{\"version\":\"0.0.1\",\"updated_at\":\"2016-05-26T15:05:43Z\",\"permissions\":[{\"name\":\"permission\",\"id\":\"f81b2ba1-7d71-40fd-b2b2-9601dc910b89\",\"bundle\":\"add_multiple_bundles1\"}],\"name\":\"add_multiple_bundles1\",\"inserted_at\":\"2016-05-26T15:05:43Z\",\"id\":\"a8a5e35a-cb22-48f9-bab0-fa411b50344f\",\"enabled\":false,\"commands\":[{\"name\":\"test_command\",\"bundle\":\"add_multiple_bundles1\"}],\"bundle_id\":\"4f60861e-1094-4564-ac39-fcf400824635\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 25 Apr 2016 17:40:52 GMT",
-        "content-length": "364",
+        "date": "Thu, 26 May 2016 15:05:43 GMT",
+        "content-length": "561",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "5d6218ng8gjmm9issjncai3hi709k1pd",
-        "location": "/v1/bundles/fe9c4b7f-ad3a-4537-8075-7199cb3ea6d0"
+        "x-request-id": "65ltokklrhi2dirrqt4np4a87oubo4cg"
       },
       "status_code": 201,
       "type": "ok"
@@ -80,9 +82,10 @@
   },
   {
     "request": {
-      "body": "{\"bundle\":{\"config\":{\"version\":\"0.0.1\",\"name\":\"add_multiple_bundles2\",\"commands\":{\"test_command\":{\"executable\":\"/bin/foobar\"}},\"cog_bundle_version\":2}}}",
+      "body": "{\"bundle\":{\"config\":{\"version\":\"0.0.1\",\"permissions\":[\"add_multiple_bundles2:permission\"],\"name\":\"add_multiple_bundles2\",\"commands\":{\"test_command\":{\"rules\":[\"when command is add_multiple_bundles2:test_command must have add_multiple_bundles2:permission\"],\"executable\":\"/foo/bar\",\"documentation\":\"Does a thing\"}},\"cog_bundle_version\":2}}}",
       "headers": {
-        "authorization": "token 3fvbN9YcEttIDMwa4fFp0clVLXN+0mSSn7divxLrpS4=",
+        "authorization": "token D9GCwtLfKQM1kdQirclaCa3yrAtMpJsMVkvROdvCBo0=",
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -91,15 +94,14 @@
       "url": "http://localhost:4000/v1/bundles"
     },
     "response": {
-      "body": "{\"bundle\":{\"updated_at\":\"2016-04-25T17:40:53Z\",\"relay_groups\":[],\"permissions\":[],\"name\":\"add_multiple_bundles2\",\"inserted_at\":\"2016-04-25T17:40:53Z\",\"id\":\"d939c34d-ae62-4148-b797-949e1a265b3a\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"2c372e21-8818-4f52-b454-d6a4fa634d81\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]}}",
+      "body": "{\"warnings\":[\"Warning near #/cog_bundle_version: Bundle config version 2 has been deprecated. Please update to version 3.\"],\"bundle_version\":{\"version\":\"0.0.1\",\"updated_at\":\"2016-05-26T15:05:43Z\",\"permissions\":[{\"name\":\"permission\",\"id\":\"fd378c3a-4ed9-472e-af48-d969dbf4f223\",\"bundle\":\"add_multiple_bundles2\"}],\"name\":\"add_multiple_bundles2\",\"inserted_at\":\"2016-05-26T15:05:43Z\",\"id\":\"1de2cdf1-3d8c-462d-9767-43bb17d80912\",\"enabled\":false,\"commands\":[{\"name\":\"test_command\",\"bundle\":\"add_multiple_bundles2\"}],\"bundle_id\":\"f88a56f8-ed3d-42f9-89b6-5cce7fc215e4\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 25 Apr 2016 17:40:52 GMT",
-        "content-length": "364",
+        "date": "Thu, 26 May 2016 15:05:43 GMT",
+        "content-length": "561",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "auqaa55ocfeufilm03rhl2e1cajath0h",
-        "location": "/v1/bundles/d939c34d-ae62-4148-b797-949e1a265b3a"
+        "x-request-id": "99ee9a6ci44bm145o4mbek7unpa8ersc"
       },
       "status_code": 201,
       "type": "ok"
@@ -107,9 +109,10 @@
   },
   {
     "request": {
-      "body": "{\"bundle\":{\"config\":{\"version\":\"0.0.1\",\"name\":\"add_multiple_bundles3\",\"commands\":{\"test_command\":{\"executable\":\"/bin/foobar\"}},\"cog_bundle_version\":2}}}",
+      "body": "{\"bundle\":{\"config\":{\"version\":\"0.0.1\",\"permissions\":[\"add_multiple_bundles3:permission\"],\"name\":\"add_multiple_bundles3\",\"commands\":{\"test_command\":{\"rules\":[\"when command is add_multiple_bundles3:test_command must have add_multiple_bundles3:permission\"],\"executable\":\"/foo/bar\",\"documentation\":\"Does a thing\"}},\"cog_bundle_version\":2}}}",
       "headers": {
-        "authorization": "token 3fvbN9YcEttIDMwa4fFp0clVLXN+0mSSn7divxLrpS4=",
+        "authorization": "token D9GCwtLfKQM1kdQirclaCa3yrAtMpJsMVkvROdvCBo0=",
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -118,15 +121,14 @@
       "url": "http://localhost:4000/v1/bundles"
     },
     "response": {
-      "body": "{\"bundle\":{\"updated_at\":\"2016-04-25T17:40:53Z\",\"relay_groups\":[],\"permissions\":[],\"name\":\"add_multiple_bundles3\",\"inserted_at\":\"2016-04-25T17:40:53Z\",\"id\":\"7083a6f7-555d-4128-8c1b-b08cabe33322\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"13d6f630-5dde-46f9-878a-bbe75f090f46\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]}}",
+      "body": "{\"warnings\":[\"Warning near #/cog_bundle_version: Bundle config version 2 has been deprecated. Please update to version 3.\"],\"bundle_version\":{\"version\":\"0.0.1\",\"updated_at\":\"2016-05-26T15:05:44Z\",\"permissions\":[{\"name\":\"permission\",\"id\":\"9dddc756-9bac-4ab4-879f-144b9511d487\",\"bundle\":\"add_multiple_bundles3\"}],\"name\":\"add_multiple_bundles3\",\"inserted_at\":\"2016-05-26T15:05:44Z\",\"id\":\"60ec8b03-efb6-457f-bfdb-c9087ea10082\",\"enabled\":false,\"commands\":[{\"name\":\"test_command\",\"bundle\":\"add_multiple_bundles3\"}],\"bundle_id\":\"3e05cd0a-9824-4487-8dec-6e2c586bc076\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 25 Apr 2016 17:40:52 GMT",
-        "content-length": "364",
+        "date": "Thu, 26 May 2016 15:05:43 GMT",
+        "content-length": "561",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "se2hkivde8rgbd23dv6ufbk0m321jfj5",
-        "location": "/v1/bundles/7083a6f7-555d-4128-8c1b-b08cabe33322"
+        "x-request-id": "nldv4nb0av0ctcg5pejqrltbjpfntg4b"
       },
       "status_code": 201,
       "type": "ok"
@@ -134,25 +136,26 @@
   },
   {
     "request": {
-      "body": "{\"bundles\":{\"add\":[\"fe9c4b7f-ad3a-4537-8075-7199cb3ea6d0\",\"d939c34d-ae62-4148-b797-949e1a265b3a\",\"7083a6f7-555d-4128-8c1b-b08cabe33322\"]}}",
+      "body": "{\"bundles\":{\"add\":[\"4f60861e-1094-4564-ac39-fcf400824635\",\"f88a56f8-ed3d-42f9-89b6-5cce7fc215e4\",\"3e05cd0a-9824-4487-8dec-6e2c586bc076\"]}}",
       "headers": {
-        "authorization": "token 3fvbN9YcEttIDMwa4fFp0clVLXN+0mSSn7divxLrpS4=",
+        "authorization": "token D9GCwtLfKQM1kdQirclaCa3yrAtMpJsMVkvROdvCBo0=",
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/relay_groups/a11621b3-4bfd-49f2-9bb0-dbd4db611953/bundles"
+      "url": "http://localhost:4000/v1/relay_groups/f0c0cb95-34d8-4043-b2d0-ce2145a2ec8f/bundles"
     },
     "response": {
-      "body": "{\"relay_group\":{\"updated_at\":\"2016-04-25T17:40:52Z\",\"relays\":[],\"name\":\"add_multiple_bundles\",\"inserted_at\":\"2016-04-25T17:40:52Z\",\"id\":\"a11621b3-4bfd-49f2-9bb0-dbd4db611953\",\"bundles\":[{\"updated_at\":\"2016-04-25T17:40:53Z\",\"name\":\"add_multiple_bundles1\",\"inserted_at\":\"2016-04-25T17:40:53Z\",\"id\":\"fe9c4b7f-ad3a-4537-8075-7199cb3ea6d0\",\"enabled\":false},{\"updated_at\":\"2016-04-25T17:40:53Z\",\"name\":\"add_multiple_bundles2\",\"inserted_at\":\"2016-04-25T17:40:53Z\",\"id\":\"d939c34d-ae62-4148-b797-949e1a265b3a\",\"enabled\":false},{\"updated_at\":\"2016-04-25T17:40:53Z\",\"name\":\"add_multiple_bundles3\",\"inserted_at\":\"2016-04-25T17:40:53Z\",\"id\":\"7083a6f7-555d-4128-8c1b-b08cabe33322\",\"enabled\":false}]}}",
+      "body": "{\"relay_group\":{\"updated_at\":\"2016-05-26T15:05:43Z\",\"relays\":[],\"name\":\"add_multiple_bundles\",\"inserted_at\":\"2016-05-26T15:05:43Z\",\"id\":\"f0c0cb95-34d8-4043-b2d0-ce2145a2ec8f\",\"bundles\":[{\"versions\":[{\"version\":\"0.0.1\",\"id\":\"a8a5e35a-cb22-48f9-bab0-fa411b50344f\"}],\"updated_at\":\"2016-05-26T15:05:43Z\",\"name\":\"add_multiple_bundles1\",\"inserted_at\":\"2016-05-26T15:05:43Z\",\"id\":\"4f60861e-1094-4564-ac39-fcf400824635\"},{\"versions\":[{\"version\":\"0.0.1\",\"id\":\"1de2cdf1-3d8c-462d-9767-43bb17d80912\"}],\"updated_at\":\"2016-05-26T15:05:43Z\",\"name\":\"add_multiple_bundles2\",\"inserted_at\":\"2016-05-26T15:05:43Z\",\"id\":\"f88a56f8-ed3d-42f9-89b6-5cce7fc215e4\"},{\"versions\":[{\"version\":\"0.0.1\",\"id\":\"60ec8b03-efb6-457f-bfdb-c9087ea10082\"}],\"updated_at\":\"2016-05-26T15:05:44Z\",\"name\":\"add_multiple_bundles3\",\"inserted_at\":\"2016-05-26T15:05:44Z\",\"id\":\"3e05cd0a-9824-4487-8dec-6e2c586bc076\"}]}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 25 Apr 2016 17:40:53 GMT",
-        "content-length": "686",
+        "date": "Thu, 26 May 2016 15:05:43 GMT",
+        "content-length": "869",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "g98p39a41tho9qiscumq0vkm13o4n8ls"
+        "x-request-id": "cgn01t9234jthh9f31sjjentakkv5mnp"
       },
       "status_code": 200,
       "type": "ok"

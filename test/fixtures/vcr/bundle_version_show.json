@@ -1,0 +1,82 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"PhXSvsOrCQLv0eYoVJVtXB9uxxAb98d6by+O19xH7hg=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 26 May 2016 14:14:51 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "3ko6c613k0rc04vvcruqpb7lvf2i6lf1"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"bundle\":{\"config\":{\"version\":\"0.0.1\",\"permissions\":[\"version:permission\"],\"name\":\"version\",\"commands\":{\"test_command\":{\"rules\":[\"when command is version:test_command must have version:permission\"],\"executable\":\"/foo/bar\",\"documentation\":\"Does a thing\"}},\"cog_bundle_version\":2}}}",
+      "headers": {
+        "authorization": "token PhXSvsOrCQLv0eYoVJVtXB9uxxAb98d6by+O19xH7hg=",
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/bundles"
+    },
+    "response": {
+      "body": "{\"warnings\":[\"Warning near #/cog_bundle_version: Bundle config version 2 has been deprecated. Please update to version 3.\"],\"bundle_version\":{\"version\":\"0.0.1\",\"updated_at\":\"2016-05-26T14:14:52Z\",\"permissions\":[{\"name\":\"permission\",\"id\":\"d7adef9c-2902-4bfd-a56c-447f39a354d3\",\"bundle\":\"version\"}],\"name\":\"version\",\"inserted_at\":\"2016-05-26T14:14:52Z\",\"id\":\"28d23385-7f9f-4d64-abc6-0f19bd73d02f\",\"enabled\":false,\"commands\":[{\"name\":\"test_command\",\"bundle\":\"version\"}],\"bundle_id\":\"5fe2d262-6c74-475c-9074-67c779571a37\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 26 May 2016 14:14:52 GMT",
+        "content-length": "519",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "mgfqjio9po94vrll0ts9pnj3tfjp4he2"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token PhXSvsOrCQLv0eYoVJVtXB9uxxAb98d6by+O19xH7hg=",
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/bundles/5fe2d262-6c74-475c-9074-67c779571a37/versions/28d23385-7f9f-4d64-abc6-0f19bd73d02f"
+    },
+    "response": {
+      "body": "{\"bundle_version\":{\"version\":\"0.0.1\",\"updated_at\":\"2016-05-26T14:14:52Z\",\"permissions\":[{\"name\":\"permission\",\"id\":\"d7adef9c-2902-4bfd-a56c-447f39a354d3\",\"bundle\":\"version\"}],\"name\":\"version\",\"inserted_at\":\"2016-05-26T14:14:52Z\",\"id\":\"28d23385-7f9f-4d64-abc6-0f19bd73d02f\",\"enabled\":false,\"commands\":[{\"name\":\"test_command\",\"bundle\":\"version\"}],\"bundle_id\":\"5fe2d262-6c74-475c-9074-67c779571a37\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 26 May 2016 14:14:52 GMT",
+        "content-length": "396",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "cojjmgn38qlll6g9hg9ekjkuks2847t0"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
