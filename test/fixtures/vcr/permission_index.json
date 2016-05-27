@@ -3,6 +3,7 @@
     "request": {
       "body": "{\"username\":\"admin\",\"password\":\"password\"}",
       "headers": {
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -11,14 +12,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"qzNneNJQ3y/qR7t7XKRiFAZmHb7wobC/vuZG/omwwDY=\"}}",
+      "body": "{\"token\":{\"value\":\"+v89rJXDcuqrmnirDd0bdVijOlEFAmlcfKQQDwXxH2o=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 04 Apr 2016 14:51:32 GMT",
+        "date": "Tue, 24 May 2016 17:31:09 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "rdv81jfq4j0bm5nb3rivt0ab4vgku85b"
+        "x-request-id": "ahq73t5653ikft7u8ld4a0d20p6um8gs"
       },
       "status_code": 201,
       "type": "ok"
@@ -28,8 +29,9 @@
     "request": {
       "body": "",
       "headers": {
-        "authorization": "token qzNneNJQ3y/qR7t7XKRiFAZmHb7wobC/vuZG/omwwDY=",
-        "Accept": "application/json"
+        "authorization": "token +v89rJXDcuqrmnirDd0bdVijOlEFAmlcfKQQDwXxH2o=",
+        "Accept": "application/json",
+        "Content-Type": "application/json"
       },
       "method": "get",
       "options": [],
@@ -37,14 +39,14 @@
       "url": "http://localhost:4000/v1/permissions"
     },
     "response": {
-      "body": "{\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_commands\",\"id\":\"5c0bc7ab-7e78-4cba-9e70-b636ee39fed9\"},{\"namespace\":\"operable\",\"name\":\"manage_groups\",\"id\":\"bf40715f-6c6a-4fb7-bab6-8128db74190a\"},{\"namespace\":\"operable\",\"name\":\"manage_permissions\",\"id\":\"fc8c909b-f2d6-4a9c-b41d-1f5b6ea91954\"},{\"namespace\":\"operable\",\"name\":\"manage_relays\",\"id\":\"cb877614-2ec4-4ad2-9da7-45ddcc3f383a\"},{\"namespace\":\"operable\",\"name\":\"manage_roles\",\"id\":\"77626cf0-a85e-470b-aca2-3c48b8226002\"},{\"namespace\":\"operable\",\"name\":\"manage_users\",\"id\":\"99169c9a-37aa-44af-886a-3a39219fd524\"}]}",
+      "body": "{\"permissions\":[{\"name\":\"manage_commands\",\"id\":\"a7a025e8-67e5-48ab-92d7-67ae6842b39b\",\"bundle\":\"operable\"},{\"name\":\"manage_groups\",\"id\":\"e134bfa6-2e2f-424e-b9f0-ad2c7ba8da4e\",\"bundle\":\"operable\"},{\"name\":\"manage_permissions\",\"id\":\"7f031130-b391-4121-b3b7-f0a62bfe51fd\",\"bundle\":\"operable\"},{\"name\":\"manage_relays\",\"id\":\"b7af0d39-c111-485f-bba1-f25c48adc215\",\"bundle\":\"operable\"},{\"name\":\"manage_roles\",\"id\":\"e6e04a92-5a18-4c63-bc8c-a7d41d94d9c3\",\"bundle\":\"operable\"},{\"name\":\"manage_triggers\",\"id\":\"c65b4056-42d9-44af-b361-1651aa9f0e40\",\"bundle\":\"operable\"},{\"name\":\"manage_users\",\"id\":\"86c4cdef-ee6d-48c9-8148-b01e3461326b\",\"bundle\":\"operable\"},{\"name\":\"user_permissions\",\"id\":\"f910a987-aed8-4915-9b5a-c5737a45291b\",\"bundle\":\"site\"},{\"name\":\"permission_create\",\"id\":\"28958092-9394-410e-a889-5578bf94bfee\",\"bundle\":\"site\"},{\"name\":\"write_code\",\"id\":\"7b6c6427-fea3-4aab-95ae-749fd1a16580\",\"bundle\":\"site\"},{\"name\":\"write_code2\",\"id\":\"d6b1f3ec-ab78-4682-98cd-f36440c82340\",\"bundle\":\"site\"}]}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 04 Apr 2016 14:51:32 GMT",
-        "content-length": "574",
+        "date": "Tue, 24 May 2016 17:31:09 GMT",
+        "content-length": "989",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "q80hib7tcbq82t86ts48inrte9r1r6it"
+        "x-request-id": "bsm1n2k9hpbnbuulkajsb7fh2bg6ki7c"
       },
       "status_code": 200,
       "type": "ok"

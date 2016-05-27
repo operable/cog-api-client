@@ -1,6 +1,4 @@
 defmodule CogApi.Decoders.RelayGroup do
-  import CogApi.Decoders.Helpers
-
   alias CogApi.Resources.Relay
   alias CogApi.Resources.Bundle
 
@@ -22,7 +20,7 @@ defmodule CogApi.Decoders.RelayGroup do
 
   def to_resource(decoder) do
     %CogApi.Resources.RelayGroup{
-      bundles: decode_many(decoder.bundles, CogApi.Decoders.Bundle),
+      bundles: decoder.bundles,
       id: decoder.id,
       inserted_at: decoder.inserted_at,
       name: decoder.name,

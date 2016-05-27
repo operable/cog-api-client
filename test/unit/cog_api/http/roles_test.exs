@@ -125,7 +125,7 @@ defmodule CogApi.HTTP.RolesTest do
         cassette "role_add_permission_fail" do
           endpoint = valid_endpoint
           role = Client.role_create(endpoint, %{name: "designer"}) |> get_value
-          permission = %Permission{name: "", namespace: ""}
+          permission = %Permission{name: "", bundle: ""}
 
           {:error, error} = Client.role_add_permission(endpoint, role, permission)
 

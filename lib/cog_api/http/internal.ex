@@ -205,7 +205,7 @@ defmodule CogApi.HTTP.Internal do
 
   def permission_delete(%Endpoint{}=endpoint, name) do
     delete_by(endpoint, "permissions", fn item ->
-      item["name"] == name && item["namespace"] == "site"
+      item["name"] == name && item["bundle"] == "site"
     end)
   end
 

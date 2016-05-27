@@ -3,6 +3,7 @@
     "request": {
       "body": "{\"username\":\"admin\",\"password\":\"password\"}",
       "headers": {
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -11,14 +12,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"vMicUL4DgNEv5ZUZsIRUYrrgb3Ibmo94Puir27S43HA=\"}}",
+      "body": "{\"token\":{\"value\":\"pPZPnEpH9xMzIcd2BHQpjb12LlI0dSsBpgRELJ0FwJo=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 04 Apr 2016 14:51:40 GMT",
+        "date": "Tue, 24 May 2016 17:26:03 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "5iqabvoke8sohcdsopbunrmoa82usq5u"
+        "x-request-id": "t25e7d0ldq7coqo3o1vufordt87b4slr"
       },
       "status_code": 201,
       "type": "ok"
@@ -28,7 +29,8 @@
     "request": {
       "body": "{\"permission\":{\"name\":\"permission_create\"}}",
       "headers": {
-        "authorization": "token vMicUL4DgNEv5ZUZsIRUYrrgb3Ibmo94Puir27S43HA=",
+        "authorization": "token pPZPnEpH9xMzIcd2BHQpjb12LlI0dSsBpgRELJ0FwJo=",
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,15 +39,15 @@
       "url": "http://localhost:4000/v1/permissions"
     },
     "response": {
-      "body": "{\"permission\":{\"namespace\":\"site\",\"name\":\"permission_create\",\"id\":\"17107127-dab7-495d-93a0-e963a418ff9c\"}}",
+      "body": "{\"permission\":{\"name\":\"permission_create\",\"id\":\"28958092-9394-410e-a889-5578bf94bfee\",\"bundle\":\"site\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 04 Apr 2016 14:51:40 GMT",
-        "content-length": "106",
+        "date": "Tue, 24 May 2016 17:26:03 GMT",
+        "content-length": "103",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "6bh8qk2bgpeic4r572uvdtlll5kgptaa",
-        "location": "/v1/permissions/17107127-dab7-495d-93a0-e963a418ff9c"
+        "x-request-id": "iqi5f8eh99g4ovp2tmdfnvpqvv9okktp",
+        "location": "/v1/permissions/28958092-9394-410e-a889-5578bf94bfee"
       },
       "status_code": 201,
       "type": "ok"

@@ -13,7 +13,7 @@ defmodule CogApi.HTTP.PermissionsTest do
         first_permission = List.first permissions
         assert present first_permission.id
         assert present first_permission.name
-        assert present first_permission.namespace
+        assert present first_permission.bundle
       end
     end
   end
@@ -26,7 +26,7 @@ defmodule CogApi.HTTP.PermissionsTest do
 
         assert present permission.id
         assert permission.name == name
-        assert permission.namespace == "site"
+        assert permission.bundle == "site"
       end
     end
   end
@@ -56,9 +56,9 @@ defmodule CogApi.HTTP.PermissionsTest do
     end
   end
 
-  def find_command(endpoint, namespace, name) do
+  def find_command(endpoint, bundle, name) do
     Client.permission_index(endpoint)
     |> get_value
-    |> Enum.find(fn permission -> permission.name == name && permission.namespace == namespace end)
+    |> Enum.find(fn permission -> permission.name == name && permission.bundle == bundle end)
   end
 end

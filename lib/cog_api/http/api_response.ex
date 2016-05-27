@@ -36,6 +36,23 @@ defmodule CogApi.HTTP.ApiResponse do
     }
   end
 
+  def format(%Response{status_code: code}=response, _, _) when http_error?(code) do
+    ApiErrorHandler.format_error(response)
+  end
+  def format(%Response{}=response, struct, key) do
+    resource = Poison.decode!(response.body, as: %{key => struct})
+    |> Map.get(key)
+
+    {type(response), resource}
+  end
+
+  def format_many(%Response{}=response, struct, key) do
+    resources = Poison.decode!(response.body, as: %{key => [struct]})
+    |> Map.get(key)
+
+    {type(response), resources}
+  end
+
   def format_many_with_decoder({:error, error_message}, _, _) do
     ApiErrorHandler.format_error(error_message)
   end
@@ -72,10 +89,16 @@ defmodule CogApi.HTTP.ApiResponse do
     }
   end
 
+  def format_delete(_, error_message \\ nil)
   def format_delete(%Response{status_code: @no_content}, _) do
     :ok
   end
+  def format_delete(%Response{body: body}, nil) do
+    error = Poison.decode!(body)
+    |> Map.get("error")
 
+    {:error, [error]}
+  end
   def format_delete(%Response{}, error_message) do
     {:error, [error_message]}
   end

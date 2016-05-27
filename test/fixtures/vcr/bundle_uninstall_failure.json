@@ -1,0 +1,55 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"+OwCo26sbMSkyfM19hsMGIZrPN0bebIB1jNITXICtM8=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 26 May 2016 12:59:27 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "qotnvsl2ftsbmuus1cef1ibe779vebik"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "authorization": "token +OwCo26sbMSkyfM19hsMGIZrPN0bebIB1jNITXICtM8=",
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/bundles"
+    },
+    "response": {
+      "body": "{\"bundles\":[{\"versions\":[{\"version\":\"0.7.0\",\"id\":\"d3e09e8f-b7b1-49d3-b861-926bbe37c8cf\"}],\"updated_at\":\"2016-05-26T12:37:15Z\",\"relay_groups\":[],\"name\":\"operable\",\"inserted_at\":\"2016-05-26T12:37:15Z\",\"id\":\"a2522be9-791e-41b6-8bfa-207d8fda924d\",\"enabled_version\":{\"version\":\"0.7.0\",\"updated_at\":\"2016-05-26T12:37:15Z\",\"permissions\":[{\"name\":\"manage_commands\",\"id\":\"ecd499cb-bf62-40e1-9cab-f0f0f17b98e4\",\"bundle\":\"operable\"},{\"name\":\"manage_groups\",\"id\":\"c16795b6-a45c-4a24-94f4-37df17c59d1f\",\"bundle\":\"operable\"},{\"name\":\"manage_permissions\",\"id\":\"ab1c8447-5377-499a-b47b-46f8c2419a39\",\"bundle\":\"operable\"},{\"name\":\"manage_relays\",\"id\":\"bcd38e62-6bb8-49c3-959a-45d20843469c\",\"bundle\":\"operable\"},{\"name\":\"manage_roles\",\"id\":\"f177d0d5-3c34-4e15-bb7f-a50e77e58be1\",\"bundle\":\"operable\"},{\"name\":\"manage_triggers\",\"id\":\"3c885479-c669-4524-bb19-f603047e8cc8\",\"bundle\":\"operable\"},{\"name\":\"manage_users\",\"id\":\"9df3633f-6d76-4ef7-9f30-67a07f80d16e\",\"bundle\":\"operable\"}],\"name\":\"operable\",\"inserted_at\":\"2016-05-26T12:37:15Z\",\"id\":\"d3e09e8f-b7b1-49d3-b861-926bbe37c8cf\",\"enabled\":true,\"commands\":[{\"name\":\"alias\",\"bundle\":\"operable\"},{\"name\":\"bundle\",\"bundle\":\"operable\"},{\"name\":\"echo\",\"bundle\":\"operable\"},{\"name\":\"filter\",\"bundle\":\"operable\"},{\"name\":\"greet\",\"bundle\":\"operable\"},{\"name\":\"group\",\"bundle\":\"operable\"},{\"name\":\"help\",\"bundle\":\"operable\"},{\"name\":\"max\",\"bundle\":\"operable\"},{\"name\":\"min\",\"bundle\":\"operable\"},{\"name\":\"permissions\",\"bundle\":\"operable\"},{\"name\":\"raw\",\"bundle\":\"operable\"},{\"name\":\"relay\",\"bundle\":\"operable\"},{\"name\":\"relay-group\",\"bundle\":\"operable\"},{\"name\":\"role\",\"bundle\":\"operable\"},{\"name\":\"rule\",\"bundle\":\"operable\"},{\"name\":\"seed\",\"bundle\":\"operable\"},{\"name\":\"sleep\",\"bundle\":\"operable\"},{\"name\":\"sort\",\"bundle\":\"operable\"},{\"name\":\"sum\",\"bundle\":\"operable\"},{\"name\":\"table\",\"bundle\":\"operable\"},{\"name\":\"thorn\",\"bundle\":\"operable\"},{\"name\":\"unique\",\"bundle\":\"operable\"},{\"name\":\"wc\",\"bundle\":\"operable\"},{\"name\":\"which\",\"bundle\":\"operable\"}],\"bundle_id\":\"a2522be9-791e-41b6-8bfa-207d8fda924d\"}},{\"versions\":[{\"version\":\"0.0.0\",\"id\":\"f58bc5fe-3367-418e-be0e-e4bf6c7af8fd\"}],\"updated_at\":\"2016-05-26T12:37:16Z\",\"relay_groups\":[],\"name\":\"site\",\"inserted_at\":\"2016-05-26T12:37:16Z\",\"id\":\"82a4ba9b-9d7e-4977-80c1-90bd4486830c\",\"enabled_version\":null},{\"versions\":[{\"version\":\"0.0.1\",\"id\":\"4331dedc-27a0-4595-a81f-29cd212a3900\"}],\"updated_at\":\"2016-05-26T12:45:47Z\",\"relay_groups\":[],\"name\":\"bundle_create\",\"inserted_at\":\"2016-05-26T12:45:47Z\",\"id\":\"38e774ca-947d-43e8-b0e2-8bb930c419cf\",\"enabled_version\":null}]}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 26 May 2016 12:59:27 GMT",
+        "content-length": "2540",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "o9crl02k0s87oapvmq6ulhvjcrirvqqf"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

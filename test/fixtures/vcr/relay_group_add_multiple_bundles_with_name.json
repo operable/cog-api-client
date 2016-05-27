@@ -3,7 +3,7 @@
     "request": {
       "body": "",
       "headers": {
-        "authorization": "token 7rwyi1xfPJ6NH5kqyUfzJwR6U/jDqEwu0lZ8WfhqSyo=",
+        "authorization": "token 3uDpnTKmbDHLSVxo8Q7QOVevAG4+foMm4mepGqDZx2M=",
         "Accept": "application/json",
         "Content-Type": "application/json"
       },
@@ -13,14 +13,14 @@
       "url": "http://localhost:4000/v1/bundles"
     },
     "response": {
-      "body": "{\"bundles\":[{\"updated_at\":\"2016-04-29T16:03:46Z\",\"relay_groups\":[],\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_commands\",\"id\":\"0e849d84-0513-4d87-b2f0-a9c7d21757b3\"},{\"namespace\":\"operable\",\"name\":\"manage_groups\",\"id\":\"3ba5f76d-9113-4da8-b371-5bf0d0042e7a\"},{\"namespace\":\"operable\",\"name\":\"manage_permissions\",\"id\":\"56b3dbbd-6a79-4811-b62f-d5fc3ad2031f\"},{\"namespace\":\"operable\",\"name\":\"manage_roles\",\"id\":\"2b25436f-1419-475f-b33a-f801bba34710\"},{\"namespace\":\"operable\",\"name\":\"manage_users\",\"id\":\"483843ec-eb11-4325-8a91-04d151f77017\"},{\"namespace\":\"operable\",\"name\":\"manage_relays\",\"id\":\"2c61e068-0f8c-4f16-bdde-9441d127564d\"},{\"namespace\":\"operable\",\"name\":\"manage_triggers\",\"id\":\"89233e8e-59eb-4194-9aaa-8d42ee7fd007\"}],\"name\":\"operable\",\"inserted_at\":\"2016-04-29T16:03:46Z\",\"id\":\"ff5a8338-2863-4621-8b66-7f5409b4b5c4\",\"enabled\":true,\"commands\":[{\"rules\":[{\"rule\":\"when command is operable:group with option[create] == true must have operable:manage_groups\",\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_groups\",\"id\":\"3ba5f76d-9113-4da8-b371-5bf0d0042e7a\"}],\"id\":\"97f6ff38-bc0a-47d3-a43f-0be7f4e477e3\",\"command\":\"operable:group\"},{\"rule\":\"when command is operable:group with option[drop] == true must have operable:manage_groups\",\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_groups\",\"id\":\"3ba5f76d-9113-4da8-b371-5bf0d0042e7a\"}],\"id\":\"0e4d22c2-1739-4bc5-ada7-472279de96c0\",\"command\":\"operable:group\"},{\"rule\":\"when command is operable:group with option[list] == true must have operable:manage_groups\",\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_groups\",\"id\":\"3ba5f76d-9113-4da8-b371-5bf0d0042e7a\"}],\"id\":\"11a68b6f-774b-42a4-8f72-88c150776c03\",\"command\":\"operable:group\"},{\"rule\":\"when command is operable:group with option[remove] == true must have operable:manage_users\",\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_users\",\"id\":\"483843ec-eb11-4325-8a91-04d151f77017\"}],\"id\":\"0ada354c-e2ea-4676-b208-911962120211\",\"command\":\"operable:group\"},{\"rule\":\"when command is operable:group with option[add] == true must have operable:manage_users\",\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_users\",\"id\":\"483843ec-eb11-4325-8a91-04d151f77017\"}],\"id\":\"3799f90a-9871-4591-8952-1dbd0f69efdb\",\"command\":\"operable:group\"}],\"name\":\"group\",\"id\":\"7ec4b651-2e9e-4d6b-9ab3-cfcf66f90d47\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":\"This command allows the user to manage groups of users.\\n\\nUsage:\\n    group --create <groupname>\\n    group --drop <groupname>\\n    group --add --user=<username> <groupname>\\n    group --remove --user=<username> <groupname>\\n    group --list\\nExamples:\\n> @bot operable:group --create ops\\n> @bot operable:group --create engineering\\n> @bot operable:group --add --user=bob ops\\n> @bot operable:group --remove --user=bob ops\\n> @bot operable:group --drop ops\\n> @bot operable:group --list\\n\"},{\"rules\":[],\"name\":\"help\",\"id\":\"e9000d13-c0a6-45c1-bb33-778aa2b954d8\",\"execution\":\"multiple\",\"enforcing\":false,\"documentation\":\"Get help on all installed Cog bot commands.\\n\\n  * `@bot operable:help` - list all enabled commands\\n  * `@bot operable:help --disabled` - list all disabled commands\\n  * `@bot operable:help --all` - list all known commands, enabled and disabled\\n  * `@bot operable:help \\\"operable:help\\\"` - list help for a specific command\\n\\n\"},{\"rules\":[],\"name\":\"max\",\"id\":\"c9709d2c-b9eb-4e0a-b07a-2c8936784850\",\"execution\":\"multiple\",\"enforcing\":false,\"documentation\":\"This command allows the user to determine the maximum value given a\\nlist of inputs.\\n\\nExamples:\\n> @bot operable:max 49 9 2 2\\n> @bot operable:max 0.48 0.2 1.8 3548.4 0.078\\n> @bot operable:max \\\"apple\\\" \\\"ball\\\" \\\"car\\\" \\\"zebra\\\"\\n\"},{\"rules\":[],\"name\":\"min\",\"id\":\"9d86bdf8-166f-4e39-8e35-06e9eb03064e\",\"execution\":\"multiple\",\"enforcing\":false,\"documentation\":\"This command allows the user to determine the minimum value given a\\nlist of inputs.\\n\\nExamples:\\n> @bot operable:min 49 9 2 2\\n> @bot operable:min 0.48 0.2 1.8 3548.4 0.078\\n> @bot operable:min \\\"apple\\\" \\\"ball\\\" \\\"car\\\" \\\"zebra\\\"\\n\"},{\"rules\":[{\"rule\":\"when command is operable:permissions with option[delete] == true must have operable:manage_permissions\",\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_permissions\",\"id\":\"56b3dbbd-6a79-4811-b62f-d5fc3ad2031f\"}],\"id\":\"e528b7be-4fb9-4bad-bf28-e4b7d8a9e71f\",\"command\":\"operable:permissions\"},{\"rule\":\"when command is operable:permissions with option[grant] == true must have operable:manage_roles\",\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_roles\",\"id\":\"2b25436f-1419-475f-b33a-f801bba34710\"}],\"id\":\"6bd37a8e-490b-451e-8150-49ff340c162d\",\"command\":\"operable:permissions\"},{\"rule\":\"when command is operable:permissions with option[list] == true must have operable:manage_permissions\",\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_permissions\",\"id\":\"56b3dbbd-6a79-4811-b62f-d5fc3ad2031f\"}],\"id\":\"8b89f170-aaaa-4c05-ae7d-df8be6689b99\",\"command\":\"operable:permissions\"},{\"rule\":\"when command is operable:permissions with option[revoke] == true must have operable:manage_roles\",\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_roles\",\"id\":\"2b25436f-1419-475f-b33a-f801bba34710\"}],\"id\":\"eeff9323-e42a-402b-acee-9c27721d1d7a\",\"command\":\"operable:permissions\"},{\"rule\":\"when command is operable:permissions with option[create] == true must have operable:manage_permissions\",\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_permissions\",\"id\":\"56b3dbbd-6a79-4811-b62f-d5fc3ad2031f\"}],\"id\":\"c86bfe50-c2cf-4955-b69a-7ac687fe0691\",\"command\":\"operable:permissions\"}],\"name\":\"permissions\",\"id\":\"bb3c7a2e-6fd7-4ece-9c4c-d97737c66a2f\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":\"Manipulate authorization permissions.\\n\\n* Create permissions in the `site` namespace\\n* Delete permissions in the `site` namespace\\n* List all permissions in the system\\n* Grant and revoke permissions from roles.\\n\\nFormat:\\n\\n    --list\\n    --create --permission=site:<name>\\n    --delete --permission=site:<name>\\n    --grant --permission=<namespace>:<permission> --role=<name>\\\"\\n    --revoke --permission=<namespace>:<permission> --role=<name>\\\"\\n\\nExamples:\\n\\n> !operable:permissions --list\\n> !operable:permissions --create --permission=site:admin\\n> !operable:permissions --delete --permission=site:admin\\n> !operable:permissions --grant --role=dev --permission=site:write\\n> !operable:permissions --revoke --role=dev --permission=giphy:giphy\\n\\n\"},{\"rules\":[],\"name\":\"raw\",\"id\":\"b9b6020a-113b-446a-a720-b90c6f3bfea3\",\"execution\":\"multiple\",\"enforcing\":false,\"documentation\":\"Show the raw output of a command, exclusive of any templating.\\n\\nUseful for seeing the difference between `multiple` and `once`\\nexecution modes, as well as seeing which fields are available for\\nuse in `bound` and `all` calling conventions.\\n\\nAlso useful as a debugging tool for command authors.\\n\\nExample:\\n\\n    @bot operable:echo foo | operable:raw\\n    > {\\n        \\\"body\\\": [\\n          \\\"foo\\\"\\n        ]\\n      }\\n\\n\"},{\"rules\":[{\"rule\":\"when command is operable:role with option[drop] == true must have operable:manage_roles\",\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_roles\",\"id\":\"2b25436f-1419-475f-b33a-f801bba34710\"}],\"id\":\"edc4a26c-1a94-4298-952e-9a08858064ae\",\"command\":\"operable:role\"},{\"rule\":\"when command is operable:role with option[grant] == true must have operable:manage_groups\",\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_groups\",\"id\":\"3ba5f76d-9113-4da8-b371-5bf0d0042e7a\"}],\"id\":\"a7f3a0db-1cee-4d2b-8a32-73a4aa4c2bfc\",\"command\":\"operable:role\"},{\"rule\":\"when command is operable:role with option[list] == true must have operable:manage_roles\",\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_roles\",\"id\":\"2b25436f-1419-475f-b33a-f801bba34710\"}],\"id\":\"e7b0d59f-9ce0-4b6e-94a4-9f45f45121f8\",\"command\":\"operable:role\"},{\"rule\":\"when command is operable:role with option[revoke] == true must have operable:manage_groups\",\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_groups\",\"id\":\"3ba5f76d-9113-4da8-b371-5bf0d0042e7a\"}],\"id\":\"39d150d6-e3a8-467a-ac33-e5ecd3257be1\",\"command\":\"operable:role\"},{\"rule\":\"when command is operable:role with option[create] == true must have operable:manage_roles\",\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_roles\",\"id\":\"2b25436f-1419-475f-b33a-f801bba34710\"}],\"id\":\"0ea1dd60-f7f9-453d-aa00-6163f15bfe18\",\"command\":\"operable:role\"}],\"name\":\"role\",\"id\":\"e17384c0-2cca-43cd-9283-009cbf25207b\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":\"This command allows the user to manage roles.\\n\\nUsage:\\n    role --create <rolename>\\n    role --drop <rolename>\\n    role --grant --group=<groupname> <rolename>\\n    role --revoke --group=<groupname> <rolename>\\n    role --list\\nExamples:\\n> @bot operable:role --create deployment\\n> @bot operable:role --grant --group=ops deployment\\n> @bot operable:role --revoke --group=ops deployment\\n> @bot operable:role --drop deployment\\n> @bot operable:role --list\\n\"},{\"rules\":[{\"rule\":\"when command is operable:rules must have operable:manage_commands\",\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_commands\",\"id\":\"0e849d84-0513-4d87-b2f0-a9c7d21757b3\"}],\"id\":\"42858931-59c7-46e4-8eef-14b9012a5844\",\"command\":\"operable:rules\"}],\"name\":\"rules\",\"id\":\"0d7efe01-c5ca-49b8-be5c-3e84101b836a\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":\"This command allows the user to manage rules for commands.\\n\\nFormat:\\n  Rules -\\n    rules --add \\\"when command is <full_command_name> must have <namespace>:<permission>\\\"\\n    rules --add --for-command=<full_command_name> --permission=<namespace>:<permission>\\n    rules --list --for-command=<full_command_name>\\n    rules --drop --for-command=<full_command_name>\\n    rules --drop --id=<rule_id>\\n\\nExamples:\\n> @bot operable:rules --add \\\"when command is operable:ec2-terminate must have operable:ec2\\\"\\n\"},{\"rules\":[],\"name\":\"alias\",\"id\":\"daedbcd5-7bc0-483c-af27-de9c362cd5e8\",\"execution\":\"multiple\",\"enforcing\":false,\"documentation\":\"Manages aliases\\n\\nSubcommands\\n* new <alias-name> <alias-definition> -- creates a new alias visible to the creating user.\\n* mv <alias-name> <site | user>:[new-alias-name] -- moves aliases between user and site visibility. Optionally renames aliases.\\n* rm <alias-name> -- Removes aliases\\n* ls [pattern] -- Returns the list of aliases optionally filtered by pattern. Pattern support basic wildcards with '*'.\\n\\n## Example\\n\\n  @bot operable:alias new my-awesome-alias \\\"echo \\\"My Awesome Alias\\\"\\\"\\n  > user:my-awesome-alias has been created\\n\\n  @bot operable:alias mv my-awesome-alias site:awesome-alias\\n  > Moved user:my-awesome-alias to site:awesome-alias\\n\\n  @bot operable:alias rm awesome-alias\\n  > Removed site:awesome-alias\\n\\n  @bot operable:alias ls\\n  > Name: 'my-awesome-alias'\\n    Visibility: 'user'\\n    Pipeline: 'echo my-awesome-alias'\\n\\n    Name: 'my-other-awesome-alias'\\n    Visibility: 'site'\\n    Pipeline: 'echo my-other-awesome-alias'\\n\"},{\"rules\":[],\"name\":\"sleep\",\"id\":\"9586bb45-42d3-48e9-b99d-cd1a96631e4a\",\"execution\":\"once\",\"enforcing\":false,\"documentation\":\"Sleep for a configurable number of seconds. Useful\\nfor testing timeout handling in executor logic.\\n\\nPasses COG_ENV through unchanged.\\n\\nNote, however, that invocations of this command are still subject to\\nthe current per-invocation timeout in the executor (1 minute).\\n\\nCurrently useful mainly for debugging purposes.\\n\\nExample:\\n\\n    !echo \\\"Get up and stretch\\\" | sleep 10 | echo $body > me`\\n\\n\"},{\"rules\":[],\"name\":\"sort\",\"id\":\"a7f16e55-881c-4332-ae68-da8c46d512c5\",\"execution\":\"once\",\"enforcing\":false,\"documentation\":\"Sorts the given inputs.\\n\\nExamples\\n    @bot operable:sort 3 2 1 5 4\\n    > [1, 2, 3, 4, 5]\\n    @bot operable:sort --asc 4.5 1.8 0.032 0.6 1.5 0.4\\n    > [0.032, 0.4, 0.6, 1.5, 1.8, 4.5]\\n    @bot operable:sort --desc Life is 10 percent what happens to us and 90% how we react to it\\n    > [what, we, us, to, to, react, percent, it, is, how, happens, and, Life, %, 90, 10]\\n    @bot operable:rules --for-command=rules| sort --field=rule\\n    > {\\n\\\"rule\\\": \\\"when command is operable:permissions with option[user] == /.*/ must have operable:manage_users\\\",\\n\\\"id\\\": \\\"12345678-abcd-efgh-ijkl-0987654321ab\\\",\\n\\\"command\\\": \\\"operable:permissions\\\"\\n}\\n{\\n\\\"rule\\\": \\\"when command is operable:permissions with option[role] == /.*/ must have operable:manage_roles\\\",\\n\\\"id\\\": \\\"87654321-mnop-qrst-uvwx-0123456789ab\\\",\\n\\\"command\\\": \\\"operable:permissions\\\"\\n}\\n{\\n\\\"rule\\\": \\\"when command is operable:permissions with option[group] == /.*/ must have operable:manage_groups\\\",\\n\\\"id\\\": \\\"24680135-azby-cxdw-evfu-ab0123456789\\\",\\n\\\"command\\\": \\\"operable:permissions\\\"\\n}\\n\"},{\"rules\":[],\"name\":\"sum\",\"id\":\"db3db271-3ce6-4cef-b6da-2eff01acff68\",\"execution\":\"multiple\",\"enforcing\":false,\"documentation\":\"This command allows the user to sum together a list of numbers\\n\\nExamples:\\n> @bot operable:sum 2 2\\n> @bot operable:sum 2 \\\"-9\\\"\\n> @bot operable:sum 2 24 57 3.7 226.78\\n\"},{\"rules\":[],\"name\":\"table\",\"id\":\"0bd1259a-4e44-4602-8e50-70115efe9ee1\",\"execution\":\"once\",\"enforcing\":false,\"documentation\":\"Converts lists of maps into a table of columns specified.\\n\\n## Example\\n\\n    @bot operable:stackoverflow vim | operable:table âfields=\\\"title, score\\\" $items\\n    > title                                             score\\n    > What is your most productive shortcut with Vim?   1129\\n    > Vim clear last search highlighting                843\\n    > How to replace a character for a newline in Vim?  920\\n\\n\"},{\"rules\":[],\"name\":\"thorn\",\"id\":\"9eb12108-2842-4d98-b5b4-346ce7687ad1\",\"execution\":\"multiple\",\"enforcing\":false,\"documentation\":\"This command replaces `Th` following a word boundary with Ã¾\\n\\nExamples:\\n> @bot operable:thorn foo-Thbar-Thbaz\\n\"},{\"rules\":[],\"name\":\"unique\",\"id\":\"a878b079-954c-44ce-9408-96399ea9b47a\",\"execution\":\"once\",\"enforcing\":false,\"documentation\":\"This command returns unique values given list of inputs\\n\\nExamples:\\n> @bot operable:unique 49.3 9 2 2 42 49.3\\n> @bot operable:unique \\\"apple\\\" \\\"apple\\\" \\\"ball\\\" \\\"car\\\" \\\"car\\\" \\\"zebra\\\"\\n\"},{\"rules\":[],\"name\":\"wc\",\"id\":\"fadd50b4-8112-49d0-8028-b7feb4c50d81\",\"execution\":\"multiple\",\"enforcing\":false,\"documentation\":\"This command allows the user to count the number of words or lines in the input string.\\n  wc [--words | --lines]  <input string>\\n\\nExamples:\\n> @bot wc --words \\\"Hey, what will we do today?\\\"\\n> @bot wc --lines \\\"From time to time\\nThe clouds give rest\\nTo the moon-beholders.\\\"\\n\"},{\"rules\":[],\"name\":\"which\",\"id\":\"2c063eb0-7a56-4e14-b747-9b9255ee5267\",\"execution\":\"multiple\",\"enforcing\":false,\"documentation\":\"Determine whether a given input is a command or an alias. Returns the type of\\ninput and it's bundle or visibility. In the case of aliases it also returns\\nthe aliased command string. This command is only useful non fully qualified\\ncommands or aliases. Fully qualified commands or aliases will return no match.\\n\\nNote: If a command is shadowed, it has an alias with the same name, the alias\\nwill be returned.\\n\\n## Example\\n\\n  @bot operable:which my-awesome-alias\\n  > alias - user:my-awesome-alias -> \\\"echo my awesome alias\\\"\\n\\n  @bot operable:which an-awesome-command\\n  > command - operable:an-awesome-command\\n\\n  @bot operable:which not-anything\\n  > No matching commands or aliases.\\n\"},{\"rules\":[],\"name\":\"seed\",\"id\":\"949c6b2d-468e-4a78-99c7-dd3e087abe30\",\"execution\":\"multiple\",\"enforcing\":false,\"documentation\":\"Seed a pipeline with arbitrary data.\\n\\nAccepts a single string argument, which must be valid JSON for\\neither a map or a list of maps.\\n\\nThough some values may be able to be typed without enclosing quotes,\\nit is highly recommended to single-quote your entire string.\\n\\nBest used for debugging and experimentation.\\n\\nExamples:\\n\\n    !seed '{\\\"thing\\\":\\\"stuff\\\"}' | echo $thing\\n    > stuff\\n\\n    !seed '[{\\\"thing\\\":\\\"stuff\\\"},{\\\"thing\\\":\\\"more stuff\\\"}]' | echo $thing\\n    > stuff\\n    > more stuff\\n\\n\"},{\"rules\":[{\"rule\":\"when command is operable:bundle must have operable:manage_commands\",\"permissions\":[{\"namespace\":\"operable\",\"name\":\"manage_commands\",\"id\":\"0e849d84-0513-4d87-b2f0-a9c7d21757b3\"}],\"id\":\"d4a2d1d5-6acf-451a-8ee2-fe35548759f1\",\"command\":\"operable:bundle\"}],\"name\":\"bundle\",\"id\":\"6e2563a0-a8e4-4e02-a6d9-8e3fe1c2b095\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":\"\\n## Overview\\n\\nManipulate and interrogate command bundle status.\\n\\nA bundle may be either `enabled` or `disabled`. If a bundle is\\nenabled, chat invocations of commands contained within the bundle\\nwill be executed. If the bundle is disabled, on the other hand, no\\nsuch commands will be run.\\n\\nBundles may be enabled or disabled independently of whether or not\\nany Relays are currently _running_ the bundles. The status of a\\nbundle is managed centrally; when a Relay serving the bundle comes\\nonline, the status of the bundle is respected. Thus a bundle may be\\nenabled, but not running on any Relays, just as it can be disabled,\\nbut running on _every_ Relay.\\n\\nThis can be used to either quickly disable a bundle, or as the first\\nstep in deleting a bundle from the bot.\\n\\nNote that the `operable` bundle is a protected bundle;\\nthis bundle is always enabled and is in fact embedded in the bot\\nitself. Core pieces of bot functionality would not work (including\\nthis very command itself!) if this bundle were ever disabled (though\\nmany functions would remain available via the REST API). As a\\nresult, calling either of the mutator subcommands `enable` or\\n`disable` (see below) on the `operable` bundle is an\\nerror.\\n\\n## Subcommands\\n\\n* `status`\\n\\n        bundle status <bundle_name>\\n\\n   Shows the current status of the bundle, whether `enabled` or\\n   `disabled`. Additionally shows which Relays (if any) are running\\n   the code for the bundle.\\n\\n   The `enable` and `disable` subcommands (see below) also return\\n   this information.\\n\\n   Can be called on any bundle, including `operable`.\\n\\n* `enable`\\n\\n        bundle enable <bundle_name>\\n\\n  Enabling a bundle allows chat commands to be routed to it. Running\\n  this subcommand has no effect if a bundle is already enabled.\\n\\n  Cannot be used on the `operable` bundle.\\n\\n* `disable`\\n\\n        bundle disable <bundle_name>\\n\\n   Disabling a bundle prevents commands from being routed to it. The\\n   bundle is not uninstalled, and all custom rules remain\\n   intact. The bundle still exists, but commands in it will not be\\n   executed.\\n\\n   A disabled bundle can be re-enabled using this the `enable`\\n   sub-command; see above.\\n\\n   Running this subcommand has no effect if a bundle is already\\n   disabled.\\n\\n   Cannot be used on the `operable` bundle.\\n\\n\"},{\"rules\":[],\"name\":\"echo\",\"id\":\"d95b7538-3eda-484f-9c66-c7535ad6e0a2\",\"execution\":\"multiple\",\"enforcing\":false,\"documentation\":\"Repeats whatever it is passed.\\n\\n## Example\\n\\n    @bot operable:echo this is nifty\\n    > this if nifty\\n\\n\"},{\"rules\":[],\"name\":\"filter\",\"id\":\"1afb99db-811e-44df-b9ab-4d92c56fc460\",\"execution\":\"multiple\",\"enforcing\":false,\"documentation\":\"Filters a collection where the `path` equals the `matches`.\\nThe `path` option is the key that you would like to focus on;\\nThe `matches` option is the value that you are searching for.\\n\\n## Example\\n\\n    @bot operable:rules --list --for-command=\\\"operable:permissions\\\" | operable:filter --path=\\\"rule\\\" --matches=\\\"/manage_users/\\\"\\n    > { \\\"id\\\": \\\"91edb472-04cf-4bca-ba05-e51b63f26758\\\",\\n        \\\"rule\\\": \\\"operable:manage_users\\\",\\n        \\\"command\\\": \\\"operable:permissions\\\" }\\n    @bot operable:seed --list --for-command=\\\"operable:permissions\\\" | operable:filter --path=\\\"rule\\\" --matches=\\\"/manage_users/\\\"\\n    > { \\\"id\\\": \\\"91edb472-04cf-4bca-ba05-e51b63f26758\\\",\\n        \\\"rule\\\": \\\"operable:manage_users\\\",\\n        \\\"command\\\": \\\"operable:permissions\\\" }\\n    @bot operable:seed '[{\\\"foo\\\":{\\\"bar.qux\\\":{\\\"baz\\\":\\\"stuff\\\"}}}, {\\\"foo\\\": {\\\"bar\\\":{\\\"baz\\\":\\\"me\\\"}}}]' | operable:filter --path=\\\"foo.bar.baz\\\"\\\"\\n    > [ {\\\"foo\\\": {\\\"bar.qux\\\": {\\\"baz\\\": \\\"stuff\\\"} } }, {\\\"foo\\\": {\\\"bar\\\": {\\\"baz\\\": \\\"me\\\"} } } ]\\n    @bot operable:seed '[{\\\"foo\\\":{\\\"bar.qux\\\":{\\\"baz\\\":\\\"stuff\\\"}}}, {\\\"foo\\\": {\\\"bar\\\":{\\\"baz\\\":\\\"me\\\"}}}]' | operable:filter --path=\\\"foo.\\\\\\\"bar.qux\\\\\\\".baz\\\"\\\"\\n    > { \\\"foo\\\": {\\\"bar.qux\\\": {\\\"baz\\\": \\\"stuff\\\"} } }\\n\\n\"},{\"rules\":[],\"name\":\"greet\",\"id\":\"5c5dd4f3-30f6-44f3-bfd9-f112483d2c63\",\"execution\":\"multiple\",\"enforcing\":false,\"documentation\":\"Introduce the bot to new coworkers!\\n\\n## Example\\n\\n    @bot operable:greet @new_hire\\n    > Hello @new_hire\\n    > I'm Cog! I can do lots of things ...\\n\\n\"}]},{\"updated_at\":\"2016-04-29T16:21:18Z\",\"relay_groups\":[],\"permissions\":[],\"name\":\"add_multiple_bundles1\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"cfa1d61e-2398-40a6-b18f-d2bf6a519a2f\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"2e04aa50-1c1b-460a-b953-755b5427e0fa\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]},{\"updated_at\":\"2016-04-29T16:21:18Z\",\"relay_groups\":[],\"permissions\":[],\"name\":\"add_multiple_bundles2\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"2d0a20df-635a-48c8-92f8-f42d77451f47\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"f511cfa0-6ee3-4d72-a684-8e15de5d0642\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]},{\"updated_at\":\"2016-04-29T16:21:18Z\",\"relay_groups\":[],\"permissions\":[],\"name\":\"add_multiple_bundles3\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"2154d331-11e9-4458-b431-54906ddf6066\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"59a0405a-2005-4edb-a528-20ede375cee5\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]},{\"updated_at\":\"2016-04-29T16:21:18Z\",\"relay_groups\":[],\"permissions\":[],\"name\":\"add_multiple_bundles4\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"3761b6f5-4f75-4259-b810-d9b744cc4f2f\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"23c36a18-e209-43f4-b0f1-56f70e00fc41\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]},{\"updated_at\":\"2016-04-29T16:21:18Z\",\"relay_groups\":[],\"permissions\":[],\"name\":\"add_multiple_bundles5\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"b0987376-af9d-4a21-822d-30b1a50b479d\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"eed34d34-ae1f-4ec7-aab3-9d05f6461ee9\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]}]}",
+      "body": "{\"bundles\":[{\"versions\":[{\"version\":\"0.7.0\",\"id\":\"d3e09e8f-b7b1-49d3-b861-926bbe37c8cf\"}],\"updated_at\":\"2016-05-26T12:37:15Z\",\"relay_groups\":[],\"name\":\"operable\",\"inserted_at\":\"2016-05-26T12:37:15Z\",\"id\":\"a2522be9-791e-41b6-8bfa-207d8fda924d\",\"enabled_version\":{\"version\":\"0.7.0\",\"updated_at\":\"2016-05-26T12:37:15Z\",\"permissions\":[{\"name\":\"manage_groups\",\"id\":\"c16795b6-a45c-4a24-94f4-37df17c59d1f\",\"bundle\":\"operable\"},{\"name\":\"manage_permissions\",\"id\":\"ab1c8447-5377-499a-b47b-46f8c2419a39\",\"bundle\":\"operable\"},{\"name\":\"manage_relays\",\"id\":\"bcd38e62-6bb8-49c3-959a-45d20843469c\",\"bundle\":\"operable\"},{\"name\":\"manage_commands\",\"id\":\"ecd499cb-bf62-40e1-9cab-f0f0f17b98e4\",\"bundle\":\"operable\"},{\"name\":\"manage_triggers\",\"id\":\"3c885479-c669-4524-bb19-f603047e8cc8\",\"bundle\":\"operable\"},{\"name\":\"manage_users\",\"id\":\"9df3633f-6d76-4ef7-9f30-67a07f80d16e\",\"bundle\":\"operable\"},{\"name\":\"manage_roles\",\"id\":\"f177d0d5-3c34-4e15-bb7f-a50e77e58be1\",\"bundle\":\"operable\"}],\"name\":\"operable\",\"inserted_at\":\"2016-05-26T12:37:15Z\",\"id\":\"d3e09e8f-b7b1-49d3-b861-926bbe37c8cf\",\"enabled\":true,\"commands\":[{\"name\":\"filter\",\"bundle\":\"operable\"},{\"name\":\"greet\",\"bundle\":\"operable\"},{\"name\":\"group\",\"bundle\":\"operable\"},{\"name\":\"help\",\"bundle\":\"operable\"},{\"name\":\"max\",\"bundle\":\"operable\"},{\"name\":\"min\",\"bundle\":\"operable\"},{\"name\":\"permissions\",\"bundle\":\"operable\"},{\"name\":\"raw\",\"bundle\":\"operable\"},{\"name\":\"relay\",\"bundle\":\"operable\"},{\"name\":\"relay-group\",\"bundle\":\"operable\"},{\"name\":\"alias\",\"bundle\":\"operable\"},{\"name\":\"rule\",\"bundle\":\"operable\"},{\"name\":\"seed\",\"bundle\":\"operable\"},{\"name\":\"sleep\",\"bundle\":\"operable\"},{\"name\":\"sort\",\"bundle\":\"operable\"},{\"name\":\"sum\",\"bundle\":\"operable\"},{\"name\":\"table\",\"bundle\":\"operable\"},{\"name\":\"thorn\",\"bundle\":\"operable\"},{\"name\":\"unique\",\"bundle\":\"operable\"},{\"name\":\"wc\",\"bundle\":\"operable\"},{\"name\":\"which\",\"bundle\":\"operable\"},{\"name\":\"role\",\"bundle\":\"operable\"},{\"name\":\"bundle\",\"bundle\":\"operable\"},{\"name\":\"echo\",\"bundle\":\"operable\"}],\"bundle_id\":\"a2522be9-791e-41b6-8bfa-207d8fda924d\"}},{\"versions\":[{\"version\":\"0.0.0\",\"id\":\"f58bc5fe-3367-418e-be0e-e4bf6c7af8fd\"}],\"updated_at\":\"2016-05-26T12:37:16Z\",\"relay_groups\":[],\"name\":\"site\",\"inserted_at\":\"2016-05-26T12:37:16Z\",\"id\":\"82a4ba9b-9d7e-4977-80c1-90bd4486830c\",\"enabled_version\":null},{\"versions\":[{\"version\":\"0.7.4\",\"id\":\"9b199f64-1eeb-42be-b981-c78bf9c8a165\"},{\"version\":\"0.7.3\",\"id\":\"f6875160-73d8-4749-99db-19818f5dbd74\"},{\"version\":\"0.7.2\",\"id\":\"518d4aa9-c075-485d-91a9-0f238ed24ab7\"}],\"updated_at\":\"2016-05-26T13:24:18Z\",\"relay_groups\":[],\"name\":\"date\",\"inserted_at\":\"2016-05-26T13:24:18Z\",\"id\":\"4b73f89d-8078-415c-beb7-fb9a4112b82e\",\"enabled_version\":{\"version\":\"0.7.4\",\"updated_at\":\"2016-05-26T13:33:08Z\",\"permissions\":[{\"name\":\"date\",\"id\":\"1674395b-05c9-4657-addf-4192cf0715a1\",\"bundle\":\"date\"}],\"name\":\"date\",\"inserted_at\":\"2016-05-26T13:33:08Z\",\"id\":\"9b199f64-1eeb-42be-b981-c78bf9c8a165\",\"enabled\":true,\"commands\":[{\"name\":\"bar\",\"bundle\":\"date\"},{\"name\":\"date\",\"bundle\":\"date\"},{\"name\":\"foo\",\"bundle\":\"date\"}],\"bundle_id\":\"4b73f89d-8078-415c-beb7-fb9a4112b82e\"}},{\"versions\":[{\"version\":\"0.0.1\",\"id\":\"1287be4a-64c4-4e68-9b21-6c5e4d4e261b\"}],\"updated_at\":\"2016-05-26T15:06:34Z\",\"relay_groups\":[],\"name\":\"add_multiple_bundles1\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"94ecbccb-7b7a-4904-a7a3-ad3977dc9c62\",\"enabled_version\":null},{\"versions\":[{\"version\":\"0.0.1\",\"id\":\"75783c4e-8319-4d2a-a8b7-fc30db3fd250\"}],\"updated_at\":\"2016-05-26T15:06:34Z\",\"relay_groups\":[],\"name\":\"add_multiple_bundles2\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"56fa7df0-62f3-4c35-9af7-015c8ac06fe8\",\"enabled_version\":null},{\"versions\":[{\"version\":\"0.0.1\",\"id\":\"782b79ab-106c-4663-99ce-fd40efa11efb\"}],\"updated_at\":\"2016-05-26T15:06:34Z\",\"relay_groups\":[],\"name\":\"add_multiple_bundles3\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"3d03efb5-4d39-4f11-ac06-174b1c67953f\",\"enabled_version\":null},{\"versions\":[{\"version\":\"0.0.1\",\"id\":\"0e963408-0e85-43e5-9787-ca6953856a6c\"}],\"updated_at\":\"2016-05-26T15:06:34Z\",\"relay_groups\":[],\"name\":\"add_multiple_bundles4\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"3d12d1eb-a6f8-426b-a375-c589230b0ee5\",\"enabled_version\":null},{\"versions\":[{\"version\":\"0.0.1\",\"id\":\"c0907eb1-75b7-4407-9b08-650baa67c9d3\"}],\"updated_at\":\"2016-05-26T15:06:34Z\",\"relay_groups\":[],\"name\":\"add_multiple_bundles5\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"c74ce803-078c-4057-a8c6-b121ad28fe87\",\"enabled_version\":null}]}",
       "headers": {
         "server": "Cowboy",
-        "date": "Fri, 29 Apr 2016 16:21:18 GMT",
-        "content-length": "22429",
+        "date": "Thu, 26 May 2016 15:06:34 GMT",
+        "content-length": "4410",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "fvrp2m1r00lh9uncvvl85p2ik8bm78bj"
+        "x-request-id": "ejg7btdndpjpnl7csi3bo7loa54q2asv"
       },
       "status_code": 200,
       "type": "ok"
@@ -39,14 +39,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"7rwyi1xfPJ6NH5kqyUfzJwR6U/jDqEwu0lZ8WfhqSyo=\"}}",
+      "body": "{\"token\":{\"value\":\"3uDpnTKmbDHLSVxo8Q7QOVevAG4+foMm4mepGqDZx2M=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Fri, 29 Apr 2016 16:21:17 GMT",
+        "date": "Thu, 26 May 2016 15:06:33 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "jb0ef6fhfqvi3garnkfhsa1r4sqpp5ue"
+        "x-request-id": "u11flk7cnquecjearlhi3n0863opdroh"
       },
       "status_code": 201,
       "type": "ok"
@@ -56,7 +56,7 @@
     "request": {
       "body": "{\"relay_group\":{\"name\":\"multiple_bundle_group\"}}",
       "headers": {
-        "authorization": "token 7rwyi1xfPJ6NH5kqyUfzJwR6U/jDqEwu0lZ8WfhqSyo=",
+        "authorization": "token 3uDpnTKmbDHLSVxo8Q7QOVevAG4+foMm4mepGqDZx2M=",
         "Accept": "application/json",
         "Content-Type": "application/json"
       },
@@ -66,15 +66,15 @@
       "url": "http://localhost:4000/v1/relay_groups"
     },
     "response": {
-      "body": "{\"relay_group\":{\"updated_at\":\"2016-04-29T16:21:18Z\",\"relays\":[],\"name\":\"multiple_bundle_group\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"b29b75b8-a736-4751-af68-ba19b6a21ec1\",\"bundles\":[]}}",
+      "body": "{\"relay_group\":{\"updated_at\":\"2016-05-26T15:06:34Z\",\"relays\":[],\"name\":\"multiple_bundle_group\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"48d8ee83-b44e-43ad-a419-3f49a4b98d23\",\"bundles\":[]}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Fri, 29 Apr 2016 16:21:17 GMT",
+        "date": "Thu, 26 May 2016 15:06:33 GMT",
         "content-length": "190",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "k28tepftu3572u4bh02865m27pji2o69",
-        "location": "/v1/groups/b29b75b8-a736-4751-af68-ba19b6a21ec1"
+        "x-request-id": "jak5lj0ogk8am7uqckhjnjls04dvg6vj",
+        "location": "/v1/groups/48d8ee83-b44e-43ad-a419-3f49a4b98d23"
       },
       "status_code": 201,
       "type": "ok"
@@ -82,9 +82,9 @@
   },
   {
     "request": {
-      "body": "{\"bundle\":{\"config\":{\"version\":\"0.0.1\",\"name\":\"add_multiple_bundles1\",\"commands\":{\"test_command\":{\"executable\":\"/bin/foobar\"}},\"cog_bundle_version\":2}}}",
+      "body": "{\"bundle\":{\"config\":{\"version\":\"0.0.1\",\"permissions\":[\"add_multiple_bundles1:permission\"],\"name\":\"add_multiple_bundles1\",\"commands\":{\"test_command\":{\"rules\":[\"when command is add_multiple_bundles1:test_command must have add_multiple_bundles1:permission\"],\"executable\":\"/foo/bar\",\"documentation\":\"Does a thing\"}},\"cog_bundle_version\":2}}}",
       "headers": {
-        "authorization": "token 7rwyi1xfPJ6NH5kqyUfzJwR6U/jDqEwu0lZ8WfhqSyo=",
+        "authorization": "token 3uDpnTKmbDHLSVxo8Q7QOVevAG4+foMm4mepGqDZx2M=",
         "Accept": "application/json",
         "Content-Type": "application/json"
       },
@@ -94,15 +94,14 @@
       "url": "http://localhost:4000/v1/bundles"
     },
     "response": {
-      "body": "{\"bundle\":{\"updated_at\":\"2016-04-29T16:21:18Z\",\"relay_groups\":[],\"permissions\":[],\"name\":\"add_multiple_bundles1\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"cfa1d61e-2398-40a6-b18f-d2bf6a519a2f\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"2e04aa50-1c1b-460a-b953-755b5427e0fa\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]}}",
+      "body": "{\"warnings\":[\"Warning near #/cog_bundle_version: Bundle config version 2 has been deprecated. Please update to version 3.\"],\"bundle_version\":{\"version\":\"0.0.1\",\"updated_at\":\"2016-05-26T15:06:34Z\",\"permissions\":[{\"name\":\"permission\",\"id\":\"a6187dbd-8a91-494c-8219-275f9d722e71\",\"bundle\":\"add_multiple_bundles1\"}],\"name\":\"add_multiple_bundles1\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"1287be4a-64c4-4e68-9b21-6c5e4d4e261b\",\"enabled\":false,\"commands\":[{\"name\":\"test_command\",\"bundle\":\"add_multiple_bundles1\"}],\"bundle_id\":\"94ecbccb-7b7a-4904-a7a3-ad3977dc9c62\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Fri, 29 Apr 2016 16:21:17 GMT",
-        "content-length": "364",
+        "date": "Thu, 26 May 2016 15:06:33 GMT",
+        "content-length": "561",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "5rvkoe5bs8vg4gdr5dpcrh4u0ofts8hf",
-        "location": "/v1/bundles/cfa1d61e-2398-40a6-b18f-d2bf6a519a2f"
+        "x-request-id": "9igq4b27nvja0bn51cq79j3bkjcqkevg"
       },
       "status_code": 201,
       "type": "ok"
@@ -110,9 +109,9 @@
   },
   {
     "request": {
-      "body": "{\"bundle\":{\"config\":{\"version\":\"0.0.1\",\"name\":\"add_multiple_bundles2\",\"commands\":{\"test_command\":{\"executable\":\"/bin/foobar\"}},\"cog_bundle_version\":2}}}",
+      "body": "{\"bundle\":{\"config\":{\"version\":\"0.0.1\",\"permissions\":[\"add_multiple_bundles2:permission\"],\"name\":\"add_multiple_bundles2\",\"commands\":{\"test_command\":{\"rules\":[\"when command is add_multiple_bundles2:test_command must have add_multiple_bundles2:permission\"],\"executable\":\"/foo/bar\",\"documentation\":\"Does a thing\"}},\"cog_bundle_version\":2}}}",
       "headers": {
-        "authorization": "token 7rwyi1xfPJ6NH5kqyUfzJwR6U/jDqEwu0lZ8WfhqSyo=",
+        "authorization": "token 3uDpnTKmbDHLSVxo8Q7QOVevAG4+foMm4mepGqDZx2M=",
         "Accept": "application/json",
         "Content-Type": "application/json"
       },
@@ -122,15 +121,14 @@
       "url": "http://localhost:4000/v1/bundles"
     },
     "response": {
-      "body": "{\"bundle\":{\"updated_at\":\"2016-04-29T16:21:18Z\",\"relay_groups\":[],\"permissions\":[],\"name\":\"add_multiple_bundles2\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"2d0a20df-635a-48c8-92f8-f42d77451f47\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"f511cfa0-6ee3-4d72-a684-8e15de5d0642\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]}}",
+      "body": "{\"warnings\":[\"Warning near #/cog_bundle_version: Bundle config version 2 has been deprecated. Please update to version 3.\"],\"bundle_version\":{\"version\":\"0.0.1\",\"updated_at\":\"2016-05-26T15:06:34Z\",\"permissions\":[{\"name\":\"permission\",\"id\":\"f3040de9-c553-41be-8a2a-9c28dbcf58ba\",\"bundle\":\"add_multiple_bundles2\"}],\"name\":\"add_multiple_bundles2\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"75783c4e-8319-4d2a-a8b7-fc30db3fd250\",\"enabled\":false,\"commands\":[{\"name\":\"test_command\",\"bundle\":\"add_multiple_bundles2\"}],\"bundle_id\":\"56fa7df0-62f3-4c35-9af7-015c8ac06fe8\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Fri, 29 Apr 2016 16:21:17 GMT",
-        "content-length": "364",
+        "date": "Thu, 26 May 2016 15:06:33 GMT",
+        "content-length": "561",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "7paipptgcv2pobvc0lqldvmsrb6rcuq7",
-        "location": "/v1/bundles/2d0a20df-635a-48c8-92f8-f42d77451f47"
+        "x-request-id": "4nt9ntc4ifoms8871rip6jaea87dmo6n"
       },
       "status_code": 201,
       "type": "ok"
@@ -138,9 +136,9 @@
   },
   {
     "request": {
-      "body": "{\"bundle\":{\"config\":{\"version\":\"0.0.1\",\"name\":\"add_multiple_bundles3\",\"commands\":{\"test_command\":{\"executable\":\"/bin/foobar\"}},\"cog_bundle_version\":2}}}",
+      "body": "{\"bundle\":{\"config\":{\"version\":\"0.0.1\",\"permissions\":[\"add_multiple_bundles3:permission\"],\"name\":\"add_multiple_bundles3\",\"commands\":{\"test_command\":{\"rules\":[\"when command is add_multiple_bundles3:test_command must have add_multiple_bundles3:permission\"],\"executable\":\"/foo/bar\",\"documentation\":\"Does a thing\"}},\"cog_bundle_version\":2}}}",
       "headers": {
-        "authorization": "token 7rwyi1xfPJ6NH5kqyUfzJwR6U/jDqEwu0lZ8WfhqSyo=",
+        "authorization": "token 3uDpnTKmbDHLSVxo8Q7QOVevAG4+foMm4mepGqDZx2M=",
         "Accept": "application/json",
         "Content-Type": "application/json"
       },
@@ -150,15 +148,14 @@
       "url": "http://localhost:4000/v1/bundles"
     },
     "response": {
-      "body": "{\"bundle\":{\"updated_at\":\"2016-04-29T16:21:18Z\",\"relay_groups\":[],\"permissions\":[],\"name\":\"add_multiple_bundles3\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"2154d331-11e9-4458-b431-54906ddf6066\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"59a0405a-2005-4edb-a528-20ede375cee5\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]}}",
+      "body": "{\"warnings\":[\"Warning near #/cog_bundle_version: Bundle config version 2 has been deprecated. Please update to version 3.\"],\"bundle_version\":{\"version\":\"0.0.1\",\"updated_at\":\"2016-05-26T15:06:34Z\",\"permissions\":[{\"name\":\"permission\",\"id\":\"06f6ad7f-787f-45fc-8165-c7abf29130b2\",\"bundle\":\"add_multiple_bundles3\"}],\"name\":\"add_multiple_bundles3\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"782b79ab-106c-4663-99ce-fd40efa11efb\",\"enabled\":false,\"commands\":[{\"name\":\"test_command\",\"bundle\":\"add_multiple_bundles3\"}],\"bundle_id\":\"3d03efb5-4d39-4f11-ac06-174b1c67953f\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Fri, 29 Apr 2016 16:21:17 GMT",
-        "content-length": "364",
+        "date": "Thu, 26 May 2016 15:06:34 GMT",
+        "content-length": "561",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "hglnljrghk3fti1b9edu9jl79t4g31s2",
-        "location": "/v1/bundles/2154d331-11e9-4458-b431-54906ddf6066"
+        "x-request-id": "ornl3lhhjugj4jlsh99f0rhmvn2k03v7"
       },
       "status_code": 201,
       "type": "ok"
@@ -166,9 +163,9 @@
   },
   {
     "request": {
-      "body": "{\"bundle\":{\"config\":{\"version\":\"0.0.1\",\"name\":\"add_multiple_bundles4\",\"commands\":{\"test_command\":{\"executable\":\"/bin/foobar\"}},\"cog_bundle_version\":2}}}",
+      "body": "{\"bundle\":{\"config\":{\"version\":\"0.0.1\",\"permissions\":[\"add_multiple_bundles4:permission\"],\"name\":\"add_multiple_bundles4\",\"commands\":{\"test_command\":{\"rules\":[\"when command is add_multiple_bundles4:test_command must have add_multiple_bundles4:permission\"],\"executable\":\"/foo/bar\",\"documentation\":\"Does a thing\"}},\"cog_bundle_version\":2}}}",
       "headers": {
-        "authorization": "token 7rwyi1xfPJ6NH5kqyUfzJwR6U/jDqEwu0lZ8WfhqSyo=",
+        "authorization": "token 3uDpnTKmbDHLSVxo8Q7QOVevAG4+foMm4mepGqDZx2M=",
         "Accept": "application/json",
         "Content-Type": "application/json"
       },
@@ -178,15 +175,14 @@
       "url": "http://localhost:4000/v1/bundles"
     },
     "response": {
-      "body": "{\"bundle\":{\"updated_at\":\"2016-04-29T16:21:18Z\",\"relay_groups\":[],\"permissions\":[],\"name\":\"add_multiple_bundles4\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"3761b6f5-4f75-4259-b810-d9b744cc4f2f\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"23c36a18-e209-43f4-b0f1-56f70e00fc41\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]}}",
+      "body": "{\"warnings\":[\"Warning near #/cog_bundle_version: Bundle config version 2 has been deprecated. Please update to version 3.\"],\"bundle_version\":{\"version\":\"0.0.1\",\"updated_at\":\"2016-05-26T15:06:34Z\",\"permissions\":[{\"name\":\"permission\",\"id\":\"d56d95b1-eb91-471d-a1f7-34ac74a0adc1\",\"bundle\":\"add_multiple_bundles4\"}],\"name\":\"add_multiple_bundles4\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"0e963408-0e85-43e5-9787-ca6953856a6c\",\"enabled\":false,\"commands\":[{\"name\":\"test_command\",\"bundle\":\"add_multiple_bundles4\"}],\"bundle_id\":\"3d12d1eb-a6f8-426b-a375-c589230b0ee5\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Fri, 29 Apr 2016 16:21:17 GMT",
-        "content-length": "364",
+        "date": "Thu, 26 May 2016 15:06:34 GMT",
+        "content-length": "561",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "nffic5un926ojnral8i0uoet6bdfu0pi",
-        "location": "/v1/bundles/3761b6f5-4f75-4259-b810-d9b744cc4f2f"
+        "x-request-id": "qm9n5n9ki7ugcrdv7jtnf8rs6lqvm6me"
       },
       "status_code": 201,
       "type": "ok"
@@ -194,9 +190,9 @@
   },
   {
     "request": {
-      "body": "{\"bundle\":{\"config\":{\"version\":\"0.0.1\",\"name\":\"add_multiple_bundles5\",\"commands\":{\"test_command\":{\"executable\":\"/bin/foobar\"}},\"cog_bundle_version\":2}}}",
+      "body": "{\"bundle\":{\"config\":{\"version\":\"0.0.1\",\"permissions\":[\"add_multiple_bundles5:permission\"],\"name\":\"add_multiple_bundles5\",\"commands\":{\"test_command\":{\"rules\":[\"when command is add_multiple_bundles5:test_command must have add_multiple_bundles5:permission\"],\"executable\":\"/foo/bar\",\"documentation\":\"Does a thing\"}},\"cog_bundle_version\":2}}}",
       "headers": {
-        "authorization": "token 7rwyi1xfPJ6NH5kqyUfzJwR6U/jDqEwu0lZ8WfhqSyo=",
+        "authorization": "token 3uDpnTKmbDHLSVxo8Q7QOVevAG4+foMm4mepGqDZx2M=",
         "Accept": "application/json",
         "Content-Type": "application/json"
       },
@@ -206,15 +202,14 @@
       "url": "http://localhost:4000/v1/bundles"
     },
     "response": {
-      "body": "{\"bundle\":{\"updated_at\":\"2016-04-29T16:21:18Z\",\"relay_groups\":[],\"permissions\":[],\"name\":\"add_multiple_bundles5\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"b0987376-af9d-4a21-822d-30b1a50b479d\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"eed34d34-ae1f-4ec7-aab3-9d05f6461ee9\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]}}",
+      "body": "{\"warnings\":[\"Warning near #/cog_bundle_version: Bundle config version 2 has been deprecated. Please update to version 3.\"],\"bundle_version\":{\"version\":\"0.0.1\",\"updated_at\":\"2016-05-26T15:06:34Z\",\"permissions\":[{\"name\":\"permission\",\"id\":\"f9ab157b-fca5-4a0e-be84-780d1bb874bf\",\"bundle\":\"add_multiple_bundles5\"}],\"name\":\"add_multiple_bundles5\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"c0907eb1-75b7-4407-9b08-650baa67c9d3\",\"enabled\":false,\"commands\":[{\"name\":\"test_command\",\"bundle\":\"add_multiple_bundles5\"}],\"bundle_id\":\"c74ce803-078c-4057-a8c6-b121ad28fe87\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Fri, 29 Apr 2016 16:21:17 GMT",
-        "content-length": "364",
+        "date": "Thu, 26 May 2016 15:06:34 GMT",
+        "content-length": "561",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "e8e342fbkio1n0rhrin7cbtqothvr7iv",
-        "location": "/v1/bundles/b0987376-af9d-4a21-822d-30b1a50b479d"
+        "x-request-id": "hil73klp4satpl2vabk18p9nrb6m3djo"
       },
       "status_code": 201,
       "type": "ok"
@@ -224,7 +219,7 @@
     "request": {
       "body": "",
       "headers": {
-        "authorization": "token 7rwyi1xfPJ6NH5kqyUfzJwR6U/jDqEwu0lZ8WfhqSyo=",
+        "authorization": "token 3uDpnTKmbDHLSVxo8Q7QOVevAG4+foMm4mepGqDZx2M=",
         "Accept": "application/json",
         "Content-Type": "application/json"
       },
@@ -234,14 +229,14 @@
       "url": "http://localhost:4000/v1/relay_groups"
     },
     "response": {
-      "body": "{\"relay_groups\":[{\"updated_at\":\"2016-04-29T16:21:18Z\",\"relays\":[],\"name\":\"multiple_bundle_group\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"b29b75b8-a736-4751-af68-ba19b6a21ec1\",\"bundles\":[]}]}",
+      "body": "{\"relay_groups\":[{\"updated_at\":\"2016-05-26T15:06:34Z\",\"relays\":[],\"name\":\"multiple_bundle_group\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"48d8ee83-b44e-43ad-a419-3f49a4b98d23\",\"bundles\":[]}]}",
       "headers": {
         "server": "Cowboy",
-        "date": "Fri, 29 Apr 2016 16:21:18 GMT",
+        "date": "Thu, 26 May 2016 15:06:34 GMT",
         "content-length": "193",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "tc00onirvm6vcdkclopketa9q82fttst"
+        "x-request-id": "8o4u1e9qjibb7ca2vaid1k7j7mrdsb2g"
       },
       "status_code": 200,
       "type": "ok"
@@ -251,24 +246,24 @@
     "request": {
       "body": "",
       "headers": {
-        "authorization": "token 7rwyi1xfPJ6NH5kqyUfzJwR6U/jDqEwu0lZ8WfhqSyo=",
+        "authorization": "token 3uDpnTKmbDHLSVxo8Q7QOVevAG4+foMm4mepGqDZx2M=",
         "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "get",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/relay_groups/b29b75b8-a736-4751-af68-ba19b6a21ec1"
+      "url": "http://localhost:4000/v1/relay_groups/48d8ee83-b44e-43ad-a419-3f49a4b98d23"
     },
     "response": {
-      "body": "{\"relay_group\":{\"updated_at\":\"2016-04-29T16:21:18Z\",\"relays\":[],\"name\":\"multiple_bundle_group\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"b29b75b8-a736-4751-af68-ba19b6a21ec1\",\"bundles\":[]}}",
+      "body": "{\"relay_group\":{\"updated_at\":\"2016-05-26T15:06:34Z\",\"relays\":[],\"name\":\"multiple_bundle_group\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"48d8ee83-b44e-43ad-a419-3f49a4b98d23\",\"bundles\":[]}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Fri, 29 Apr 2016 16:21:18 GMT",
+        "date": "Thu, 26 May 2016 15:06:34 GMT",
         "content-length": "190",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "5uhh8fs7imb0vq7er3nbdhf00g5bb8br"
+        "x-request-id": "m6o7lkikk3g916sf4jj3kh9meogpdefm"
       },
       "status_code": 200,
       "type": "ok"
@@ -278,24 +273,24 @@
     "request": {
       "body": "",
       "headers": {
-        "authorization": "token 7rwyi1xfPJ6NH5kqyUfzJwR6U/jDqEwu0lZ8WfhqSyo=",
+        "authorization": "token 3uDpnTKmbDHLSVxo8Q7QOVevAG4+foMm4mepGqDZx2M=",
         "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "get",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/bundles/cfa1d61e-2398-40a6-b18f-d2bf6a519a2f"
+      "url": "http://localhost:4000/v1/bundles/94ecbccb-7b7a-4904-a7a3-ad3977dc9c62"
     },
     "response": {
-      "body": "{\"bundle\":{\"updated_at\":\"2016-04-29T16:21:18Z\",\"relay_groups\":[],\"permissions\":[],\"name\":\"add_multiple_bundles1\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"cfa1d61e-2398-40a6-b18f-d2bf6a519a2f\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"2e04aa50-1c1b-460a-b953-755b5427e0fa\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]}}",
+      "body": "{\"bundle\":{\"versions\":[{\"version\":\"0.0.1\",\"id\":\"1287be4a-64c4-4e68-9b21-6c5e4d4e261b\"}],\"updated_at\":\"2016-05-26T15:06:34Z\",\"relay_groups\":[],\"name\":\"add_multiple_bundles1\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"94ecbccb-7b7a-4904-a7a3-ad3977dc9c62\",\"enabled_version\":null}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Fri, 29 Apr 2016 16:21:18 GMT",
-        "content-length": "364",
+        "date": "Thu, 26 May 2016 15:06:34 GMT",
+        "content-length": "278",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "t6d8rfg9iartpmndco23n9fu98edvr0l"
+        "x-request-id": "6ea90e9nsjp5h6psrkmsgsqcp9mfosuu"
       },
       "status_code": 200,
       "type": "ok"
@@ -305,24 +300,24 @@
     "request": {
       "body": "",
       "headers": {
-        "authorization": "token 7rwyi1xfPJ6NH5kqyUfzJwR6U/jDqEwu0lZ8WfhqSyo=",
+        "authorization": "token 3uDpnTKmbDHLSVxo8Q7QOVevAG4+foMm4mepGqDZx2M=",
         "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "get",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/bundles/2d0a20df-635a-48c8-92f8-f42d77451f47"
+      "url": "http://localhost:4000/v1/bundles/56fa7df0-62f3-4c35-9af7-015c8ac06fe8"
     },
     "response": {
-      "body": "{\"bundle\":{\"updated_at\":\"2016-04-29T16:21:18Z\",\"relay_groups\":[],\"permissions\":[],\"name\":\"add_multiple_bundles2\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"2d0a20df-635a-48c8-92f8-f42d77451f47\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"f511cfa0-6ee3-4d72-a684-8e15de5d0642\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]}}",
+      "body": "{\"bundle\":{\"versions\":[{\"version\":\"0.0.1\",\"id\":\"75783c4e-8319-4d2a-a8b7-fc30db3fd250\"}],\"updated_at\":\"2016-05-26T15:06:34Z\",\"relay_groups\":[],\"name\":\"add_multiple_bundles2\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"56fa7df0-62f3-4c35-9af7-015c8ac06fe8\",\"enabled_version\":null}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Fri, 29 Apr 2016 16:21:18 GMT",
-        "content-length": "364",
+        "date": "Thu, 26 May 2016 15:06:34 GMT",
+        "content-length": "278",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "qlvktj0m2337q1i8r5vleodun7s5h2vq"
+        "x-request-id": "eh9166g0dpl7mi0osf8u135n09h7dvjs"
       },
       "status_code": 200,
       "type": "ok"
@@ -332,24 +327,24 @@
     "request": {
       "body": "",
       "headers": {
-        "authorization": "token 7rwyi1xfPJ6NH5kqyUfzJwR6U/jDqEwu0lZ8WfhqSyo=",
+        "authorization": "token 3uDpnTKmbDHLSVxo8Q7QOVevAG4+foMm4mepGqDZx2M=",
         "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "get",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/bundles/2154d331-11e9-4458-b431-54906ddf6066"
+      "url": "http://localhost:4000/v1/bundles/3d03efb5-4d39-4f11-ac06-174b1c67953f"
     },
     "response": {
-      "body": "{\"bundle\":{\"updated_at\":\"2016-04-29T16:21:18Z\",\"relay_groups\":[],\"permissions\":[],\"name\":\"add_multiple_bundles3\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"2154d331-11e9-4458-b431-54906ddf6066\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"59a0405a-2005-4edb-a528-20ede375cee5\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]}}",
+      "body": "{\"bundle\":{\"versions\":[{\"version\":\"0.0.1\",\"id\":\"782b79ab-106c-4663-99ce-fd40efa11efb\"}],\"updated_at\":\"2016-05-26T15:06:34Z\",\"relay_groups\":[],\"name\":\"add_multiple_bundles3\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"3d03efb5-4d39-4f11-ac06-174b1c67953f\",\"enabled_version\":null}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Fri, 29 Apr 2016 16:21:18 GMT",
-        "content-length": "364",
+        "date": "Thu, 26 May 2016 15:06:34 GMT",
+        "content-length": "278",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "rr6mngddom18j1ipieehsoaeb2o51p40"
+        "x-request-id": "krfc88b7eoqg7qruaubcq35oisostotu"
       },
       "status_code": 200,
       "type": "ok"
@@ -359,24 +354,24 @@
     "request": {
       "body": "",
       "headers": {
-        "authorization": "token 7rwyi1xfPJ6NH5kqyUfzJwR6U/jDqEwu0lZ8WfhqSyo=",
+        "authorization": "token 3uDpnTKmbDHLSVxo8Q7QOVevAG4+foMm4mepGqDZx2M=",
         "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "get",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/bundles/3761b6f5-4f75-4259-b810-d9b744cc4f2f"
+      "url": "http://localhost:4000/v1/bundles/3d12d1eb-a6f8-426b-a375-c589230b0ee5"
     },
     "response": {
-      "body": "{\"bundle\":{\"updated_at\":\"2016-04-29T16:21:18Z\",\"relay_groups\":[],\"permissions\":[],\"name\":\"add_multiple_bundles4\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"3761b6f5-4f75-4259-b810-d9b744cc4f2f\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"23c36a18-e209-43f4-b0f1-56f70e00fc41\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]}}",
+      "body": "{\"bundle\":{\"versions\":[{\"version\":\"0.0.1\",\"id\":\"0e963408-0e85-43e5-9787-ca6953856a6c\"}],\"updated_at\":\"2016-05-26T15:06:34Z\",\"relay_groups\":[],\"name\":\"add_multiple_bundles4\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"3d12d1eb-a6f8-426b-a375-c589230b0ee5\",\"enabled_version\":null}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Fri, 29 Apr 2016 16:21:18 GMT",
-        "content-length": "364",
+        "date": "Thu, 26 May 2016 15:06:35 GMT",
+        "content-length": "278",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "t8a2nf3tkchm7mfeqstl5v49n6gtmmjs"
+        "x-request-id": "7ovpdgl36fgeu1c8gvt4rn6u96d5qpv5"
       },
       "status_code": 200,
       "type": "ok"
@@ -386,24 +381,24 @@
     "request": {
       "body": "",
       "headers": {
-        "authorization": "token 7rwyi1xfPJ6NH5kqyUfzJwR6U/jDqEwu0lZ8WfhqSyo=",
+        "authorization": "token 3uDpnTKmbDHLSVxo8Q7QOVevAG4+foMm4mepGqDZx2M=",
         "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "get",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/bundles/b0987376-af9d-4a21-822d-30b1a50b479d"
+      "url": "http://localhost:4000/v1/bundles/c74ce803-078c-4057-a8c6-b121ad28fe87"
     },
     "response": {
-      "body": "{\"bundle\":{\"updated_at\":\"2016-04-29T16:21:18Z\",\"relay_groups\":[],\"permissions\":[],\"name\":\"add_multiple_bundles5\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"b0987376-af9d-4a21-822d-30b1a50b479d\",\"enabled\":false,\"commands\":[{\"rules\":[],\"name\":\"test_command\",\"id\":\"eed34d34-ae1f-4ec7-aab3-9d05f6461ee9\",\"execution\":\"multiple\",\"enforcing\":true,\"documentation\":null}]}}",
+      "body": "{\"bundle\":{\"versions\":[{\"version\":\"0.0.1\",\"id\":\"c0907eb1-75b7-4407-9b08-650baa67c9d3\"}],\"updated_at\":\"2016-05-26T15:06:34Z\",\"relay_groups\":[],\"name\":\"add_multiple_bundles5\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"c74ce803-078c-4057-a8c6-b121ad28fe87\",\"enabled_version\":null}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Fri, 29 Apr 2016 16:21:18 GMT",
-        "content-length": "364",
+        "date": "Thu, 26 May 2016 15:06:35 GMT",
+        "content-length": "278",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "qrv4td81j3b5tkr6g7ps0akrrl4jrcnq"
+        "x-request-id": "0ka28b8nnf568ghdobr7d4r869a4jl6q"
       },
       "status_code": 200,
       "type": "ok"
@@ -411,26 +406,26 @@
   },
   {
     "request": {
-      "body": "{\"bundles\":{\"add\":[\"b0987376-af9d-4a21-822d-30b1a50b479d\",\"3761b6f5-4f75-4259-b810-d9b744cc4f2f\",\"2154d331-11e9-4458-b431-54906ddf6066\",\"2d0a20df-635a-48c8-92f8-f42d77451f47\",\"cfa1d61e-2398-40a6-b18f-d2bf6a519a2f\"]}}",
+      "body": "{\"bundles\":{\"add\":[\"c74ce803-078c-4057-a8c6-b121ad28fe87\",\"3d12d1eb-a6f8-426b-a375-c589230b0ee5\",\"3d03efb5-4d39-4f11-ac06-174b1c67953f\",\"56fa7df0-62f3-4c35-9af7-015c8ac06fe8\",\"94ecbccb-7b7a-4904-a7a3-ad3977dc9c62\"]}}",
       "headers": {
-        "authorization": "token 7rwyi1xfPJ6NH5kqyUfzJwR6U/jDqEwu0lZ8WfhqSyo=",
+        "authorization": "token 3uDpnTKmbDHLSVxo8Q7QOVevAG4+foMm4mepGqDZx2M=",
         "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/relay_groups/b29b75b8-a736-4751-af68-ba19b6a21ec1/bundles"
+      "url": "http://localhost:4000/v1/relay_groups/48d8ee83-b44e-43ad-a419-3f49a4b98d23/bundles"
     },
     "response": {
-      "body": "{\"relay_group\":{\"updated_at\":\"2016-04-29T16:21:18Z\",\"relays\":[],\"name\":\"multiple_bundle_group\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"b29b75b8-a736-4751-af68-ba19b6a21ec1\",\"bundles\":[{\"updated_at\":\"2016-04-29T16:21:18Z\",\"name\":\"add_multiple_bundles1\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"cfa1d61e-2398-40a6-b18f-d2bf6a519a2f\",\"enabled\":false},{\"updated_at\":\"2016-04-29T16:21:18Z\",\"name\":\"add_multiple_bundles2\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"2d0a20df-635a-48c8-92f8-f42d77451f47\",\"enabled\":false},{\"updated_at\":\"2016-04-29T16:21:18Z\",\"name\":\"add_multiple_bundles3\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"2154d331-11e9-4458-b431-54906ddf6066\",\"enabled\":false},{\"updated_at\":\"2016-04-29T16:21:18Z\",\"name\":\"add_multiple_bundles4\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"3761b6f5-4f75-4259-b810-d9b744cc4f2f\",\"enabled\":false},{\"updated_at\":\"2016-04-29T16:21:18Z\",\"name\":\"add_multiple_bundles5\",\"inserted_at\":\"2016-04-29T16:21:18Z\",\"id\":\"b0987376-af9d-4a21-822d-30b1a50b479d\",\"enabled\":false}]}}",
+      "body": "{\"relay_group\":{\"updated_at\":\"2016-05-26T15:06:34Z\",\"relays\":[],\"name\":\"multiple_bundle_group\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"48d8ee83-b44e-43ad-a419-3f49a4b98d23\",\"bundles\":[{\"versions\":[{\"version\":\"0.0.1\",\"id\":\"1287be4a-64c4-4e68-9b21-6c5e4d4e261b\"}],\"updated_at\":\"2016-05-26T15:06:34Z\",\"name\":\"add_multiple_bundles1\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"94ecbccb-7b7a-4904-a7a3-ad3977dc9c62\"},{\"versions\":[{\"version\":\"0.0.1\",\"id\":\"75783c4e-8319-4d2a-a8b7-fc30db3fd250\"}],\"updated_at\":\"2016-05-26T15:06:34Z\",\"name\":\"add_multiple_bundles2\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"56fa7df0-62f3-4c35-9af7-015c8ac06fe8\"},{\"versions\":[{\"version\":\"0.0.1\",\"id\":\"782b79ab-106c-4663-99ce-fd40efa11efb\"}],\"updated_at\":\"2016-05-26T15:06:34Z\",\"name\":\"add_multiple_bundles3\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"3d03efb5-4d39-4f11-ac06-174b1c67953f\"},{\"versions\":[{\"version\":\"0.0.1\",\"id\":\"0e963408-0e85-43e5-9787-ca6953856a6c\"}],\"updated_at\":\"2016-05-26T15:06:34Z\",\"name\":\"add_multiple_bundles4\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"3d12d1eb-a6f8-426b-a375-c589230b0ee5\"},{\"versions\":[{\"version\":\"0.0.1\",\"id\":\"c0907eb1-75b7-4407-9b08-650baa67c9d3\"}],\"updated_at\":\"2016-05-26T15:06:34Z\",\"name\":\"add_multiple_bundles5\",\"inserted_at\":\"2016-05-26T15:06:34Z\",\"id\":\"c74ce803-078c-4057-a8c6-b121ad28fe87\"}]}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Fri, 29 Apr 2016 16:21:18 GMT",
-        "content-length": "1019",
+        "date": "Thu, 26 May 2016 15:06:35 GMT",
+        "content-length": "1324",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "thhjeut1nm4ppai4fu05j6grlekhn7g2"
+        "x-request-id": "fsnkg8tic161ne5gb36pt729tuauc6ln"
       },
       "status_code": 200,
       "type": "ok"

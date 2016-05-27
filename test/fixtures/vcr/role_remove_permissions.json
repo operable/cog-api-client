@@ -3,6 +3,7 @@
     "request": {
       "body": "{\"username\":\"admin\",\"password\":\"password\"}",
       "headers": {
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -11,14 +12,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"6xy5VaSZjnDFh7mc8yNyLyqcPqZy165887X6/gYxGeI=\"}}",
+      "body": "{\"token\":{\"value\":\"PPYhdijXi24YPAw2EApLfWyVM/nWNda+qpGTp8Fe5sE=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 07 Apr 2016 13:38:22 GMT",
+        "date": "Tue, 24 May 2016 17:28:38 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "1ro1us805q9ml356o9jm1ieqbkl69f8l"
+        "x-request-id": "1kdch3ac5cfff6vp33927nvgg07sa2ot"
       },
       "status_code": 201,
       "type": "ok"
@@ -28,7 +29,8 @@
     "request": {
       "body": "{\"role\":{\"name\":\"developer2\"}}",
       "headers": {
-        "authorization": "token 6xy5VaSZjnDFh7mc8yNyLyqcPqZy165887X6/gYxGeI=",
+        "authorization": "token PPYhdijXi24YPAw2EApLfWyVM/nWNda+qpGTp8Fe5sE=",
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,15 +39,15 @@
       "url": "http://localhost:4000/v1/roles"
     },
     "response": {
-      "body": "{\"role\":{\"permissions\":[],\"name\":\"developer2\",\"id\":\"e0764566-164b-459b-ab75-3f8633bb85fc\"}}",
+      "body": "{\"role\":{\"permissions\":[],\"name\":\"developer2\",\"id\":\"2b41c198-b392-4269-8c2f-563e720bad73\",\"groups\":[]}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 07 Apr 2016 13:38:22 GMT",
-        "content-length": "91",
+        "date": "Tue, 24 May 2016 17:28:38 GMT",
+        "content-length": "103",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "b6qg3ipu4jbh9n309bk55sv6pdurdmrb",
-        "location": "/v1/roles/e0764566-164b-459b-ab75-3f8633bb85fc"
+        "x-request-id": "vo2tffm0fsihr1tigp4s8lfnehlr0r95",
+        "location": "/v1/roles/2b41c198-b392-4269-8c2f-563e720bad73"
       },
       "status_code": 201,
       "type": "ok"
@@ -55,7 +57,8 @@
     "request": {
       "body": "{\"permission\":{\"name\":\"write_code2\"}}",
       "headers": {
-        "authorization": "token 6xy5VaSZjnDFh7mc8yNyLyqcPqZy165887X6/gYxGeI=",
+        "authorization": "token PPYhdijXi24YPAw2EApLfWyVM/nWNda+qpGTp8Fe5sE=",
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -64,15 +67,15 @@
       "url": "http://localhost:4000/v1/permissions"
     },
     "response": {
-      "body": "{\"permission\":{\"namespace\":\"site\",\"name\":\"write_code2\",\"id\":\"f29371d5-740c-486c-9a19-bbef7e6d3060\"}}",
+      "body": "{\"permission\":{\"name\":\"write_code2\",\"id\":\"d6b1f3ec-ab78-4682-98cd-f36440c82340\",\"bundle\":\"site\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 07 Apr 2016 13:38:23 GMT",
-        "content-length": "100",
+        "date": "Tue, 24 May 2016 17:28:38 GMT",
+        "content-length": "97",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "3q8upfnbngd81mgqed3c55mgv7b7phjo",
-        "location": "/v1/permissions/f29371d5-740c-486c-9a19-bbef7e6d3060"
+        "x-request-id": "9nrn72vumkpmt4ignf5a9r1hc0veo5lf",
+        "location": "/v1/permissions/d6b1f3ec-ab78-4682-98cd-f36440c82340"
       },
       "status_code": 201,
       "type": "ok"
@@ -82,23 +85,24 @@
     "request": {
       "body": "{\"permissions\":{\"grant\":[\"site:write_code2\"]}}",
       "headers": {
-        "authorization": "token 6xy5VaSZjnDFh7mc8yNyLyqcPqZy165887X6/gYxGeI=",
+        "authorization": "token PPYhdijXi24YPAw2EApLfWyVM/nWNda+qpGTp8Fe5sE=",
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/roles/e0764566-164b-459b-ab75-3f8633bb85fc/permissions"
+      "url": "http://localhost:4000/v1/roles/2b41c198-b392-4269-8c2f-563e720bad73/permissions"
     },
     "response": {
-      "body": "{\"permissions\":[{\"namespace\":\"site\",\"name\":\"write_code2\",\"id\":\"f29371d5-740c-486c-9a19-bbef7e6d3060\"}]}",
+      "body": "{\"permissions\":[{\"name\":\"write_code2\",\"id\":\"d6b1f3ec-ab78-4682-98cd-f36440c82340\",\"bundle\":\"site\"}]}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 07 Apr 2016 13:38:23 GMT",
-        "content-length": "103",
+        "date": "Tue, 24 May 2016 17:28:38 GMT",
+        "content-length": "100",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "v91jpvph51bf2q99sqgkkv1i19ioscfv"
+        "x-request-id": "bue03kmlrvavpspqock1brhlm4majs7l"
       },
       "status_code": 200,
       "type": "ok"
@@ -108,23 +112,24 @@
     "request": {
       "body": "{\"permissions\":{\"revoke\":[\"site:write_code2\"]}}",
       "headers": {
-        "authorization": "token 6xy5VaSZjnDFh7mc8yNyLyqcPqZy165887X6/gYxGeI=",
+        "authorization": "token PPYhdijXi24YPAw2EApLfWyVM/nWNda+qpGTp8Fe5sE=",
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/roles/e0764566-164b-459b-ab75-3f8633bb85fc/permissions"
+      "url": "http://localhost:4000/v1/roles/2b41c198-b392-4269-8c2f-563e720bad73/permissions"
     },
     "response": {
       "body": "{\"permissions\":[]}",
       "headers": {
         "server": "Cowboy",
-        "date": "Thu, 07 Apr 2016 13:38:23 GMT",
+        "date": "Tue, 24 May 2016 17:28:38 GMT",
         "content-length": "18",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "sqbda6r67ru9om1uve918vlodgbsiqfs"
+        "x-request-id": "0k9dk3uil0407kslb7ue6snu3h1ss3po"
       },
       "status_code": 200,
       "type": "ok"

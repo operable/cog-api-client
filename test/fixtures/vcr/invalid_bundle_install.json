@@ -12,14 +12,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"wcLeT+QSYUxw7tbiD1lkPa/t+k+DKwH5qfM2+9Dd9Bk=\"}}",
+      "body": "{\"token\":{\"value\":\"eU1ZhuDXhzmIb94DRR3AlGtA/TZgH7lofk/eQKdJZNs=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Fri, 29 Apr 2016 17:44:49 GMT",
+        "date": "Thu, 26 May 2016 12:45:56 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "2vder5i44ber7av8eo8og2vbr6f8pe6l"
+        "x-request-id": "n2q56b0khja57m3o9hksuq0gph7tleal"
       },
       "status_code": 201,
       "type": "ok"
@@ -29,7 +29,7 @@
     "request": {
       "body": "{\"bundle\":{\"bundle_config\":{}}}",
       "headers": {
-        "authorization": "token wcLeT+QSYUxw7tbiD1lkPa/t+k+DKwH5qfM2+9Dd9Bk=",
+        "authorization": "token eU1ZhuDXhzmIb94DRR3AlGtA/TZgH7lofk/eQKdJZNs=",
         "Accept": "application/json",
         "Content-Type": "application/json"
       },
@@ -39,13 +39,13 @@
       "url": "http://localhost:4000/v1/bundles"
     },
     "response": {
-      "body": "{\"error\":\"Invalid config.\"}",
+      "body": "{\"error\":\"Missing bundle config.\"}",
       "headers": {
         "server": "Cowboy",
-        "date": "Fri, 29 Apr 2016 17:44:49 GMT",
-        "content-length": "27",
+        "date": "Thu, 26 May 2016 12:45:56 GMT",
+        "content-length": "34",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "6t4v6oqmlodtqh1e8135g17tmvum8ndq",
+        "x-request-id": "3reu682mbndl10sjoj1iipm4eobu7t88",
         "content-type": "application/json; charset=utf-8"
       },
       "status_code": 400,

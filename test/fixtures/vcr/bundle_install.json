@@ -1,0 +1,55 @@
+[
+  {
+    "request": {
+      "body": "{\"username\":\"admin\",\"password\":\"password\"}",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/token"
+    },
+    "response": {
+      "body": "{\"token\":{\"value\":\"xRiX7mHCih6hG61jKMN5jHZIFyMpEFYbGfj1zdG/VHo=\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 26 May 2016 13:01:45 GMT",
+        "content-length": "66",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "dsilni2oo873asgbqdo26oqfp28iuvf0"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "{\"bundle\":{\"config\":{\"version\":\"0.0.1\",\"permissions\":[\"bundle_install:permission\"],\"name\":\"bundle_install\",\"commands\":{\"test_command\":{\"rules\":[\"when command is bundle_install:test_command must have bundle_install:permission\"],\"executable\":\"/foo/bar\",\"documentation\":\"Does a thing\"}},\"cog_bundle_version\":2}}}",
+      "headers": {
+        "authorization": "token xRiX7mHCih6hG61jKMN5jHZIFyMpEFYbGfj1zdG/VHo=",
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:4000/v1/bundles"
+    },
+    "response": {
+      "body": "{\"warnings\":[\"Warning near #/cog_bundle_version: Bundle config version 2 has been deprecated. Please update to version 3.\"],\"bundle_version\":{\"version\":\"0.0.1\",\"updated_at\":\"2016-05-26T13:01:45Z\",\"permissions\":[{\"name\":\"permission\",\"id\":\"af4eb72b-c560-4b09-be16-489da8481821\",\"bundle\":\"bundle_install\"}],\"name\":\"bundle_install\",\"inserted_at\":\"2016-05-26T13:01:45Z\",\"id\":\"05c31185-015d-4a69-b58b-4279d31ed7e8\",\"enabled\":false,\"commands\":[{\"name\":\"test_command\",\"bundle\":\"bundle_install\"}],\"bundle_id\":\"112c8912-e100-44f6-8568-4070e40d3ac9\"}}",
+      "headers": {
+        "server": "Cowboy",
+        "date": "Thu, 26 May 2016 13:01:45 GMT",
+        "content-length": "540",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "max-age=0, private, must-revalidate",
+        "x-request-id": "ru6agkucp327aj2m4v46kklfmin0bj05"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  }
+]
