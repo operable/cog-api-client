@@ -8,6 +8,7 @@ defmodule CogApi.Resources.BundleVersion do
     :id,
     :version,
     :name,
+    :description,
     :bundle_id,
     :enabled,
     :inserted_at,
