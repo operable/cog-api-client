@@ -6,8 +6,9 @@ defmodule CogApi.Resources.Relay do
     :name,
     :updated_at,
     :inserted_at,
-    :enabled,
     :description,
+    :token,
+    enabled: false,
     groups: [],
   ]
 
