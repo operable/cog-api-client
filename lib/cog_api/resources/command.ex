@@ -3,6 +3,7 @@ defmodule CogApi.Resources.Command do
 
   defstruct [
     :id,
+    :description,
     :documentation,
     :name,
     :bundle,
