@@ -12,6 +12,7 @@ defmodule CogApi.Resources.BundleVersion do
     :bundle_id,
     :enabled,
     :inserted_at,
+    :config_file,
     permissions: [%Permission{}],
     commands: [%Command{}]
   ]
