@@ -254,8 +254,24 @@ defmodule CogApi.HTTP.Client do
     Rules.index(command, endpoint)
   end
 
-  def rule_create(rule_text, %Endpoint{}=endpoint) do
-    Rules.create(rule_text, endpoint)
+  def rule_create(bundle_version_id, rule_text, %Endpoint{}=endpoint) do
+    Rules.create(bundle_version_id, rule_text, endpoint)
+  end
+
+  def rule_show(rule_id, %Endpoint{}=endpoint) do
+    Rules.show(rule_id, endpoint)
+  end
+
+  def rule_update(rule_id, rule_text, %Endpoint{}=endpoint) do
+    Rules.update(rule_id, rule_text, endpoint)
+  end
+
+  def rule_update(bundle_version_id, rule_id, rule_text, %Endpoint{}=endpoint) do
+    Rules.update(bundle_version_id, rule_id, rule_text, endpoint)
+  end
+
+  def rule_delete(bundle_version_id, rule_id, %Endpoint{}=endpoint) do
+    Rules.delete(bundle_version_id, rule_id, endpoint)
   end
 
   def rule_delete(rule_id, %Endpoint{}=endpoint) do
