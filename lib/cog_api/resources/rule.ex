@@ -5,8 +5,7 @@ defmodule CogApi.Resources.Rule do
     :id,
     :command_name,
     :command,
-    :rule,
-    :enabled
+    :rule
   ]
 
   def fake_key do
