@@ -33,10 +33,8 @@ defmodule CogApi.HTTP.RulesTest do
   describe "rule_create" do
     it "returns the created rule" do
       cassette "rule_create" do
-        bundle = Client.bundle_show_by_name(valid_endpoint, "operable") |> get_value 
-        bundle_version_id = bundle.enabled_version.id
         rule_text = "when command is operable:help must have operable:manage_commands"
-        rule = Client.rule_create(bundle_version_id, rule_text, valid_endpoint) |> get_value
+        rule = rule_text |> Client.rule_create(valid_endpoint) |> get_value
 
         assert present rule.id
         assert rule.rule == rule_text
@@ -46,10 +44,8 @@ defmodule CogApi.HTTP.RulesTest do
     context "when the rule is invalid" do
       it "returns the errors" do
         cassette "rule_create_invalid" do
-          bundle = Client.bundle_show_by_name(valid_endpoint, "operable") |> get_value 
-          bundle_version_id = bundle.enabled_version.id
           rule_text = "when command invalid text operable:help"
-          {:error, [error]} = Client.rule_create(bundle_version_id, rule_text, valid_endpoint)
+          {:error, [error]} = rule_text |> Client.rule_create(valid_endpoint)
 
           assert error =~ "Invalid rule syntax"
         end
@@ -61,10 +57,8 @@ defmodule CogApi.HTTP.RulesTest do
     it "returns :ok" do
       cassette "rule_delete" do
         endpoint = valid_endpoint
-        bundle = Client.bundle_show_by_name(valid_endpoint, "operable") |> get_value 
-        bundle_version_id = bundle.enabled_version.id
         rule_text = "when command is operable:which must have operable:manage_commands"
-        rule = Client.rule_create(bundle_version_id, rule_text, valid_endpoint) |> get_value
+        rule = rule_text |> Client.rule_create(endpoint) |> get_value
 
         response = Client.rule_delete(rule.id, endpoint)
 

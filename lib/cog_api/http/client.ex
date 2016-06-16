@@ -254,8 +254,8 @@ defmodule CogApi.HTTP.Client do
     Rules.index(command, endpoint)
   end
 
-  def rule_create(bundle_version_id, rule_text, %Endpoint{}=endpoint) do
-    Rules.create(bundle_version_id, rule_text, endpoint)
+  def rule_create(rule_text, %Endpoint{}=endpoint) do
+    Rules.create(rule_text, endpoint)
   end
 
   def rule_show(rule_id, %Endpoint{}=endpoint) do

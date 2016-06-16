@@ -12,8 +12,8 @@ defmodule CogApi.HTTP.Rules do
     |> format_index_response
   end
 
-  def create(bundle_version_id, rule_text, %Endpoint{}=endpoint) do
-    Base.post(endpoint, "bundle_versions/#{bundle_version_id}/rules", %{rule: rule_text})
+  def create(rule_text, %Endpoint{}=endpoint) do
+    Base.post(endpoint, "rules", %{rule: rule_text})
     |> ApiResponse.format(%Rule{})
   end
 
