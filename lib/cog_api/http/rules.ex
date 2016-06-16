@@ -27,18 +27,8 @@ defmodule CogApi.HTTP.Rules do
     |> ApiResponse.format(%Rule{})
   end
 
-  def update(bundle_version_id, rule_id, rule_text, %Endpoint{}=endpoint) do
-    Base.patch(endpoint, "bundle_versions/#{bundle_version_id}/rules/#{rule_id}", %{rule: rule_text})
-    |> ApiResponse.format(%Rule{})
-  end
-
   def delete(rule_id, %Endpoint{}=endpoint) do
     Base.delete(endpoint, "rules/#{rule_id}")
-    |> ApiResponse.format_delete("The rule could not be deleted")
-  end
-
-  def delete(bundle_version_id, rule_id, %Endpoint{}=endpoint) do
-    Base.delete(endpoint, "bundle_versions/#{bundle_version_id}/rules/#{rule_id}")
     |> ApiResponse.format_delete("The rule could not be deleted")
   end
 
