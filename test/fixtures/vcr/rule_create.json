@@ -3,6 +3,7 @@
     "request": {
       "body": "{\"username\":\"admin\",\"password\":\"password\"}",
       "headers": {
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -11,14 +12,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"hdlZiIW4Wc0iB4AIFk7SWlZQ9fkMXnqpDb7fe0Msl5o=\"}}",
+      "body": "{\"token\":{\"value\":\"4zVjSgeQk8zViJS1Lf+4WLY0usCK9cTGouXyGihleDA=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 28 Mar 2016 18:43:23 GMT",
+        "date": "Thu, 16 Jun 2016 17:54:40 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "pn2c52dor5dvfsrbucr0h0aphg6ncl7r"
+        "x-request-id": "v505ijpq4ecd8055t2achua3arlvgdmt"
       },
       "status_code": 201,
       "type": "ok"
@@ -28,7 +29,8 @@
     "request": {
       "body": "{\"rule\":\"when command is operable:help must have operable:manage_commands\"}",
       "headers": {
-        "authorization": "token hdlZiIW4Wc0iB4AIFk7SWlZQ9fkMXnqpDb7fe0Msl5o=",
+        "authorization": "token 4zVjSgeQk8zViJS1Lf+4WLY0usCK9cTGouXyGihleDA=",
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,14 +39,14 @@
       "url": "http://localhost:4000/v1/rules"
     },
     "response": {
-      "body": "{\"rule\":\"when command is operable:help must have operable:manage_commands\",\"id\":\"c5cd2f03-531c-4f64-94ee-17ced6e38fb4\"}",
+      "body": "{\"rule\":\"when command is operable:help must have operable:manage_commands\",\"id\":\"3398134c-91ce-4d35-bacb-d52c7e6101b8\",\"enabled\":true,\"command_name\":\"operable:help\"}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 28 Mar 2016 18:43:23 GMT",
-        "content-length": "119",
+        "date": "Thu, 16 Jun 2016 17:54:40 GMT",
+        "content-length": "165",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "4t2n5mqnrpp175tkeg8q0no5bu16h70p"
+        "x-request-id": "0n0gsmiel105hee9vgeirn9v8l0sh8us"
       },
       "status_code": 201,
       "type": "ok"

@@ -3,6 +3,7 @@
     "request": {
       "body": "{\"username\":\"admin\",\"password\":\"password\"}",
       "headers": {
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -11,14 +12,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"NShl5j4hdcJGts3sXJQ6qCWIV2cUXKRAf6OhjCdCUtg=\"}}",
+      "body": "{\"token\":{\"value\":\"fw9NyjgVNzH2VnSgPl5gBwIeEnBGNaT+b8ba9boMWrI=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 28 Mar 2016 19:59:35 GMT",
+        "date": "Thu, 16 Jun 2016 17:54:38 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "34cj1e0a4uaer7se9gi817jcheq5dalv"
+        "x-request-id": "pjumo45m0btqnp7gcvq4qst05iam5lr7"
       },
       "status_code": 201,
       "type": "ok"
@@ -28,7 +29,8 @@
     "request": {
       "body": "{\"rule\":\"when command is operable:which must have operable:manage_commands\"}",
       "headers": {
-        "authorization": "token NShl5j4hdcJGts3sXJQ6qCWIV2cUXKRAf6OhjCdCUtg=",
+        "authorization": "token fw9NyjgVNzH2VnSgPl5gBwIeEnBGNaT+b8ba9boMWrI=",
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -37,14 +39,14 @@
       "url": "http://localhost:4000/v1/rules"
     },
     "response": {
-      "body": "{\"rule\":\"when command is operable:which must have operable:manage_commands\",\"id\":\"d3f742f5-d251-4698-9fbd-002ef4afebad\"}",
+      "body": "{\"rule\":\"when command is operable:which must have operable:manage_commands\",\"id\":\"0c8d4964-08bd-497e-a6ed-043bd50d515d\",\"enabled\":false,\"command_name\":\"operable:which\"}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 28 Mar 2016 19:59:35 GMT",
-        "content-length": "120",
+        "date": "Thu, 16 Jun 2016 17:54:38 GMT",
+        "content-length": "168",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "9kf9c1qdmeco2ejs06peuqgqs08gbt7c"
+        "x-request-id": "52kp6eqptuo7hkrj0mof6r0pdilefu18"
       },
       "status_code": 201,
       "type": "ok"
@@ -54,22 +56,23 @@
     "request": {
       "body": "",
       "headers": {
-        "authorization": "token NShl5j4hdcJGts3sXJQ6qCWIV2cUXKRAf6OhjCdCUtg=",
-        "Accept": "application/json"
+        "authorization": "token fw9NyjgVNzH2VnSgPl5gBwIeEnBGNaT+b8ba9boMWrI=",
+        "Accept": "application/json",
+        "Content-Type": "application/json"
       },
       "method": "delete",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:4000/v1/rules/d3f742f5-d251-4698-9fbd-002ef4afebad"
+      "url": "http://localhost:4000/v1/rules/0c8d4964-08bd-497e-a6ed-043bd50d515d"
     },
     "response": {
       "body": "",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 28 Mar 2016 19:59:35 GMT",
+        "date": "Thu, 16 Jun 2016 17:54:38 GMT",
         "content-length": "0",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "74ogfmp15aeun9ir2t5n2ds9pbeh0inq"
+        "x-request-id": "dqb7gu2bd3nhtm6icl727inikuhesfdi"
       },
       "status_code": 204,
       "type": "ok"

@@ -3,8 +3,10 @@ defmodule CogApi.Resources.Rule do
 
   defstruct [
     :id,
+    :command_name,
     :command,
     :rule,
+    :enabled
   ]
 
   def fake_key do

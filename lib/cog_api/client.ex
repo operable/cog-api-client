@@ -82,6 +82,7 @@ defmodule CogApi.Client do
 
   @callback rule_index(String.t, %Endpoint{}) :: {atom, [%Rule{}]}
   @callback rule_create(String.t, %Endpoint{}) :: {atom, %Rule{}}
+  @callback rule_update(String.t, String.t, %Endpoint{}) :: {atom, %Rule{}}
   @callback rule_delete(String.t, %Endpoint{}) :: atom
   @callback rule_delete(String.t, %Endpoint{}) :: {atom, [String.t]}
 

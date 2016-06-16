@@ -3,6 +3,7 @@
     "request": {
       "body": "{\"username\":\"admin\",\"password\":\"password\"}",
       "headers": {
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -11,14 +12,14 @@
       "url": "http://localhost:4000/v1/token"
     },
     "response": {
-      "body": "{\"token\":{\"value\":\"A2fEYVOilxzf7Ojck153sw4CrLYZUHSgNHwM1wc8hWw=\"}}",
+      "body": "{\"token\":{\"value\":\"B/1wsEDoTe2nUJoNXMcp9CVu18inpPwkcGzrSU+gw4M=\"}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 28 Mar 2016 18:49:35 GMT",
+        "date": "Thu, 16 Jun 2016 17:54:37 GMT",
         "content-length": "66",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "al45nisorsfrcc417dt6sogm02cgcqfg"
+        "x-request-id": "2revfvmgtnn4smajrbfgl9ajlb7qh9er"
       },
       "status_code": 201,
       "type": "ok"
@@ -28,7 +29,8 @@
     "request": {
       "body": "{\"rule\":\"when command invalid text operable:help\"}",
       "headers": {
-        "authorization": "token A2fEYVOilxzf7Ojck153sw4CrLYZUHSgNHwM1wc8hWw=",
+        "authorization": "token B/1wsEDoTe2nUJoNXMcp9CVu18inpPwkcGzrSU+gw4M=",
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       "method": "post",
@@ -40,11 +42,11 @@
       "body": "{\"errors\":{\"invalid_rule_syntax\":[\"(Line: 1, Col: 13) syntax error before: \\\"invalid\\\".\"]}}",
       "headers": {
         "server": "Cowboy",
-        "date": "Mon, 28 Mar 2016 18:49:35 GMT",
+        "date": "Thu, 16 Jun 2016 17:54:37 GMT",
         "content-length": "91",
         "content-type": "application/json; charset=utf-8",
         "cache-control": "max-age=0, private, must-revalidate",
-        "x-request-id": "va01h54mn1hd02lrqdgbcmh1k0s9ms9r"
+        "x-request-id": "0a52q1u6ksra3qnaknd2s9td2q411cih"
       },
       "status_code": 422,
       "type": "ok"

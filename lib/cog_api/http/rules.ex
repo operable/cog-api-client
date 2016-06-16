@@ -17,6 +17,16 @@ defmodule CogApi.HTTP.Rules do
     |> ApiResponse.format(%Rule{})
   end
 
+  def show(rule_id, %Endpoint{}=endpoint) do
+    Base.get(endpoint, "rules/#{rule_id}")
+    |> ApiResponse.format(%Rule{})
+  end
+
+  def update(rule_id, rule_text, %Endpoint{}=endpoint) do
+    Base.patch(endpoint, "rules/#{rule_id}", %{rule: rule_text})
+    |> ApiResponse.format(%Rule{})
+  end
+
   def delete(rule_id, %Endpoint{}=endpoint) do
     Base.delete(endpoint, "rules/#{rule_id}")
     |> ApiResponse.format_delete("The rule could not be deleted")
