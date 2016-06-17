@@ -7,6 +7,7 @@ defmodule CogApi.Decoders.RelayGroup do
     :inserted_at,
     :name,
     :updated_at,
+    :desc,
     bundles: [],
     relays: [],
   ]
@@ -24,6 +25,7 @@ defmodule CogApi.Decoders.RelayGroup do
       id: decoder.id,
       inserted_at: decoder.inserted_at,
       name: decoder.name,
+      desc: decoder.desc,
       relays: decoder.relays,
       updated_at: decoder.updated_at,
     }
