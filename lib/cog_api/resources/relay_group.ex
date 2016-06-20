@@ -9,6 +9,7 @@ defmodule CogApi.Resources.RelayGroup do
     :name,
     :updated_at,
     :inserted_at,
+    :desc,
     bundles: [],
     relays: [],
   ]
