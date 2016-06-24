@@ -116,6 +116,19 @@ defmodule CogApi.HTTP.Bundles do
     end
   end
 
+  def create_dynamic_config(%Endpoint{}=endpoint, bundle_id, config) do
+    Base.post(endpoint, "bundles/#{bundle_id}/dynamic_config", %{config: config})
+    |> ApiResponse.format
+  end
+
+  def delete_dynamic_config(%Endpoint{}=endpoint, bundle_id) do
+    Base.delete(endpoint, "bundles/#{bundle_id}/dynamic_config") |> ApiResponse.format
+  end
+
+  def show_dynamic_config(%Endpoint{}=endpoint, bundle_id) do
+    Base.get(endpoint, "bundles/#{bundle_id}/dynamic_config") |> ApiResponse.format
+  end
+
   defp find_bundle(bundles, bundle_name) do
     case Enum.find(bundles, &(&1.name == bundle_name)) do
       nil ->

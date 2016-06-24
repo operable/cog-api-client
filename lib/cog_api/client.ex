@@ -4,6 +4,7 @@ defmodule CogApi.Client do
   alias CogApi.Resources.Bundle
   alias CogApi.Resources.BundleVersion
   alias CogApi.Resources.ChatHandle
+  alias CogApi.Resources.DynamicConfig
   alias CogApi.Resources.Group
   alias CogApi.Resources.Permission
   alias CogApi.Resources.Relay
@@ -30,6 +31,9 @@ defmodule CogApi.Client do
   @callback bundle_enable_version_by_name(%Endpoint{}, String.t, String.t) :: {atom, %BundleVersion{}} | {:error, any()}
   @callback bundle_disable_version(%Endpoint{}, String.t, String.t) :: {atom, %BundleVersion{}} | {:error, any()}
   @callback bundle_disable_version_by_name(%Endpoint{}, String.t, String.t) :: {atom, %BundleVersion{}} | {:error, any()}
+  @callback bundle_create_dynamic_config(%Endpoint{}, String.t, %{}) :: {atom, %DynamicConfig{}} | {:error, any()}
+  @callback bundle_delete_dynamic_config(%Endpoint{}, String.t) :: :ok | {:error, any()}
+  @callback bundle_show_dynamic_config(%Endpoint{}, String.t) :: {atom, %DynamicConfig{}} | {:error, any()}
 
   @callback chat_handle_upsert(%Endpoint{}, String.t, %{}) :: {atom, %ChatHandle{}}
   @callback chat_handle_delete(%Endpoint{}, String.t) :: atom
