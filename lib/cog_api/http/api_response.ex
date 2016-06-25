@@ -51,7 +51,6 @@ defmodule CogApi.HTTP.ApiResponse do
     {:error, ["Not Authorized"]}
   end
   def format_many(%Response{}=response, struct, key) do
-    IO.inspect {"RESPONSE", response}
     resources = Poison.decode!(response.body, as: %{key => [struct]})
     |> Map.get(key)
 
