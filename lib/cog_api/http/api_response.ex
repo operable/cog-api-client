@@ -3,6 +3,7 @@ defmodule CogApi.HTTP.ApiResponse do
   alias CogApi.HTTP.ApiErrorHandler
 
   @no_content 204
+  @not_authorized 403
 
   defmacrop http_error?(status_code) do
     quote do
@@ -46,7 +47,11 @@ defmodule CogApi.HTTP.ApiResponse do
     {type(response), resource}
   end
 
+  def format_many(%Response{status_code: @not_authorized}, _, _) do
+    {:error, ["Not Authorized"]}
+  end
   def format_many(%Response{}=response, struct, key) do
+    IO.inspect {"RESPONSE", response}
     resources = Poison.decode!(response.body, as: %{key => [struct]})
     |> Map.get(key)
 
