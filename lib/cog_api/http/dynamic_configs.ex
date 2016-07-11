@@ -4,6 +4,7 @@ defmodule CogApi.HTTP.DynamicConfig do
 
   alias CogApi.Endpoint
   alias CogApi.Resources.DynamicConfig
+  alias CogApi.Resources.Relay
 
   def show(%{name: name}, %Endpoint{}=endpoint) do
     Base.get_by(endpoint, "bundles", name: name)

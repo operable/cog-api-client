@@ -278,10 +278,6 @@ defmodule CogApi.HTTP.Client do
     Rules.update(rule_id, rule_text, endpoint)
   end
 
-  def rule_delete(bundle_version_id, rule_id, %Endpoint{}=endpoint) do
-    Rules.delete(bundle_version_id, rule_id, endpoint)
-  end
-
   def rule_delete(rule_id, %Endpoint{}=endpoint) do
     Rules.delete(rule_id, endpoint)
   end
