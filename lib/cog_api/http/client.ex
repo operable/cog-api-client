@@ -90,16 +90,20 @@ defmodule CogApi.HTTP.Client do
     Bundles.disable_version_by_name(endpoint, bundle_name, bundle_version)
   end
 
-  def bundle_create_dynamic_config(%Endpoint{}=endpoint, bundle_id, config) do
-    Bundles.create_dynamic_config(endpoint, bundle_id, config)
+  def bundle_create_dynamic_config(%Endpoint{}=endpoint, bundle_id, layer, name, config) do
+    Bundles.create_dynamic_config(endpoint, bundle_id, layer, name, config)
   end
 
-  def bundle_delete_dynamic_config(%Endpoint{}=endpoint, bundle_id) do
-    Bundles.delete_dynamic_config(endpoint, bundle_id)
+  def bundle_delete_dynamic_config(%Endpoint{}=endpoint, bundle_id, layer, name) do
+    Bundles.delete_dynamic_config(endpoint, bundle_id, layer, name)
   end
 
-  def bundle_show_dynamic_config(%Endpoint{}=endpoint, bundle_id) do
-    Bundles.show_dynamic_config(endpoint, bundle_id)
+  def bundle_show_dynamic_config(%Endpoint{}=endpoint, bundle_id, layer, name) do
+    Bundles.show_dynamic_config(endpoint, bundle_id, layer, name)
+  end
+
+  def bundle_dynamic_config_index(%Endpoint{}=endpoint, bundle_id) do
+    Bundles.dynamic_config_index(endpoint, bundle_id)
   end
 
   def chat_handle_upsert(%Endpoint{}=endpoint, user_id, params) do

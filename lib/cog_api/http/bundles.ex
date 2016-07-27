@@ -116,17 +116,28 @@ defmodule CogApi.HTTP.Bundles do
     end
   end
 
-  def create_dynamic_config(%Endpoint{}=endpoint, bundle_id, config) do
-    Base.post(endpoint, "bundles/#{bundle_id}/dynamic_config", %{config: config})
+
+  defp dynamic_config_layer_path(bundle_id, "base", nil),
+    do: "bundles/#{bundle_id}/dynamic_config/base"
+  defp dynamic_config_layer_path(bundle_id, layer, name),
+    do: "bundles/#{bundle_id}/dynamic_config/#{layer}/#{name}"
+
+  def create_dynamic_config(%Endpoint{}=endpoint, bundle_id, layer, name, config) do
+    Base.post(endpoint, dynamic_config_layer_path(bundle_id, layer, name), %{config: config})
     |> ApiResponse.format
   end
 
-  def delete_dynamic_config(%Endpoint{}=endpoint, bundle_id) do
-    Base.delete(endpoint, "bundles/#{bundle_id}/dynamic_config") |> ApiResponse.format
+  def delete_dynamic_config(%Endpoint{}=endpoint, bundle_id, layer, name) do
+    Base.delete(endpoint, dynamic_config_layer_path(bundle_id, layer, name)) |> ApiResponse.format
   end
 
-  def show_dynamic_config(%Endpoint{}=endpoint, bundle_id) do
-    Base.get(endpoint, "bundles/#{bundle_id}/dynamic_config") |> ApiResponse.format
+  def show_dynamic_config(%Endpoint{}=endpoint, bundle_id, layer, name) do
+    Base.get(endpoint, dynamic_config_layer_path(bundle_id, layer, name)) |> ApiResponse.format
+  end
+
+  def dynamic_config_index(%Endpoint{}=endpoint, bundle_id) do
+    Base.get(endpoint, "bundles/#{bundle_id}/dynamic_config/")
+    |> ApiResponse.format_many(%CogApi.Resources.DynamicConfig{}, "dynamic_configurations")
   end
 
   defp find_bundle(bundles, bundle_name) do

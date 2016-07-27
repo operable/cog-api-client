@@ -31,9 +31,11 @@ defmodule CogApi.Client do
   @callback bundle_enable_version_by_name(%Endpoint{}, String.t, String.t) :: {atom, %BundleVersion{}} | {:error, any()}
   @callback bundle_disable_version(%Endpoint{}, String.t, String.t) :: {atom, %BundleVersion{}} | {:error, any()}
   @callback bundle_disable_version_by_name(%Endpoint{}, String.t, String.t) :: {atom, %BundleVersion{}} | {:error, any()}
-  @callback bundle_create_dynamic_config(%Endpoint{}, String.t, %{}) :: {atom, %DynamicConfig{}} | {:error, any()}
-  @callback bundle_delete_dynamic_config(%Endpoint{}, String.t) :: :ok | {:error, any()}
-  @callback bundle_show_dynamic_config(%Endpoint{}, String.t) :: {atom, %DynamicConfig{}} | {:error, any()}
+
+  @callback bundle_create_dynamic_config(%Endpoint{}, String.t, String.t, String.t, %{}) :: {atom, %DynamicConfig{}} | {:error, any()}
+  @callback bundle_delete_dynamic_config(%Endpoint{}, String.t, String.t, String.t) :: :ok | {:error, any()}
+  @callback bundle_show_dynamic_config(%Endpoint{}, String.t, String.t, String.t) :: {atom, %DynamicConfig{}} | {:error, any()}
+  @callback bundle_dynamic_config_index(%Endpoint{}, String.t) :: {atom, [%DynamicConfig{}]} | {:error, any()}
 
   @callback chat_handle_upsert(%Endpoint{}, String.t, %{}) :: {atom, %ChatHandle{}}
   @callback chat_handle_delete(%Endpoint{}, String.t) :: atom
