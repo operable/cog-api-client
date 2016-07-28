@@ -4,6 +4,8 @@ defmodule CogApi.Resources.DynamicConfig do
   defstruct [
     :bundle_id,
     :bundle_name,
+    :layer,
+    :name,
     :config,
     :inserted_at,
   ]
