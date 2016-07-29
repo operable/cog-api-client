@@ -5,6 +5,7 @@ defmodule CogApi.Endpoint do
     port: 4000,
     version: 1,
     token: nil,
+    email: nil,
     username: nil,
     password: nil
   ]
