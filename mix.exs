@@ -33,7 +33,7 @@ defmodule CogApi.Mixfile do
 
   defp deps do
     [
-      {:ex_spec, "~> 1.0.0", only: :test},
+      {:ex_spec, "~> 2.0.0", only: :test},
       {:exvcr, github: "operable/exvcr", branch: "fix-cached-status-code", only: [:dev, :test]},
       {:httpotion, "~> 2.1.0"},
       {:ibrowse, "~> 4.2.2", override: true},
