@@ -40,7 +40,7 @@ defmodule CogApi.HTTP.UsersTest do
           handle = Client.chat_handle_upsert(
             endpoint,
             created_user.id,
-            %{chat_provider: "slack", handle: "mpeck"}
+            %{chat_provider: "slack", handle: "peck"}
           ) |> get_value
 
           found_user = Client.user_show(endpoint, created_user.id) |> get_value
