@@ -24,6 +24,13 @@ defmodule CogApi.HTTP.Base do
     end)
   end
 
+  def put(%Endpoint{}=endpoint, resource, params) do
+    rescue_econnrefused(fn ->
+      body = Poison.encode!(params)
+      HTTPotion.put(make_url(endpoint, resource), body: body, headers: make_headers(endpoint))
+    end)
+  end
+
   def delete(%Endpoint{}=endpoint, resource) do
     rescue_econnrefused(fn ->
       HTTPotion.delete(make_url(endpoint, resource), headers: make_headers(endpoint))
