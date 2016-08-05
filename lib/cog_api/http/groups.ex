@@ -68,7 +68,7 @@ defmodule CogApi.HTTP.Groups do
 
   defp update_membership(endpoint, group, user, action) do
     path = "groups/#{group.id}/users"
-    Base.post(endpoint, path, %{users: %{action => [user.username]}})
+    Base.post(endpoint, path, %{users: %{action => [user.email_address]}})
     |> format_group_response
   end
 
