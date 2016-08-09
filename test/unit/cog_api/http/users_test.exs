@@ -3,6 +3,9 @@ defmodule CogApi.HTTP.UsersTest do
 
   alias CogApi.HTTP.Client
   alias CogApi.Resources.User
+  alias CogApi.HTTP.Users
+  alias CogApi.HTTP.Base
+  alias CogApi.Endpoint
 
   doctest CogApi.HTTP.Users
 
@@ -163,6 +166,39 @@ defmodule CogApi.HTTP.UsersTest do
         users = Client.user_index(endpoint) |> get_value
         refute Enum.member?(users, user)
       end
+    end
+  end
+
+  test "password reset" do
+    cassette "password reset" do
+      endpoint = valid_endpoint
+      params = user_params("password_reset")
+
+      # Create a user
+      user = Client.user_create(endpoint, params) |> get_value
+
+      # Make sure the user can authenticate
+      assert {:ok, _} = CogApi.HTTP.Authentication.get_and_merge_token(
+       %Endpoint{username: user.username, password: params.password})
+
+      # Request a reset
+      assert :ok = Users.request_password_reset(endpoint, user.email_address)
+
+      # Here we get the list of emails from the special Bamboo dev only
+      # sent_emails endpoint and parse out the token
+      emails = Base.get(endpoint, "/sent_emails")
+      |> Map.get(:body)
+      [_, token] = Regex.run(~r/token=(.*)/, emails)
+
+      # Then we can try and reset the password
+      assert {:ok, _user} = Users.reset_password(endpoint, token, "new_password")
+
+      # See if we can authenticate with the new password
+      assert {:ok, _} = CogApi.HTTP.Authentication.get_and_merge_token(
+       %Endpoint{username: user.username, password: "new_password"})
+
+      # Cleanup
+      Client.user_delete(endpoint, user.id)
     end
   end
 end
