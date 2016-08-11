@@ -42,6 +42,6 @@ defmodule CogApi.HTTP.Users do
 
   def reset_password(%Endpoint{}=endpoint, token, new_password) do
     Base.put(endpoint, "users/reset-password/#{token}", %{password: new_password})
-    |> ApiResponse.format(%{"user" => User.format})
+    |> ApiResponse.format
   end
 end
