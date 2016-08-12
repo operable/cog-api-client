@@ -37,9 +37,18 @@ defmodule CogApi.HTTP.ApiResponse do
     }
   end
 
+  def format(%HTTPotion.ErrorResponse{message: "econnrefused"}, _) do
+    {:error, "Connection refused"}
+  end
+
+  def format(%HTTPotion.ErrorResponse{message: "{:tls_alert, 'record overflow'}"}, _) do
+    {:error, "Connection did not expect to be using https"}
+  end
+
   def format(%Response{status_code: code}=response, _, _) when http_error?(code) do
     ApiErrorHandler.format_error(response)
   end
+
   def format(%Response{}=response, struct, key) do
     resource = Poison.decode!(response.body, as: %{key => struct})
     |> Map.get(key)
