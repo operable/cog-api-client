@@ -5,7 +5,7 @@ defmodule CogApi.Mixfile do
     [
       app: :cog_api,
       version: "0.13.0",
-      elixir: "~> 1.2",
+      elixir: "~> 1.3.1",
       elixirc_paths: elixirc_paths(Mix.env),
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
@@ -33,14 +33,12 @@ defmodule CogApi.Mixfile do
 
   defp deps do
     [
+      {:dialyxir, "~> 0.3", only: [:dev, :test]},
       {:ex_spec, "~> 2.0.0", only: :test},
-      {:exvcr, github: "operable/exvcr", branch: "fix-cached-status-code", only: [:dev, :test]},
-      {:httpotion, "~> 2.1.0"},
-      {:ibrowse, "~> 4.2.2", override: true},
-      {:poison, "~> 2.0"},
-      {:dialyxir, "~> 0.3"},
-
-      {:mix_test_watch, "~> 0.1.1", only: [:test, :dev]}
+      {:exvcr, "~> 0.8", only: [:dev, :test]},
+      {:httpotion, "~> 3.0"},
+      {:mix_test_watch, "~> 0.2", only: [:test, :dev]},
+      {:poison, "~> 2.0"}
     ]
   end
 end
