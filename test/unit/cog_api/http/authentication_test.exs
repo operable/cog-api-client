@@ -31,9 +31,9 @@ defmodule CogApi.HTTP.AuthenticationTest do
             host: "localhost",
             port: invalid_port,
           }
-          {:error, errors} = Authentication.get_and_merge_token(endpoint)
+          {:error, error} = Authentication.get_and_merge_token(endpoint)
 
-          assert errors == ["Could not connect to a Cog instance"]
+          assert error == "Connection refused"
         end
       end
     end
