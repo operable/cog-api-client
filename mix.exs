@@ -5,7 +5,7 @@ defmodule CogApi.Mixfile do
     [
       app: :cog_api,
       version: "0.13.0",
-      elixir: "~> 1.2",
+      elixir: "~> 1.3.1",
       elixirc_paths: elixirc_paths(Mix.env),
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
