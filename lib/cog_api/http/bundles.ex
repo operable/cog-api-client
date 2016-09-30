@@ -53,6 +53,11 @@ defmodule CogApi.HTTP.Bundles do
     |> ApiResponse.format(%BundleVersion{}, "bundle_version")
   end
 
+  def install_from_registry(%Endpoint{}=endpoint, bundle_name, version) do
+    Base.post(endpoint, "bundles/install/#{bundle_name}/#{version}", %{})
+    |> ApiResponse.format(%BundleVersion{}, "bundle_version")
+  end
+
   def uninstall(%Endpoint{}=endpoint, id) do
     Base.delete(endpoint, "bundles/#{id}")
     |> ApiResponse.format_delete

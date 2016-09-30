@@ -66,6 +66,10 @@ defmodule CogApi.HTTP.Client do
     Bundles.install(endpoint, params)
   end
 
+  def bundle_install_from_registry(%Endpoint{}=endpoint, bundle, version) do
+    Bundles.install_from_registry(endpoint, bundle, version)
+  end
+
   def bundle_enable_version(%Endpoint{}=endpoint, bundle_id, bundle_version_id) do
     Bundles.enable_version(endpoint, bundle_id, bundle_version_id)
   end
