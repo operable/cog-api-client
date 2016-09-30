@@ -27,6 +27,7 @@ defmodule CogApi.Client do
   @callback bundle_uninstall_version(%Endpoint{}, String.t, String.t) :: atom | {:error, any()}
   @callback bundle_uninstall_version_by_name(%Endpoint{}, String.t, String.t) :: atom | {:error, any()}
   @callback bundle_install(%Endpoint{}, Map.t) :: {atom, %Bundle{}} | {:error, any()}
+  @callback bundle_install_from_registry(%Endpoint{}, String.t, String.t) :: {atom, %Bundle{}} | {:error, any()}
   @callback bundle_enable_version(%Endpoint{}, String.t, String.t) :: {atom, %BundleVersion{}} | {:error, any()}
   @callback bundle_enable_version_by_name(%Endpoint{}, String.t, String.t) :: {atom, %BundleVersion{}} | {:error, any()}
   @callback bundle_disable_version(%Endpoint{}, String.t, String.t) :: {atom, %BundleVersion{}} | {:error, any()}
