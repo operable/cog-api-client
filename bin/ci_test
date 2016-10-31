@@ -1,4 +1,0 @@
-#!/bin/bash
-
-source ~/.asdf/asdf.sh
-mix test
