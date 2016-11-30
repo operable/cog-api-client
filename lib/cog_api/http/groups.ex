@@ -51,11 +51,12 @@ defmodule CogApi.HTTP.Groups do
   end
 
   defp format_response(response, group) do
-    roles = ApiResponse.parse_struct(response,  %{"roles" => [Role.format]})
-    {
-      ApiResponse.type(response),
-      %{group | roles: roles}
-    }
+    case ApiResponse.format(response, %{"roles" => [Role.format]}) do
+      {:error, error} ->
+        {:error, error}
+      {code, roles} ->
+        {code, %{group | roles: roles}}
+    end
   end
 
   def add_user(%Endpoint{}=endpoint, group, user) do
