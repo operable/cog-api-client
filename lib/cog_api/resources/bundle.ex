@@ -12,6 +12,7 @@ defmodule CogApi.Resources.Bundle do
     :modifiable,
     enabled_version: %BundleVersion{},
     versions: [%BundleVersion{}],
+    incompatible_versions: [%BundleVersion{}],
     relay_groups: [%RelayGroup{}],
   ]
 
@@ -21,6 +22,7 @@ defmodule CogApi.Resources.Bundle do
     %__MODULE__{
       enabled_version: %BundleVersion{},
       versions: [%BundleVersion{}],
+      incompatible_versions: [%BundleVersion{}],
       relay_groups: [%RelayGroup{}],
     }
   end
