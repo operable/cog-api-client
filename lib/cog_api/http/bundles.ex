@@ -157,7 +157,12 @@ defmodule CogApi.HTTP.Bundles do
   defp find_version(bundle, bundle_version) do
     case Enum.find(bundle.versions, &(&1.version == bundle_version)) do
       nil ->
-        {:error, ["Version '#{bundle_version}' of '#{bundle.name}' is not installed."]}
+        case Enum.find(bundle.incompatible_versions, &(&1.version == bundle_version)) do
+          nil ->
+            {:error, ["Version '#{bundle_version}' of '#{bundle.name}' is not installed."]}
+          version ->
+            {:ok, version}
+        end
       version ->
         {:ok, version}
     end
