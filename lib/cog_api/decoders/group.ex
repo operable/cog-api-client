@@ -4,12 +4,14 @@ defmodule CogApi.Decoders.Group do
   defstruct [
     :id,
     :name,
-    :members,
+    :roles,
+    :users
   ]
 
   def format do
     %__MODULE__{
-      members: CogApi.Decoders.Member.format,
+      roles: [%CogApi.Resources.Role{}],
+      users: [%CogApi.Resources.User{}]
     }
   end
 
@@ -18,8 +20,8 @@ defmodule CogApi.Decoders.Group do
       id: decoder.id,
       modifiable: modifiable?(decoder.name),
       name: decoder.name,
-      users: decoder.members.users,
-      roles: decode_many(decoder.members.roles, CogApi.Decoders.Role),
+      users: decoder.users,
+      roles: decode_many(decoder.roles, CogApi.Decoders.Role),
     }
   end
 
