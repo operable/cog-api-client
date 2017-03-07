@@ -1,7 +1,5 @@
 # CogApi
 
-[![Build status](https://badge.buildkite.com/7990c5595f4defef05b1a07e4d6dce50190b95e488f0346d83.svg?branch=master)](https://buildkite.com/operable/cog-api-client-elixir)
-
 ## Installation
 1. Add cog_api to your list of dependencies in `mix.exs`:
 
