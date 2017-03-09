@@ -1,5 +1,7 @@
 # CogApi
 
+[![Build Status](https://travis-ci.org/operable/cog-api-client.svg?branch=master)](https://travis-ci.org/operable/cog-api-client)
+
 ## Installation
 1. Add cog_api to your list of dependencies in `mix.exs`:
 
