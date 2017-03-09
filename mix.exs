@@ -9,6 +9,10 @@ defmodule CogApi.Mixfile do
       elixirc_paths: elixirc_paths(Mix.env),
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: ["coveralls": :test,
+                          "coveralls.html": :test,
+                          "coveralls.travis": :test],
       deps: deps,
       dialyzer: dialyzer_settings,
     ]
@@ -38,7 +42,8 @@ defmodule CogApi.Mixfile do
       {:exvcr, "~> 0.8", only: [:dev, :test]},
       {:httpotion, "~> 3.0"},
       {:mix_test_watch, "~> 0.2", only: [:test, :dev]},
-      {:poison, "~> 2.0"}
+      {:poison, "~> 2.0"},
+      {:excoveralls, "~> 0.6", only: :test}
     ]
   end
 end
