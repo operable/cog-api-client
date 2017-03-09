@@ -1,6 +1,7 @@
 # CogApi
 
 [![Build Status](https://travis-ci.org/operable/cog-api-client.svg?branch=master)](https://travis-ci.org/operable/cog-api-client)
+[![Coverage Status](https://coveralls.io/repos/github/operable/cog-api-client/badge.svg?branch=master)](https://coveralls.io/github/operable/cog-api-client?branch=master)
 
 ## Installation
 1. Add cog_api to your list of dependencies in `mix.exs`:
